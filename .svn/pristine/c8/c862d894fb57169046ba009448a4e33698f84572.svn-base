@@ -1,0 +1,8 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "MessageProBuf";
+
+import "account.proto";
+import "common.proto";
+import "gate.proto";
+import "item.proto";
+import "npc.proto";

@@ -1,0 +1,448 @@
+//
+//  Skill.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-4.
+//
+//
+
+#include "Skill.h"
+Skill* Skill::create(MFighter* attacker,int skillID)
+{
+    Skill* pRet=new Skill();
+    if(pRet && pRet->init(attacker,skillID))
+    {
+        pRet->autorelease();
+       
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = NULL;
+        return NULL;
+    }
+}
+
+bool Skill::init(MFighter* attacker,int skillID)
+{
+    this->attacker=attacker;
+    this->skillID=skillID;
+    this->isReady=false;
+    //被动技能走CD
+    int skillType=1;
+    if(skillType==1){
+        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::coldDown),this,0.5,false);
+    }
+    return true;
+}
+
+void Skill::coldDown()
+{
+    this->setIsReady(true);
+    //主动技能通知UI现实可操作
+    XSkill* xSkill=XSkill::record(Value(skillID));
+    if(xSkill->getType()==0){
+        Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(HERO_SKILL_COLDDOWN);
+    }
+}
+
+void Skill::setIsReady(bool isReady)
+{
+    this->isReady=isReady;
+}
+
+bool Skill::getIsReady()
+{
+    return this->isReady;
+}
+
+void Skill::start()
+{
+    this->setIsReady(false);
+    //施法时间 1舜发 2吟唱（引导） 3蓄力
+    XSkill* xSkill=XSkill::record(Value(skillID));
+    //蓄力
+    if(xSkill->getBuildTime()>0)
+    {
+        //进入蓄力阶段
+        //定时触发攻击（中间操作可能直接攻击）
+        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::cast), this, 0,0,3, false);
+        this->attacker->buildup();
+        return;
+    }
+    //舜发
+    if(xSkill->getLeadNum()==0)
+    {
+        this->cast();
+        //this->attacker->cast();
+        return;
+    }
+    //引导
+    if(xSkill->getLeadNum()>0)
+    {
+        //引导
+        //定时触发正式攻击
+        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::cast), this,0,0, 3, false);
+        this->attacker->spell();
+        return;
+    }
+    
+}
+
+void Skill::cast()
+{
+    XSkill* xSkill=XSkill::record(Value(skillID));
+    if(this->attacker->currentState==fstate::spell || attacker->currentState==fstate::buildup || attacker->currentState==fstate::throwing)
+    {
+        Director::getInstance()->getScheduler()->unschedule(SEL_SCHEDULE(&Skill::cast),this);
+    }
+    
+    this->attacker->cast();
+    
+    this->targets=this->selectTarget();
+    int rangeType=xSkill->getRangeType();
+    
+    if (rangeType == 5) //弹射
+    {
+        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::bounce), this,0.2,targets.size(), 0.2, false);
+
+    }else{
+        for(MFighter* mf : targets)
+        {
+            int arrowNum=xSkill->getRangeParam2();
+            //带弹道的
+            if(arrowNum>0 && attacker->currentState==fstate::throwing)
+            {
+                this->shoot(mf);
+                continue;
+            }
+            this->hit(mf);
+        }
+    }
+}
+
+void Skill::shoot(MFighter* mf)
+{
+    Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::hit), this, 1,0,2, false);
+    int arrowType=XSkill::record(Value(skillID))->getArrowType();
+    this->attacker->shoot(mf,arrowType);
+}
+
+void Skill::bounce(float dt)
+{
+    if(this->targets.size()==0)
+    {
+        Director::getInstance()->getScheduler()->unschedule(SEL_SCHEDULE(&Skill::bounce), this);
+    }
+    MFighter* mf=this->targets.at(0);
+    FightMgr::getInstance()->view->bounce(mf);
+    this->hit(mf);
+
+    this->targets.erase(0);
+}
+
+void Skill::hit(MFighter* mf,bool isSub)
+{
+    //预估 命中 爆击 免疫
+    //A	若目标携带物理免疫buff则物理伤害类技能无法生效
+    //B	若目标携带法术免疫buff则法术伤害类技能无法生效
+    //C	若目标携带治疗免疫buff则目标无法被治疗
+    //命中率=（90+攻方等级-防方等级-防方闪避）*1%
+    bool isMiss=false;
+    for(Buff* buff : mf->buffs)
+    {
+        //XBuff* buff=XBuff::record(Value(buffID));
+        XRole* xrole=XRole::record(Value(attacker->xid));
+        //0物理 1法术
+        if((xrole->getAttackType()==0 && buff->isAtkMiss()) ||
+           (xrole->getAttackType()==1 && buff->isMatkMiss()))
+        {
+            isMiss=true;
+        }
+    }
+    if(isMiss){
+        mf->attacked();
+        return;
+    }
+    
+    float hitRate=(90+this->attacker->data->lv-mf->data->lv-mf->data->miss)/0.01;
+    if(Utils::random01() > hitRate) //miss
+    {
+        mf->attacked();
+        return;
+    }
+    
+    /*
+     A	暴击率=（攻方等级-防方等级+10+暴击率调整指数）*1%
+     B	最大暴击率为80%
+     C	最小暴击率为1%
+     D	只有攻击类技能才有暴击
+     */
+    float chRate=(this->attacker->data->lv-mf->data->lv+10+2)*0.01;
+    chRate=MAX(MIN(0.8,chRate), 0.01);
+    bool isCrh=Utils::random01()<=chRate;
+    
+    //计算伤害
+    int hurt=MIN(1,this->attacker->data->atc-mf->data->def);
+    int hpHeal=0;
+    int mpHeal=0;
+    int power=0;
+    //处理技能效果(效果1，数值类的）
+    //  0 攻击 攻击加成千分比/攻击加成实数
+    //  # 溅射攻击 溅射攻击加成千分比/溅射攻击加成实数
+    //  #治疗 治疗加成千分比/治疗加成实数
+    //  # 能量恢复 恢复法力加成实数
+    //  # 吸取生命 吸取生命千分比/吸取生命加成实数
+    //  # 夺取能量（特例，可抢夺敌方在战斗过程中掉落但未拾取的能量豆）
+    //  有#标识的表示还没做的技能效果
+    XSkill* xskill=XSkill::record(Value(skillID));
+    switch (xskill->getEffectType()) {
+        case 0: //A	攻击
+            hurt=hurt+hurt*xskill->getEffectParam1()/1000.0+xskill->getEffectParam2();
+            if(isCrh) hurt*=2;
+            //A	普通伤害=基础伤害+基础伤害*技能给与的伤害加成比例+技能给与的伤害加成实数
+            //B	暴击伤害=普通伤害*2
+            //蓄力攻击
+            //A	普通伤害=基础伤害*（起始伤害百分比+蓄力时间*每秒伤害加成百分比+起始加成实数+蓄力时间*每秒加成实数）
+            //B	暴击伤害=普通伤害*2
+            
+            break;
+        case 1: //溅射
+            /*
+             A	普通伤害
+             a	主目标伤害=基础伤害*主目标伤害加成百分比+主目标加成实数
+             b	副目标伤害=主目标伤害*副目标衰减指数
+             B	暴击伤害=普通伤害*2
+             */
+            
+            hurt=hurt*xskill->getEffectParam1()/1000.0+xskill->getEffectParam2();
+            
+            if(isSub)
+            {
+                //hurt=hurt
+            }
+            if(isCrh) hurt*=2;
+            
+            break;
+        case 2: //治疗
+        {
+            XRoleData* xrd=XRoleData::record(Value(attacker->xid));
+            hpHeal=attacker->data->lv*xrd->getHeal();
+            hpHeal=hpHeal+hpHeal*xskill->getEffectParam1()/1000.0+xskill->getEffectParam2();
+        }
+            break;
+        case 3: //能量回复
+            /*
+             A	为主角恢复的能量值=技能给与的能量恢复实数
+             */
+            mpHeal=xskill->getEffectParam1();
+            break;
+        case 4: //吸取生命
+            /*
+             A	对敌方角色造成的伤害=目标现有生命值*技能给与的生命吸取比例
+             B	对自身的治疗量=对敌方角色造成的伤害+技能给与的生命加成实数
+             */
+            hurt=mf->data->hp*xskill->getEffectParam1()/1000.0;
+            hpHeal=hurt+xskill->getEffectParam2();
+            break;
+        case 5: //夺取能量
+            /*
+             A	夺取能量的概念
+             a	使用夺取能量的技能可抢夺敌方在战斗过程中掉落但未拾取的能量豆
+             B	每释放一次技能抢一颗能量豆
+             */
+            power=1;
+            break;
+        default:
+            log("未知的效果类型,skill:%d,effectType:%d",skillID,xskill->getEffectType());
+            break;
+    }
+    float buffRate=xskill->getBuffRate()/10000.0;
+    Buff* buff=nullptr;
+    if(Utils::random01() <= buffRate)
+    {
+        buff=Buff::create(xskill->getBuffID());
+    }
+    
+    //触发buff被动技能检查
+    //buffer替换
+    for(Buff* bf : mf->buffs)
+    {
+        if(!buff) break;
+        if(bf->getGroupID() == buff->getGroupID())
+        {
+            if (bf->getLv()<=buff->getLv()){
+                mf->buffs.eraseObject(bf);
+                mf->buffs.pushBack(buff);
+                buff->start();
+            }
+            else
+            {
+                mf->buffs.pushBack(buff);
+                break;
+            }
+        }
+    }
+    //受击者属性改变，
+    
+    //修正结果
+    //检查死亡
+    mf->attacked();
+}
+
+//重置受击对象,攻击范围－－》策略
+Vector<MFighter*> Skill::selectTarget()
+{
+    Vector<MFighter*> arr;
+    XSkill* xSkill=XSkill::record(Value(skillID));
+    
+    switch (xSkill->getRangeType()) {
+        case 0: //自身
+            arr.pushBack(this->attacker);
+            break;
+        case 1: //我方 影响人数 all
+            arr=FightMgr::getInstance()->getFoes(attacker->pos,true);
+            arr=this->selectStrategy(arr,xSkill->getRangeParam1());
+            break;
+        case 2: //近战 影响人数 all
+            arr=FightMgr::getInstance()->getFoes(attacker->pos);
+            arr=this->selectStrategy(arr,xSkill->getRangeParam1());
+            this->selectStrategy(arr,xSkill->getRangeParam2());
+            break;
+        case 3:{ //爆发 前排/中排/后排
+            Vector<MFighter*> vec=FightMgr::getInstance()->getFoes(attacker->pos);
+            int row1=0,row2=0,row3=0;
+            
+            for(MFighter* mf : vec)
+            {
+                if(attacker->getGrid() - mf->getGrid() <= 2){
+                    if(row1 <= xSkill->getRangeParam1()){
+                        arr.pushBack(mf);
+                        row1++;
+                    }
+                }
+                if(attacker->getGrid() - mf->getGrid() <= 2){
+                    if(row2 <= xSkill->getRangeParam2()){
+                        arr.pushBack(mf);
+                        row2++;
+                    }
+                }
+                if(attacker->getGrid() - mf->getGrid() <= 2){
+                    if(row3 <= xSkill->getRangeParam3()){
+                        arr.pushBack(mf);
+                        row3++;
+                    }
+                }
+            }
+            break;
+        }
+        case 4: //最大距离/子弹数量 all
+            arr=FightMgr::getInstance()->getFoes(attacker->pos);
+            for(MFighter* mf : arr)
+            {
+                if(abs(attacker->getGrid()-mf->getGrid()) > xSkill->getRangeParam1())
+                {
+                    arr.eraseObject(mf);
+                }
+            }
+            arr=this->selectStrategy(arr,xSkill->getRangeParam2());
+            break;
+        case 5: //弹射 弹射次数
+        {
+            Vector<MFighter*> vec=FightMgr::getInstance()->getFoes(attacker->pos);
+            int bondNum=xSkill->getRangeParam1();
+            for(int i=0;i<bondNum;i++)
+            {
+                arr.pushBack(vec.at(i%vec.size()));
+            }
+        }
+            break;
+        case 6: //穿透 最大距离
+        {
+            Vector<MFighter*> vec=FightMgr::getInstance()->getFoes(attacker->pos);
+            for(MFighter* mf : arr)
+            {
+                if(attacker->getGrid()-mf->getGrid() <= xSkill->getRangeParam1()){
+                    arr.pushBack(mf);
+                }
+            }
+        }
+            break;
+        default:
+            log("error range type:%d,skillID:%d",xSkill->getRangeType(),skillID);
+            break;
+    }
+    return arr;
+}
+
+
+//选择策略
+Vector<MFighter*> Skill::selectStrategy(Vector<MFighter*>arr,int num)
+{
+    Vector<MFighter*>targets;
+    if(num==0) return targets;
+    int type=1;
+    switch (type) {
+        case 0: //普通
+        {
+            std::vector<int> vec=Utils::randSeveral(num,false);
+            for(int i=0;i<num;i++)
+            {
+                targets.pushBack(arr.at(vec[i]));
+            }
+            if(arr.size()<num)log("选择策略配置有错:skillID:%d",skillID);
+            break;
+        }
+        case 1: //随机
+        {
+            std::vector<int> vec=Utils::randSeveral(num,true);
+            for(int i=0;i<num;i++)
+            {
+                targets.pushBack(arr.at(vec[i]));
+            }
+            break;
+        }
+        case 2://血最少
+        {
+            sort(arr.begin(),arr.end(),Utils::sortLessHp);
+            for(int i=0;i<num;i++){
+                targets.pushBack(arr.at(i%arr.size()));
+            }
+            break;
+        }
+        case 3: //血最多
+        {
+            sort(arr.begin(),arr.end(),Utils::sortMoreHp);
+            for(int i=0;i<num;i++){
+                targets.pushBack(arr.at(i%arr.size()));
+            }
+            break;
+        }
+        case 4: //离得近
+        {
+            sort(arr.begin(),arr.end(),Utils::sortNear);
+            for(int i=0;i<num;i++){
+                targets.pushBack(arr.at(i%arr.size()));
+            }
+            break;
+        }
+        case 5: //离得远
+        {
+            sort(arr.begin(),arr.end(),Utils::sortFar);
+            for(int i=0;i<num;i++){
+                targets.pushBack(arr.at(i%arr.size()));
+            }
+            break;
+        }
+        default:
+            log("错误的选择策略");
+            break;
+    }
+    return targets;
+}
+
+Skill::~Skill()
+{
+    Director::getInstance()->getScheduler()->unschedule(SEL_SCHEDULE(&Skill::coldDown),this);
+}

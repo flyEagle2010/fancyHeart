@@ -1,0 +1,103 @@
+package com.doteyplay.game.domain.outfit;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.doteyplay.core.bhns.BOServiceConfig;
+import com.doteyplay.core.bhns.BOServiceManager;
+import com.doteyplay.core.dbcs.DBCS;
+import com.doteyplay.game.constants.item.OutfitInstallResult;
+import com.doteyplay.game.domain.item.RoleItem;
+import com.doteyplay.game.domain.sprite.AbstractSprite;
+import com.doteyplay.game.persistence.serverdata.item.IItemBeanDao;
+import com.doteyplay.game.service.bo.item.IItemService;
+
+public class Outfit
+{
+	private Map<Integer,RoleItem> outfitMap = new HashMap<Integer, RoleItem>();
+	private AbstractSprite sprite;
+	private long roleId;
+
+	public Outfit(long roleId, AbstractSprite sprite)
+	{
+		this.sprite = sprite;
+		this.roleId = roleId;
+	}
+
+	public OutfitInstallResult installOutfit(RoleItem item)
+	{
+		if (getQualityItemIdList().indexOf(item.getBean().getItemId()) <= -1)
+			return OutfitInstallResult.ITEM_NOT_FIT;
+		
+		if (outfitMap.get(item.getBean().getItemId()) != null)
+			return OutfitInstallResult.ITEM_HAS_EXIST;
+		
+		item = RoleItem.closeRoleItem(item.getBean());
+		item.getBean().setItemNum(1);
+		item.getBean().setDressedSpriteId(sprite.getId());
+		
+		outfitMap.put(item.getBean().getItemId(), item);
+		
+		IItemBeanDao dao = DBCS.getExector(IItemBeanDao.class);
+		dao.insertItemBean(item.getBean());
+		return OutfitInstallResult.SUCCESS;
+	}
+
+	public void removeAll()
+	{
+		outfitMap.clear();
+		IItemBeanDao dao = DBCS.getExector(IItemBeanDao.class);
+		dao.deleteItemBeanByDressedSpriteId(sprite.getId());
+	}
+
+	public AbstractSprite getSprite()
+	{
+		return sprite;
+	}
+
+	public void setSprite(AbstractSprite sprite)
+	{
+		this.sprite = sprite;
+	}
+
+	public Map<Integer, RoleItem> getOutfitMap()
+	{
+		return outfitMap;
+	}
+
+	public void setOutfitMap(Map<Integer, RoleItem> outfitMap)
+	{
+		this.outfitMap = outfitMap;
+	}
+
+	public long getRoleId()
+	{
+		return roleId;
+	}
+
+	public void setRoleId(long roleId)
+	{
+		this.roleId = roleId;
+	}
+
+	public List<Integer> getQualityItemIdList()
+	{
+		if(sprite == null)
+			return null;
+		
+		return sprite.getSpriteDataObject().getPropDataList()
+				.get(sprite.getQuality()).getCurQualityItemList();
+	}
+	
+	public boolean isOutfitFull()
+	{
+		for(Integer itemId:getQualityItemIdList())
+		{
+			if(outfitMap.get(itemId) == null)
+				return false;
+		}
+		return true;
+	}
+}

@@ -1,0 +1,114 @@
+package com.doteyplay.game.message.login;
+
+import org.apache.log4j.Logger;
+import org.apache.mina.core.buffer.IoBuffer;
+
+import com.doteyplay.game.MessageCommands;
+import com.doteyplay.game.constants.account.LoginResult;
+import com.doteyplay.game.message.proto.AccountProBuf;
+import com.doteyplay.net.message.AbstractMessage;
+import com.google.protobuf.InvalidProtocolBufferException;
+
+public class LoginGameMessage extends AbstractMessage
+{
+	private static final Logger logger = Logger
+			.getLogger(LoginGameMessage.class);
+
+	private String account;
+	private String sessionKey;
+	
+	private LoginResult result;
+	private long respRoleId;
+	private String respName;
+
+	public LoginGameMessage()
+	{
+		super(MessageCommands.LOGIN_GAME_MESSAGE);
+	}
+
+	@Override
+	public void decodeBody(IoBuffer in)
+	{
+		byte[] bytes = getProtoBufBytes(in);
+		try
+		{
+			AccountProBuf.PackageLoginReq req = AccountProBuf.PackageLoginReq.parseFrom(bytes);
+			account = req.getAccount();
+			sessionKey = req.getKey();
+		} catch (InvalidProtocolBufferException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void encodeBody(IoBuffer out)
+	{
+		AccountProBuf.PackageLoginResp.Builder builder = AccountProBuf.PackageLoginResp.newBuilder();
+		builder.setResult(this.result.ordinal());
+		
+		if(result == LoginResult.SUCCESS)
+		{
+			builder.setId(this.respRoleId);
+			builder.setName(this.respName);
+		}
+		
+		AccountProBuf.PackageLoginResp resp = builder.build();
+		out.put(resp.toByteArray());
+	}
+	
+	public void release()
+	{
+	}
+
+	public LoginResult getResult()
+	{
+		return result;
+	}
+
+	public void setResult(LoginResult result)
+	{
+		this.result = result;
+	}
+
+	public String getRespName()
+	{
+		return respName;
+	}
+
+	public void setRespName(String respName)
+	{
+		this.respName = respName;
+	}
+
+	public String getAccount()
+	{
+		return account;
+	}
+
+	public void setAccount(String account)
+	{
+		this.account = account;
+	}
+
+	public String getSessionKey()
+	{
+		return sessionKey;
+	}
+
+	public void setSessionKey(String sessionKey)
+	{
+		this.sessionKey = sessionKey;
+	}
+
+	public long getRespRoleId()
+	{
+		return respRoleId;
+	}
+
+	public void setRespRoleId(long respRoleId)
+	{
+		this.respRoleId = respRoleId;
+	}
+	
+}

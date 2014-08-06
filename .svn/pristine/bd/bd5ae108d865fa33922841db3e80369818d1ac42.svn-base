@@ -1,0 +1,178 @@
+//
+//  Fighter.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-6.
+//
+//
+
+#include "Fighter.h"
+#include "FightScene.h"
+
+
+Fighter* Fighter::create(std::string fPath,std::string rPath,int pos)
+{
+    Fighter* pRet = new Fighter();
+    if (pRet && pRet->init(fPath,rPath,pos))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = NULL;
+        return NULL;
+    }
+}
+
+bool Fighter::init(std::string fPath,std::string rPath,int pos)
+{
+    this->pos=pos;
+	//init ui
+    Size winSize=Director::getInstance()->getWinSize();
+
+    this->cEventDispatcher=new EventDispatcher();
+    this->cEventDispatcher->setEnabled(true);
+    ArmatureDataManager::getInstance()->addArmatureFileInfo(rPath+".png", rPath+".plist", fPath+".ExportJson");
+    this->armature=Armature::create("HeroAnimation");
+    this->armature->getAnimation()->setFrameEventCallFunc(CC_CALLBACK_0(Fighter::onFrameEvent, this,std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4));
+    this->addChild(armature);
+    
+//    Value v(pos);
+//    auto label=Label::create(v.asString(), "Marker Felt.ttf", 32);
+//    armature->addChild(label);
+//    this->schedule(SEL_SCHEDULE(&Fighter::tick), 0.1);
+    this->scheduleUpdate();
+	return true;
+}
+
+void Fighter::onEnter()
+{
+    Node::onEnter();
+    this->stand();
+//    this->delegate->start();
+}
+
+/*
+//@param 触发攻击
+void Fighter::tick(float dt)
+{
+    this->delegate->startAttack(0);
+}
+*/
+
+void Fighter::stand()
+{
+    if(this->pos>4)
+    {
+        this->armature->setScale(-0.8,0.8);
+    }else{
+        this->armature->setScale(0.8,0.8);
+    }
+    this->armature->getAnimation()->play("loading",6);
+    
+    this->fallHp(Value(30));
+}
+
+float Fighter::runTo(Point p)
+{
+    Size winSize=Director::getInstance()->getWinSize();
+    Size size=this->armature->getBoundingBox().size;
+    this->armature->getAnimation()->play("run",10);
+    //float mTime=abs(p.x-this->getPosition().x)/120;
+    float mTime=3.0;
+    CallFunc* cf=CallFunc::create(CC_CALLBACK_0(Fighter::stand,this));
+    Sequence* sq=Sequence::create(MoveTo::create(mTime, p),cf, NULL);
+    this->runAction(sq);
+    return mTime;
+}
+
+void Fighter::run()
+{
+    CallFunc* cf=CallFunc::create(CC_CALLBACK_0(Fighter::runEnd, this));
+    Vec2 vec(pos>4?-40:40.0,0);
+    Sequence* sq=Sequence::create(MoveBy::create(0.25, vec),cf, NULL);
+    this->runAction(sq);
+    std::string mName=this->armature->getAnimation()->getCurrentMovementID();
+    if(mName!="run")this->armature->getAnimation()->play("run",1,true);
+}
+
+void Fighter::runEnd()
+{
+    this->delegate->startAttack(0);
+}
+
+void Fighter::attack()
+{
+    this->armature->getAnimation()->play("attack",0);
+}
+
+void Fighter::attacked()
+{
+    this->armature->getAnimation()->play("smitten");
+}
+
+void Fighter::spell()
+{
+    this->armature->getAnimation()->play("loading");
+}
+
+void Fighter::fallHp(Value num)
+{
+    Label* label=Label::createWithTTF(num.asString(), "Marker Felt.ttf", 32);
+    this->addChild(label);
+    label->setPosition(Vec2(30,this->armature->boundingBox().size.height*2/3));
+    label->runAction(CCSequence::create(MoveBy::create(0.3, Vec2(0,120)),FadeTo::create(0.5, 0),CallFunc::create(CC_CALLBACK_0(Label::removeFromParent, label)), NULL));
+}
+
+void Fighter::hitWord()
+{
+    
+}
+
+void Fighter::die()
+{
+    this->armature->getAnimation()->play("death");
+}
+
+// 直线弹道
+void Fighter::lineThrow()
+{
+    
+}
+
+//弧线弹道,被塞尔曲线计算
+void Fighter::arcThrow()
+{
+    
+}
+
+//穿刺弹道，快速穿透
+void Fighter::impaleThrow()
+{
+    
+}
+
+void Fighter::onFrameEvent(Bone *bone, const std::string& evt, int originFrameIndex, int currentFrameIndex)
+{
+    CCLOG("(%s) emit a frame event (%s) at frame index (%d) arigin (%d).", bone->getName().c_str(), evt.c_str(), currentFrameIndex,originFrameIndex);
+    if (!this->getActionByTag(10000) || this->getActionByTag(10000)->isDone())
+    {
+        this->stand();
+    }
+}
+
+void Fighter::update(float delta)
+{
+    this->tickCount++;
+    if(this->tickCount>=60*3){
+        this->tickCount=0;
+        this->attack();
+    }
+}
+
+void Fighter::onExit()
+{
+    Node::onExit();
+}

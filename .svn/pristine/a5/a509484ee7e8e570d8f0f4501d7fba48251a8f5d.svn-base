@@ -1,0 +1,68 @@
+//
+//  chat.cpp
+//  fancyHeart
+//
+//  Created by zhai on 14-7-9.
+//
+//
+
+#include "chat.h"
+static Chat* instance=nullptr;
+Chat* Chat::getInstance(){
+    if(instance==nullptr){
+        instance=new Chat();
+        instance->init();
+        instance->setPosition(Vec2(0, 100));
+    }
+    return instance;
+}
+
+bool Chat::init()
+{
+	if(!BaseUI::init("publish/chat.json"))
+	{
+		return false;
+	}
+	//如果需要对cocostudio 设计的ui进行调整
+    auto button=static_cast<Button*>(layout->getChildByName("btn_send"));
+    button->addTouchEventListener(CC_CALLBACK_2(Chat::touchButtonEvent, this));
+	return true;
+}
+
+void Chat::onEnter()
+{
+    BaseUI::onEnter();
+}
+
+void Chat::touchButtonEvent(Ref *pSender, TouchEventType type)
+{
+    auto button=static_cast<Button*>(pSender);
+    if (!button) {
+        return;
+    }
+    switch(type)
+    {
+        case TouchEventType::BEGAN:
+            
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+            switch (button->getTag()) {
+                case 10071://聊天按钮
+                {
+                    PChatReq chat;
+                    //log("roldId:%d",Manager::getInstance()->getRoleData()->role().roleid());
+                    chat.set_msg("money[2][100]");
+                    Manager::getInstance()->socket->send(C_CHAT, &chat);
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+
+}

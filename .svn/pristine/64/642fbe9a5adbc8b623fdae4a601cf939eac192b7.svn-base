@@ -1,0 +1,155 @@
+#include "LoginScene.h"
+
+
+#include "external/json/document.h"
+#include "extensions/cocos-ext.h"
+#include "ui/CocosGUI.h"
+#include "cocostudio/CocoStudio.h"
+
+#include "ShaderNode.h"
+#include "SkillBuff.h"
+#include "SkillData.h"
+
+
+
+LoginScene::~LoginScene(){
+}
+LoginScene::LoginScene()
+{
+    
+}
+Scene* LoginScene::createScene()
+{
+    // 'scene' is an autorelease object
+    auto scene = Scene::create();
+    
+    // 'layer' is an autorelease object
+    auto layer = LoginScene::create();
+
+    // add layer as a child to scene
+    scene->addChild(layer);
+
+    // return the scene
+    return scene;
+}
+bool LoginScene::init()
+{
+    return true;
+}
+
+LoginScene* LoginScene::create()
+{
+    LoginScene* loginScene=new LoginScene();
+    if (loginScene && loginScene->init("login.json")) {
+        loginScene->autorelease();
+        return loginScene;
+    }
+    CC_SAFE_DELETE(loginScene);
+    return nullptr;
+}
+// on "init" you need to initialize your instance
+bool LoginScene::init(std::string fileName)
+{
+    if(!BaseUI::init(fileName))
+    {
+        return false;
+    }
+    Size sSize=Director::getInstance()->getOpenGLView()->getFrameSize();
+    Size winsize=Director::getInstance()->getWinSize();
+    return true;
+}
+void LoginScene::onDlgClose(rapidjson::Value &data)
+{
+    BaseUI::onDlgClose(data);
+    std::string btnName=data.GetString();
+    log("you click confirm %s",btnName.c_str());
+}
+void LoginScene::initGame()//init 游戏服务器 服务器认证
+{
+    rapidjson::Value tt;
+    //Confirm::create(this, tt);
+    //Loading::getInstance()->show();
+    WebHttp::getInstance()->send("http://192.168.1.132:8080/GameAuth/login?account=ceshi2&password=ceshi2", CC_CALLBACK_1(LoginScene::initGameCallback, this));
+}
+void LoginScene::initGameCallback(std::vector<char> *data)
+{
+    std::string str(data->begin(),data->end());
+    printf("%s",str.c_str());
+    json.Parse<0>(str.c_str());
+    int loginState=DICTOOL->getIntValue_json(json, "loginState");
+    int count=DICTOOL->getArrayCount_json(json, "areaList");
+    if (loginState!=0||count<1) {//先用以后修改
+        return;
+    }
+    const rapidjson::Value &areaList=DICTOOL->getSubDictionary_json(json, "areaList", 1);
+    string ip=DICTOOL->getStringValue_json(areaList, "ip");
+    int port=DICTOOL->getIntValue_json(areaList, "port");
+    
+    Manager::getInstance()->socket=new Socket();
+    Manager::getInstance()->socket->init(ip, port);
+}
+void LoginScene::onEnter()
+{
+    BaseUI::onEnter();
+    auto btn=static_cast<ui::Button*>(layout->getChildByName("Button_9"));
+    btn->addTouchEventListener(CC_CALLBACK_2(LoginScene::touchEvent,this));
+    btn->setTouchEnabled(true);
+    
+}
+void LoginScene::initNetEvent(){
+    auto listener = EventListenerCustom::create(NET_MESSAGE, [=](EventCustom* event){
+        NetMsg* msg = static_cast<NetMsg*>(event->getUserData());
+        log("Custom event 1 received:%d,%d",msg->msgId,msg->len);
+        switch (msg->msgId)
+        {
+            case C_LOGIN:
+            {
+                PackageLoginResp pm2;
+                pm2.ParseFromArray(msg->bytes, msg->len);
+                int id=pm2.id();
+                bool status=pm2.status();
+                string name=pm2.name();
+                Manager::getInstance()->switchScence(HomeScene::createScene());
+                //log("name:%s,id:%f,status:%f",pm2.name().c_str(),pm2.id(),pm2.status());
+                break;
+            }
+                
+            case CONNECTED:
+            {
+                PackageLoginReq pbLogin;
+                const rapidjson::Value &userBean=DICTOOL->getSubDictionary_json(json, "userBean");
+                string account=DICTOOL->getStringValue_json(userBean, "name");
+                string key=DICTOOL->getStringValue_json(json, "key");
+                pbLogin.set_account(account);
+                pbLogin.set_key(key);
+                Manager::getInstance()->socket->send(C_LOGIN, &pbLogin);
+                break;
+            }
+                
+            default:
+                break;
+        }
+    });
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener,1);
+}
+
+void LoginScene::touchEvent(Ref *pSender, Widget::TouchEventType type)
+{
+    switch (type)
+    {
+        case TouchEventType::BEGAN:
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+        {
+            this->initGame();
+        }
+            break;
+        case TouchEventType::CANCELED:
+            break;
+        default:
+            break;
+    }
+}
+

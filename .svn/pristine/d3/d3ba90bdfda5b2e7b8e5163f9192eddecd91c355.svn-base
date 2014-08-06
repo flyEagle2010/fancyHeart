@@ -1,0 +1,7 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "PUpItemProBuf";
+
+import "item.proto";
+message PUpItem{
+	repeated PItem itemList=1;
+}

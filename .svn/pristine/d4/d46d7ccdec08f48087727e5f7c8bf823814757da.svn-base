@@ -1,0 +1,8 @@
+message PHit{
+   required int32 xid=1;//道具id
+   required bool isMiss=2; //闪避
+   required bool isCrh=3; //暴击
+   required int32 hp=4; //掉血
+   required int32 addBuff=5; //增加的buff
+   required int32 delBuff=6; //去掉的buff
+}

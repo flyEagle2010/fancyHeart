@@ -1,0 +1,37 @@
+package com.doteyplay.game.action.common;
+
+import org.apache.mina.core.session.IoSession;
+
+import com.doteyplay.game.domain.session.SessionHolder;
+import com.doteyplay.game.service.runtimecache.GlobalSessionCache;
+import com.doteyplay.net.message.AbstractMessage;
+import com.doteyplay.net.message.MessageActionParameterResolver;
+
+public class SessionHolderMessageActionParameterResolver implements
+		MessageActionParameterResolver<SessionHolder>
+{
+	private final static SessionHolderMessageActionParameterResolver instance = new SessionHolderMessageActionParameterResolver();
+
+	public static SessionHolderMessageActionParameterResolver getInstance()
+	{
+		return instance;
+	}
+
+	private SessionHolderMessageActionParameterResolver()
+	{
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see com.doteyplay.net.message.MessageActionParameterResolver#resolveParameter(org.apache.mina.common.IoSession,
+	 *      com.doteyplay.net.message.AbstractMessage)
+	 */
+	@Override
+	public SessionHolder resolveParameter(IoSession session,
+			AbstractMessage message)
+	{
+		return GlobalSessionCache.getInstance().getBySession(session);
+	}
+
+}

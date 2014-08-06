@@ -1,0 +1,46 @@
+package com.doteyplay.game.domain.role;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.doteyplay.core.dbcs.DBCS;
+import com.doteyplay.game.domain.gamebean.PetBean;
+import com.doteyplay.game.domain.pet.Pet;
+import com.doteyplay.game.persistence.serverdata.pet.IPetBeanDao;
+
+public class RolePetManager
+{
+	// 角色拥有的全部宠物
+	private List<Pet> petList = new ArrayList<Pet>();
+	// 目前排上场的宠物列表
+	private List<Pet> curPetList = new ArrayList<Pet>();
+
+	private Role role;
+
+	public RolePetManager(Role role)
+	{
+		this.role = role;
+	}
+
+	public void init()
+	{
+		IPetBeanDao petBeanDao = DBCS.getExector(IPetBeanDao.class);
+		List<PetBean> petBeanList = petBeanDao.selectPetBeanListByRoleId(role
+				.getId());
+
+		if (petBeanList != null && petBeanList.size() > 0)
+		{
+			for (PetBean bean : petBeanList)
+			{
+				Pet pet = new Pet(bean, this.role);
+				pet.init();
+				
+				if (this.role.getCurPetList().indexOf(new Long(bean.getId())) > -1)
+					curPetList.add(pet);
+				
+				petList.add(pet);
+			}
+		}
+
+	}
+}

@@ -1,0 +1,61 @@
+//
+//  loading.cpp
+//  fancyHeart
+//
+//  Created by zhai on 14-6-25.
+//
+//
+
+#include "Loading.h"
+static Loading* _instance;
+Loading* Loading::getInstance()
+{
+    if (_instance==nullptr) {
+        Size size=Director::getInstance()->getWinSize();
+        _instance=Loading::create();
+    }
+    _instance->retain();
+    return _instance;
+}
+
+Loading* Loading::create()
+{
+    Loading* loading=new Loading();
+    if (loading && loading->init()) {
+        loading->autorelease();
+        return loading;
+    }
+    CC_SAFE_DELETE(loading);
+    return nullptr;
+}
+
+bool Loading::init()
+{
+    if(!Layout::init())
+    {
+        return false;
+    }
+    Size size=Director::getInstance()->getWinSize();
+    this->setSize(size);
+    img=Sprite::create("publish/srcImg/round.png");
+    this->setBackGroundColorType(BackGroundColorType::SOLID);
+    this->setBackGroundColor(Color3B::BLACK);
+    this->setBackGroundColorOpacity(160);
+    img->setPosition(Vec2(size.width/2,size.height/2));
+    this->addChild(img);
+    return true;
+}
+
+void Loading::show()
+{
+    auto scene=Director::getInstance()->getRunningScene();
+    if (scene && this->getParent()==nullptr) {
+        scene->getChildren().at(0)->addChild(this);
+        img->runAction(RepeatForever::create(RotateBy::create(2, 360)));
+    }
+}
+
+void Loading::hide()
+{
+    this->removeFromParent();
+}

@@ -1,0 +1,9 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "PUpRoleProBuf";
+
+message PUpRole{
+   required int32 fieldType=1;//字段类型
+   required int32 addValue=2;//增加的值
+   required int32 finalValue=3;//最终值
+   required string itemType=4;//类型 保留字段
+}

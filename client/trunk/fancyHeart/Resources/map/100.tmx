@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="21" height="16" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="scene1" tilewidth="110" tileheight="110">
+  <image source="scene1.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="82" name="1" tilewidth="40" tileheight="40">
+  <image source="1.png" width="823" height="635"/>
+ </tileset>
+ <layer name="map" width="21" height="16">
+  <data encoding="base64" compression="zlib">
+   eJy1zPe7z3Ucx+EvMspIJCWRTVQkRGZCNsfeZxjn2OMMzkAhZEel7FlWVhmZlVFmaVD2LHuECsXt8vkXvK73fT1/ej/CQqFQE5rSjOa0oCWtaE0b2tKO9nQgnAgiiaIjnUIPrjNdiCaGrnSjOz3oSS9604e+9COWOOJJoD8DgmYiSSSTwkAGMZi3eYchDGUY7zKcEYzkPUYxmjFBcyzjGM8E3mcik/iAD/mIyXzMJ0xhKtOYzgxmMitozmYOc5nHfD7lMxawkEUsZgmfs5RlLGcFK/mCL4PmKlazhrV8xTrWs4GNbGIzX/MN37KFrWxjO9/xfdDcwU52sZs97OUHfmQfP/Ezv/Ar+znAb/zOQQ5xOGge4SjHOM4JTnKK05zhD/7kLOc4zwUuconLXOFq0LzGX1znBjf5m3/4l1vc5g7/8T93739M5ZGaNDxC2lQPmulsejLwKI+RkUxkJguPk5UnyEZ2niQHT5GTp3kmaOayz5Kb58hDXp4nH/kpQEEKUZgiFKUYL1CcErwYNF+yL1OSUrxCaV6lDGUpx2uUpwKvU5FKVKYKVakWNN+w1XmTGtSkFm9RmzrUpR71aUBDGtGYMJrQlGZBs7ltQUta0Zo2tKUd7elAOBFEEkVHOtGZLkQTEzS72m50pwc96UVv+tCXfsQSRzwJ9GcAiSSRTErQfBh3D+/7kck=
+  </data>
+ </layer>
+ <layer name="item" width="21" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBiawBmLGA/dXcHA4DgAdg4UUB9g+33wyLHRzRXUBxp45BiJNEOBCu4Y6sBqAOwEAEmYAY0=
+  </data>
+ </layer>
+ <objectgroup name="object" width="21" height="16">
+  <object name="1" x="66" y="390" width="59" height="66">
+   <properties>
+    <property name="id" value="10001"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+  <object name="2" x="142" y="292" width="84" height="66">
+   <properties>
+    <property name="id" value="10002"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+  <object name="3" x="181" y="46" width="79" height="72">
+   <properties>
+    <property name="id" value="10003"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+  <object name="4" x="365" y="16" width="96" height="105">
+   <properties>
+    <property name="id" value="10004"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+  <object name="5" x="537" y="201" width="79" height="72">
+   <properties>
+    <property name="id" value="10005"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+  <object name="6" x="427" y="267" width="84" height="80">
+   <properties>
+    <property name="id" value="10006"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+  <object name="7" x="463" y="393" width="84" height="80">
+   <properties>
+    <property name="id" value="10007"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+  <object name="8" x="697" y="80" width="77" height="79">
+   <properties>
+    <property name="id" value="10008"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+  <object name="9" x="621" y="360" width="82" height="67">
+   <properties>
+    <property name="id" value="10009"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+  <object name="10" x="545" y="522" width="70" height="68">
+   <properties>
+    <property name="id" value="10010"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

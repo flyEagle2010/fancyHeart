@@ -1,0 +1,225 @@
+package com.doteyplay.core.bhns.active;
+
+import java.rmi.server.ServerCloneException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.print.attribute.standard.MediaSize.ISO;
+
+import org.apache.log4j.Logger;
+
+import com.doteyplay.core.bhns.BOServiceManager;
+import com.doteyplay.core.util.dependence.DepandenceSorter;
+import com.doteyplay.core.util.dependence.DependenceScaner;
+import com.doteyplay.core.util.dependence.IDependence;
+import com.doteyplay.core.util.dependence.IDependenceAssembly;
+import com.doteyplay.core.util.xml.IParamterSupport;
+import com.doteyplay.core.util.xml.ISimpleParamters;
+import com.doteyplay.core.util.xml.XmlFileSupport;
+import com.doteyplay.game.config.GameConfig;
+import com.doteyplay.game.config.ServerConfig;
+
+/**
+ * 服务的激活管理
+ * 
+ * @author
+ * 
+ */
+public class ActiveServiceHolder implements IParamterSupport,
+		IDependenceAssembly
+{
+	private static final Logger logger = Logger
+			.getLogger(ActiveServiceHolder.class);
+
+	public static String ACTIVESERVICE_CONFIG_FILE = "/active_service.xml";
+	private Map<String, ActiveServiceInfo> activeInfoMap = new HashMap<String, ActiveServiceInfo>();
+	private Map<Integer, ActiveServiceInfo> activeIdInfoMap = new HashMap<Integer, ActiveServiceInfo>();
+	private List<Integer> serivceSortedList = new ArrayList<Integer>();
+
+	public void load_config(String configfile)
+	{
+		if (configfile != null && configfile.length() > 0)
+			ACTIVESERVICE_CONFIG_FILE = configfile;
+
+		XmlFileSupport.parseXmlFromResource(ACTIVESERVICE_CONFIG_FILE, this);
+
+		boolean check = this.checkDependRelation();
+		if (!check)
+			throw new RuntimeException("activeService depaendRelation error");
+
+		DepandenceSorter sorter = new DepandenceSorter();
+		for (ActiveServiceInfo info : activeInfoMap.values())
+		{
+			int[] depaends = null;
+			if (info.getDependence() != null
+					&& info.getDependence().length >= 0)
+			{
+				depaends = new int[info.getDependence().length];
+			}
+			sorter.addElement(info.getPortalId(), depaends);
+		}
+		serivceSortedList = sorter.sort();
+	}
+
+	public void active_all_service(long serviceId)
+	{
+		if (serviceId <= 0)
+			return ;
+
+		if (serivceSortedList != null && serivceSortedList.size() > 0)
+		{
+			int portalId = serivceSortedList.get(0);
+			ActiveServiceInfo info = activeIdInfoMap.get(portalId);
+			BOServiceManager.activeService(info.getPortalId(), serviceId,
+					info.getRule(),true);
+		}
+	}
+	
+	public void active_next_service(int portalId, long serviceId)
+	{
+		int curIndex = serivceSortedList.indexOf(new Integer(portalId));
+		int nextIndex = 0;
+		if(curIndex < serivceSortedList.size() - 1)
+		{
+			nextIndex  = curIndex + 1;
+			
+			int nextPortalId = serivceSortedList.get(nextIndex);
+			ActiveServiceInfo info = activeIdInfoMap.get(nextPortalId);
+			BOServiceManager.activeService(info.getPortalId(), serviceId,
+					info.getRule(),true);
+		}
+		else
+			return;
+	}
+
+	public void active_service(int portalId, long serviceId)
+	{
+		ActiveServiceInfo info = activeIdInfoMap.get(portalId);
+		BOServiceManager.activeService(info.getPortalId(), serviceId,
+				info.getRule(),false);
+	}
+	
+	@Override
+	public void putParamter(ISimpleParamters paramter)
+	{
+		if ("SERVICE".equals(paramter.getDataName()))
+		{
+			String name = paramter.getValue("NAME");
+			String portalIdStr = paramter.getValue("PORTALID");
+			String dependencesStr = paramter.getValue("DEPENDENCES");
+			String ruleStr = paramter.getValue("RULE");
+			if (name == null || name.length() <= 0 || portalIdStr == null
+					|| portalIdStr.length() <= 0)
+			{
+				logger.error("Invalid active setting,name=" + name
+						+ ",portalId=" + portalIdStr);
+				return;
+			}
+			String[] tmpDependenceList = null;
+			if (dependencesStr != null)
+				dependencesStr = dependencesStr.trim();
+
+			if (dependencesStr != null && dependencesStr.length() > 0)
+				tmpDependenceList = dependencesStr.trim().toUpperCase()
+						.split(",");
+			else
+				tmpDependenceList = null;
+
+			int portalId = Integer.parseInt(portalIdStr);
+			ActiveServiceInfo activeInfo = new ActiveServiceInfo(name,
+					portalId, tmpDependenceList, ruleStr);
+			this.activeInfoMap.put(name.toUpperCase(), activeInfo);
+			this.activeIdInfoMap.put(portalId, activeInfo);
+		}
+	}
+
+	@Override
+	public void onComplete()
+	{
+	}
+
+	public boolean checkDependRelation()
+	{
+		Collection<ActiveServiceInfo> tmpBlockInfos = activeInfoMap.values();
+		if (tmpBlockInfos != null)
+		{
+			for (ActiveServiceInfo tmpBlockInfo : tmpBlockInfos)
+			{
+				if (!DependenceScaner.checkValidation(tmpBlockInfo.getName(),
+						this))
+				{
+					logger.error("dependence of " + tmpBlockInfo.getName()
+							+ " is invalid");
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public IDependence getItem(String name)
+	{
+		if (name != null)
+			return activeInfoMap.get(name.toUpperCase());
+		else
+			return null;
+	}
+
+	// **********************************************************************
+	private static ActiveServiceHolder instance;
+
+	private synchronized static ActiveServiceHolder getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new ActiveServiceHolder();
+		}
+		return instance;
+
+	}
+
+	public static void initialize()
+	{
+		ActiveServiceHolder tmpDataStore = getInstance();
+		if (tmpDataStore != null)
+		{
+			tmpDataStore.load_config(ACTIVESERVICE_CONFIG_FILE);
+		}
+	}
+
+	public static void activeAllService(long serviceId)
+	{
+		ActiveServiceHolder tmpDataStore = getInstance();
+		if (tmpDataStore != null)
+		{
+			tmpDataStore.active_all_service(serviceId);
+		}
+	}
+	
+	public static void activeNextService(int curPortalId, long serviceId)
+	{
+		ActiveServiceHolder tmpDataStore = getInstance();
+		if (tmpDataStore != null)
+		{
+			tmpDataStore.active_next_service(curPortalId, serviceId);
+		}
+	}
+	
+	public static void activeService(int portalId, long serviceId)
+	{
+		ActiveServiceHolder tmpDataStore = getInstance();
+		if (tmpDataStore != null)
+		{
+			tmpDataStore.active_service(portalId, serviceId);
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		System.out.println(Integer.MAX_VALUE / 10000);
+	}
+}

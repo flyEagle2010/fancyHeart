@@ -1,0 +1,29 @@
+//package com.doteyplay.support.messageagent;
+//
+//import java.util.List;
+//
+//import com.doteyplay.core.messageagent.ITransferAgent;
+//import com.doteyplay.game.domain.role.User;
+//import com.doteyplay.game.service.runtimecache.GlobalUserCache;
+//import com.doteyplay.net.message.AbstractMessage;
+//
+///**
+// * 本地消息转发代理
+// * 
+// */
+//public class LocalTransferAgent implements ITransferAgent {
+//
+//	public void sendMessage(int roleId, AbstractMessage message) {
+//		User user = GlobalUserCache.getInstance().getUserByCurRoleId(roleId);
+//		if(user != null)
+//			user.sendMsg(message);
+//	}
+//
+//	@Override
+//	public void broadcastMessage(List<Integer> roleIdLst,
+//			AbstractMessage message)
+//	{
+//		for(int roleId:roleIdLst)
+//			this.sendMessage(roleId, message);
+//	}
+//}

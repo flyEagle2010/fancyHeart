@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- the proxool configuration can be embedded within your own application's.
+Anything outside the "proxool" tag is ignored. -->
+<something-else-entirely>
+  <proxool>
+    <alias>game-data-db1</alias>
+    <driver-url>jdbc:mysql://127.0.0.1:3306/game_data?useUnicode=true&amp;characterEncoding=UTF-8</driver-url>
+    <driver-class>com.mysql.jdbc.Driver</driver-class>
+    <driver-properties>
+      <property name="user" value="root"/>
+      <property name="password" value="root"/>
+	  <property name="autoReconnect" value="true"/>
+    </driver-properties>
+	<statistics>1m,10m,1d</statistics>
+	<house-keeping-sleep-time>90000</house-keeping-sleep-time>
+	<prototype-count>1</prototype-count>
+	<maximum-connection-count>30</maximum-connection-count>
+	<minimum-connection-count>5</minimum-connection-count>
+	<maximum-active-time>300000</maximum-active-time>
+	<maximum-connection-lifetime>14400000</maximum-connection-lifetime>
+	<simultaneous-build-throttle>10</simultaneous-build-throttle>
+    <house-keeping-test-sql>select CURRENT_DATE</house-keeping-test-sql>
+    <jndi-name>/gamedbsource1</jndi-name>
+    <jndi-java.naming.factory.initial>org.apache.naming.java.javaURLContextFactory</jndi-java.naming.factory.initial>
+    <jndi-java.naming.factory.url.pkgs>org.apache.naming</jndi-java.naming.factory.url.pkgs>
+  </proxool>
+</something-else-entirely>

@@ -1,0 +1,438 @@
+package com.doteyplay.core.bhns;
+
+import java.lang.reflect.Field;
+
+import org.apache.log4j.Logger;
+
+import com.doteyplay.core.bhns.net.ServerActionManager;
+import com.doteyplay.core.bhns.source.IEndpointSource;
+import com.doteyplay.core.bhns.source.IServiceOption;
+import com.doteyplay.core.bhns.source.options.AppertainServiceOption;
+import com.doteyplay.core.bhns.source.options.ClusterServiceOption;
+import com.doteyplay.core.bhns.source.options.NormalServiceOption;
+import com.doteyplay.core.bhns.source.source.AppertainSource;
+import com.doteyplay.core.bhns.source.source.ClusterSource;
+import com.doteyplay.core.bhns.source.source.NormalSource;
+import com.doteyplay.core.util.xml.IParamterSupport;
+import com.doteyplay.core.util.xml.ISimpleParamters;
+import com.doteyplay.core.util.xml.XmlFileSupport;
+import com.doteyplay.luna.server.LunaServer;
+
+/**
+ * 分布式服务配置信息解析
+ * 
+ * @author 
+ * 
+ */
+public class BOServiceConfig implements IParamterSupport
+{
+	private static final Logger logger = Logger
+			.getLogger(BOServiceConfig.class);
+
+	public String COMMON_BOSERVICE_CONFIG_FILE = "/common_service.xml";
+	public String LOCAL_BOSERVICE_CONFIG_FILE = "/local_service.xml";
+
+	private int localServerPort;
+	private LunaServer netServer;
+
+	private boolean isReload = false;
+
+	public void loadConfig(String commonconfig, String localconfig)
+	{
+		localServerPort = -1;
+		if (commonconfig != null && commonconfig.length() > 0)
+			COMMON_BOSERVICE_CONFIG_FILE = commonconfig;
+		if (localconfig != null && localconfig.length() > 0)
+			LOCAL_BOSERVICE_CONFIG_FILE = localconfig;
+
+		XmlFileSupport.parseXmlFromResource(COMMON_BOSERVICE_CONFIG_FILE, this);
+		XmlFileSupport.parseXmlFromResource(LOCAL_BOSERVICE_CONFIG_FILE, this);
+
+		if (localServerPort > 0)
+		{
+			netServer = new LunaServer(localServerPort, ServerActionManager
+					.getInstance());
+			netServer.start(true);
+//			logger.error("LunaServer start at port:" + localServerPort);
+		}
+//		BOServiceManager.initialService();
+		isReload = true;
+	}
+
+	public void reloadCommonConfig()
+	{
+		isReload = true;
+		XmlFileSupport.parseXmlFromResource(COMMON_BOSERVICE_CONFIG_FILE, this);
+	}
+
+	public void reloadLocalConfig()
+	{
+		isReload = true;
+		XmlFileSupport.parseXmlFromResource(LOCAL_BOSERVICE_CONFIG_FILE, this);
+	}
+
+	@Override
+	public void putParamter(ISimpleParamters paramter)
+	{
+		if (isReload)
+		{
+			if ("SERVICE".equals(paramter.getDataName()))
+			{
+				try
+				{
+					int tmpBHId = Integer
+							.valueOf(paramter.getValue("PORTALID"));
+					String tmpClassName = paramter.getValue("SERVICE");
+					Class<?> tmpClass = Class.forName(tmpClassName);
+					if (tmpClass == null
+							|| !ISimpleService.class.isAssignableFrom(tmpClass))
+					{
+						logger
+								.error("registering remote service fail,can't load bo class,BEHAVIORID="
+										+ tmpBHId + ",BO=" + tmpClassName);
+					} else
+					{
+						IServiceOption tmpServiceOption = null;
+						boolean isAppertain = false;
+
+						String tmpApertainStr = paramter.getValue("APPERTAIN");
+						if (tmpApertainStr == null
+								|| tmpApertainStr.length() <= 0)
+						{
+							String tmpIP = paramter.getValue("IP");
+							int tmpPort = Integer.valueOf(paramter
+									.getValue("PORT"));
+							BOServiceManager.relocateServiceInfo(tmpBHId,
+									tmpIP, tmpPort);
+						}
+					}
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			} else if ("ENDPOINT".equals(paramter.getDataName()))
+			{
+				try
+				{
+					int tmpPortalId = Integer.valueOf(paramter
+							.getValue("PORTALID"));
+					String tmpIP = paramter.getValue("IP");
+					int tmpPort = Integer.valueOf(paramter.getValue("PORT"));
+
+					String tmpEndpointIdStr = paramter.getValue("ENDPOINTID");
+					byte tmpEndpointId = (byte) -1;
+					if (tmpEndpointIdStr != null
+							&& tmpEndpointIdStr.length() > 0)
+						tmpEndpointId = Byte.valueOf(tmpEndpointIdStr);
+
+					ServiceInfo tmpBhns = BOServiceManager
+							.getServiceInfo(tmpPortalId);
+					if (tmpBhns == null
+							|| tmpBhns.option().configType() != IServiceOption.CONFIG_TYPE_CLUSTER)
+					{
+						logger.error("invalid clusterunit");
+					} else
+					{
+						BOServiceManager.relocateServiceInfo(tmpPortalId,
+								tmpEndpointId, tmpIP, tmpPort);
+					}
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			} else if ("LOCAL".equals(paramter.getDataName()))
+			{
+				try
+				{
+					int tmpPortalId = Integer.valueOf(paramter
+							.getValue("PORTALID"));
+
+					String tmpServiceClassName = paramter
+							.getValue("SERVICE_IMPL");
+
+					ServiceInfo tmpServiceInfo = BOServiceManager
+							.getServiceInfo(tmpPortalId);
+					if (tmpServiceInfo != null)
+					{
+						IEndpointSource tmpEndpoint = tmpServiceInfo.source()
+								.getLocalEndPoint();
+						if (tmpEndpoint != null
+								&& tmpEndpoint.isLocalImplemention())
+						{
+							Class<?> clz = tmpEndpoint.getServiceImplClz();
+							if (clz == null)
+								logger
+										.error("localServer cannt find serviceimpl class :"
+												+ tmpServiceClassName);
+							else if (!clz.getName().equals(tmpServiceClassName))
+								logger
+										.error("the serviceimpl class has find out by localServer is not the current using clz:"
+												+ tmpServiceClassName
+												+ ",current clz:"
+												+ clz.getName());
+						}
+					}
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+		if ("SERVICE".equals(paramter.getDataName()))
+		{
+			try
+			{
+				int tmpBHId = Integer.valueOf(paramter.getValue("PORTALID"));
+				String tmpClassName = paramter.getValue("SERVICE");
+				@SuppressWarnings("unchecked")
+				Class<? extends ISimpleService> tmpClass = (Class<? extends ISimpleService>) Class.forName(tmpClassName);
+				if (tmpClass == null
+						|| !ISimpleService.class.isAssignableFrom(tmpClass))
+				{
+					logger
+							.error("registering remote service fail,can't load bo class,BEHAVIORID="
+									+ tmpBHId + ",BO=" + tmpClassName);
+				} else
+				{
+					IServiceOption tmpServiceOption = null;
+					boolean isAppertain = false;
+
+					String tmpApertainStr = paramter.getValue("APPERTAIN");
+					if (tmpApertainStr == null || tmpApertainStr.length() <= 0)
+					{
+						String tmpIP = paramter.getValue("IP");
+						int tmpPort = Integer
+								.valueOf(paramter.getValue("PORT"));
+						tmpServiceOption = new NormalServiceOption(tmpBHId,
+								tmpClass, tmpIP, tmpPort);
+					} else
+					{
+						int tmpApertain = Integer.valueOf(tmpApertainStr);
+						tmpServiceOption = new AppertainServiceOption(tmpBHId,
+								tmpClass, tmpApertain);
+					}
+
+					ServiceInfo tmpServiceInfo = new ServiceInfo(
+							tmpServiceOption);
+					BOServiceManager.registerServiceInfo(tmpServiceInfo);
+				}
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		if ("CLUSTER".equals(paramter.getDataName()))
+		{
+			try
+			{
+				int tmpBHId = Integer.valueOf(paramter.getValue("PORTALID"));
+				String tmpClassName = paramter.getValue("SERVICE");
+				@SuppressWarnings("unchecked")
+				Class<? extends ISimpleService> tmpClass = (Class<? extends ISimpleService>) Class.forName(tmpClassName);
+				if (tmpClass == null
+						|| !ISimpleService.class.isAssignableFrom(tmpClass))
+				{
+					logger
+							.error("registering remote service fail,can't load bo class,BEHAVIORID="
+									+ tmpBHId + ",BO=" + tmpClassName);
+				} else
+				{
+					IServiceOption tmpServiceOption = null;
+					boolean isAppertain = false;
+
+					String tmpApertainStr = paramter.getValue("APPERTAIN");
+					if (tmpApertainStr == null || tmpApertainStr.length() <= 0)
+					{
+						tmpServiceOption = new ClusterServiceOption(tmpBHId,
+								tmpClass, (byte) 0);
+					} else
+					{
+						int tmpApertain = Integer.valueOf(tmpApertainStr);
+						tmpServiceOption = new AppertainServiceOption(tmpBHId,
+								tmpClass, tmpApertain);
+					}
+
+					ServiceInfo tmpServiceInfo = new ServiceInfo(
+							tmpServiceOption);
+					BOServiceManager.registerServiceInfo(tmpServiceInfo);
+				}
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		} else if ("ENDPOINT".equals(paramter.getDataName()))
+		{
+			int tmpPortalId = Integer.valueOf(paramter.getValue("PORTALID"));
+			String tmpIP = paramter.getValue("IP");
+			int tmpPort = Integer.valueOf(paramter.getValue("PORT"));
+
+			String tmpEndpointIdStr = paramter.getValue("ENDPOINTID");
+			byte tmpEndpointId = (byte) -1;
+			if (tmpEndpointIdStr != null && tmpEndpointIdStr.length() > 0)
+				tmpEndpointId = Byte.valueOf(tmpEndpointIdStr);
+
+			ServiceInfo tmpBhns = BOServiceManager.getServiceInfo(tmpPortalId);
+			if (tmpBhns == null
+					|| tmpBhns.option().configType() != IServiceOption.CONFIG_TYPE_CLUSTER)
+			{
+				logger.error("invalid clusterunit");
+			} else
+			{
+				((ClusterServiceOption) tmpBhns.option()).regEndpointInfo(
+						tmpEndpointId, tmpIP, tmpPort);
+			}
+		} else if ("LOCAL".equals(paramter.getDataName()))
+		{
+			try
+			{
+				int tmpPortalId = Integer
+						.valueOf(paramter.getValue("PORTALID"));
+
+				String tmpDataBlocks = paramter.getValue("DATABLOCK");
+				String tmpConfigFile = paramter.getValue("CONFIG");
+				String tmpPortalClassName = paramter.getValue("PORTAL_IMPL");
+				String tmpServiceClassName = paramter.getValue("SERVICE_IMPL");
+
+				ServiceInfo tmpServiceInfo = BOServiceManager
+						.getServiceInfo(tmpPortalId);
+				if (tmpServiceInfo != null)
+				{
+					switch (tmpServiceInfo.option().configType())
+					{
+					case IServiceOption.CONFIG_TYPE_NORMAL:
+						((NormalSource) tmpServiceInfo.source()).bindSource(
+								tmpPortalClassName, tmpServiceClassName,
+								tmpConfigFile, tmpDataBlocks);
+						break;
+					case IServiceOption.CONFIG_TYPE_CLUSTER:
+						String tmpEndpointIdStr = paramter
+								.getValue("ENDPOINTID");
+						byte tmpEndpointId = (byte) -1;
+						if (tmpEndpointIdStr != null
+								&& tmpEndpointIdStr.length() > 0)
+							tmpEndpointId = Byte.valueOf(tmpEndpointIdStr);
+						((ClusterSource) tmpServiceInfo.source()).regEndpoint(
+								tmpEndpointId, tmpPortalClassName,
+								tmpServiceClassName, tmpConfigFile,
+								tmpDataBlocks);
+						break;
+					case IServiceOption.CONFIG_TYPE_APPERTAIN:
+						AppertainSource tmpAppertainSource = new AppertainSource(
+								(AppertainServiceOption) tmpServiceInfo
+										.option());
+						break;
+					default:
+						logger.error("invalid option type");
+						break;
+					}
+				}
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		} else if ("SERVER".equals(paramter.getDataName()))
+		{
+			this.localServerPort = Integer.valueOf(paramter.getValue("PORT"));
+		}
+	}
+
+	@Override
+	public void onComplete()
+	{
+	}
+
+	public int getLocalServerPort()
+	{
+		return localServerPort;
+	}
+
+	public LunaServer getNetServer()
+	{
+		return netServer;
+	}
+
+	public boolean checkServices(Class<?> bhidDefinitionClass,
+			String fieldPrefixFilter, String fieldSuffixFilter)
+	{
+		if (bhidDefinitionClass == null)
+			return false;
+
+		boolean result = true;
+		try
+		{
+			int tmpBHID;
+			Field[] tmpFields = bhidDefinitionClass.getFields();
+			for (Field tmpField : tmpFields)
+			{
+				if ((tmpField.getType() == java.lang.Integer.class || tmpField
+						.getType() == int.class)
+						&& ((fieldPrefixFilter != null && tmpField.getName()
+								.startsWith(fieldPrefixFilter)) || (fieldSuffixFilter != null && tmpField
+								.getName().endsWith(fieldSuffixFilter))))
+				{
+
+					tmpBHID = tmpField.getInt(null);
+					if (BOServiceManager.getServiceInfo(tmpBHID) == null)
+					{
+						logger.error("service not registered:"
+								+ tmpField.getName() + " =" + tmpBHID);
+						result = false;
+					}
+				}
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	// **********************************
+	private static BOServiceConfig instance;
+
+	public static void loadService(String commonconfig, String localconfig)
+	{
+		if (instance == null)
+		{
+			instance = new BOServiceConfig();
+			instance.loadConfig(commonconfig, localconfig);
+		}
+	}
+
+	public static boolean reloadCommonService()
+	{
+		if (instance != null)
+		{
+			instance.reloadCommonConfig();
+			return true;
+		} else
+			return false;
+	}
+
+	public static boolean reloadLocalService()
+	{
+		if (instance != null)
+		{
+			instance.reloadLocalConfig();
+			return true;
+		} else
+			return false;
+	}
+
+	// 服务器初始化时检查相应portailID的服务是否加载，此处无需同步
+	public static boolean checkServiceList(Class<?> bhidDefinitionClass,
+			String fieldPrefixFilter, String fieldSuffixFilter)
+	{
+		if (instance != null)
+			return instance.checkServices(bhidDefinitionClass,
+					fieldPrefixFilter, fieldSuffixFilter);
+		else
+		{
+			logger.error("checking service list fail");
+			return false;
+		}
+	}
+
+}

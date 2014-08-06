@@ -1,0 +1,53 @@
+package com.doteyplay.game.util.excel;
+
+import java.util.Arrays;
+
+public class TemplateConfig
+{
+	private String fileName;
+	private String parserClassName;
+	private Class classes[];
+
+	public TemplateConfig(String fileName, Class classes[])
+	{
+		this.fileName = fileName;
+		this.classes = classes;
+	}
+
+	public void setFileName(String fileName)
+	{
+		this.fileName = fileName;
+	}
+
+	public String getFileName()
+	{
+		return fileName;
+	}
+
+	public String getParserClassName()
+	{
+		return parserClassName;
+	}
+
+	public void setParserClassName(String parserClassName)
+	{
+		this.parserClassName = parserClassName;
+	}
+
+	public void setClasses(Class classes[])
+	{
+		this.classes = classes;
+	}
+
+	public Class[] getClasses()
+	{
+		return classes;
+	}
+
+	public String toString()
+	{
+		return (new StringBuilder()).append("TemplateConfig [classes=")
+				.append(Arrays.toString(classes)).append(", fileName=")
+				.append(fileName).append("]").toString();
+	}
+}

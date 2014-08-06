@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleBean">
+	<typeAlias alias="roleBean" type="com.doteyplay.game.domain.gamebean.RoleBean" />
+
+	<insert id="insertRoleBean" parameterClass="roleBean">
+		INSERT INTO
+		t_role
+		(
+			id,userId,name, level,areaId,exp,money,rmb,energy,vipLevel,lastLoginTime,lastLogoutTime,createTime,petGroupId
+		)
+		VALUES
+		(
+			#id#,#userId#,#name#,#level#,#areaId#,#exp#,#money#,#rmb#,#energy#,#vipLevel#,#lastLoginTime#,#lastLogoutTime#,#createTime# ,#petGroupId#
+		)
+	</insert>
+
+	<select id="selectRoleBean" resultClass="roleBean"
+		parameterClass="long">
+		SELECT
+		id,
+		userId,
+		name,
+		level,
+		areaId,
+		exp,
+		money,
+		rmb,
+		energy,
+		lastLoginTime,
+		lastLogoutTime,
+		createTime,
+		vipLevel,
+		petGroupId 
+		FROM t_role
+		WHERE id =
+		#value#
+	</select>
+	
+	<select id="selectRoleBeanByUserId" resultClass="roleBean"
+		parameterClass="java.util.Map">
+		SELECT
+		id,
+		userId,
+		name,
+		level,
+		areaId,
+		exp,
+		money,
+		rmb,
+		energy,
+		lastLoginTime,
+		lastLogoutTime,
+		createTime,
+		vipLevel,
+		petGroupId 
+		FROM t_role
+		WHERE userId = #userId# and areaId = #areaId#
+	</select>
+
+	<select id="selectRoleBeanByName" resultClass="roleBean"
+		parameterClass="String">
+		SELECT
+		id,
+		userId,
+		name,
+		level,
+		areaId,
+		exp,
+		money,
+		rmb,
+		energy,
+		lastLoginTime,
+		lastLogoutTime,
+		createTime,
+		vipLevel,
+		petGroupId  
+		FROM t_role
+		WHERE name =
+		#value#
+	</select>
+
+	<update id="updateRoleBean" parameterClass="roleBean">
+		update 
+		t_role 
+		set 
+		userId = #userId#,
+		name = #name#,
+		level = #level#,
+		areaId = #areaId#,
+		exp = #exp#,
+		money = #money#,
+		rmb = #rmb#,
+		energy = #energy#,
+		lastLoginTime = #lastLoginTime#,
+		lastLogoutTime = #lastLogoutTime#,
+		vipLevel = #vipLevel#,
+		petGroupId = #petGroupId# 
+		WHERE id =
+		#id#
+	</update>
+
+</sqlMap>

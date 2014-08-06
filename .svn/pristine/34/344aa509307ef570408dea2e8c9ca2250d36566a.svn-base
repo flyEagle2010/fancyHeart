@@ -1,0 +1,11 @@
+package com.doteyplay.game.constants;
+
+public enum InstallOutFitResultType
+{
+	SUCCESS,
+	NOT_FOUND,
+	LEVEL_LIMIT,
+	DECK_NOT_FOUND,
+	NOT_ENOUGH,
+	;
+}

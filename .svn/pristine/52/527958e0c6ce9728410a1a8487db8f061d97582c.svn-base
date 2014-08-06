@@ -1,0 +1,28 @@
+//
+//  loading.h
+//  fancyHeart
+//
+//  Created by zhai on 14-6-25.
+//
+//
+
+#ifndef __fancyHeart__Loading__
+#define __fancyHeart__Loading__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "ui/CocosGUI.h"
+#include "BaseUI.h"
+USING_NS_CC;
+class Loading:public Layout
+{
+public:
+    static Loading* getInstance();
+    static Loading* create();
+    void show();
+    void hide();
+	virtual bool init();
+private:
+    Sprite* img;
+};
+#endif /* defined(__fancyHeart__Loading__) */

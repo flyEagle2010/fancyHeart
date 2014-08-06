@@ -1,0 +1,198 @@
+//
+//  FighterCtrl.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-5.
+//
+//
+
+#include "MFighter.h"
+#include "FightScene.h"
+MFighter* MFighter::create(FData* fd)
+{
+    MFighter* pRet=new MFighter();
+    if(pRet && pRet->init(fd))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = NULL;
+        return NULL;
+    }
+}
+
+bool MFighter::init(FData* fd)
+{
+    this->data=fd;
+    this->pos=fd->bd.pos;
+    this->currentState=fstate::idle;
+    //初始化技能
+    this->initSkill();
+    return true;
+}
+
+void MFighter::initSkill()
+{
+    Skill* skill=Skill::create(this, 10101);
+    this->skills.pushBack(skill);
+}
+
+void MFighter::start()
+{
+    Director::getInstance()->getScheduler()->schedule(schedule_selector(MFighter::timeHandler), this, 0.5, false);
+}
+
+void MFighter::pause()
+{
+    Director::getInstance()->getScheduler()->pauseTarget(this);
+}
+
+void MFighter::timeHandler(float dt)
+{
+    if(this->currentState==fstate::idle){
+        this->startAttack(0);
+    }
+}
+
+void MFighter::startAttack(int triggerType)
+{
+    Vector<MFighter*> foes=FightMgr::getInstance()->getFoes(pos);
+    bool isFightOver=true;
+    for(int i=0;i<foes.size();i++)
+    {
+        MFighter* mf=foes.at(i);
+        if(i==0) this->foe=mf;
+        if(mf->currentState!=fstate::die)
+        {
+            isFightOver=false;
+            break;
+        }
+    }
+    if(isFightOver)
+    {
+        //战斗结果处理
+        FightMgr::getInstance()->handleResult();
+        return;
+    }
+    this->currentState=fstate::start;
+    //自动选择目标
+    //取mf普通攻击距离 和默认目标的位置计算是否移动
+    MFighter* lf=FightMgr::getInstance()->getFirst(pos);
+    MFighter* rf=FightMgr::getInstance()->getFirst(foe->pos);
+    float dis=rf->view->getPosition().x-lf->view->getPosition().x;
+    //检查攻击距离
+    if(abs(dis) >40*5)
+    {
+        this->view->run();
+        return;
+    }
+    
+    //技能列表，选择技能
+    
+    Skill* pSkill=this->selectSkill();;
+    pSkill->start();
+
+}
+/*
+ //1个普通攻击
+ //2个自动攻击的技能（优先使用，随机取一个，会有自己的CD和公共冷却时间）
+ //1手点的
+ //主将只有主动技能，其他的只有被动技能
+ */
+Skill* MFighter::selectSkill()
+{
+    
+    return this->skills.at(0);
+}
+
+//吟唱（引导）
+void MFighter::spell()
+{
+    this->currentState=fstate::spell;
+    this->view->spell();
+}
+
+//施法(攻击）
+void MFighter::cast()
+{
+    this->currentState=fstate::cast;
+    this->view->attack();
+}
+
+//仍东西 1抛射 2直射 3穿刺
+void MFighter::shoot(MFighter* mf,int type)
+{
+    this->currentState=fstate::throwing;
+    switch (type) {
+        case 1:
+//            beziermove
+            break;
+        case 2:
+            this->view->lineThrow();
+            break;
+        case 3:
+            break;
+        default:
+            break;
+    }
+}
+
+//蓄力
+void MFighter::buildup()
+{
+    this->currentState=fstate::buildup;
+}
+
+//受击
+void MFighter::attacked()
+{
+    if(this->data->hp<=0)
+    {
+        this->die();
+        return;
+    }
+    this->currentState=fstate::idle;
+    this->view->attacked();
+}
+
+void MFighter::fallHp(int num)
+{
+//    this->data->sethp
+}
+
+//死亡
+void MFighter::die()
+{
+    this->currentState=fstate::die;
+    this->view->die();
+}
+
+int MFighter::getGrid()
+{
+    return 2;
+}
+
+void MFighter::clearBuff(Buff* buff)
+{
+    //清除特效，重新计算属性,buff数组中清除
+    for(Buff* bf : this->buffs)
+    {
+        if((bf->getGroupID() == buff->getGroupID()) && (bf->getLv()<buff->getLv()))
+        {
+            bf->start();
+            this->data->addBuff(bf);
+            break;
+        }
+    }
+    this->data->delBuff(buff);
+    this->buffs.eraseObject(buff);
+}
+
+MFighter::~MFighter()
+{
+    Director::getInstance()->getScheduler()->unschedule(schedule_selector(MFighter::timeHandler), this);
+    this->view->removeFromParent();
+}

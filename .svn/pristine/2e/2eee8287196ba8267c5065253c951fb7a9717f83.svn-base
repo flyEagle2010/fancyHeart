@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="gb2312"?>
+<project name="frameCore" default="all" basedir=".">
+
+    <!-- 环境变量 -->
+    <property environment="env"/>
+    <property name="build" value="build"/>
+    <property name="dist" value="dist"/>
+	<property name="src" value="src/main/java"/>
+	<property name="game-server-service-lib" value="../GameServerService/lib" />
+	<property name="game-server-lib" value="../GameServer/lib" />
+    <property name="version" value="1.0"/>
+
+    <path id="classpath">
+        <fileset dir=".">
+			 <include name="lib/**/*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="init">
+        <mkdir dir="${build}"/>
+        <mkdir dir="${dist}"/>
+        <uptodate property="gamserver.uptodate" targetfile="${dist}/server-core-1.0.0.jar">
+            <srcfiles dir="${src}" includes="*"/>
+        </uptodate>
+    </target>
+    
+	<target name="make-server" unless="gamserver.uptodate">
+	        <javac destdir="${build}" debug="true" fork="true" memoryinitialsize="128m" memorymaximumsize="256m" >
+	            <src path="${src}"/>				
+	            <classpath refid="classpath"/>
+	        </javac> 	  
+		
+	    	<copy todir="${build}">
+				<fileset dir="${src}">
+					<exclude name="**/*.java"/>
+				</fileset>
+			</copy>
+	        <jar jarfile="${dist}/server-core-1.0.0.jar" basedir="${build}">
+	            <include name="**/*"/>	 
+	        </jar>
+		
+			<copy todir="${game-server-service-lib}">
+				<fileset dir="${dist}">
+					<include name="server-core-1.0.0.jar"/>
+				</fileset>
+			</copy>
+		
+			<copy todir="${game-server-lib}">
+				<fileset dir="${dist}">
+					<include name="server-core-1.0.0.jar"/>
+				</fileset>
+			</copy>
+	</target>
+	
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
+	
+    <target name="all" depends="clean,init,make-server"/>
+</project>

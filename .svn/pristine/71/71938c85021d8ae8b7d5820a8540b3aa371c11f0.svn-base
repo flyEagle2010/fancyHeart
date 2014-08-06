@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<SceneProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>Y:\Documents\svn\project2\ClientUI\CocoStudio\ccsprojs\Fight</ProjectDir>
+  <Version>1.4.0.1</Version>
+  <Resources>Y:\Documents\svn\project2\ClientUI</Resources>
+  <Name>Fight</Name>
+  <JsonFileName>Fight.json</JsonFileName>
+  <JsonFolder>Y:\Documents\svn\project2\ClientUI\CocoStudio\assets\publish</JsonFolder>
+  <JsonList />
+  <CanvasSize>
+    <Width>480</Width>
+    <Height>320</Height>
+  </CanvasSize>
+  <filePath>Y:\Documents\svn\project2\ClientUI\CocoStudio\ccsprojs\Fight\Fight.xml.scene</filePath>
+  <ProjectType>SceneProject</ProjectType>
+  <ResRelativePath>\\..\\..\\assets</ResRelativePath>
+  <JSFileList />
+  <DefaultUI_JSList />
+  <Res>Y:\Documents\svn\project2\ClientUI\CocoStudio\assets</Res>
+</SceneProject>

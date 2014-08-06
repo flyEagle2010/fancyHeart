@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf8"?>
+<project name="javagame" default="all" basedir=".">
+
+    <!-- 环境变量 -->
+    <property environment="env"/>
+    <property name="build" value="build"/>
+	<property name="build-common" value="build-common"/>
+    <property name="dist" value="dist"/>
+	<property name="src" value="src/main/java"/>
+	<property name="resource" value="src/main/resources"/>
+	<property name="version" value="1.0"/>
+	<property name="gm-common" value="../GameCommon/src"/>
+	<property name="game-server-core" value="../GameServerCore/src/main/java"/>
+	<property name="game-service" value="../GameServerService/src/main/java"/>
+	<property name="luna" value="../luna/src"/>
+ 
+    <path id="classpath">
+        <fileset dir=".">
+             <include name="dist/**/*.jar"/>
+			 <include name="lib/**/*.jar"/>
+			 <include name="devlib/**/*.jar"/>
+        	 <include name="buildlib/**/*.jar"/>
+        </fileset>
+    </path>
+	<!--执行顺序-->
+    <target name="all" depends="startClean,init,make-common,make-server,endClean"/>
+    
+    <target name="startClean">
+        <echo message="startClean"></echo>
+    	<echo message="删除上次记录的目录"></echo>
+        <delete dir="${build}"/>
+		<delete dir="${build-common}"/>
+    	<delete file="${dist}/game-common-0.5.6.0.jar"/>
+    	<delete file="${dist}/game-server-0.5.6.0.jar"/>
+    	
+    </target>
+    
+     <target name="init">
+        <echo message="init"></echo>
+     	<echo message="生成需要的目录"></echo>
+        <mkdir dir="${build}"/>
+        
+		<mkdir dir="${build-common}"/>
+
+    </target>
+
+	 <target name="make-common">
+        <echo message="make-common"></echo>
+	 	<echo message="将所有的四个项目的class拷贝到指定的目录"></echo>
+		 <javac destdir="${build-common}" debug="true" includeAntRuntime="false">
+            <src path="${gm-common}"/>
+            <classpath refid="classpath"/>
+        </javac>
+	 	 <javac destdir="${build-common}" debug="true" includeAntRuntime="false">
+	 		 <src path="${luna}"/>
+	 		 <classpath refid="classpath"/>
+	 	 </javac>
+		
+	 	 <javac destdir="${build-common}" debug="true" includeAntRuntime="false">
+	 	 				 <src path="${game-server-core}"/>
+	 	 				 <classpath refid="classpath"/>
+	 	 </javac>
+	 	 <javac destdir="${build-common}" debug="true" includeAntRuntime="false">
+	 				 <src path="${game-service}"/>
+	 				 <classpath refid="classpath"/>
+	 	 </javac>
+	 	<copy todir="${build-common}">
+	 				<fileset dir="${game-service}">
+	 					<exclude name="**/*.java"/>
+	 				</fileset>
+	 	</copy>
+		<echo message="将所有的class生成game-common.jar,不包括其它文件."></echo>
+	 
+        <jar jarfile="dist/game-common-${version}.jar" basedir="${build-common}">
+            <include name="**/*"/>
+        </jar>
+    </target>
+ 
+    <target name="make-server" unless="gamserver.uptodate">
+        <echo message="make-server"></echo>
+        <javac destdir="${build}" debug="true" fork="true" memorymaximumsize="1024M" includeAntRuntime="false">
+            <src path="${src}"/>
+			<src path="${resource}"/>
+            <classpath refid="classpath"/>
+        </javac> 
+    	<echo message="拷贝目录及子目录中所有的非*.java的文件.放到指定的目录,以便于打包."></echo>
+    	<copy todir="${build}">
+			<fileset dir="${src}">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+    	<echo message="将所有的class及${src}目录下的所有的非java的文件,一起打包成jar文件.不包括resource目录下的文件."></echo>
+        <jar jarfile="${dist}/game-server-${version}.jar" basedir="${build}">
+            <include name="**/*"/>	 
+        </jar>
+    </target>
+ 
+    <target name="endClean">
+    	 <echo message="endClean"></echo>
+        <delete dir="${build}"/>
+		<delete dir="${build-common}"/>
+    	 <echo message="resource目录的更新,需要单独维护."></echo>
+    </target>
+</project>

@@ -1,0 +1,96 @@
+#include "LoginScene.h"
+
+
+#include "external/json/document.h"
+#include "extensions/cocos-ext.h"
+#include "ui/CocosGUI.h"
+#include "cocostudio/CocoStudio.h"
+
+#include "ShaderNode.h"
+#include "SkillBuff.h"
+#include "SkillData.h"
+USING_NS_CC;
+
+LoginScene::~LoginScene(){
+    log("de.....%d",_eventDispatcher->getReferenceCount());
+}
+
+Scene* LoginScene::createScene()
+{
+    // 'scene' is an autorelease object
+    auto scene = Scene::create();
+    
+    // 'layer' is an autorelease object
+    auto layer = LoginScene::create();
+
+    // add layer as a child to scene
+    scene->addChild(layer);
+
+    // return the scene
+    return scene;
+}
+
+// on "init" you need to initialize your instance
+bool LoginScene::init()
+{
+    
+    Size sSize=Director::getInstance()->getOpenGLView()->getFrameSize();
+    Size winsize=Director::getInstance()->getWinSize();
+    
+    std::map<int ,std::string> m;
+    m[100]="v100";
+    log("map value:%s",m[100].c_str());
+    
+    auto layout=static_cast<Layout*>(cocostudio::GUIReader::getInstance()->widgetFromJsonFile("login.json"));
+    this->addChild(layout);
+    
+    auto btn=static_cast<ui::Button*>(layout->getChildByName("Button_9"));
+    btn->addTouchEventListener(CC_CALLBACK_2(LoginScene::touchEvent,this));
+    this->initNetEvent();
+   
+//    SkillBuff::getInstance(Value("1.buffx"));
+    SkillData::getInstance(Value("1.skillx"));
+    
+    return true;
+}
+
+
+void LoginScene::initNetEvent(){
+    auto listener = EventListenerCustom::create(NET_MESSAGE, [=](EventCustom* event){
+        NetMsg* msg = static_cast<NetMsg*>(event->getUserData());
+        log("Custom event 1 received:%d,%d",msg->msgId,msg->len);
+        switch (msg->msgId)
+        {
+            case C_LOGIN:
+            {
+                //PackageLoginResp* pm=new PackageLoginResp();
+                //pm->ParseFromArray(msg->bytes, msg->len);
+                PackageLoginReq pm2;
+                pm2.ParseFromArray(msg->bytes, msg->len);
+                
+            }
+                break;
+            default:
+                break;
+        }
+    });
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener,1);
+}
+
+void LoginScene::touchEvent(Ref *pSender, Widget::TouchEventType type)
+{
+    switch (type)
+    {
+        case TouchEventType::BEGAN:
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+            Director::getInstance()->replaceScene(HomeScene::createScene());
+            break;
+        case TouchEventType::CANCELED:
+            break;
+        default:
+            break;
+    }
+}

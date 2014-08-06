@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SkillBean">
+	<typeAlias alias="skillBean" type="com.doteyplay.game.domain.gamebean.SkillBean" />
+
+	<insert id="insertSkillBean" parameterClass="skillBean">
+		INSERT INTO
+		t_skill
+		(
+			roleId,petId,skillId,skillLevel 
+		)
+		VALUES
+		(
+			#roleId#,#petId#,#skillId#,#skillLevel#
+		)
+	</insert>
+
+
+	<select id="selectSkillBeanList" resultClass="skillBean"
+		parameterClass="long">
+		SELECT 
+		roleId, 
+		petId, 
+		skillId, 
+		skillLevel  
+		FROM t_skill
+		WHERE roleId =
+		#value#
+	</select>
+
+	<update id="updateSkillBean" parameterClass="java.util.Map">
+		update 
+		t_skill 
+		set skillId = #newSkillId# 
+		WHERE roleId = #roleId# 
+		and petId = #petId# 
+		and skillId = #skillId#
+	</update>
+
+</sqlMap>

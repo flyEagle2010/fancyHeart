@@ -1,0 +1,191 @@
+//
+//  HeroData.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-27.
+//
+//
+
+#include "SkillData.h"
+SkillData* instance;
+
+SkillData* SkillData::getInstance(Value v)
+{
+    if(instance==nullptr)
+    {
+        instance=new SkillData();
+        if(Value(instance->getID()).asString() != v.asString())
+        {
+            instance->load(v);
+        }
+    }
+    return instance;
+}
+
+void SkillData::load(Value v)
+{
+    std::string fullPath=FileUtils::getInstance()->fullPathForFilename(v.asString());
+//    Data data=FileUtils::getInstance()->getDataFromFile(fullPath);
+    std::ifstream ifile(fullPath.c_str(),std::ios::in|std::ios::binary);
+    
+    BData::setData(ifile, skillID);
+    BData::setData(ifile, nameID);
+    BData::setData(ifile, level);
+    BData::setData(ifile, descId);
+    
+    BData::setData(ifile, resSkillActionId);
+    BData::setData(ifile, resSkillEffectId);
+    BData::setData(ifile, resBeAttackId);
+    
+    unsigned char er,dt,evt,bt,st,at;
+    BData::setData(ifile, er);
+    BData::setData(ifile, dt);
+    BData::setData(ifile, evt);
+    BData::setData(ifile, eventParam);
+    BData::setData(ifile, bt);
+    BData::setData(ifile, st);
+    BData::setData(ifile, at);
+    
+    this->effectRange=(SkillEffectRange)er;
+    this->damageType=(DamageType)dt;
+    this->event=(SkillActiveEvent)evt;
+    this->bulletType=(SkillBulletType)bt;
+    this->selectType=(SkillTargetSelectType)st;
+    this->actionType=(SkillActionType)at;
+    
+    BData::setData(ifile, leadCount);
+    BData::setData(ifile, leadTimeDelta);
+    BData::setData(ifile, cost);
+    
+    BData::setData(ifile, storageTime);
+    BData::setData(ifile, storageStartRate);
+    BData::setData(ifile, storageStartValue);
+    BData::setData(ifile, storageEndRate);
+    BData::setData(ifile, storageEndValue);
+    int size=0;
+    BData::setData(ifile, size);
+    
+    for(int i=0;i<size;i++)
+    {
+        SLData* data=new SLData();
+        data->loadData(ifile);
+        this->levelList.push_back(data);
+    }
+    
+    ifile.close();
+}
+
+int SkillData::getID()
+{
+    return this->skillID;
+}
+
+std::string SkillData::SkillData::getName()
+{
+    return Value(this->nameID).asString();
+}
+
+std::string SkillData::getDes()
+{
+    return Value(this->descId).asString();
+}
+
+int SkillData::getLevel()
+{
+    return this->level;
+}
+
+std::string SkillData::getResSkillAction()
+{
+    return this->resSkillActionId;
+}
+
+std::string SkillData::getResSkillEffect()
+{
+    return this->resSkillEffectId;
+}
+
+std::string SkillData::getResSkillAttacked()
+{
+    return this->resBeAttackId;
+}
+
+SkillEffectRange SkillData::getEffectRange()
+{
+    return this->effectRange;
+}
+
+DamageType SkillData::getDamageType()
+{
+    return this->damageType;
+}
+
+SkillActiveEvent SkillData::getActiveEvent()
+{
+    return this->event;
+}
+
+SkillBulletType SkillData::getBulletType()
+{
+    return this->bulletType;
+}
+
+SkillTargetSelectType SkillData::getTargetSelectType()
+{
+    return this->selectType;
+}
+
+SkillActionType SkillData::getActionType()
+{
+    return this->actionType;
+}
+
+std::string SkillData::getEventParam()
+{
+    return this->eventParam;
+}
+
+int SkillData::getLeadcount()
+{
+    return this->leadCount;
+}
+
+int SkillData::getLeadTimeDelt()
+{
+    return this->leadTimeDelta;
+}
+
+int SkillData::getCost()
+{
+    return this->cost;
+}
+
+int SkillData::getStoragetime()
+{
+    return this->storageTime;
+}
+
+int SkillData::getStorageStartRate()
+{
+    return this->storageStartRate;
+}
+
+int SkillData::getStorageStartValue()
+{
+    return this->storageStartValue;
+}
+
+int SkillData::getStorageEndRate()
+{
+    return this->storageEndRate;
+}
+
+int SkillData::getStorageEndValue()
+{
+    return this->storageEndValue;
+}
+
+SLData* SkillData::getLvData()
+{
+    return this->levelList[this->level];
+}

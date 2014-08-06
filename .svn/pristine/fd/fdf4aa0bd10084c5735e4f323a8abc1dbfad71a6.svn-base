@@ -1,0 +1,16 @@
+package com.doteyplay.game.action.common;
+
+import org.apache.mina.core.session.IoSession;
+
+import com.doteyplay.net.message.AbstractMessage;
+import com.doteyplay.net.message.IMessageAction;
+
+/**
+ * 
+ * 2009-5-7обнГ05:29:43
+ *
+ */
+public interface SessionMessageAction<T extends AbstractMessage> 
+				extends IMessageAction<T, IoSession>
+{
+}

@@ -1,0 +1,75 @@
+//package com.doteyplay.support.messageagent;
+//
+//import org.apache.log4j.Logger;
+//
+//import com.doteyplay.core.configloader.MessageAgentManager;
+//import com.doteyplay.core.messageagent.net.server.MessageAgentServerService;
+//import com.doteyplay.core.server.service.IServerService;
+//import com.doteyplay.core.server.service.IServerServiceException;
+//import com.doteyplay.game.config.ServerConfig;
+//
+//public class MessageAgentService implements IServerService
+//{
+//
+//	/**
+//	 * Logger for this class
+//	 */
+//	private static final Logger logger = Logger
+//			.getLogger(MessageAgentService.class);
+//
+//	private static MessageAgentService instance = new MessageAgentService();
+//
+//	private MessageAgentService()
+//	{
+//	}
+//
+//	public static MessageAgentService getInstance()
+//	{
+//		return instance;
+//	}
+//
+//	/**
+//	 * 启动
+//	 * 
+//	 * @return
+//	 */
+//	static MessageAgentServerService service = null;
+//
+//	public static final byte ST_READY = 0;
+//	public static final byte ST_START = 1;
+//	public static final byte ST_SHUTDOWN = 2;
+//	public static byte serverState;
+//
+//	@Override
+//	public void onReady() throws IServerServiceException
+//	{
+//
+//	}
+//
+//	@Override
+//	public void onStart() throws IServerServiceException
+//	{
+//		if (ServerConfig.GATEWAY_SERVER)
+//		{
+//			try
+//			{
+//				service = new MessageAgentServerService(
+//						ServerConfig.MESSAGE_SERVER_PORT);
+//				serverState = ST_START;
+//			} catch (Exception e)
+//			{
+//				logger.error("battleserver start faild.", e);
+//			}
+//			logger.error("消息代理服务器 startuped. listen port: "
+//					+ ServerConfig.MESSAGE_SERVER_PORT);
+//			MessageAgentManager.getInstance().setLocalAgent(
+//					new LocalTransferAgent());
+//		}
+//
+//	}
+//
+//	@Override
+//	public void onDown() throws IServerServiceException
+//	{
+//	}
+//}

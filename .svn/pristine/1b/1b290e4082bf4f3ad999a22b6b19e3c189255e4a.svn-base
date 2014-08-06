@@ -1,0 +1,15 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "ChapterProBuf";
+
+message PackageChapterReq{
+	required int32 type=1;//副本类型 精英，获得等
+}
+message ChapterInfo{
+	required bool lock=1;//是否解锁
+	required int64 id=2;//副本id
+	
+}
+message PackageChapterResp{
+  
+   repeated ChapterInfo chapterList=1;//副本列表
+}

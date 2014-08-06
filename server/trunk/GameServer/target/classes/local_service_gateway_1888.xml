@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BHNS>
+	<SERVER PORT="50004"/> 
+	<!--事件定义-->
+	<LOCAL PORTALID="1" PORTAL_IMPL="com.doteyplay.core.bhns.location.SvrLocationPortal" 
+		                SERVICE_IMPL="com.doteyplay.core.bhns.location.SvrLocationService"
+						DATABLOCK="*" ENDPOINTID="3"/>
+	
+	<LOCAL PORTALID="3" PORTAL_IMPL="com.doteyplay.game.service.bo.gateway.GameGateWayPortal"
+						 SERVICE_IMPL="com.doteyplay.game.service.bo.gateway.GameGateWayService"
+						 DATABLOCK="*" ENDPOINTID="1" />
+</BHNS>	
+ 

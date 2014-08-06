@@ -1,0 +1,103 @@
+2014-05-12 12:03:30
+初始化GameServer失败
+java.lang.ArrayIndexOutOfBoundsException: 128
+	at com.doteyplay.core.bhns.source.source.ClusterSource.initialize(ClusterSource.java:127)
+	at com.doteyplay.core.bhns.ServiceInfo.initialSource(ServiceInfo.java:76)
+	at com.doteyplay.core.bhns.BOServiceManager.initial_service(BOServiceManager.java:401)
+	at com.doteyplay.core.bhns.BOServiceManager.initialService(BOServiceManager.java:511)
+	at com.doteyplay.game.startservice.ServiceService.onReady(ServiceService.java:50)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:77)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:224)
+	at com.doteyplay.game.GameServer.main(GameServer.java:242)
+2014-05-12 12:33:59
+
+参数：0
+消息：LoginGameMessage: commandId=2
+java.lang.NullPointerException
+	at $Proxy6.insertUserBean(Unknown Source)
+	at com.doteyplay.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:73)
+	at com.doteyplay.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.doteyplay.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.doteyplay.game.action.common.DefaultServicePipeline.dispatchAction(DefaultServicePipeline.java:58)
+	at com.doteyplay.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.doteyplay.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:78)
+	at com.doteyplay.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Unknown Source)
+2014-05-12 12:36:35
+
+参数：0
+消息：LoginGameMessage: commandId=2
+java.lang.NullPointerException
+	at $Proxy6.insertUserBean(Unknown Source)
+	at com.doteyplay.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:74)
+	at com.doteyplay.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.doteyplay.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.doteyplay.game.action.common.DefaultServicePipeline.dispatchAction(DefaultServicePipeline.java:58)
+	at com.doteyplay.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.doteyplay.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:78)
+	at com.doteyplay.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Unknown Source)
+2014-05-12 13:47:05
+
+参数：0
+消息：LoginGameMessage: commandId=2
+java.lang.NullPointerException
+	at $Proxy6.insertUserBean(Unknown Source)
+	at com.doteyplay.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:74)
+	at com.doteyplay.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.doteyplay.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.doteyplay.game.action.common.DefaultServicePipeline.dispatchAction(DefaultServicePipeline.java:58)
+	at com.doteyplay.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.doteyplay.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:78)
+	at com.doteyplay.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Unknown Source)
+2014-05-12 13:49:38
+
+参数：0
+消息：LoginGameMessage: commandId=2
+java.lang.NullPointerException
+	at $Proxy6.insertUserBean(Unknown Source)
+	at com.doteyplay.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:74)
+	at com.doteyplay.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.doteyplay.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.doteyplay.game.action.common.DefaultServicePipeline.dispatchAction(DefaultServicePipeline.java:58)
+	at com.doteyplay.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.doteyplay.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:78)
+	at com.doteyplay.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Unknown Source)

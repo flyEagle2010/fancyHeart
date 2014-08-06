@@ -1,0 +1,62 @@
+package com.doteyplay.game.service.bo.gateway;
+
+import com.doteyplay.core.server.task.Task;
+import com.doteyplay.game.domain.session.SessionHolder;
+
+public class ACKTask implements Task
+{
+	private SessionHolder holder;
+
+	public ACKTask(SessionHolder holder)
+	{
+		this.holder = holder;
+	}
+
+	@Override
+	public void run()
+	{
+		holder.update();
+	}
+
+//	public static void main(String[] args)
+//	{
+//
+//		PersonProbuf.Person.Builder builder = PersonProbuf.Person.newBuilder();
+//		builder.setEmail("kkk@email.com");
+//		builder.setId(1);
+//		builder.setName("TestName");
+//		builder.addPhone(PersonProbuf.Person.PhoneNumber.newBuilder()
+//				.setNumber("131111111")
+//				.setType(PersonProbuf.Person.PhoneType.MOBILE));
+//		builder.addPhone(PersonProbuf.Person.PhoneNumber.newBuilder()
+//				.setNumber("011111")
+//				.setType(PersonProbuf.Person.PhoneType.HOME));
+//
+////		Person person = builder.build();
+//		
+//		AddressBookProbuf.AddressBook.Builder builder2 = AddressBookProbuf.AddressBook.newBuilder();
+//		builder2.addPerson(builder);
+//		AddressBookProbuf.AddressBook book = builder2.build();
+//		
+////		byte[] buf = person.toByteArray();
+//
+//		byte[] buf2 = book.toByteArray();
+//		try
+//		{
+//			Person person2 = AddressBookProbuf.AddressBook.parseFrom(buf2).getPerson(0);
+//			System.out.println(person2.getName() + ", " + person2.getEmail());
+//			List<PhoneNumber> lstPhones = person2.getPhoneList();
+//			for (PhoneNumber phoneNumber : lstPhones)
+//			{
+//				System.out.println(phoneNumber.getNumber());
+//			}
+//		} catch (InvalidProtocolBufferException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+//		System.out.println(buf);
+
+//	}
+}

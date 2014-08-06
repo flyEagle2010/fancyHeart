@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B573C286-6CA1-4A94-850A-ECFBEBEFD228</string>
+	<key>IDESourceControlProjectName</key>
+	<string>fancyHeart</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AE9EEE32-3026-4439-A71C-B66C968C71FE</key>
+		<string>https://192.168.1.88/svn/game</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>client/trunk/fancyHeart/proj.ios_mac/fancyHeart.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AE9EEE32-3026-4439-A71C-B66C968C71FE</key>
+		<string>../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>AE9EEE32-3026-4439-A71C-B66C968C71FE</key>
+		<string>https://192.168.1.88/svn/game</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://192.168.1.88/svn/game/client/trunk/fancyHeart/proj.ios_mac/fancyHeart.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AE9EEE32-3026-4439-A71C-B66C968C71FE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AE9EEE32-3026-4439-A71C-B66C968C71FE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>fancyHeart</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ACTIVE>
+	<SERVICE PORTALID="3" NAME="world" DEPENDENCES="" RULE="" />
+	<SERVICE PORTALID="4" NAME="item" DEPENDENCES="3" RULE="" />
+</ACTIVE>
+ 

@@ -1,0 +1,80 @@
+//
+//  FightScene.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-5.
+//
+//
+
+#include "FightScene.h"
+#include "HomeScene.h"
+
+Scene* FightScene::createScene(){
+	auto scene = Scene::create();
+    auto layer = FightScene::create();
+    scene->addChild(layer);
+	return scene;
+}
+
+bool FightScene::init(){
+	//init ui
+    auto layout=static_cast<Layout*>(cocostudio::GUIReader::getInstance()->widgetFromJsonFile("Fight_1.json"));
+    this->addChild(layout);
+    layout->addTouchEventListener(CC_CALLBACK_2(FightScene::touchEvent,this));
+    this->addChild(this->heroNode=Node::create());
+    return true;
+}
+
+void FightScene::onEnter()
+{
+    Node::onEnter();
+}
+
+
+void FightScene::initHero(Vector<FData*> arr)
+{
+    Size winSize=Director::getInstance()->getWinSize();
+    for(FData* fd : arr)
+    {
+        int pos = fd->bd.pos;
+        MFighter* mf=MFighter::create(fd);
+        mf->view=Fighter::create("HeroAnimation", "HeroAnimation0", fd->bd.pos);
+        mf->view->setPosition(Vec2(-70*pos,winSize.height/2+(pos%2?-40:40)));
+        this->heroNode->addChild(mf->view);
+        mf->view->delegate=mf;
+        mf->start();
+    }
+}
+
+void FightScene::bounce(MFighter *mf)
+{
+    
+}
+
+void FightScene::touchEvent(cocos2d::Ref *pSender, Widget::TouchEventType type)
+{
+    switch (type)
+    {
+        case TouchEventType::BEGAN:
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+            FightMgr::getInstance()->clear();
+            Director::getInstance()->replaceScene(HomeScene::createScene());
+            break;
+        case TouchEventType::CANCELED:
+            break;
+        default:
+            break;
+    }
+}
+
+void FightScene::onMessage(Socket* socket, const NetMsg& data){
+    
+}
+
+void FightScene::onExit()
+{
+    Node::onExit();
+}

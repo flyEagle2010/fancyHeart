@@ -1,0 +1,97 @@
+//
+//  Utils.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-3.
+//
+//
+
+#include "Utils.h"
+#define PI 3.14159265
+#define EPSION 0.0001f
+#define IS_EQUAL(val1, val2)  (fabs((val1) - (val2)) <= EPSION)
+#include "BezierMove.h"
+float Utils::random01()
+{
+    //srand(time(0));
+    return (float)rand()/RAND_MAX;
+}
+
+long Utils::getTime()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    return tv.tv_sec * 1000 + tv.tv_usec / 1000;
+}
+double Utils::distance(Vec2 sp,Vec2 ep)
+{
+    return sqrt((ep.x-sp.x)*(ep.x-sp.x)+(ep.y-sp.y)*(ep.y-sp.y));
+}
+float Utils::angle(const Vec2 sp,const Vec2 ep)
+{
+    float mDegree;
+    Vec2 sub=Vec2(ep.x-sp.x,ep.y-sp.y);
+    if (IS_EQUAL(sub.x, 0.f) && IS_EQUAL(sub.y, 0.f))
+        return -1;
+    if (IS_EQUAL(sub.y, 0.f) && sub.x > 0)
+    {
+        mDegree = 90.f;
+    }
+    else if (IS_EQUAL(sub.y, 0.f) && sub.x < 0)
+    {
+        mDegree = 180.f;
+    }
+    else{
+        // 弧度转角度
+        float radians = atanf(sub.x/sub.y);
+        mDegree = CC_RADIANS_TO_DEGREES(radians);
+        
+        if (sub.x >= 0 && sub.y >= 0 )          // 第一象限
+        {
+            
+        }
+        else if (sub.x >= 0 && sub.y <= 0)      // 第二象限
+        {
+            mDegree += 180.f;
+        }
+        else if (sub.x <= 0 && sub.y <= 0)      // 第三象限
+        {
+            mDegree += 180.f;
+        }
+        else                                   // 第四象限
+        {
+            mDegree += 360.f;
+        }
+    }
+    if (mDegree < 0.f)
+        mDegree = 0.f;
+    if (mDegree > 360.f)
+        mDegree = 0.f;
+    return mDegree;
+}
+void Utils::BezierMove(Node* sprite,Vec2 startPoint,Vec2 endPoint,float duration)
+{
+    ccBezierConfig bezier; // 创建贝塞尔曲线
+    Vec2 control1 = Vec2(startPoint.x+100, startPoint.y*2);
+    Vec2 control2 = Vec2(endPoint.x/2, endPoint.y*2);
+    bezier.controlPoint_1 = control1; // 起始点
+    bezier.controlPoint_2 = control2; //控制点
+    bezier.endPosition = endPoint; // 结束位置
+
+    Sequence* sq=CCSequence::create(BezierTo::create(duration,bezier),CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, sprite)), NULL);
+    sprite->runAction(sq);
+}
+
+void  Utils::BezierRotate(Node* sprite,Vec2 startPoint,Vec2 endPoint,float duration,float starAngle)
+{
+    
+//    ccBezierConfig bezier; // 创建贝塞尔曲线
+//    Vec2 control1 = Vec2(endPoint.x/2, endPoint.y*2);
+//    //bezier.controlPoint_1 = startPoint; // 起始点
+//    bezier.controlPoint_1 = control1; // 起始点
+//    //bezier.controlPoint_2 = endPoint; //控制点
+//    bezier.endPosition = endPoint; // 结束位置
+    auto bezierTo1 = BezierMove::create(duration, endPoint);
+    Sequence* sp=Sequence::create(bezierTo1,CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, sprite)), NULL);
+    sprite->runAction(sp);
+}

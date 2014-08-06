@@ -1,0 +1,376 @@
+2014-02-18 10:51:38
+
+参数：0
+消息：LoginGameMessage: commandId=2
+java.lang.NullPointerException
+	at com.pwrd.game.util.excel.TemplateService.get(TemplateService.java:122)
+	at com.pwrd.game.domain.pet.RolePet.createPet(RolePet.java:16)
+	at com.pwrd.game.domain.role.PetManager.<init>(PetManager.java:16)
+	at com.pwrd.game.domain.role.Role.<init>(Role.java:44)
+	at com.pwrd.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:81)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 10:52:53
+初始化GameServer失败
+com.pwrd.game.util.excel.ConfigException: java.lang.ClassNotFoundException: com.pwrd.game.config.template.OutfitDataTemplate
+	at com.pwrd.game.util.excel.TemplateService.loadConfig(TemplateService.java:105)
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:34)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:45)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Caused by: java.lang.ClassNotFoundException: com.pwrd.game.config.template.OutfitDataTemplate
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:202)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:190)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:306)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:301)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:169)
+	at com.pwrd.game.util.excel.TemplateService.loadConfig(TemplateService.java:101)
+	... 5 more
+2014-02-18 10:54:52
+初始化GameServer失败
+com.pwrd.game.util.excel.ConfigException: Errors occurs while parsing xls file:skill.xls
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:60)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:45)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Caused by: java.io.FileNotFoundException: \Users\zjj\torchlight\Server\Trunk\GameServer\src\main\resources\excel\skill.xls (系统找不到指定的路径。)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:120)
+	at java.io.FileInputStream.<init>(FileInputStream.java:79)
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:54)
+	... 4 more
+2014-02-18 11:31:38
+Unresolved compilation problems: 
+	Syntax error on token "}", { expected after this token
+	Syntax error on token(s), misplaced construct(s)
+	Syntax error on token "}", delete this token
+	Syntax error on token "int", @ expected
+
+java.lang.Error: Unresolved compilation problems: 
+	Syntax error on token "}", { expected after this token
+	Syntax error on token(s), misplaced construct(s)
+	Syntax error on token "}", delete this token
+	Syntax error on token "int", @ expected
+
+	at com.pwrd.game.domain.skill.Spell.<init>(Spell.java:144)
+	at com.pwrd.game.domain.card.RoleCard.init(RoleCard.java:27)
+	at com.pwrd.game.domain.card.RoleCard.createCard(RoleCard.java:141)
+	at com.pwrd.game.domain.card.RoleCardDeck.<init>(RoleCardDeck.java:27)
+	at com.pwrd.game.domain.role.CardManager.<init>(CardManager.java:30)
+	at com.pwrd.game.domain.role.Role.<init>(Role.java:43)
+	at com.pwrd.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:83)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 11:31:39
+Unresolved compilation problems: 
+	Syntax error on token "}", { expected after this token
+	Syntax error on token(s), misplaced construct(s)
+	Syntax error on token "}", delete this token
+	Syntax error on token "int", @ expected
+
+java.lang.Error: Unresolved compilation problems: 
+	Syntax error on token "}", { expected after this token
+	Syntax error on token(s), misplaced construct(s)
+	Syntax error on token "}", delete this token
+	Syntax error on token "int", @ expected
+
+	at com.pwrd.game.domain.skill.Spell.<init>(Spell.java:144)
+	at com.pwrd.game.domain.card.RoleCard.init(RoleCard.java:27)
+	at com.pwrd.game.domain.card.RoleCard.createCard(RoleCard.java:141)
+	at com.pwrd.game.domain.card.RoleCardDeck.<init>(RoleCardDeck.java:27)
+	at com.pwrd.game.domain.role.CardManager.<init>(CardManager.java:30)
+	at com.pwrd.game.domain.role.Role.<init>(Role.java:43)
+	at com.pwrd.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:83)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 11:31:40
+Unresolved compilation problems: 
+	Syntax error on token "}", { expected after this token
+	Syntax error on token(s), misplaced construct(s)
+	Syntax error on token "}", delete this token
+	Syntax error on token "int", @ expected
+
+java.lang.Error: Unresolved compilation problems: 
+	Syntax error on token "}", { expected after this token
+	Syntax error on token(s), misplaced construct(s)
+	Syntax error on token "}", delete this token
+	Syntax error on token "int", @ expected
+
+	at com.pwrd.game.domain.skill.Spell.<init>(Spell.java:144)
+	at com.pwrd.game.domain.card.RoleCard.init(RoleCard.java:27)
+	at com.pwrd.game.domain.card.RoleCard.createCard(RoleCard.java:141)
+	at com.pwrd.game.domain.card.RoleCardDeck.<init>(RoleCardDeck.java:27)
+	at com.pwrd.game.domain.role.CardManager.<init>(CardManager.java:30)
+	at com.pwrd.game.domain.role.Role.<init>(Role.java:43)
+	at com.pwrd.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:83)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 11:34:08
+2014-02-18 11:34:08
+
+参数：0
+消息：LoginGameMessage: commandId=2
+java.lang.NullPointerException
+	at java.util.concurrent.ConcurrentHashMap.put(ConcurrentHashMap.java:882)
+	at com.pwrd.game.service.runtimecache.GlobalSessionCache.add(GlobalSessionCache.java:76)
+	at com.pwrd.game.service.bo.gateway.GameGateWayService.loginNotify(GameGateWayService.java:39)
+	at com.pwrd.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:112)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+
+参数：0
+消息：LoginGameMessage: commandId=2
+java.lang.NullPointerException
+	at java.util.concurrent.ConcurrentHashMap.put(ConcurrentHashMap.java:882)
+	at com.pwrd.game.service.runtimecache.GlobalSessionCache.add(GlobalSessionCache.java:76)
+	at com.pwrd.game.service.bo.gateway.GameGateWayService.loginNotify(GameGateWayService.java:39)
+	at com.pwrd.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:112)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 11:34:08
+
+参数：0
+消息：LoginGameMessage: commandId=2
+java.lang.NullPointerException
+	at java.util.concurrent.ConcurrentHashMap.put(ConcurrentHashMap.java:882)
+	at com.pwrd.game.service.runtimecache.GlobalSessionCache.add(GlobalSessionCache.java:76)
+	at com.pwrd.game.service.bo.gateway.GameGateWayService.loginNotify(GameGateWayService.java:39)
+	at com.pwrd.game.service.bo.virtualworld.VirtualWorldService.doLogin(VirtualWorldService.java:112)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:18)
+	at com.pwrd.game.action.login.LoginGameMessageAction.processMessage(LoginGameMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 14:32:43
+
+参数：100002
+消息：BattleUseCardMessage: commandId=19
+java.lang.NullPointerException
+	at com.pwrd.game.service.bo.battle.BattleService.summonOrSkill(BattleService.java:493)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:22)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 14:37:30
+
+参数：100002
+消息：BattleUseCardMessage: commandId=19
+java.lang.NullPointerException
+	at com.pwrd.game.service.bo.battle.BattleService.summonOrSkill(BattleService.java:506)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:22)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 15:05:13
+
+参数：100001
+消息：BattleUseCardMessage: commandId=19
+java.lang.NullPointerException
+	at com.pwrd.game.service.bo.battle.BattleService.summonOrSkill(BattleService.java:506)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:22)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 15:41:58
+
+参数：100001
+消息：BattleUseCardMessage: commandId=19
+java.lang.NullPointerException
+	at com.pwrd.game.service.bo.battle.BattleService.summonOrSkill(BattleService.java:530)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:22)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 16:20:25
+
+参数：10018
+消息：BattleUseCardMessage: commandId=19
+java.lang.NullPointerException
+	at com.pwrd.game.service.bo.battle.BattleService.summonOrSkill(BattleService.java:530)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:22)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-02-18 16:21:23
+
+参数：10018
+消息：BattleUseCardMessage: commandId=19
+java.lang.NullPointerException
+	at com.pwrd.game.service.bo.battle.BattleService.useSkill(BattleService.java:241)
+	at com.pwrd.game.service.bo.battle.BattleService.summonOrSkill(BattleService.java:493)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:22)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)

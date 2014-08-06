@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ItemBean">
+	<typeAlias alias="itemBean" type="com.doteyplay.game.domain.gamebean.ItemBean" />
+
+	<insert id="insertItemBean" parameterClass="itemBean">
+		INSERT INTO
+		t_item
+		(
+			roleId,itemId,itemNum
+		)
+		VALUES
+		(
+			 #roleId#,#itemId#,#itemNum#
+		)
+	</insert>
+
+
+	<select id="selectItemBeanListByRoleId" resultClass="itemBean"
+		parameterClass="long">
+		SELECT 
+		roleId,itemId,itemNum 
+		FROM t_item
+		WHERE roleId=#value#
+	</select>
+	
+	<select id="selectItemBeanByRoleIdItemId" resultClass="itemBean"
+		parameterClass="java.util.Map">
+		SELECT 
+		roleId,itemId,itemNum 
+		FROM t_item 
+		WHERE roleId=#roleId# and itemId = #itemId#
+	</select>
+
+	<update id="updateItemBean" parameterClass="itemBean">
+		update 
+		t_item 
+		set 
+		roleId = #roleId#,
+		itemId = #itemId#,
+		itemNum = #itemNum# 
+		WHERE roleId=#roleId# and itemId=#itemId#
+	</update>
+
+
+	<delete id="deleteItemBean" parameterClass="itemBean">
+		delete 
+		from 
+		t_item  
+		WHERE roleId=#roleId# and itemId=#itemId# 
+	</delete>
+	
+</sqlMap>

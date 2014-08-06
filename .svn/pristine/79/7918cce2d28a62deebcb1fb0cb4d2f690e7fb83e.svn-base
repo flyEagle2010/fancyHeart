@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGuidesProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GuidesProject>
+    <Project>login</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>fight</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>confirm</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>map</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>homeUi</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>loading</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>home</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>home2</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>gate</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>getPassItem</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>chat</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>gateResult</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>gateMap</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>gateSelect</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>getPass</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>package</Project>
+    <GuidesList />
+  </GuidesProject>
+</ArrayOfGuidesProject>

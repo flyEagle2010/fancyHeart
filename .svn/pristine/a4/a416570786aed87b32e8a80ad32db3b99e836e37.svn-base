@@ -1,0 +1,134 @@
+//
+//  SkillBuff.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-10.
+//
+//
+
+#include "SkillBuff.h"
+SkillBuff* ins;
+
+SkillBuff* SkillBuff::getInstance(cocos2d::Value v)
+{
+    if(ins==nullptr)
+    {
+        ins=new SkillBuff();
+        if(Value(ins->getID()).asString() != v.asString())
+        {
+            ins->load(v);
+        }
+    }
+    return ins;
+}
+
+void SkillBuff::load(cocos2d::Value v)
+{
+    std::string fullPath=FileUtils::getInstance()->fullPathForFilename(v.asString());
+    std::ifstream ifile(fullPath.c_str(),std::ios::in|std::ios::binary);
+    BData::setData(ifile, ID);
+    BData::setData(ifile, nameID);
+    unsigned char dt;
+    BData::setData(ifile, dt);
+    this->damageType=(DamageType)dt;
+    BData::setData(ifile, damage);
+    BData::setData(ifile, health);
+    BData::setData(ifile, time);
+    BData::setData(ifile, ap);
+    BData::setData(ifile, pd);
+    BData::setData(ifile, md);
+    BData::setData(ifile, crh);
+    BData::setData(ifile, dodge);
+    
+    BData::setData(ifile, canRemove);
+    BData::setData(ifile, canMove);
+    BData::setData(ifile, canUseSkill);
+    BData::setData(ifile, canHealth);
+    BData::setData(ifile, isPd);
+    BData::setData(ifile, isMd);
+    BData::setData(ifile, isOfflineSave);
+    BData::setData(ifile, isOfflineReduce);
+    
+    ifile.close();
+}
+
+#pragma mark- id
+int SkillBuff::SkillBuff::getID()
+{
+    return this->ID;
+}
+
+std::string SkillBuff::getName()
+{
+    return cocos2d::Value(nameID).asString();
+}
+
+DamageType SkillBuff::getDamageType()
+{
+    return this->damageType;
+}
+int SkillBuff::getDamage()
+{
+    return this->damage;
+}
+int SkillBuff::getHp()
+{
+    return this->health;
+}
+int SkillBuff::getDuration()
+{
+    return this->time;
+}
+int SkillBuff::getAp()
+{
+    return this->ap;
+}
+int SkillBuff::getPd()
+{
+    return this->pd;
+}
+int SkillBuff::getMd()
+{
+    return this->md;
+}
+int SkillBuff::getCrh()
+{
+    return this->crh;
+}
+int SkillBuff::getDodge()
+{
+    return this->dodge;
+}
+bool SkillBuff::getCanRemove()
+{
+    return this->canRemove;
+}
+bool SkillBuff::getCanMove()
+{
+    return this->canMove;
+}
+bool SkillBuff::getCanUseSkill()
+{
+    return this->canUseSkill;
+}
+bool SkillBuff::getCanHeal()
+{
+    return this->canHealth;
+}
+bool SkillBuff::getIsPd()
+{
+    return this->isPd;
+}
+bool SkillBuff::getIsMd()
+{
+    return this->isMd;
+}
+bool SkillBuff::getIsOffSave()
+{
+    return this->isOfflineSave;
+}
+bool SkillBuff::getIsOffReduce()
+{
+    return this->isOfflineReduce;
+}
+

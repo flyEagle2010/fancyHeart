@@ -1,0 +1,47 @@
+//
+//  FightScene.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-5.
+//
+//
+
+#ifndef __fancyHeart__FightScene__
+#define __fancyHeart__FightScene__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "Manager.h"
+#include "ui/CocosGUI.h"
+#include "cocostudio/CocoStudio.h"
+#include "Fighter.h"
+#include "external/json/rapidjson.h"
+#include "FightMgr.h"
+#include "FData.h"
+USING_NS_CC;
+using namespace ui;
+using namespace cocostudio;
+class FData;
+class FightScene:public BaseUI{
+public:
+	static Scene* createScene();
+    static FightScene* create();
+	virtual bool init(const char* fileName);
+    virtual void onEnter();
+    virtual void onExit();
+    virtual void onMessage(Socket* socket, const NetMsg& data) ;
+    void touchEvent(cocos2d::Ref *pSender, Widget::TouchEventType type);
+    Vector<MFighter*> initHero(Vector<FData*> arr);
+    
+private:
+    Widget* heroNode;
+    Widget* effectNode;
+    Widget* bossInfo;
+    Widget* progress;
+    Widget* skillNode;
+public:
+    
+    void bounce(MFighter* mf);
+    void skillColdDown(int skillID);
+};
+#endif /* defined(__fancyHeart__FightScene__) */

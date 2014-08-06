@@ -1,0 +1,92 @@
+package com.doteyplay.game.config.template;
+
+import java.util.Map;
+
+import com.doteyplay.game.util.excel.TemplateService;
+
+/**
+ * @className:TollgateDataManager.java
+ * @classDescription:
+ * @author:Tom.Zheng
+ * @createTime:2014年6月26日 下午1:35:23
+ */
+public class TollgateDataManager {
+	
+	private static TollgateDataManager instance = new TollgateDataManager();
+	
+	private TollgateDataManager(){}
+	
+	public static TollgateDataManager getInstance(){
+		return instance;
+	}
+	
+	
+	public boolean isValidateNodeExsit(int tollgateId,int nodeId){
+		return getTollgateData(tollgateId,nodeId)!=null;
+	}
+	/**
+	 * 返回具体的node节点原型数据.
+	 * @param tollgateId
+	 * @param nodeId
+	 * @return
+	 */
+	public final TollgateNodeDataTemplate getTollgateData(int tollgateId, int nodeId) {
+		Map<Integer, TollgateDataObject> all = TemplateService.getInstance()
+				.getAll(TollgateDataObject.class);
+
+		TollgateDataObject data = all.get(tollgateId);
+
+		if (data == null) {
+			return null;
+		}
+
+		TollgateNodeDataTemplate node = data.getNode(nodeId);
+
+		if (node == null) {
+			return null;
+		}
+		return node;
+	}
+	/**
+	 * 返回某一关内,第一个节点.
+	 * @param tollgateId
+	 * @param nodeId
+	 * @return
+	 */
+	public final int getFirstNodeId(int tollgateId) {
+		
+		TollgateNodeDataTemplate node = getFirstNodeData(tollgateId);
+		
+		if (node == null) {
+			throw new RuntimeException("关卡编辑错误没有节点.");
+		}
+		return node.getId();
+	}
+	
+	/**
+	 * 返回某一关内,第一个节点.
+	 * @param tollgateId
+	 * @param nodeId
+	 * @return
+	 */
+	public final TollgateNodeDataTemplate getFirstNodeData(int tollgateId) {
+		Map<Integer, TollgateDataObject> all = TemplateService.getInstance()
+				.getAll(TollgateDataObject.class);
+		
+		TollgateDataObject data = all.get(tollgateId);
+		
+		if (data == null) {
+			return null;
+		}
+		
+		TollgateNodeDataTemplate node = data.getFirstNode();
+		
+		if (node == null) {
+			return null;
+		}
+		return node;
+	}
+	
+	
+	
+}

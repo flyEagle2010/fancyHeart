@@ -1,0 +1,35 @@
+//XGate
+#include "XGate.h"
+static XGate* instance;
+
+XGate* XGate::record(Value v){ 
+	if(instance==NULL) instance=new XGate();
+	if(instance->doc.IsNull()){
+		std::string fullPath=FileUtils::getInstance()->fullPathForFilename("XGate.json");
+		std::string str=FileUtils::getInstance()->getStringFromFile(fullPath);
+		instance->doc.Parse<0>(str.c_str());
+		if(instance->doc.HasParseError()){
+			log("GetParseError %s",instance->doc.GetParseError());
+		}
+	}
+	instance->v=v;
+	return instance;
+}
+std::string XGate::getId(){
+	return doc[v.asString().c_str()]["id"].GetString();
+}
+int XGate::getGateID(){
+	return doc[v.asString().c_str()]["gateID"].GetInt();
+}
+std::string XGate::getPos(){
+	return doc[v.asString().c_str()]["pos"].GetString();
+}
+std::string XGate::getIcon(){
+	return doc[v.asString().c_str()]["icon"].GetString();
+}
+int XGate::getType(){
+	return doc[v.asString().c_str()]["type"].GetInt();
+}
+int XGate::getBattleID(){
+	return doc[v.asString().c_str()]["battleID"].GetInt();
+}

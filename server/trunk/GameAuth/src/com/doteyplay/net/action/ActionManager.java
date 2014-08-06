@@ -1,0 +1,44 @@
+package com.doteyplay.net.action;
+
+import org.apache.mina.core.session.IoSession;
+
+import com.doteyplay.luna.common.action.ActionController;
+import com.doteyplay.luna.common.action.BaseAction;
+import com.doteyplay.luna.common.message.DecoderMessage;
+import com.doteyplay.net.MessageCommands;
+public class ActionManager implements ActionController
+{
+
+	private static ActionManager instance = new ActionManager();
+
+	public static ActionManager getInstance()
+	{
+		return instance;
+	}
+
+	@Override
+	public BaseAction getAction(DecoderMessage arg0)
+	{
+		switch (arg0.getCommandId())
+		{
+		case MessageCommands.CHECK_AUTH:
+			return CheckAuthAction.getInstance();			
+
+		default:
+			break;
+		}
+		return null;
+	}
+
+	@Override
+	public void sessionClose(IoSession arg0)
+	{
+	}
+
+	@Override
+	public void sessionOpen(IoSession session)
+	{
+		
+	}
+
+}

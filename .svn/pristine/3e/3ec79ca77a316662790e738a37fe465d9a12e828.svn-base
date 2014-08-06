@@ -1,0 +1,54 @@
+package com.doteyplay.game.constants.sprite;
+
+public enum SpriteStarType
+{
+	STAR_1()
+	{
+		@Override
+		public String toString()
+		{
+			return "1ÐÇ";
+		}
+	},
+	STAR_2()
+	{
+		@Override
+		public String toString()
+		{
+			return "2ÐÇ";
+		}
+	},
+	STAR_3()
+	{
+		@Override
+		public String toString()
+		{
+			return "3ÐÇ";
+		}
+	},
+	STAR_4()
+	{
+		@Override
+		public String toString()
+		{
+			return "4ÐÇ";
+		}
+	},
+	STAR_5()
+	{
+		@Override
+		public String toString()
+		{
+			return "5ÐÇ";
+		}
+	},
+	STAR_6()
+	{
+		@Override
+		public String toString()
+		{
+			return "6ÐÇ";
+		}
+	},
+	
+}

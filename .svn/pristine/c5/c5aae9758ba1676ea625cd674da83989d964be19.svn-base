@@ -1,0 +1,205 @@
+package com.doteyplay.game.domain.role;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.doteyplay.core.bhns.BOServiceManager;
+import com.doteyplay.core.bhns.gateway.IGateWayService;
+import com.doteyplay.core.dbcs.DBCS;
+import com.doteyplay.game.CommonConstants;
+import com.doteyplay.game.constants.common.CommonPropUpdateType;
+import com.doteyplay.game.constants.common.RewardType;
+import com.doteyplay.game.domain.gamebean.RoleBean;
+import com.doteyplay.game.domain.pet.Pet;
+import com.doteyplay.game.domain.sprite.AbstractSprite;
+import com.doteyplay.game.domain.user.User;
+import com.doteyplay.game.message.common.CommonPropUpdateMessage;
+import com.doteyplay.game.persistence.serverdata.role.IRoleBeanDao;
+import com.doteyplay.net.message.AbstractMessage;
+
+public class Role
+{
+	private static final Logger logger = Logger.getLogger(Role.class);
+
+	private RoleBean roleBean;
+	private User user;
+
+	private RolePetManager petManager;
+
+	public Role(RoleBean roleBean, User user)
+	{
+		this.roleBean = roleBean;
+		this.user = user;
+	}
+
+	public void init()
+	{
+		this.petManager = new RolePetManager(this);
+		petManager.init();
+	}
+
+	public void sendMsg(AbstractMessage msg)
+	{
+		IGateWayService gateWayService = BOServiceManager.findService(
+				IGateWayService.PORTAL_ID, this.getRoleId());
+		gateWayService.sendMessage(msg);
+	}
+
+	public long getRoleId()
+	{
+		return this.roleBean.getId();
+	}
+
+	public RoleBean getRoleBean()
+	{
+		return roleBean;
+	}
+
+	public User getUser()
+	{
+		return user;
+	}
+
+	public RolePetManager getPetManager()
+	{
+		return this.petManager;
+	}
+
+	public synchronized boolean addMoney(int addValue, RewardType rewardType,
+			boolean isSync)
+	{
+		int value = roleBean.getMoney() + addValue;
+		if (value < 0 || value > CommonConstants.MAX_MONEY)
+			return false;
+		roleBean.setMoney(value);
+
+		if (isSync)
+		{
+			CommonPropUpdateMessage message = new CommonPropUpdateMessage(
+					this.getRoleId(), CommonPropUpdateType.MONEY, addValue,
+					value, rewardType);
+			this.sendMsg(message);
+		}
+		return true;
+	}
+
+	public synchronized boolean addRmb(int addValue, RewardType rewardType,
+			boolean isSync)
+	{
+		int value = roleBean.getRmb() + addValue;
+		if (value < 0 || value > CommonConstants.MAX_MONEY)
+			return false;
+		roleBean.setRmb(value);
+
+		if (isSync)
+		{
+			CommonPropUpdateMessage message = new CommonPropUpdateMessage(
+					this.getRoleId(), CommonPropUpdateType.RMB, addValue,
+					value, rewardType);
+			this.sendMsg(message);
+		}
+
+		IRoleBeanDao dao = DBCS.getExector(IRoleBeanDao.class);
+		dao.updateRoleBean(roleBean);
+		return true;
+	}
+
+	public synchronized boolean addEnergy(int addValue, RewardType rewardType,
+			boolean isSync)
+	{
+		int value = roleBean.getEnergy() + addValue;
+		if (value < 0 || value > CommonConstants.MAX_ENERGY)
+			return false;
+		roleBean.setEnergy(value);
+
+		if (isSync)
+		{
+			CommonPropUpdateMessage message = new CommonPropUpdateMessage(
+					this.getRoleId(), CommonPropUpdateType.ENERGY, addValue,
+					value, rewardType);
+			this.sendMsg(message);
+		}
+
+		IRoleBeanDao dao = DBCS.getExector(IRoleBeanDao.class);
+		dao.updateRoleBean(roleBean);
+		return true;
+	}
+
+	/**
+	 * 
+	 * @param exp
+	 * @return level
+	 */
+	public synchronized boolean addExp(int exp)
+	{
+		int oldLevel = this.getRoleBean().getLevel();
+		if (oldLevel >= CommonConstants.ROLE_MAX_LEVEL)
+			return false;
+
+		this.getRoleBean().setExp(this.getRoleBean().getExp() + exp);
+
+		long curUpgradeExp = CommonConstants.ROLE_LEVEL_EXP[getRoleBean()
+				.getLevel()];
+
+		int changeLevel = 0;
+		while (curUpgradeExp < this.getRoleBean().getExp())
+		{
+			changeLevel++;
+			this.getRoleBean().setLevel(this.getRoleBean().getLevel() + 1);
+
+			if (this.getRoleBean().getLevel() >= CommonConstants.ROLE_MAX_LEVEL)
+				break;
+			curUpgradeExp = CommonConstants.ROLE_LEVEL_EXP[getRoleBean()
+					.getLevel()];
+		}
+
+		CommonPropUpdateMessage message = new CommonPropUpdateMessage(
+				this.getRoleId(),
+				CommonPropUpdateType.EXP,
+				exp,
+				(int) (this.getRoleBean().getExp() - CommonConstants.ROLE_LEVEL_EXP[getRoleBean()
+						.getLevel()]), RewardType.DEFAULT);
+		this.sendMsg(message);
+
+		if (changeLevel > 0)
+		{
+			CommonPropUpdateMessage levelMessage = new CommonPropUpdateMessage(
+					this.getRoleId(), CommonPropUpdateType.LEVEL, changeLevel,
+					roleBean.getLevel(), RewardType.DEFAULT);
+			this.sendMsg(levelMessage);
+
+			this.onLevelUp(oldLevel, changeLevel);
+			IRoleBeanDao dao = DBCS.getExector(IRoleBeanDao.class);
+			dao.updateRoleBean(roleBean);
+		}
+		return true;
+	}
+
+	private void onLevelUp(int oldLevel, int changeLevel)
+	{
+
+	}
+
+	public Pet findPet(long petId)
+	{
+		return this.getPetManager().getPetMap().get(petId);
+	}
+	
+	public void onLeaveGame()
+	{
+		this.roleBean.setLastLogoutTime(new Date());
+		
+		IRoleBeanDao roleDao = DBCS.getExector(IRoleBeanDao.class);
+		roleDao.updateRoleBean(getRoleBean());
+		
+		this.petManager.onLeaveGame();
+	}
+	
+	public void setPetGroupId(int groupId){
+		this.roleBean.setPetGroupId(groupId);
+		
+	}
+}

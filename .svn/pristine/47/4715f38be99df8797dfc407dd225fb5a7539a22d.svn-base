@@ -1,0 +1,90 @@
+//
+//  SkillBuff.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-10.
+//
+//
+
+#ifndef __fancyHeart__SkillBuff__
+#define __fancyHeart__SkillBuff__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "SLData.h"
+using namespace cocos2d;
+class SLData;
+
+class SkillBuff:public BData{
+    int ID=10;
+    int nameID=22;
+    DamageType damageType;
+    /*@param  持续伤害*/
+    int damage;
+    /*@param  持续恢复*/
+    int health;
+
+    /*@param  打断移除*/
+    bool canRemove;
+
+    /*@param  移动*/
+    bool canMove;
+
+    /*@param  主动施法*/
+    bool canUseSkill;
+
+    /*@param  被治疗*/
+    bool canHealth;
+
+    /*@param  物理免疫*/
+    bool isPd;
+
+    /*@param  法术免疫*/
+    bool isMd;
+
+    /*@param  离线存储*/
+    bool isOfflineSave;
+
+    /*@param  离线计时*/
+    bool isOfflineReduce;
+
+    /*@param  持续时间*/
+    int time;
+
+    /*@param  攻击力*/
+    int ap;
+    /*@param  物理防御*/
+    int pd;
+
+    /*@param  法术防御*/
+    int md;
+
+    /*@param  暴击*/
+    int crh;
+
+    /*@param  闪避*/
+    int dodge;
+public:
+    static SkillBuff* getInstance(cocos2d::Value v);
+    void load(cocos2d::Value v);
+    int getID();
+    std::string getName();
+    DamageType getDamageType();
+    int getDamage();
+    int getHp();
+    int getDuration();
+    int getAp();
+    int getPd();
+    int getMd();
+    int getCrh();
+    int getDodge();
+    bool getCanRemove();
+    bool getCanMove();
+    bool getCanUseSkill();
+    bool getCanHeal();
+    bool getIsPd();
+    bool getIsMd();
+    bool getIsOffSave();
+    bool getIsOffReduce();
+};
+#endif /* defined(__fancyHeart__SkillBuff__) */

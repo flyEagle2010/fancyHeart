@@ -1,0 +1,21 @@
+package com.doteyplay.game.domain.npc;
+
+import com.doteyplay.game.CommonConstants;
+import com.doteyplay.game.domain.gamebean.PetBean;
+import com.doteyplay.game.domain.gamebean.RoleBean;
+import com.doteyplay.game.domain.sprite.AbstractSprite;
+
+public class Npc extends AbstractSprite<PetBean>
+{
+	public Npc(PetBean bean, AbstractSprite<RoleBean> owner)
+	{
+		super(CommonConstants.SPRITE_TYPE_NPC, bean, owner);
+		this.topOwner = owner;
+	}
+
+	public void init()
+	{
+		this.propertyManager = new NpcPropertyManager(this);
+		super.init();
+	}
+}

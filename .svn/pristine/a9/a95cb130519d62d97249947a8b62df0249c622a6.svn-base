@@ -1,0 +1,16 @@
+//
+//  BaseUI.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-12.
+//
+//
+
+#include "BaseUI.h"
+bool BaseUI::init(std::string fileName)
+{
+    layout=static_cast<Layout*>(cocostudio::GUIReader::getInstance()->widgetFromJsonFile(fileName.c_str()));
+    this->addChild(layout);
+	this->initNetEvent();
+    return true;
+};

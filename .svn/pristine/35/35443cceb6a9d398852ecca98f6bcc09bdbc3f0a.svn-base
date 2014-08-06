@@ -1,0 +1,55 @@
+2014-03-18 14:04:20
+
+参数：100001
+消息：BattleUseCardMessage: commandId=19
+java.lang.NullPointerException
+	at com.pwrd.core.messageagent.TransferAgent.sendMessage(TransferAgent.java:43)
+	at com.pwrd.game.domain.battle.BattlePlayerStatus.sendMessage(BattlePlayerStatus.java:798)
+	at com.pwrd.game.domain.battle.BattlePlayerStatus.useCard(BattlePlayerStatus.java:717)
+	at com.pwrd.game.service.bo.battle.BattleService.useCard(BattleService.java:201)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:25)
+	at com.pwrd.game.action.battle.BattleUseCardMessageAction.processMessage(BattleUseCardMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)
+2014-03-18 14:12:49
+
+参数：100001
+消息：BattleStepEndNotifyMessage: commandId=9
+java.lang.NullPointerException
+	at com.pwrd.game.domain.battle.BattleManager.clear(BattleManager.java:29)
+	at com.pwrd.game.domain.battle.BattleField.endBattle(BattleField.java:43)
+	at com.pwrd.game.domain.hero.Hero.onDead(Hero.java:32)
+	at com.pwrd.game.domain.battle.BattleField.doDeadProccess(BattleField.java:625)
+	at com.pwrd.game.domain.battle.BattlePlayerStatus.doSkill(BattlePlayerStatus.java:790)
+	at com.pwrd.game.domain.battle.BattlePlayerStatus.summon(BattlePlayerStatus.java:622)
+	at com.pwrd.game.domain.battle.BattlePlayerStatus.useCard(BattlePlayerStatus.java:707)
+	at com.pwrd.game.domain.pve.AIUseCardCommand.execute(AIUseCardCommand.java:41)
+	at com.pwrd.game.service.bo.battle.BattleService.endStep(BattleService.java:159)
+	at com.pwrd.game.action.battle.BattleStepEndNotifyMessageAction.processMessage(BattleStepEndNotifyMessageAction.java:17)
+	at com.pwrd.game.action.battle.BattleStepEndNotifyMessageAction.processMessage(BattleStepEndNotifyMessageAction.java:1)
+	at com.pwrd.game.action.common.WorldServerPipeline.dispatchAction(WorldServerPipeline.java:58)
+	at com.pwrd.core.bhns.AbstractSimpleService.messageReceived(AbstractSimpleService.java:372)
+	at com.pwrd.game.action.common.GatewayServerPipeline.dispatchAction(GatewayServerPipeline.java:75)
+	at com.pwrd.net.protocol.DefaultSessionHandler.messageReceived(DefaultSessionHandler.java:53)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$TailFilter.messageReceived(DefaultIoFilterChain.java:722)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.callNextMessageReceived(DefaultIoFilterChain.java:434)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain.access$1200(DefaultIoFilterChain.java:48)
+	at org.apache.mina.core.filterchain.DefaultIoFilterChain$EntryImpl$1.messageReceived(DefaultIoFilterChain.java:802)
+	at org.apache.mina.core.filterchain.IoFilterEvent.fire(IoFilterEvent.java:59)
+	at org.apache.mina.core.session.IoEvent.run(IoEvent.java:64)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTask(OrderedThreadPoolExecutor.java:737)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.runTasks(OrderedThreadPoolExecutor.java:729)
+	at org.apache.mina.filter.executor.OrderedThreadPoolExecutor$Worker.run(OrderedThreadPoolExecutor.java:667)
+	at java.lang.Thread.run(Thread.java:662)

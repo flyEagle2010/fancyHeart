@@ -1,0 +1,44 @@
+package com.doteyplay.game.gamedata.data.sprite;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.doteyplay.game.constants.sprite.SpritePropType;
+import com.doteyplay.game.constants.sprite.SpriteStarType;
+import com.doteyplay.game.gamedata.data.IGameData;
+
+public class SpriteStarData implements IGameData
+{
+	public SpriteStarType spriteStarType = SpriteStarType.STAR_0;
+	public List<Integer> propRate = new ArrayList<Integer>();
+	public int stoneId;
+	public int stoneNum;
+	public int upgradeMoney;
+
+	@Override
+	public void load(DataInputStream in) throws IOException
+	{
+		spriteStarType = SpriteStarType.values()[in.readInt()];
+		for (int i = 0; i < SpritePropType.values().length; i++)
+			propRate.add(in.readInt());
+
+		stoneId = in.readInt();
+		stoneNum = in.readInt();
+		upgradeMoney = in.readInt();
+	}
+
+	@Override
+	public void save(DataOutputStream out) throws IOException
+	{
+		out.writeInt(spriteStarType.ordinal());
+		for (int i = 0; i < SpritePropType.values().length; i++)
+			out.writeInt(propRate.get(i));
+
+		out.writeInt(stoneId);
+		out.writeInt(stoneNum);
+		out.writeInt(upgradeMoney);
+	}
+}

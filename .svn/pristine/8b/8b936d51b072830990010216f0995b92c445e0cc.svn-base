@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEMPLATE>
+	<FILE NAME="文本.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.TextDataTemplate"/>
+	</FILE>
+
+	<FILE NAME="buff表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.BuffDataTemplate" />
+	</FILE>
+	
+	<FILE NAME="skill表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.SkillDataObject" />
+	</FILE>
+	
+	<FILE NAME="角色非成长数据表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.SpriteDataObject" />
+	</FILE>
+	
+	<FILE NAME="角色属性表.xls" DEPENDENCES="角色非成长数据表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.SpriteQualiltyPropDataTemplate" />
+	</FILE>
+	
+	<FILE NAME="角色星级表.xls" DEPENDENCES="角色属性表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.SpriteStarDataTemplate" />
+	</FILE>
+	<FILE NAME="关卡表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.TollgateDataObject" />
+	</FILE>
+	<FILE NAME="地图节点表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.TollgateNodeDataTemplate" />
+	</FILE>
+	<FILE NAME="战役数据表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.BattleDataTemplate" />
+	</FILE>
+	<FILE NAME="怪物表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.MonsterDataTemplate" />
+	</FILE>
+
+	<FILE NAME="道具表_20140624_陈天华.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.ItemDataObject" />
+	</FILE>
+		
+	<FILE NAME="合成表_20140624_陈天华.xls" DEPENDENCES="道具表_20140624_陈天华.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.CreateDataTemplate" />
+	</FILE>
+	
+	<FILE NAME="角色经验表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.NpcExpDataTemplate" />
+	</FILE>
+	
+	<FILE NAME="团队经验表.xls">
+		<SHEET CLASS="com.doteyplay.game.config.template.RoleExpDataTemplate" />
+	</FILE>
+	
+</TEMPLATE>

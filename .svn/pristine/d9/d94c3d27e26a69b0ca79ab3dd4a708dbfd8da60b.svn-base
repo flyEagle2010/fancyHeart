@@ -1,0 +1,45 @@
+//
+//  Manager.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-4.
+//
+//
+
+#include "Manager.h"
+#include "Loading.h"
+static Manager* instance=nullptr;
+
+Manager* Manager::getInstance(){
+    if(instance==nullptr){
+        instance=new Manager();
+    }
+    return instance;
+}
+
+void Manager::switchScence(Scene* scene)
+{
+    auto curScene=Director::getInstance()->getRunningScene();
+    if (curScene) {
+        Director::getInstance()->replaceScene(scene);
+    }else{
+        Director::getInstance()->runWithScene(scene);
+    }
+    if(this->scene && this->scene->getChildByTag(-100)){
+        this->scene->removeChildByTag(-100);
+    }
+    this->scene=scene;
+    this->scene->addChild(Loading::getInstance(),10,-100);
+}
+
+void Manager::setRoleData(NetMsg* msg)
+{
+    if(this->roleData) delete this->roleData;
+    this->roleData=new LoginResp();
+    this->roleData->ParseFromArray(msg->bytes, msg->len);
+}
+
+LoginResp* Manager::getRoleData()
+{
+    return this->roleData;
+}

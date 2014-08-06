@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SQLMAP>
+	<DBZONE ID="0" DBCONFIG="db/1_dbsource.xml" DATASOURCE="dbsource1" SQLMAP="db/SqlMapTemplate.xml"/>
+	<MAPPER PACKAGE="com.doteyplay.dao" BEANPACKAGE="com.doteplay.bean"/>
+</SQLMAP>	
+ 

@@ -1,0 +1,40 @@
+package com.doteyplay.game;
+
+public enum MessageCommands
+{
+
+	//服务器内网间交互消息，用来转发数据块
+	SERVER_TRANSFER_MESSAGE(0, BOConst.BO_WORLD,false)
+	//心跳
+	,ACK_MESSAGE(1, BOConst.BO_WORLD,true)
+	//加入游戏
+	,LOGIN_GAME_MESSAGE(2, BOConst.BO_WORLD,false)
+	
+	,COMMON_TIPS_MESSAGE(3, BOConst.BO_BATTLE, true)
+    ;
+
+	public static final int MESSAGE_NUM = MessageCommands.values().length;
+	
+	public final int COMMAND_ID;
+	//消息归属的服务id
+	public final int BO_ID;
+	
+	public final boolean IS_NEED_AUTH;
+	
+	private MessageCommands(int commandId, int boId, boolean isNeedAuth)
+	{
+		COMMAND_ID = commandId;
+		BO_ID = boId;
+		IS_NEED_AUTH = isNeedAuth;
+	}
+	
+	public static String getMessageCommandName(int commandId)
+	{
+		return values()[commandId].name();
+	}
+	
+	public static int getBoIdByCommandId(int commandId)
+	{
+		return values()[commandId].BO_ID;
+	}
+}

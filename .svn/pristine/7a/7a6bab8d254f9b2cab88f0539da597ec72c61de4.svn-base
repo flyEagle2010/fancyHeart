@@ -1,0 +1,12 @@
+2014-05-14 11:54:40
+初始化GameServer失败
+java.lang.NullPointerException
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:98)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:232)
+	at com.doteyplay.game.GameServer.main(GameServer.java:250)
+2014-05-14 11:55:18
+初始化GameServer失败
+java.lang.NullPointerException
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:98)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:232)
+	at com.doteyplay.game.GameServer.main(GameServer.java:250)

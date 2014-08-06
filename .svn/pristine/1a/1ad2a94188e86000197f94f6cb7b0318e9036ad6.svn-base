@@ -1,0 +1,233 @@
+//
+//  Skill.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-4.
+//
+//
+
+#include "Skill.h"
+Skill* Skill::create(MFighter* attacker,int skillID)
+{
+    Skill* pRet=new Skill();
+    if(pRet && pRet->init(attacker,skillID))
+    {
+        pRet->autorelease();
+       
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = NULL;
+        return NULL;
+    }
+}
+
+bool Skill::init(MFighter* attacker,int skillID)
+{
+    this->attacker=attacker;
+    this->skillID=skillID;
+    this->isReady=false;
+    //被动技能走CD
+    int skillType=1;
+    if(skillType==1){
+        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::coldDown),this,0.5,false);
+    }
+    return true;
+}
+
+void Skill::coldDown()
+{
+    this->setIsReady(true);
+}
+
+void Skill::setIsReady(bool isReady)
+{
+    this->isReady=isReady;
+}
+
+bool Skill::getIsReady()
+{
+    return this->isReady;
+}
+
+void Skill::start()
+{
+    this->setIsReady(false);
+    //施法时间 1舜发 2吟唱（引导） 3蓄力
+    int spellTimeType=1;
+    if(spellTimeType==1)
+    {
+        this->cast();
+        this->attacker->cast();
+    }
+    if(spellTimeType==2)
+    {
+        //引导
+        //定时触发正式攻击
+        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::cast), this,0,0, 3, false);
+        this->attacker->spell();
+    }
+    if(spellTimeType==3)
+    {
+        //进入蓄力阶段
+        //定时触发攻击（中间操作可能直接攻击）
+        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::cast), this, 0,0,3, false);
+        this->attacker->buildup();
+    }
+}
+
+//重置受击对象
+std::vector<int> Skill::selectTarget()
+{
+    std::vector<int> targets;
+    int attackNum=0;
+    //1.一个，2一群／2.1己方 2.2敌方
+    int targetType=1;//1自己 2己方 2敌方
+    if(targetType==1)
+    {
+        targets.push_back(this->attacker->pos);
+    }
+    if(targetType==2)
+    {
+        attackNum=1;
+        targets=this->selectStrategy(attackNum,(this->attacker->pos<5)?FightMgr::getInstance()->leftArr:FightMgr::getInstance()->rightArr);
+    }
+    if(targetType==3)
+    {
+        //攻击类型:1近战 2爆发 3射击 4弹射 5穿透
+        
+        //根据类型计算要影响的数量
+        attackNum=1;
+        targets=this->selectStrategy(attackNum,(this->attacker->pos<5)?FightMgr::getInstance()->rightArr:FightMgr::getInstance()->leftArr);
+    }
+    
+    return targets;
+}
+
+//选择策略
+/*
+ 1随机选择（随机选取达到最大人数，可以一人多次哦）
+ 2最弱优先(HP最低的起
+ 3最强优先(HP最高的起
+ 4最近优先
+ 5最远优先
+ 6普通【随机N人 每人1下】
+ */
+std::vector<int> Skill::selectStrategy(int num,Vector<MFighter*>arr)
+{
+    std::vector<int> targets;
+    if(num==0) return targets;
+    int type=1;
+    switch (type) {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        default:
+            log("错误的选择策略");
+            break;
+    }
+    
+    return targets;
+}
+
+void Skill::shoot(MFighter* mf)
+{
+    Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::hit), this, 0,0,1, false);
+}
+
+void Skill::cast()
+{
+    if(this->attacker->currentState==fstate::spell || attacker->currentState==fstate::buildup || attacker->currentState==fstate::throwing)
+    {
+        Director::getInstance()->getScheduler()->unschedule(SEL_SCHEDULE(&Skill::cast),this);
+    }
+
+    std::vector<int> targets=this->selectTarget();
+    
+    for(std::vector<int>::iterator it=targets.begin();it!=targets.end();++it)
+    {
+        MFighter* mf=*it<5?FightMgr::getInstance()->leftArr.at(*it):FightMgr::getInstance()->rightArr.at(*it-5);
+        int arrowNum=0;
+        //带弹道的
+        if(arrowNum>0 && attacker->currentState==fstate::throwing)
+        {
+            this->shoot(mf);
+            this->targets.pushBack(mf);
+            continue;
+        }
+        this->hit(mf);
+    }
+}
+
+void Skill::hit(MFighter* mf)
+{
+    //预估 命中 爆击 免疫
+    //A	若目标携带物理免疫buff则物理伤害类技能无法生效
+    //B	若目标携带法术免疫buff则法术伤害类技能无法生效
+    //C	若目标携带治疗免疫buff则目标无法被治疗
+    //命中率=（90+攻方等级-防方等级-防方闪避）*1%
+    float hitRate=(90+this->attacker->level-mf->level-mf->dodge)/0.01;
+    if(Utils::random01() > hitRate) //miss
+    {
+        mf->view->attacked();
+        return;
+    }
+    //计算伤害
+    int hurt=MIN(1,this->attacker->attack-mf->def);
+    
+    /*
+    A	暴击率=（攻方等级-防方等级+10+暴击率调整指数）*1%
+    B	最大暴击率为80%
+    C	最小暴击率为1%
+    D	只有攻击类技能才有暴击
+    */
+    float chRate=(this->attacker->level-mf->level+10+2)*0.01;
+    chRate=MAX(MIN(0.8,chRate), 0.01);
+    
+    //处理技能效果(效果1，数值类的）
+    int etype=1;
+    switch (etype) {
+        case 1: //A	攻击
+            
+            break;
+        case 2: //蓄力
+            break;
+        case 3: //溅射
+            break;
+        case 4: //治疗
+            break;
+        case 5: //能量回复
+            break;
+        case 6: //吸取生命
+            break;
+        case 7: //夺取能量
+            break;
+        default:
+            break;
+    }
+    //触发buff被动技能检查
+    int bufferNum=2;
+    for(int i=0;i<bufferNum;i++)
+    {
+        //受击者属性改变，buffer替换
+    }
+    //修正结果
+    //检查死亡
+    mf->attacked();
+}
+
+Skill::~Skill()
+{
+    Director::getInstance()->getScheduler()->unschedule(SEL_SCHEDULE(&Skill::coldDown),this);
+}

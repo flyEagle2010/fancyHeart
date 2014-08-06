@@ -1,0 +1,44 @@
+//
+//  Manager.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-4.
+//
+//
+
+#ifndef __fancyHeart__Manager__
+#define __fancyHeart__Manager__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "google/protobuf/message.h"
+#include "net/Socket.h"
+#include "DeviceInfo.h"
+#include "MsgID.h"
+#include "BaseUI.h"
+USING_NS_CC;
+using namespace google::protobuf;
+
+#define EVENT_RUN "event_run"
+#define EVENT_HERO_EVENTER "event_hero_enter"
+
+class Manager{
+    
+public:
+    Node* scene;
+    Socket* socket;
+public:
+    static Manager* getInstance();
+    void showDlg(Node* node,int effectType=0);
+    void removeDlg(Node* node,bool isClear);
+    Vector<Layer*> dlgVec;
+    void switchScence(Scene* scene);
+    void setMsg(int msgID,Message* msg);
+    Message* getMsg(int msgID);
+    
+private:
+    std::map<int, google::protobuf::Message*> netData;
+
+};
+
+#endif /* defined(__fancyHeart__Manager__) */

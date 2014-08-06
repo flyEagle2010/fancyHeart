@@ -1,0 +1,261 @@
+//
+//  RotatList.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-30.
+//
+//
+
+#include "RotateList.h"
+
+RotateList*RotateList::create()
+{
+    RotateList* widget = new RotateList();
+    if (widget && widget->init())
+    {
+        widget->autorelease();
+        return widget;
+    }
+    CC_SAFE_DELETE(widget);
+    return nullptr;
+}
+
+void RotateList::onEnter()
+{
+    Layout::onEnter();
+    scheduleUpdate();
+}
+
+
+void RotateList::initRenderer()
+{
+    Layout::initRenderer();
+}
+
+bool RotateList::init()
+{
+    if (Layout::init())
+    {
+        return true;
+    }
+    return false;
+}
+
+void RotateList::addChild(Node *child)
+{
+    Layout::addChild(child);
+}
+
+void RotateList::addChild(Node *child, int zOrder, int tag)
+{
+    Layout::addChild(child, zOrder, tag);
+}
+
+//移动坐标
+bool RotateList::scrollChildren(float touchOffsetX, float touchOffsetY)
+{
+    bool scrollenabled = true;
+    float realOffset = touchOffsetX;
+    
+    Size widgetSize = Director::getInstance()->getWinSize();//屏幕大小
+    auto widgetEnd = this->getChildByTag(itemNum-1);
+    auto widgetFirst = this->getChildByTag(0);
+    isBack = true;
+    //向左移动最多确保最后一个模版在中间位置
+    if (widgetEnd->getPositionX()+touchOffsetX <= widgetSize.width/2) {
+        isBack = false;
+        realOffset = widgetSize.width/2 - widgetEnd->getPositionX();
+    }
+    //向右移动最多确保第一个要在中间位置
+    if (widgetFirst->getPositionX()+touchOffsetX >= widgetSize.width/2) {
+        isBack = false;
+        realOffset = widgetSize.width/2 -widgetFirst->getPositionX();
+    }
+    changePos(Vec2(realOffset,0));
+    //改变坐标以及scale
+    change();
+    
+    return scrollenabled;
+}
+//移动各个模版坐标
+void RotateList::changePos(const Vec2 &realOffset)
+{
+    for (int i = 0; i<itemNum; ++i) {
+        auto widget = this->getChildByTag(i);
+        widget->setPosition(widget->getPosition()+realOffset);
+    }
+}
+//释放,并且设置层级关系
+void RotateList::handleReleaseLogic(const Vec2 &touchPoint)
+{
+    //把世界坐标转换到当前节点的本地坐标系
+    _touchEndedPoint = convertToNodeSpace(touchPoint);
+    float totalDis = 0.0f;
+    totalDis = _touchEndedPoint.x - _touchBeganPoint.x;
+    goDistance = totalDis;//记录移动的距离，根据距离看是否要更换图片
+    
+    if (isBack) {
+        //回弹
+        goBack();
+    }
+    //更改层级
+    Size widgetSize = Director::getInstance()->getWinSize();//屏幕大小
+    for (int i = 0; i<itemNum; ++i) {
+        auto widget = this->getChildByTag(i);
+        int x= widget->getPositionX();
+        //改变层级setLocalZOrder 当x坐标在中间图片范围内
+        if (x>= (widgetSize.width/2-itemWidth/4) && x<=(widgetSize.width/2+itemWidth/4)) {
+            widget->setLocalZOrder(itemNum);
+        }else if (x > widgetSize.width/2+itemWidth/4) {
+            widget->setLocalZOrder(itemNum-i-1);
+        }else{
+            widget->setLocalZOrder(i);
+        }
+    }
+}
+//回弹
+void RotateList::goBack()
+{
+    Size widgetSize=Director::getInstance()->getWinSize();
+    //多走需要回弹的位移:触摸移动的横向位移－需要移动几个模版＊每个模版需要走的位移（此处只要移动模版与模版距离的3/4就可移动）
+    int dis = goDistance - ceilf(goDistance/((widgetSize.width/haveItemNum-widgetSize.width/haveItemNum/4)))*widgetSize.width/haveItemNum;
+    
+    changePos(- Vec2(dis,0));
+    change();
+}
+
+bool RotateList::onTouchBegan(Touch *touch, Event *unusedEvent)
+{
+    bool pass = Layout::onTouchBegan(touch, unusedEvent);
+    _touchBeganPoint = convertToNodeSpace(_touchStartPos);
+    //起始移动点
+    _touchMovingPoint = _touchBeganPoint;
+    _slidTime = 0.0f;
+    _bePressed = true;
+    return pass;
+}
+
+void RotateList::onTouchMoved(Touch *touch, Event *unusedEvent)
+{
+    Layout::onTouchMoved(touch, unusedEvent);
+    _touchMovedPoint = convertToNodeSpace(_touchMovePos);
+    
+    Vec2 delta = _touchMovedPoint - _touchMovingPoint;
+    //随着移动，起始移动点坐标变化
+    _touchMovingPoint = _touchMovedPoint;
+    
+    scrollChildren(delta.x, 0.0f);
+}
+
+void RotateList::onTouchEnded(Touch *touch, Event *unusedEvent)
+{
+    Layout::onTouchEnded(touch, unusedEvent);
+    handleReleaseLogic(_touchEndPos);
+}
+
+void RotateList::onTouchCancelled(Touch *touch, Event *unusedEvent)
+{
+    Layout::onTouchCancelled(touch, unusedEvent);
+    handleReleaseLogic(touch->getLocation());
+}
+
+void RotateList::update(float dt)
+{
+    //手触发屏幕后时间会进行加操作
+    if (_bePressed){
+        _slidTime += dt;
+    }
+}
+
+void RotateList::checkChildInfo(int handleState,Widget* sender,const Vec2 &touchPoint)
+{
+    switch (handleState)
+    {
+        case 0:
+            _touchBeganPoint = convertToNodeSpace(touchPoint);
+            //起始移动点
+            _touchMovingPoint = _touchBeganPoint;
+            _slidTime = 0.0f;
+            _bePressed = true;
+            break;
+        case 1:
+        {
+            float offset = (sender->getTouchStartPos() - touchPoint).getLength();
+            if (offset > _childFocusCancelOffset){
+                sender->setHighlighted(false);
+                _touchMovedPoint = convertToNodeSpace(touchPoint);
+                
+                Vec2 delta = _touchMovedPoint - _touchMovingPoint;
+                //随着移动，起始移动点坐标变化
+                _touchMovingPoint = _touchMovedPoint;
+                
+                scrollChildren(delta.x, 0.0f);
+            }
+        }
+            break;
+        case 2:
+            handleReleaseLogic(touchPoint);
+            break;
+    }
+}
+
+//移动过程中调用的方法，用来改变y轴坐标，并且调用setMoveType方法用来改变缩放和角度值
+void RotateList::change()
+{
+    Size widgetSize=Director::getInstance()->getWinSize();
+    
+    for (int i = 0; i<10; ++i) {
+        auto widget = this->getChildByTag(i);
+        
+        //设置位置
+        int x =widget->getPositionX();
+        widget->setPosition(Vec2(widget->getPositionX(),widgetSize.height*sin(x*(3.1415926/widgetSize.width))*5/12));
+        setMoveType(widget,x);
+    }
+}
+//移动的过程中处理缩放以及角度变化
+void RotateList::setMoveType(Node* widget,int x)
+{
+    Size widgetSize=Director::getInstance()->getWinSize();
+    //缩放：越往中心点缩放系数越大
+    float wholePosX = widget->getPositionX();
+    float scaleNum;
+    if ( wholePosX< widgetSize.width/2) {//如果图片在屏幕中心点左边
+        //模版的坐标／整个屏幕宽度的一半） ＋ 2/5
+        scaleNum = pow(wholePosX/(widgetSize.width/2)+2/5,0.5);
+    }else if (wholePosX > widgetSize.width/2){//如果图片在屏幕中心点右边
+        //（整个屏幕的宽度 － 模版的坐标）／整个屏幕宽度的一半）） ＋ 2/5
+        scaleNum = pow((widgetSize.width - wholePosX)/(widgetSize.width/2)+2/5,0.5);
+    }else{
+        scaleNum = 1;
+    }
+    widget->setScale(fmax(scaleNum,0.5));
+    //旋转角度
+    int rotation = (180/widgetSize.width/2)*(x - widgetSize.width/2);
+    widget->setRotation(rotation);
+}
+//设置样式
+void RotateList::setItemModel(Widget* model)
+{
+    itemNum = 10;//数据长度（显示几个模版）
+    itemWidth = 263;//单个模版的宽度
+    haveItemNum= 8;//整个显示界面当前放几个模版
+    Size widgetSize = Director::getInstance()->getWinSize();//屏幕大小
+    for (int i = 0; i<itemNum; ++i) {
+        Widget* newItem = model->clone();
+        addChild(newItem);
+        int x =widgetSize.width/haveItemNum*i + widgetSize.width/2;
+        newItem->setTag(i);
+        
+        //初始设置位置
+        newItem->setPosition(Vec2(x,widgetSize.height*sin(x*(3.1415926/widgetSize.width))*5/12));
+        setMoveType(newItem,x);
+        
+        //初始设置层级setLocalZOrder
+        if (x >= widgetSize.width/2) {
+            newItem->setLocalZOrder(itemNum-i);
+        }else{
+            newItem->setLocalZOrder(i);
+        }
+    }
+}

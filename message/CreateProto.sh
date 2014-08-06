@@ -1,0 +1,1 @@
+protoc -I$PROTOIN --cpp_out=$PROTOOUT $PROTOIN/*.proto

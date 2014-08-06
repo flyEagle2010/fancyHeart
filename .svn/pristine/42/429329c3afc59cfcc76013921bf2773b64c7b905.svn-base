@@ -1,0 +1,120 @@
+package com.doteyplay.bean;
+
+public class UserBean extends BaseBean
+{
+	public static byte USER_STATE_UNLOGIN = 0;
+	public static byte USER_STATE_LOGEDIN = 1;
+	
+	private long id;
+	protected String name;
+	private String password;
+	private byte userType;
+	private String channel;
+	private byte state;
+
+	private String lastLoginIp;
+
+	private boolean over18 = false;
+	private long onlineTime;
+	private int key;
+
+	public long getId()
+	{
+		return id;
+	}
+
+	public void setId(long id)
+	{
+		this.id = id;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public String getPassword()
+	{
+		return password;
+	}
+
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
+	public byte getUserType()
+	{
+		return userType;
+	}
+
+	public void setUserType(byte userType)
+	{
+		this.userType = userType;
+	}
+
+	public String getChannel()
+	{
+		return channel;
+	}
+
+	public void setChannel(String channel)
+	{
+		this.channel = channel;
+	}
+
+	public byte getState()
+	{
+		return state;
+	}
+
+	public void setState(byte state)
+	{
+		this.state = state;
+	}
+
+	public String getLastLoginIp()
+	{
+		return lastLoginIp;
+	}
+
+	public void setLastLoginIp(String lastLoginIp)
+	{
+		this.lastLoginIp = lastLoginIp;
+	}
+
+	public boolean isOver18()
+	{
+		return over18;
+	}
+
+	public void setOver18(boolean over18)
+	{
+		this.over18 = over18;
+	}
+
+	public long getOnlineTime()
+	{
+		return onlineTime;
+	}
+
+	public void setOnlineTime(long onlineTime)
+	{
+		this.onlineTime = onlineTime;
+	}
+
+	public int getKey()
+	{
+		return key;
+	}
+
+	public void setKey(int key)
+	{
+		this.key = key;
+	}
+}

@@ -1,0 +1,40 @@
+package com.doteyplay.support.loginportal.action;
+
+import org.apache.log4j.Logger;
+import org.apache.mina.core.session.IoSession;
+
+import com.doteyplay.luna.common.action.BaseAction;
+import com.doteyplay.luna.common.message.DecoderMessage;
+
+public class GetUserBySessionIdAction extends BaseAction
+{
+
+	private static Logger logger = Logger
+			.getLogger(GetUserBySessionIdAction.class.getName());
+
+	private static GetUserBySessionIdAction action = new GetUserBySessionIdAction();
+
+	private GetUserBySessionIdAction()
+	{
+
+	}
+
+	public static synchronized GetUserBySessionIdAction getInstance()
+	{
+		if (action == null)
+			action = new GetUserBySessionIdAction();
+		return action;
+	}
+
+	@Override
+	public void doAction(IoSession session, DecoderMessage message)
+	{
+
+	}
+
+	@Override
+	public void doAction(long roleId)
+	{
+
+	}
+}

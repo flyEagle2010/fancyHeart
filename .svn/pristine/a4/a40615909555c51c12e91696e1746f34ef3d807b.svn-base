@@ -1,0 +1,41 @@
+package com.doteyplay.game.service.bo.tollgate;
+
+import com.doteyplay.core.bhns.ISimpleService;
+import com.doteyplay.game.BOConst;
+
+/**
+ * 副本信息服务接口
+ * 
+ * @author Tom.Zheng
+ * 
+ */
+public interface ITollgateInfoService extends ISimpleService {
+
+	public final static int PORTAL_ID = BOConst.BO_INSTANCE;
+
+	/**
+	 * 初使化基本信息.
+	 */
+	public void initlize();
+
+	/**
+	 * 向用户展示,所有的关卡的信息及关卡内部节点的信息.
+	 */
+	public void showTollgateDetailInfo();
+	/**
+	 * 发送关卡开放信息
+	 */
+	public void sendTollgateAndNodeChangeInfo(int tollgateId,int nodeId);
+
+	/**
+	 * 用户进入节点.
+	 */
+	public void enterNode(int tollgateId,int nodeId);
+	
+	/**
+	 * 释放资源
+	 */
+	public void release();
+
+
+}

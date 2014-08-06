@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messages name="登陆服消息注册">
+	<action_helper_creator>com.doteyplay.game.action.common.MessageActionHelperCreator</action_helper_creator>
+	<message_num>0</message_num>
+
+	<message_package value="com.doteyplay.game.action">
+		<exclude class="" />
+	</message_package>	
+</messages>
+
+

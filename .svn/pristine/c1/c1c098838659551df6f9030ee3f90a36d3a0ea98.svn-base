@@ -1,0 +1,14 @@
+2014-04-16 13:41:20
+初始化GameServer失败
+com.pwrd.game.util.excel.ConfigException: Errors occurs while parsing xls file:skill.xls
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:60)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:40)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Caused by: java.io.FileNotFoundException: D:\myworkspace\GameServer\src\main\resources\excel\skill.xls (系统找不到指定的路径。)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:54)
+	... 4 more

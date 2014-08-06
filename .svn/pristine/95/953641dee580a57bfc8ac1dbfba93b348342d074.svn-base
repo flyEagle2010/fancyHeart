@@ -1,0 +1,488 @@
+package com.doteyplay.core.configloader;
+
+import java.io.FileNotFoundException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+import org.apache.mina.core.buffer.IoBuffer;
+import org.dom4j.Attribute;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
+
+import com.doteyplay.core.action.ActionAnnotation;
+import com.doteyplay.core.util.PackageScaner;
+import com.doteyplay.core.util.StrUtils;
+import com.doteyplay.exception.MessageProcessException;
+import com.doteyplay.net.message.AbstractMessage;
+import com.doteyplay.net.message.IMessageAction;
+import com.doteyplay.net.message.IMessageActionHelper;
+import com.doteyplay.net.message.MessageFactory;
+import com.doteyplay.net.protocol.IHelperCreator;
+
+/**
+ * MessageHandler的加载
+ * 
+ * @author
+ * 
+ * 
+ */
+public class MessageRegistry
+{
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger
+			.getLogger(MessageRegistry.class);
+
+	private static final String[] CONFIG_FILES =
+	{ "message-config.xml"};
+
+	private MessageFactory factory;
+
+	/**
+	 * actionHelper创建者
+	 */
+	private IHelperCreator creator;
+
+	public MessageRegistry()
+	{
+		// loadConfig();
+	}
+
+	public void loadConfig(int maxNum) throws FileNotFoundException
+	{
+		int maxCommandId = 0; // 最大消息号，工厂内数组长度为最大消息号+1
+		List<MessageHandlerObject> list = new LinkedList<MessageHandlerObject>();
+
+		// 读取配置文件参数
+		SAXReader saxReader = new SAXReader();
+
+		int readFileSize = 0; // 至少存在一份以上的配置文件
+		for (String file : CONFIG_FILES)
+		{
+			try
+			{
+				Document paramsXMLDoc = saxReader.read(MessageRegistry.class
+						.getClassLoader().getResourceAsStream(file));
+
+				// 查找creator
+				loadActionCreator(paramsXMLDoc);
+
+				// 查找消息数
+				maxCommandId = loadNum(paramsXMLDoc);
+
+				// 查找package
+				maxCommandId = loadPackage(paramsXMLDoc, list, maxCommandId);
+
+				// 查找message
+				maxCommandId = loadMessage(paramsXMLDoc, list, maxCommandId);
+
+				readFileSize++;
+			} catch (Exception e)
+			{
+				logger.error("消息注册错误,可以被忽略", e);
+				// 啥也不输出
+			}
+		}
+
+		if (readFileSize < 1)
+			throw new FileNotFoundException("找不到任何消息配置文件");
+
+		// // 消息处理Factory
+		if (maxCommandId < maxNum)
+			maxCommandId = maxNum - 1;
+
+		factory = new MessageFactory(maxCommandId + 1); // 消息Factory
+		for (MessageHandlerObject obj : list)
+		{
+			factory.addMessage(obj.getCommandId(), obj.getClazz());
+			if (obj.getHelper() != null)
+			{
+				factory.addMessageAction(obj.getCommandId(), obj.getHelper());
+			}
+		}
+	}
+
+	private void loadActionCreator(Document paramsXMLDoc) throws Exception
+	{
+		Node node = paramsXMLDoc.selectSingleNode("//action_helper_creator");
+		if (node != null && creator == null)
+		{
+			creator = (IHelperCreator) Class.forName(node.getStringValue())
+					.newInstance();
+		}
+	}
+
+	private int loadNum(Document paramsXMLDoc) throws Exception
+	{
+		Node node = paramsXMLDoc.selectSingleNode("//message_num");
+		if (node != null)
+			return Integer.parseInt(node.getStringValue()) - 1;
+		else
+			return 0;
+	}
+
+	private int loadPackage(Document paramsXMLDoc,
+			List<MessageHandlerObject> list, int maxNum) throws Exception
+	{
+		@SuppressWarnings("unchecked")
+		List<Node> nodeList = paramsXMLDoc.selectNodes("//message_package");
+		int maxCommandId = maxNum;
+		String ext = ".class";
+		if (nodeList != null && nodeList.size() > 0)
+		{
+			MessageHandlerObject obj;
+			for (Node packageNode : nodeList)
+			{
+				String value = ((Element) packageNode).attributeValue("value");
+				// 解析不包括的
+				@SuppressWarnings("unchecked")
+				List<Node> exclude = packageNode.selectNodes("exclude");
+				Map<String, String> excludeClass = new HashMap<String, String>();
+				Map<String, String> excludePackage = new HashMap<String, String>();
+				if (exclude != null)
+				{
+					String ex;
+					for (Node e : exclude)
+					{
+						ex = ((Element) e).attributeValue("class");
+						if (ex.endsWith(".*"))
+						{
+							String tmp = ex.substring(0, ex.length() - 1);
+							excludePackage.put(tmp, tmp);
+						} else
+							excludeClass.put(ex, ex);
+					}
+				}
+
+				// 解析目录
+				String[] include = PackageScaner.scanNamespaceFiles(value, ext,
+						false, true);
+				if (include != null && include.length > 0)
+				{
+					String key;
+					for (String includeClass : include)
+					{
+						key = value
+								+ "."
+								+ includeClass.subSequence(0,
+										includeClass.length() - (ext.length()));
+						if (!excludeClass.containsKey(key)
+								&& notIncludePackage(excludePackage, key))
+						{
+							Class<?> actionClass = Class.forName(key);
+							ActionAnnotation annotation = (ActionAnnotation) actionClass
+									.getAnnotation(ActionAnnotation.class);
+							if (annotation != null
+									&& annotation.message() != null)
+							{
+								if (!checkAnnotation(actionClass,
+										annotation.message()))
+								{
+									logger.error("Action注解和消息类不一致，不予添加:"
+											+ actionClass);
+									continue;
+								}
+								maxCommandId = processMessage(list, maxNum,
+										actionClass, annotation.message(),
+										false, false);
+							}
+						}
+					}
+				}
+
+			}
+		}
+		return maxCommandId;
+	}
+
+	private boolean notIncludePackage(Map<String, String> keys, String key)
+	{
+		for (String tmpKey : keys.values())
+		{
+			if (key.startsWith(tmpKey))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean checkAnnotation(Class<?> actionClass, Class<?> messageClass)
+	{
+		Type[] types = actionClass.getGenericInterfaces();
+		for (Type t : types)
+		{
+			if (t instanceof ParameterizedType)
+			{
+				Type[] intypes = ((ParameterizedType) t)
+						.getActualTypeArguments();
+				for (Type tt : intypes)
+				{
+					if (tt == messageClass)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	private int loadMessage(Document paramsXMLDoc,
+			List<MessageHandlerObject> list, int maxNum) throws Exception
+	{
+		@SuppressWarnings("unchecked")
+		List<Node> nodeList = paramsXMLDoc.selectNodes("//message");
+		int maxCommandId = maxNum;
+		if (nodeList != null)
+		{
+			for (Node messageNode : nodeList)
+			{
+				Element elm = (Element) messageNode;
+				Attribute attribute = elm.attribute("clazz");
+				@SuppressWarnings("unchecked")
+				Class<? extends AbstractMessage> messageClass = (Class<? extends AbstractMessage>) Class
+						.forName(attribute.getValue()); // Message
+				// Class
+				attribute = elm.attribute("action");
+				if (attribute != null && creator != null)
+				{
+					Class<?> actionClass = Class.forName(attribute.getValue());
+					// 是否是关闭的
+					attribute = elm.attribute("closed");
+					boolean close = StrUtils.parseBoolean(attribute.getValue(),
+							false);
+					// 状态是否绑定
+					attribute = elm.attribute("binded");
+					boolean binded = StrUtils.parseBoolean(
+							attribute.getValue(), false);
+					maxCommandId = processMessage(list, maxNum, actionClass,
+							messageClass, close, binded);
+				} else
+				{
+					maxCommandId = processMessage(list, maxNum, null,
+							messageClass, false, false);
+				}
+
+			}
+		}
+		return maxCommandId;
+	}
+
+	private int processMessage(List<MessageHandlerObject> list, int maxNum,
+			Class<?> actionClass,
+			Class<? extends AbstractMessage> messageClass, boolean closed,
+			boolean binded) throws Exception
+	{
+		if (messageClass == null)
+			return maxNum;
+
+		int maxCommandId = maxNum;
+		try
+		{
+			Constructor<?> c = messageClass.getDeclaredConstructor(null);
+			c.setAccessible(true);
+			int commandId = ((AbstractMessage) c.newInstance()).getCommandId(); // 获取message的commandId;
+			MessageHandlerObject obj = new MessageHandlerObject();
+			obj.setCommandId(commandId);
+			obj.setClazz(messageClass);
+
+			if (actionClass != null && creator != null)
+			{
+				c = actionClass.getDeclaredConstructor(null);
+				c.setAccessible(true);
+				IMessageAction<?, ?> action = (IMessageAction<?, ?>) c
+						.newInstance();
+				obj.setHelper(creator.createActionHelper(action));
+				if (closed)
+					obj.getHelper().close();
+				obj.getHelper().setBinded(binded);
+			}
+
+			list.add(obj);
+			if (maxCommandId < commandId)
+			{
+				maxCommandId = commandId;
+			}
+		} catch (Exception e)
+		{
+			throw new MessageProcessException("解析错误actionClass=" + actionClass
+					+ ",messageClass=" + messageClass, e);
+		}
+		return maxCommandId;
+	}
+
+	private static MessageRegistry _instance = new MessageRegistry();
+
+	public static MessageRegistry getInstance()
+	{
+		return _instance;
+	}
+
+	/**
+	 * 这里暂时只处理开关
+	 */
+	public static void reload()
+	{
+		// int maxCommandId = 0; // 最大消息号，工厂内数组长度为最大消息号+1
+		// ArrayList<MessageHandlerObject> list = new
+		// ArrayList<MessageHandlerObject>();
+
+		// 读取配置文件参数
+		SAXReader saxReader = new SAXReader();
+		for (String file : CONFIG_FILES)
+		{
+			try
+			{
+				Document paramsXMLDoc = saxReader.read(MessageRegistry.class
+						.getClassLoader().getResourceAsStream(file));
+
+				// 查找消息
+				@SuppressWarnings("unchecked")
+				List<Node> nodeList = paramsXMLDoc.selectNodes("//message");
+				if (nodeList != null)
+				{
+					for (Node messageNode : nodeList)
+					{
+						Element elm = (Element) messageNode;
+						Attribute attribute = elm.attribute("clazz");
+						Class<?> c = Class.forName(attribute.getValue()); // Message
+						// Class
+
+						int commandId = ((AbstractMessage) c.newInstance())
+								.getCommandId(); // 获取message的commandId;
+						IMessageActionHelper helper = getInstance()
+								.getMessageActionHelper(commandId);
+						if (helper != null)
+						{
+							// 是否开放
+							attribute = elm.attribute("closed");
+							boolean close = StrUtils.parseBoolean(
+									attribute.getValue(), false);
+							if (close)
+								helper.close();
+							else
+								helper.open();
+
+							// 状态是否绑定
+							attribute = elm.attribute("binded");
+							boolean binded = StrUtils.parseBoolean(
+									attribute.getValue(), false);
+							helper.setBinded(binded);
+						}
+					}
+				}
+
+			} catch (Exception e)
+			{
+			}
+		}
+	}
+
+	private static class MessageHandlerObject
+	{
+		private int commandId;
+		private Class<? extends AbstractMessage> clazz;
+		private IMessageActionHelper helper;
+
+		public int getCommandId()
+		{
+			return commandId;
+		}
+
+		public void setCommandId(int commandId)
+		{
+			this.commandId = commandId;
+		}
+
+		public Class<? extends AbstractMessage> getClazz()
+		{
+			return clazz;
+		}
+
+		public void setClazz(Class<? extends AbstractMessage> clazz)
+		{
+			this.clazz = clazz;
+		}
+
+		public IMessageActionHelper getHelper()
+		{
+			return helper;
+		}
+
+		public void setHelper(IMessageActionHelper helper)
+		{
+			this.helper = helper;
+		}
+	}
+
+	public void add_message(int commandId,
+			Class<? extends AbstractMessage> messageClass)
+	{
+		// logger.error(commandId);
+		factory.addMessage(commandId, messageClass);
+	}
+	
+	public static void addMessage(int commandId,
+			Class<? extends AbstractMessage> messageClass)
+	{
+		if(getInstance() != null)
+			getInstance().add_message(commandId, messageClass);
+	}
+
+	public final AbstractMessage getMessage(int commandId)
+	{
+		return factory.getMessage(commandId);
+	}
+
+	public void addMessageHelper(int commandId, IMessageActionHelper helper)
+	{
+		factory.addMessageAction(commandId, helper);
+	}
+
+	public final IMessageActionHelper getMessageActionHelper(int commandId)
+	{
+		return factory.getMessageActionHelper(commandId);
+	}
+
+	public MessageFactory getFactory()
+	{
+		return factory;
+	}
+
+	public final void freeMessage(AbstractMessage message)
+	{
+		factory.freeMessage(message);
+	}
+
+
+	public static void main(String[] args)
+	{
+		IoBuffer buf = IoBuffer.allocate(10);
+		buf.put((byte) 1);
+		buf.put((byte) 2);
+		buf.put((byte) 3);
+		buf.put((byte) 4);
+		buf.put((byte) 5);
+		buf.put((byte) 6);
+		buf.put((byte) 7);
+		buf.put((byte) 8);
+		buf.put((byte) 9);
+		buf.put((byte) 10);
+		buf.rewind();
+		System.out.println(buf.position());
+		System.out.println(buf.get(6));
+		System.out.println(buf.position());
+		System.out.println(Arrays.toString(buf.array()));
+	}
+}

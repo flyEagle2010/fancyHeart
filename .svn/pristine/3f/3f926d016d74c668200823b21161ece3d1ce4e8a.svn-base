@@ -1,0 +1,256 @@
+2013-12-23 15:20:50
+初始化服务器相关配置参数失败，错误信息：Error on line 1 of document  : Content is not allowed in prolog. Nested exception: Content is not allowed in prolog.
+org.dom4j.DocumentException: Error on line 1 of document  : Content is not allowed in prolog. Nested exception: Content is not allowed in prolog.
+	at org.dom4j.io.SAXReader.read(SAXReader.java:482)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.pwrd.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.pwrd.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:42)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Nested exception: 
+org.xml.sax.SAXParseException: Content is not allowed in prolog.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:195)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:174)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:388)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1414)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:1039)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:648)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:140)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:511)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:808)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:737)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:119)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1205)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:522)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:465)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.pwrd.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.pwrd.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:42)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+2013-12-23 15:20:50
+初始化GameServer失败
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at com.pwrd.core.resourcebundle.WordResource._init(WordResource.java:24)
+	at com.pwrd.core.resourcebundle.WordResource.init(WordResource.java:62)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:45)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+2013-12-23 15:23:04
+初始化服务器相关配置参数失败，错误信息：Error on line 1 of document  : Content is not allowed in prolog. Nested exception: Content is not allowed in prolog.
+org.dom4j.DocumentException: Error on line 1 of document  : Content is not allowed in prolog. Nested exception: Content is not allowed in prolog.
+	at org.dom4j.io.SAXReader.read(SAXReader.java:482)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.pwrd.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.pwrd.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:42)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Nested exception: 
+org.xml.sax.SAXParseException: Content is not allowed in prolog.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:195)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:174)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:388)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1414)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:1039)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:648)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:140)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:511)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:808)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:737)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:119)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1205)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:522)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:465)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.pwrd.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.pwrd.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:42)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+2013-12-23 15:23:04
+初始化GameServer失败
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at com.pwrd.core.resourcebundle.WordResource._init(WordResource.java:24)
+	at com.pwrd.core.resourcebundle.WordResource.init(WordResource.java:62)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:45)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+2013-12-23 15:25:03
+初始化服务器相关配置参数失败，错误信息：Error on line 1 of document  : Content is not allowed in prolog. Nested exception: Content is not allowed in prolog.
+org.dom4j.DocumentException: Error on line 1 of document  : Content is not allowed in prolog. Nested exception: Content is not allowed in prolog.
+	at org.dom4j.io.SAXReader.read(SAXReader.java:482)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.pwrd.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.pwrd.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:42)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Nested exception: 
+org.xml.sax.SAXParseException: Content is not allowed in prolog.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:195)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:174)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:388)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1414)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:1039)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:648)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:140)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:511)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:808)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:737)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:119)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1205)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:522)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:465)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.pwrd.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.pwrd.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:42)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+2013-12-23 15:26:20
+初始化服务器相关配置参数失败，错误信息：Error on line 1 of document  : Content is not allowed in prolog. Nested exception: Content is not allowed in prolog.
+org.dom4j.DocumentException: Error on line 1 of document  : Content is not allowed in prolog. Nested exception: Content is not allowed in prolog.
+	at org.dom4j.io.SAXReader.read(SAXReader.java:482)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.pwrd.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.pwrd.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:42)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Nested exception: 
+org.xml.sax.SAXParseException: Content is not allowed in prolog.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:195)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:174)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:388)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1414)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:1039)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:648)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:140)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:511)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:808)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:737)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:119)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1205)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:522)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:465)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.pwrd.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.pwrd.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:42)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+2013-12-23 15:27:13
+初始化服务器相关配置参数失败，错误信息：Error on line 1 of document  : Content is not allowed in prolog. Nested exception: Content is not allowed in prolog.
+org.dom4j.DocumentException: Error on line 1 of document  : Content is not allowed in prolog. Nested exception: Content is not allowed in prolog.
+	at org.dom4j.io.SAXReader.read(SAXReader.java:482)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.pwrd.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.pwrd.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:42)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Nested exception: 
+org.xml.sax.SAXParseException: Content is not allowed in prolog.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:195)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:174)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:388)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1414)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:1039)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:648)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:140)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:511)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:808)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:737)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:119)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1205)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:522)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:465)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.pwrd.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.pwrd.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:42)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+2013-12-23 15:27:17
+初始化GameServer失败
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at com.pwrd.core.resourcebundle.WordResource._init(WordResource.java:24)
+	at com.pwrd.core.resourcebundle.WordResource.init(WordResource.java:62)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:45)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+2013-12-23 15:27:44
+初始化GameServer失败
+java.lang.NullPointerException
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:49)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+2013-12-23 15:27:57
+初始化GameServer失败
+java.lang.NullPointerException
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:49)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+2013-12-23 15:30:07
+初始化GameServer失败
+com.pwrd.game.util.excel.ConfigException: Errors occurs while parsing xls file:skill.xlsx
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:62)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:47)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Caused by: org.apache.poi.poifs.filesystem.OfficeXmlFileException: The supplied data appears to be in the Office 2007+ XML. You are calling the part of POI that deals with OLE2 Office Documents. You need to call a different part of POI to process this data (eg XSSF instead of HSSF)
+	at org.apache.poi.poifs.storage.HeaderBlockReader.<init>(HeaderBlockReader.java:98)
+	at org.apache.poi.poifs.filesystem.POIFSFileSystem.<init>(POIFSFileSystem.java:151)
+	at com.pwrd.game.util.excel.TemplateFileParser.parseXlsFile(TemplateFileParser.java:30)
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:57)
+	... 4 more
+2013-12-23 16:01:17
+初始化GameServer失败
+com.pwrd.game.util.excel.ConfigException: Errors occurs while parsing xls file:skill.xlsx
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:62)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:47)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Caused by: org.apache.poi.poifs.filesystem.OfficeXmlFileException: The supplied data appears to be in the Office 2007+ XML. You are calling the part of POI that deals with OLE2 Office Documents. You need to call a different part of POI to process this data (eg XSSF instead of HSSF)
+	at org.apache.poi.poifs.storage.HeaderBlockReader.<init>(HeaderBlockReader.java:98)
+	at org.apache.poi.poifs.filesystem.POIFSFileSystem.<init>(POIFSFileSystem.java:151)
+	at com.pwrd.game.util.excel.TemplateFileParser.parseXlsFile(TemplateFileParser.java:30)
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:57)
+	... 4 more
+2013-12-23 16:28:48
+初始化GameServer失败
+com.pwrd.game.util.excel.ConfigException: Errors occurs while parsing xls file:skill.xlsx
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:62)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:47)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)
+Caused by: java.io.FileNotFoundException: D:\myworkspace\GameServer\src\main\resources\excel\skill.xlsx (系统找不到指定的文件。)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:120)
+	at java.io.FileInputStream.<init>(FileInputStream.java:79)
+	at com.pwrd.game.util.excel.TemplateService.init(TemplateService.java:56)
+	... 4 more

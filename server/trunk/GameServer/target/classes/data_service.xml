@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA>
+	<!--数据源 -->
+	<!-- 必须在resource表之前加载 -->
+	<DATABLOCK NAME="GameData"
+		SOURCE="com.doteyplay.game.persistence.resourcedata.gamedata.GameDataDataProvider"
+		IMPLEMENTION="com.doteyplay.game.persistence.resourcedata.gamedata.GameDataDataProvider"
+		DEPENDENCES="" />
+
+</DATA>
+ 

@@ -1,0 +1,26 @@
+//
+//  TextData.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-12.
+//
+//
+
+#ifndef __fancyHeart__TextData__
+#define __fancyHeart__TextData__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "BData.h"
+using namespace cocos2d;
+class TextData:public BData {
+    Value ID;
+    std::string name;
+    std::string txt;
+public:
+    static TextData* getInstance(Value v);
+    virtual void load(Value v);
+    std::string getName();
+    std::string getTxt();
+};
+#endif /* defined(__fancyHeart__TextData__) */

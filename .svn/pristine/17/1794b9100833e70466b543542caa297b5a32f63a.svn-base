@@ -1,0 +1,8 @@
+package com.doteyplay.support.loginportal;
+
+public interface LoginPortalCommand {
+	/**
+	 * 通过SessionId获得用户对象
+	 */
+	public static final short GET_USER_BY_SESSIONID_MESSAGE = 1;
+}

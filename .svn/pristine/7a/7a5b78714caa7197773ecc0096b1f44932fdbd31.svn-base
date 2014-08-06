@@ -1,0 +1,97 @@
+//
+//  FightScene.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-5.
+//
+//
+
+#include "FightScene.h"
+#include "HomeScene.h"
+
+Scene* FightScene::createScene(){
+	auto scene = Scene::create();
+    auto layer = FightScene::create();
+    scene->addChild(layer,0,0);
+	return scene;
+}
+
+bool FightScene::init(){
+	//init ui
+    auto layout=static_cast<Layout*>(cocostudio::GUIReader::getInstance()->widgetFromJsonFile("Fight_1.json"));
+    this->addChild(layout);
+    layout->addTouchEventListener(CC_CALLBACK_2(FightScene::touchEvent,this));
+
+    this->heroNode=Node::create();
+    this->addChild(this->heroNode);
+    return true;
+}
+
+void FightScene::onEnter()
+{
+    Node::onEnter();
+}
+
+Vector<MFighter*> FightScene::initHero(Vector<FData*> arr)
+{
+    Size winSize=Director::getInstance()->getWinSize();
+    Vector<MFighter*> vec;
+    for(int i=0;i<arr.size();i++)
+    {
+        FData* fd=arr.at(i);
+        int pos = fd->bd.pos;
+        MFighter* mf=MFighter::create(fd);
+        mf->view=Fighter::create("HeroAnimation", "HeroAnimation0", pos);
+//        mf->view->setPosition(Vec2(70*pos,winSize.height/2+(pos%2?-40:40)));
+        float dis=(winSize.width-960)/2;
+//        log("dis:%f",dis);
+        mf->view->setPosition(Vec2(40*3*(1+i%3)+dis,winSize.height/2+(pos%2?40:-40)));
+        if(pos > 4)
+        {
+//            mf->view->setPosition(Point(winSize.width+70*pos,winSize.height/2+(pos%2?-40:40)));
+            mf->view->setPosition(Point(winSize.width+dis-40*10,winSize.height/2));
+        }
+        
+        this->addChild(mf->view,pos);
+        mf->view->delegate=mf;
+        mf->start();
+        vec.pushBack(mf);
+    }
+    
+    return vec;
+}
+
+void FightScene::bounce(MFighter *mf)
+{
+    
+}
+
+void FightScene::touchEvent(cocos2d::Ref *pSender, Widget::TouchEventType type)
+{
+    switch (type)
+    {
+        case TouchEventType::BEGAN:
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+            FightMgr::getInstance()->clear();
+            Director::getInstance()->replaceScene(HomeScene::createScene());
+            break;
+        case TouchEventType::CANCELED:
+            break;
+        default:
+            break;
+    }
+}
+
+void FightScene::onMessage(Socket* socket, const NetMsg& data)
+{
+    
+}
+
+void FightScene::onExit()
+{
+    FightMgr::getInstance()->clear();
+    Node::onExit();
+}

@@ -1,0 +1,33 @@
+package com.doteyplay.game.service.bo.virtualworld.chat.patameter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @className:AbstractPatameterObject.java
+ * @classDescription:
+ * @author:Tom.Zheng
+ * @createTime:2014年7月10日 下午4:25:46
+ */
+public abstract class AbstractPatameterObject implements IPatameterObject {
+
+	private List<Long> roleIds;
+
+	public List<Long> getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(List<Long> roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public void addRoles(String[] rIds) {
+		if (roleIds == null) {
+			roleIds = new ArrayList<Long>();
+		}
+		for (String str : rIds) {
+			roleIds.add(Long.parseLong(str));
+		}
+	}
+
+}

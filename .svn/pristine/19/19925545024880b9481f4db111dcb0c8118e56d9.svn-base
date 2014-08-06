@@ -1,0 +1,111 @@
+//
+//  TestUi.cpp
+//  fancyHeart
+//
+//  Created by doteyplay on 14-7-2.
+//
+//
+
+#include "TestUi.h"
+#include "ScrollView2.h"
+#include "TestUi2.h"
+Scene* TestUi::createScene()
+{
+	auto scene = Scene::create();
+	auto layer=TestUi::create();
+	scene->addChild(layer);
+	return scene;
+}
+
+bool TestUi::init()
+{
+    Size widgetSize = Director::getInstance()->getWinSize();
+    
+    TestUi2* scrollView = TestUi2::create();
+    
+    scrollView->setSize(Size(600, 400));
+    scrollView->setPosition(Vec2(0,0));
+    //模版数量
+    int itemNum = 10;
+    
+    for (int i = 0; i<itemNum; ++i) {
+        ImageView* imageView = ImageView::create("HelloWorld1.jpg");
+        scrollView->addChild(imageView);
+        int x =widgetSize.width/8*i + widgetSize.width/2;
+        imageView->setTag(i);
+        
+        //设置位置
+        imageView->setPosition(Vec2(x,widgetSize.height*sin(x*(3.1415926/widgetSize.width))/2));
+        
+        //缩放
+        float wholePosX = scrollView->getInnerContainer()->getPositionX() + imageView->getPositionX();
+        if ( wholePosX< widgetSize.width/2) {//如果图片在屏幕中央左边
+            float scaleNum = wholePosX/(widgetSize.width/2)+1/4;
+            imageView->setScale(scaleNum);
+        }else if (wholePosX > widgetSize.width/2){//如果图片在屏幕中央右边
+            float scaleNum = (widgetSize.width - wholePosX)/(widgetSize.width/2)+1/4;
+            imageView->setScale(scaleNum);
+        }else{
+            float scaleNum = 1;
+            imageView->setScale(scaleNum);
+        }
+
+        //旋转角度
+        int rotation = (180/widgetSize.width/2)*(x - widgetSize.width/2);
+        imageView->setRotation(rotation);
+        //层级setLocalZOrder
+        if (x >= widgetSize.width/2) {
+            imageView->setLocalZOrder(itemNum-i);
+        }else{
+            imageView->setLocalZOrder(i);
+        }
+
+    }
+    
+    scrollView->setInnerContainerSize(Size(scrollView->getInnerContainer()->getChildByTag(itemNum-1)->getPositionX() + widgetSize.width/5,400));
+    this->addChild(scrollView);
+
+    
+	return true;
+}
+
+void TestUi::onEnter()
+{
+    Widget::onEnter();
+}
+
+bool TestUi::onTouchBegan(Touch* touch, Event* event)
+{
+    // 获取点击的坐标
+    this->isStart=false;
+    moveBegainX =touch->getStartLocation().x;
+    return true;
+}
+
+void TestUi::onTouchMoved(Touch* touch, Event* event)
+{
+    this->isStart=true;
+}
+
+void TestUi::onTouchEnded(Touch* touch, Event* event)
+{
+    this->isStart=false;
+}
+
+void TestUi::onTouchCancelled(Touch* touch, Event* event)
+{
+    this->isStart=false;
+}
+
+void TestUi::update(float dt)
+{
+    if(this->isStart){
+    }
+
+}
+
+void TestUi::onExit()
+{
+    Widget::onExit();
+    this->removeAllChildrenWithCleanup(true);
+}

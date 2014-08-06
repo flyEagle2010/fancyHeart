@@ -1,0 +1,116 @@
+//
+//  chat.cpp
+//  fancyHeart
+//
+//  Created by zhai on 14-7-9.
+//
+//
+
+#include "chat.h"
+Chat* Chat::create(){
+    Chat* chat=new Chat();
+    if(chat && chat->init()){
+        chat->setPosition(Vec2(-600, 0));
+        chat->setVisible(false);
+        chat->autorelease();
+        return  chat;
+    }
+    CC_SAFE_DELETE(chat);
+    return nullptr;
+}
+
+bool Chat::init()
+{
+	if(!BaseUI::init("publish/chat.ExportJson"))
+	{
+		return false;
+	}
+    auto chatBg=static_cast<Widget*>(layout->getChildByName("chatBg"));
+    // RichText
+    richText = RichText::create();
+    richText->ignoreContentAdaptWithSize(false);
+    richText->setSize(Size(chatBg->getContentSize().width, chatBg->getContentSize().height));
+    
+    RichElementText* re1 = RichElementText::create(1, Color3B::WHITE, 255, "和发呆丰富. ", "Helvetica", 24);
+    RichElementText* re2 = RichElementText::create(2, Color3B::YELLOW, 255, "打发的 善 噶的发. ", "Helvetica", 24);
+    RichElementText* re3 = RichElementText::create(3, Color3B::BLUE, 255, "阿 fads 风 的发生地方阿萨德发. ", "Helvetica", 24);
+    RichElementText* re4 = RichElementText::create(4, Color3B::GREEN, 255, "阿萨德发的风对撒风. ", "Helvetica", 24);
+    RichElementText* re5 = RichElementText::create(5, Color3B::RED, 255, "阿萨德发多少分多少分 ", "Helvetica", 24);
+    RichElementText* re6 = RichElementText::create(7, Color3B::ORANGE, 255, "Have fun!! ", "Helvetica", 24);
+    richText->pushBackElement(re1);
+    richText->pushBackElement(re2);
+    richText->pushBackElement(re3);
+    richText->pushBackElement(re4);
+    richText->pushBackElement(re5);
+    richText->insertElement(re5, 4);
+    richText->pushBackElement(re6);
+    richText->setPosition(Vec2(chatBg->getContentSize().width/2, chatBg->getContentSize().height/2));
+    richText->setLocalZOrder(10);
+    chatBg->addChild(richText);
+    auto button=static_cast<Button*>(layout->getChildByName("btn_send"));
+    button->addTouchEventListener(CC_CALLBACK_2(Chat::touchButtonEvent, this));
+    button=static_cast<Button*>(layout->getChildByName("btn_close"));
+    button->addTouchEventListener(CC_CALLBACK_2(Chat::touchButtonEvent, this));
+	return true;
+}
+
+void Chat::onEnter()
+{
+    BaseUI::onEnter();
+}
+
+void Chat::show()
+{
+    this->setVisible(true);
+    this->runAction(MoveTo::create(1, Vec2(0, 0)));
+}
+
+void Chat::hide()
+{
+    
+    Sequence* sequence=Sequence::create(MoveTo::create(1, Vec2(-600, 0)),CallFunc::create(CC_CALLBACK_0(Chat::disVisible, this)), NULL);
+    this->runAction(sequence);
+}
+
+void Chat::disVisible()
+{
+    this->setVisible(false);
+}
+
+void Chat::touchButtonEvent(Ref *pSender, TouchEventType type)
+{
+    auto button=static_cast<Button*>(pSender);
+    if (!button) {
+        return;
+    }
+    switch(type)
+    {
+        case TouchEventType::BEGAN:
+            
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+            switch (button->getTag()) {
+                case 10071://聊天按钮
+                {
+                    PChatReq chat;
+                    //chat.set_msg("money[2][100]");
+                    chat.set_msg("goods[2][1002x1]");
+                    Manager::getInstance()->socket->send(C_CHAT, &chat);
+                    break;
+                }
+                case 10190://关闭按钮
+                {
+                    this->hide();
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+
+}

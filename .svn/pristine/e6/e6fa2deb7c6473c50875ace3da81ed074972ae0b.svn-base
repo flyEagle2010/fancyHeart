@@ -1,0 +1,190 @@
+//
+//  GateSelect.cpp
+//  fancyHeart
+//
+//  Created by zhai on 14-6-18.
+//
+//
+
+#include "GateSelect.h"
+#include "FightMgr.h"
+GateSelect* GateSelect::create(BaseUI* delegate,int gateId,int nodeId)
+{
+    GateSelect* gateSelect=new GateSelect();
+    if (gateSelect && gateSelect->init("publish/gateSelect/gateSelect.ExportJson",gateId,nodeId)) {
+        gateSelect->autorelease();
+        return gateSelect;
+    }
+    CC_SAFE_DELETE(gateSelect);
+    return nullptr;
+}
+
+bool GateSelect::init(std::string fileName,int gateId,int nodeId)
+{
+	if(!BaseUI::init(fileName))
+	{
+		return false;
+	}
+	//init ui
+    this->gateId=gateId;
+    this->nodeId=nodeId;
+    Widget* widget=static_cast<Widget*>(layout->getChildByName("img_bg"));
+    XGate* xg=XGate::record(Value(this->gateId));
+    static_cast<Text*>(widget->getChildByName("txt_title"))->setString(xg->getName());
+    static_cast<Text*>(widget->getChildByName("txt_desc"))->setString(xg->getDesc());
+    Widget* paneGoup=static_cast<Widget*>(widget->getChildByName("panel_group"));
+    std::vector<Button*> buttons;
+    for (int i=1; i<6; i++) {
+        Button* button=static_cast<Button*>(paneGoup->getChildByName("group_"+Value(i).asString()));
+        button->addTouchEventListener(CC_CALLBACK_2(GateSelect::touchButtonEvent,this));
+        buttons.push_back(static_cast<Button*>(button));
+    }
+    tabBar=TabBar::create(buttons);
+    tabBar->retain();
+    
+    auto button=static_cast<Button*>(widget->getChildByName("btn_start"));
+    button->addTouchEventListener(CC_CALLBACK_2(GateSelect::touchButtonEvent, this));
+    button=static_cast<Button*>(widget->getChildByName("btn_return"));
+    button->addTouchEventListener(CC_CALLBACK_2(GateSelect::touchButtonEvent, this));
+    this->initGroup(0);
+	return true;
+}
+
+void GateSelect::initGroup(int groupIndex)
+{
+    Widget* widget=static_cast<Widget*>(layout->getChildByName("img_bg"));
+    PGroup pGroup=Manager::getInstance()->getRoleData()->groups(groupIndex);
+    Widget* paneGoup=static_cast<Widget*>(widget->getChildByName("panel_group"));
+    for (int i=0; i<5; i++) {
+        Widget* img=static_cast<Widget*>(paneGoup->getChildByName("img_"+Value((i+1)).asString()));
+        img->setVisible(i<pGroup.npcid_size());
+    }
+}
+
+void GateSelect::touchButtonEvent(Ref *pSender, TouchEventType type)
+{
+    Button* btn=static_cast<Button*>(pSender);
+    if (!btn) {
+        return;
+    }
+    switch (type)
+    {
+        case TouchEventType::BEGAN:
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+        {
+            switch (btn->getTag()) {
+                case 10505://开始
+                {
+                    PNodeReq pNodeReq;
+                    pNodeReq.set_gateid(this->gateId);
+                    pNodeReq.set_xid(this->nodeId);
+                    pNodeReq.set_groupid(this->tabBar->getIndex());
+                    Manager::getInstance()->socket->send(C_STARTFIGHT, &pNodeReq);
+                    break;
+                }
+                case 10522://返回
+                    this->clear(true);
+                    break;
+                case 10515:
+                {
+                    tabBar->setIndex(0);
+                    this->initGroup(0);
+                    break;
+                }
+                    
+                case 10517:
+                {
+                    tabBar->setIndex(1);
+                    this->initGroup(1);
+                    break;
+                }
+                    
+                case 10518:
+                {
+                    tabBar->setIndex(2);
+                    this->initGroup(2);
+                    break;
+                }
+                case 10519:
+                {
+                    tabBar->setIndex(3);
+                    this->initGroup(3);
+                    break;
+                }
+                case 10520:
+                {
+                    tabBar->setIndex(4);
+                    this->initGroup(4);
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+            break;
+        case TouchEventType::CANCELED:
+            break;
+        default:
+            break;
+    }
+}
+void GateSelect::initNetEvent(){
+    auto listener = EventListenerCustom::create(NET_MESSAGE, [=](EventCustom* event){
+        NetMsg* msg = static_cast<NetMsg*>(event->getUserData());
+        log("Custom event 1 received:%d,%d",msg->msgId,msg->len);
+        switch (msg->msgId)
+        {
+            case C_COMMONMSG:
+            {
+                PCommonResp pCommonResp;
+                pCommonResp.ParseFromArray(msg->bytes, msg->len);
+                if(pCommonResp.resulttype()==C_STARTFIGHT){
+                    /*
+                    if (pCommonResp.status()==0) {
+                        PResultReq pResultReq;
+                        pResultReq.set_gateid(this->gateId);
+                        pResultReq.set_xid(this->nodeId);
+                        pResultReq.set_star(3);
+                        Manager::getInstance()->socket->send(C_FIGHTRESULT, &pResultReq);
+                    }else{
+                        Manager::getInstance()->showMsg("请求战斗失败");
+                    }
+                    */
+                    //武将
+                    //怪物Npc
+                    //PGroup{groupID,xids:[xid]}
+                    PGroup* group=Manager::getInstance()->getRoleData()->mutable_groups(this->tabBar->getIndex());
+                    std::vector<long> heros;
+                    for(auto hero : group->npcid()){
+                        heros.push_back(hero);
+                    }
+                    FightMgr::getInstance()->init(heros,this->nodeId,this->gateId);
+
+                }
+                break;
+            }
+            case C_FIGHTRESULT:
+            {
+//                PResultResp pResultResp;
+//                pResultResp.ParseFromArray(msg->bytes, msg->len);
+//                GateResult* gateResult=GateResult::create(this, pResultResp);
+//                gateResult->show(this);
+              break;
+            }
+               
+            default:
+                break;
+        }
+    });
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void GateSelect::onExit()
+{
+    tabBar->release();
+    BaseUI::onExit();
+}
+

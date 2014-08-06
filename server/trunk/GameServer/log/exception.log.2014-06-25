@@ -1,0 +1,23 @@
+2014-06-25 14:54:17
+消息注册错误,可以被忽略
+java.lang.ClassNotFoundException: com.doteyplay.game.action.common.MessageActionHelperCreator
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:202)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:190)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:306)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:301)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:169)
+	at com.doteyplay.core.configloader.MessageRegistry.loadActionCreator(MessageRegistry.java:120)
+	at com.doteyplay.core.configloader.MessageRegistry.loadConfig(MessageRegistry.java:78)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:84)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:230)
+	at com.doteyplay.game.GameServer.main(GameServer.java:249)
+2014-06-25 14:54:17
+初始化GameServer失败
+java.io.FileNotFoundException: 找不到任何消息配置文件
+	at com.doteyplay.core.configloader.MessageRegistry.loadConfig(MessageRegistry.java:98)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:84)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:230)
+	at com.doteyplay.game.GameServer.main(GameServer.java:249)

@@ -1,0 +1,112 @@
+package com.doteyplay.game.message.login;
+
+import org.apache.log4j.Logger;
+import org.apache.mina.core.buffer.IoBuffer;
+
+import com.doteyplay.game.MessageCommands;
+import com.doteyplay.game.message.proto.AccountProBuf;
+import com.doteyplay.net.message.AbstractMessage;
+import com.google.protobuf.InvalidProtocolBufferException;
+
+public class LoginGameMessage extends AbstractMessage
+{
+	private static final Logger logger = Logger
+			.getLogger(LoginGameMessage.class);
+
+	private String reqName;
+	private String reqPassword;
+	
+	private boolean respStatus;
+	private long respUserId;
+	private String respName;
+
+	public LoginGameMessage()
+	{
+		super(MessageCommands.LOGIN_GAME_MESSAGE);
+	}
+
+	@Override
+	public void decodeBody(IoBuffer in)
+	{
+		byte[] bytes = getProtoBufBytes(in);
+		try
+		{
+			AccountProBuf.PackageLoginReq req = AccountProBuf.PackageLoginReq.parseFrom(bytes);
+			reqName = req.getName();
+			reqPassword = req.getPasswd();
+		} catch (InvalidProtocolBufferException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void encodeBody(IoBuffer out)
+	{
+		AccountProBuf.PackageLoginResp.Builder builder = AccountProBuf.PackageLoginResp.newBuilder();
+		builder.setStatus(this.respStatus);
+		
+		if(respStatus)
+		{
+			builder.setId(this.respUserId);
+			builder.setName(this.respName);
+		}
+		
+		AccountProBuf.PackageLoginResp resp = builder.build();
+		out.put(resp.toByteArray());
+	}
+	
+	public void release()
+	{
+	}
+
+	public String getReqName()
+	{
+		return reqName;
+	}
+
+	public void setReqName(String reqName)
+	{
+		this.reqName = reqName;
+	}
+
+	public String getReqPassword()
+	{
+		return reqPassword;
+	}
+
+	public void setReqPassword(String reqPassword)
+	{
+		this.reqPassword = reqPassword;
+	}
+
+	public boolean isRespStatus()
+	{
+		return respStatus;
+	}
+
+	public void setRespStatus(boolean respStatus)
+	{
+		this.respStatus = respStatus;
+	}
+
+	public long getRespUserId()
+	{
+		return respUserId;
+	}
+
+	public void setRespUserId(long respUserId)
+	{
+		this.respUserId = respUserId;
+	}
+
+	public String getRespName()
+	{
+		return respName;
+	}
+
+	public void setRespName(String respName)
+	{
+		this.respName = respName;
+	}
+}

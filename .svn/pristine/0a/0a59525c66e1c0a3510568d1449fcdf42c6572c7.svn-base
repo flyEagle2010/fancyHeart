@@ -1,0 +1,13 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "RoleProBuf";
+import "item.proto";
+message PRole{
+   required int64 roleId=1;//玩家id
+   required string roleName=2;//玩家名字
+   required int32 level=3;//等级
+   required int32 vipLvl=4;//vip等级
+   required int32 coin=5;//游戏币
+   required int32 rmb=6;//人民币
+   required int32 stamina=7;//体力
+   required int32 exp=8;//经验
+}

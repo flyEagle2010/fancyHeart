@@ -1,0 +1,9 @@
+2014-02-17 11:50:55
+≥ı ºªØGameServer ß∞‹
+java.lang.IllegalArgumentException: The messageClasses has already the commandId mapping class: commandId=18
+	at com.pwrd.net.message.MessageFactory.addMessage(MessageFactory.java:109)
+	at com.pwrd.core.configloader.MessageRegistry.loadConfig(MessageRegistry.java:122)
+	at com.pwrd.game.startservice.ConfigService.onReady(ConfigService.java:57)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:75)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:224)
+	at com.pwrd.game.GameServer.main(GameServer.java:242)

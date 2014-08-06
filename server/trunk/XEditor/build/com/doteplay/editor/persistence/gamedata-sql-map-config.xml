@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+  <transactionManager type="JDBC">
+	<dataSource type="SIMPLE">
+		<property value="${autoCommit}" name="autoCommit"/>
+		<property value="${driver}" name="JDBC.Driver"/>
+		<property value="${url}" name="JDBC.ConnectionURL"/>
+		<property value="${username}" name="JDBC.Username"/>
+		<property value="${password}" name="JDBC.Password"/>
+		<property name="Pool.MaximumActiveConnections" value="10"/>
+		<property name="Pool.MaximumIdleConnections" value="5"/>
+		<property name="Pool.MaximumCheckoutTime" value="120000"/>
+		<property name="Pool.PingEnabled" value="true"/>
+		<property name="Pool.PingQuery" value="select 1"/>
+		<property name="Pool.PingConnectionsOlderThan" value="0"/>
+		<property name="Pool.PingConnectionsNotUsedFor" value="3600000"/> 		
+	</dataSource>
+  </transactionManager>
+	<sqlMap resource="com/doteplay/editor/persistence/sqlExecute.xml"/>
+</sqlMapConfig>

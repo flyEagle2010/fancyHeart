@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserBean">
+	<typeAlias alias="userbean" type="com.doteyplay.bean.UserBean" />
+
+	<insert id="insertUserBean" parameterClass="userbean">
+		INSERT INTO
+		t_user
+		(
+			name, password 
+		)
+		VALUES
+		(
+			#name#,#password#
+		)
+		<selectKey resultClass="long" keyProperty="id" >
+   			SELECT @@IDENTITY AS id
+   		</selectKey>
+	</insert>
+
+	<select id="selectAllUserBean" resultClass="userBean">
+		SELECT
+		id,
+		name,
+		password 
+		FROM t_user
+	</select>
+
+	<select id="selectUserBean" resultClass="userBean"
+		parameterClass="int">
+		SELECT
+		id,
+		name,
+		password 
+		FROM t_user
+		WHERE id =
+		#userId#
+	</select>
+
+	<select id="selectUserBeanByName" resultClass="userBean"
+		parameterClass="String">
+		SELECT
+		id,
+		name,
+		password 
+		FROM t_user
+		WHERE name =
+		#value#
+	</select>
+
+</sqlMap>

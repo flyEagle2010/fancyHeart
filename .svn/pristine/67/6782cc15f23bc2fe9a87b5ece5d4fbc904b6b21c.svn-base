@@ -1,0 +1,124 @@
+//
+//  FData.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-23.
+//
+//
+
+#include "FData.h"
+
+FData* FData::create(BData bd)
+{
+    FData* pRet=new FData();
+    if(pRet && pRet->init(bd))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        CC_SAFE_DELETE(pRet);
+        pRet=nullptr;
+        return nullptr;
+    }
+}
+
+bool FData::init(BData bd)
+{
+    if(bd.xid<=0 || bd.lv<=0 || bd.rate<=0 || bd.star<=0){
+        log("角色基本信息有误:%d",bd.xid);
+        return false;
+    }
+    this->bd=bd;
+    XRoleData* xrd=XRoleData::record(Value(bd.xid*1000+bd.rate));
+    XRoleStar* xrs=XRoleStar::record(Value(bd.xid*1000+bd.star));
+    XRole* xr=XRole::record(Value(bd.xid));
+    //this->lv=lv;
+    this->hp=xrd->getHp()+lv*(xrs->getHpRate()+xrd->getHpRate());
+    this->mp=0;
+    this->row=xr->getPos();
+    
+//    this->pos
+//    int mp;
+//    int pos;
+    int row;
+    int star;
+    int grade;
+    int roleID;
+    int atc;
+    int mAtc;
+    int def;
+    int mDef;
+    int miss;
+    int reHp;
+}
+
+
+/*
+ 当前品质基础＋等级＊（品质成长＋星级成长）
+ C	怪物的实际数据=由角色表Id获得的基础属性+等级X品质成长率+等级X星级成长率
+ */
+/*
+int FData::getAtc()
+{
+    XRoleData* xrd=XRoleData::record(Value(roleID*1000+grade));
+    XRoleStar* xrs=XRoleStar::record(Value(roleID*1000+star));
+    int v = xrd->getAtk()+lv*(xrs->getAttackRate()+xrd->getAtkRate()) + buffAtc;
+    return v;
+}
+
+int FData::getDef()
+{
+    XRoleData* xrd=XRoleData::record(Value(roleID*1000+grade));
+    XRoleStar* xrs=XRoleStar::record(Value(roleID*1000+star));
+    int v = xrd->getDf()+lv*(xrs->getDfRate()+xrd->getDfRate()) + buffDef;
+    return v;
+}
+
+int FData::getMDef()
+{
+    XRoleData* xrd=XRoleData::record(Value(roleID*1000+grade));
+    XRoleStar* xrs=XRoleStar::record(Value(roleID*1000+star));
+    int v = xrd->getMDf()+lv*(xrs->getMDfRate()+xrd->getMDfRate()) + buffMDef;
+    return v;
+}
+
+int FData::getHp()
+{
+    XRoleData* xrd=XRoleData::record(Value(roleID*1000+grade));
+    XRoleStar* xrs=XRoleStar::record(Value(roleID*1000+star));
+    int v = xrd->getHp()+lv*(xrs->getHpRate()+xrd->getHpRate());
+    return v;
+}
+
+int FData::getMiss()
+{
+    XRoleData* xrd=XRoleData::record(Value(roleID*1000+grade));
+    int v = xrd->getMiss() + buffMiss;
+    return v;
+}
+
+int FData::getCrh()
+{
+    XRoleData* xrd=XRoleData::record(Value(roleID*1000+grade));
+    int v = xrd->getCrh()+buffCrh;
+    return v;
+}
+
+int FData::getReHp()
+{
+    XRoleData* xrd=XRoleData::record(Value(roleID*1000+grade));
+    int v = xrd->getHeal();
+    return v;
+}
+*/
+void FData::addBuff(Buff* buff)
+{
+//    this->buffAtc;
+}
+
+void FData::delBuff(Buff* buff)
+{
+    
+}

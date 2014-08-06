@@ -1,0 +1,98 @@
+package com.doteyplay.game.domain.role;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.doteyplay.core.dbcs.DBCS;
+import com.doteyplay.game.CommonConstants;
+import com.doteyplay.game.domain.gamebean.RoleBean;
+import com.doteyplay.game.domain.sprite.AbstractSprite;
+import com.doteyplay.game.domain.user.User;
+import com.doteyplay.game.persistence.serverdata.role.IRoleBeanDao;
+import com.doteyplay.net.message.AbstractMessage;
+
+public class Role extends AbstractSprite<RoleBean>
+{
+	private static final Logger logger = Logger.getLogger(Role.class);
+
+	private RoleBean roleBean;
+	private List<Long> curPetList;
+	private User user;
+
+	private RolePetManager petManager = new RolePetManager(this);
+	
+	public Role(RoleBean roleBean, User user)
+	{
+		super(CommonConstants.SPRITE_TYPE_ROLE, roleBean, null);
+		this.roleBean = roleBean;
+		this.user = user;
+	}
+	
+	public void init()
+	{
+		super.init();
+		
+		String tmpStr = roleBean.getPetList();
+		if(tmpStr != null && !"".equals(tmpStr))
+		{
+			curPetList = new ArrayList<Long>();
+			for(String tmpPetId:tmpStr.split(CommonConstants.COMMON_LIST_TO_STRING_SPLIT_FLAG))
+				curPetList.add(Long.parseLong(tmpPetId));
+		}
+		petManager.init();
+	}
+	
+	
+
+	public void sendMsg(AbstractMessage msg)
+	{
+		// if (!this.isUserActive()) {
+		// return;
+		// }
+		// // 当处于影子状态时不发送消息
+		// if (isShadowState())
+		// return;
+		//
+		// if (!this.isActive())
+		// return;
+
+	}
+
+	public RoleBean getRoleBean()
+	{
+		return roleBean;
+	}
+
+	public User getUser()
+	{
+		return user;
+	}
+	
+	public List<Long> getCurPetList()
+	{
+		return curPetList;
+	}
+
+	public void save()
+	{
+		super.save();
+		
+		if(this.curPetList != null && this.curPetList.size() > 0)
+		{
+			String petListStr = "";
+			for(Integer pos:starPosList)
+			{
+				petListStr += String.valueOf(pos);
+				petListStr += CommonConstants.COMMON_LIST_TO_STRING_SPLIT_FLAG;
+			}
+			this.roleBean.setPetList(petListStr);
+		}
+		
+		IRoleBeanDao beanDao = DBCS.getExector(IRoleBeanDao.class);
+		beanDao.updateRoleBean(this.roleBean);
+	}
+	
+	
+}

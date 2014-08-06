@@ -1,0 +1,54 @@
+package com.doteyplay.support.loginportal;
+
+import org.apache.mina.core.session.IoSession;
+
+import com.doteyplay.luna.common.action.ActionController;
+import com.doteyplay.luna.common.action.BaseAction;
+import com.doteyplay.luna.common.message.DecoderMessage;
+import com.doteyplay.support.loginportal.action.GetUserBySessionIdAction;
+
+/**
+ * 分发所有的Action的类，目前只有两个有返回
+ * 
+ */
+@SuppressWarnings("deprecation")
+public class LoginPortalController implements ActionController,
+		LoginPortalCommand {
+
+	private static LoginPortalController controller = new LoginPortalController();
+
+	private LoginPortalController() {
+
+	}
+
+	public synchronized static LoginPortalController getInstance() {
+		if (controller == null)
+			controller = new LoginPortalController();
+		return controller;
+	}
+
+	@Override
+	public BaseAction getAction(DecoderMessage message) {
+		return getAction(message.getCommandId());
+	}
+
+	public BaseAction getAction(short commandId) {
+		switch (commandId) {
+		case GET_USER_BY_SESSIONID_MESSAGE:
+			return GetUserBySessionIdAction.getInstance();
+		}
+		return null;
+	}
+
+	@Override
+	public void sessionClose(IoSession session) {
+		
+		
+	}
+
+	@Override
+	public void sessionOpen(IoSession session)
+	{
+		
+	}
+}

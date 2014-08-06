@@ -1,0 +1,156 @@
+package com.doteyplay.game.domain.gamebean;
+
+public class UserBean extends BaseBean
+{
+	/**
+	 *  */
+	private long id;
+	/**
+	 * 用户名
+	 */
+	protected String name;
+	/**
+	 * 密码
+	 */
+	private String password;
+
+	/**
+	 * 用户类型:0:普通用户,1:GM
+	 */
+	private byte userType;
+	/**
+	 * 渠道代码
+	 */
+	private String channel;
+
+	/**
+	 * 用户状态
+	 */
+	private byte state;
+
+	/**
+	 * 用户未登录
+	 */
+	public static byte USER_STATE_UNLOGIN = 0;
+	/**
+	 * 用户已登录
+	 */
+	public static byte USER_STATE_LOGEDIN = 1;
+	/**
+	 * 最近一次登陆的ip
+	 */
+	private String lastLoginIp;
+
+	/**
+	 * 是否超过18岁
+	 */
+	private boolean over18 = false;
+	/**
+	 * 当日在线时长
+	 */
+	private long onlineTime;
+	/**
+	 * 密钥
+	 */
+	private int key;
+
+	public long getId()
+	{
+		return id;
+	}
+
+	public void setId(long id)
+	{
+		this.id = id;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public String getPassword()
+	{
+		return password;
+	}
+
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
+	public byte getUserType()
+	{
+		return userType;
+	}
+
+	public void setUserType(byte userType)
+	{
+		this.userType = userType;
+	}
+
+	public String getChannel()
+	{
+		return channel;
+	}
+
+	public void setChannel(String channel)
+	{
+		this.channel = channel;
+	}
+
+	public byte getState()
+	{
+		return state;
+	}
+
+	public void setState(byte state)
+	{
+		this.state = state;
+	}
+
+	public String getLastLoginIp()
+	{
+		return lastLoginIp;
+	}
+
+	public void setLastLoginIp(String lastLoginIp)
+	{
+		this.lastLoginIp = lastLoginIp;
+	}
+
+	public boolean isOver18()
+	{
+		return over18;
+	}
+
+	public void setOver18(boolean over18)
+	{
+		this.over18 = over18;
+	}
+
+	public long getOnlineTime()
+	{
+		return onlineTime;
+	}
+
+	public void setOnlineTime(long onlineTime)
+	{
+		this.onlineTime = onlineTime;
+	}
+
+	public int getKey()
+	{
+		return key;
+	}
+
+	public void setKey(int key)
+	{
+		this.key = key;
+	}
+}

@@ -1,0 +1,63 @@
+package com.doteyplay.game.config.template;
+
+import java.util.List;
+import java.util.Map;
+
+import com.doteyplay.game.domain.tollgate.NodeArray;
+import com.doteyplay.game.util.excel.ExcelRowBinding;
+import com.doteyplay.game.util.excel.TemplateService;
+
+/**
+ * @className:TollgateDataObject.java
+ * @classDescription: 经过封装后的关卡信息。
+ * @author:Tom.Zheng
+ * @createTime:2014年6月25日 下午12:01:33
+ */
+@ExcelRowBinding
+public class TollgateDataObject extends TollgateDataTemplate {
+
+	/**
+	 * @author:Tom.Zheng
+	 * @createTime:2014年6月25日 下午12:10:14
+	 */
+	private static final long serialVersionUID = -7250763316096756322L;
+	
+	private NodeArray<Integer, TollgateNodeDataTemplate> nodeArray=null;
+	
+	@Override
+	public void patchUp() throws Exception {
+		// TODO Auto-generated method stub
+		super.patchUp();
+		//初始化
+		nodeArray = new NodeArray<Integer, TollgateNodeDataTemplate>();
+		
+		Map<Integer, TollgateNodeDataTemplate> all = TemplateService
+				.getInstance().getAll(TollgateNodeDataTemplate.class);
+
+		for (TollgateNodeDataTemplate iterable_element : all.values()) {
+			if (iterable_element.getTollgateGateId() == this.id) {
+				nodeArray.addValue(iterable_element.getTollgateGateId(), iterable_element);
+			}
+		}
+		
+		if(nodeArray.size()==0){
+			throw new RuntimeException("关卡数据里边没有节点的数据!!编辑错误或程序读取错误!");
+		}
+	}
+
+	public List<TollgateNodeDataTemplate> getNodeList() {
+		return nodeArray.getNodeList();
+	}
+	
+	public TollgateNodeDataTemplate getNode(int nodeId){
+		return nodeArray.get(nodeId);
+	}
+	
+	public TollgateNodeDataTemplate getFirstNode(){
+		
+		List<TollgateNodeDataTemplate> nodeList = getNodeList();
+		return nodeList.get(0);
+	}
+	
+
+}

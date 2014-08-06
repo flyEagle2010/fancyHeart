@@ -1,0 +1,100 @@
+//
+//  SLData.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-10.
+//
+//
+
+#ifndef __fancyHeart__SLData__
+#define __fancyHeart__SLData__
+
+#include <iostream>
+#include <fstream>
+#include "cocos2d.h"
+#include "BData.h"
+using namespace cocos2d;
+
+/* @param 技能类型*/
+enum SkillActionType{
+    initiative,
+    passive
+};
+/* @param 子弹类型*/
+enum SkillBulletType{
+    none, //无
+    bcast, //抛射
+    beat, //直射
+    cross //穿刺
+};
+/* @param 影响范围*/
+enum SkillEffectRange{
+    me, //自己
+    mside, //己方
+    eclose, //附近
+    location, // 爆发
+    shoot, //射击
+    eject, //弹射
+    distance //穿透
+};
+/* @param 效果类型*/
+enum SkillEffectType{
+    commonAttack //普通攻击
+};
+/* @param 目标选择类型*/
+enum SkillTargetSelectType{
+    common, //普通
+    randsel, //随机
+    hpLow, //最弱优先
+    hpHigh, //最强优先
+    near, //最近优先
+    far  //最远优先
+};
+/* @param 伤害类型 */
+enum DamageType{
+    physic, //物理
+    magic, //魔法
+    ignoreDef //无视防御
+};
+/* @param 技能效果触发事件*/
+enum SkillActiveEvent{
+    noActive,
+    automatic,
+    onEnter,
+    onDie,
+    onKill,
+    onSkill,
+    onAttack, //攻击时(未必命中造成伤害)
+    onAttacked, //被攻击时(未必命中造成伤害)
+    onDamage, //产生伤害时
+    onDamaged //受到伤害时∂
+};
+
+class SLData:public BData
+{
+    int level;
+	/* 被动技能触发概率*/
+	int skillTriggerPercent;
+	/* 影响范围参数*/
+    std::string effectRangeParam = "";
+	/* 效果类型*/
+	SkillEffectType effectType = SkillEffectType::commonAttack;
+	/* 效果数据*/
+    std::string effectDataParam = "";
+	/* bufid*/
+	int buffId;
+	/* 使用技能时，有多大概率触发这个buf*/
+	int buffTriggerPercent;
+    
+public:
+    virtual void load(Value v){};
+    void loadData(std::ifstream& ifile);
+    int getLevel();
+    int getSkillTrigerPer();
+    std::string getEffectRangeParam();
+    SkillEffectType getEffectType();
+    std::string getEffectDataParam();
+    int getBuffID();
+    int getBufTriggerPer();
+};
+#endif /* defined(__fancyHeart__SLData__) */

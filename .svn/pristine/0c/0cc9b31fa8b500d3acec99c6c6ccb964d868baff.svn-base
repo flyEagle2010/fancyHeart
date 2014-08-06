@@ -1,0 +1,88 @@
+//
+//  FighterCtrl.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-5.
+//
+//
+
+#ifndef __fancyHeart__MFighter__
+#define __fancyHeart__MFighter__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "external/json/rapidjson.h"
+#include "Manager.h"
+#include "Fighter.h"
+#include "FightMgr.h"
+#include "Utils.h"
+#include "Skill.h"
+using namespace cocos2d;
+class Skill;
+enum fstate{
+    idle,
+    start,
+    spell,
+    buildup,
+    throwing,
+    cast,
+    die
+};
+
+class MFighter:public Ref{
+public:
+    static MFighter* create(int pos);
+    ~MFighter();
+    bool init(int pos);
+    void initSkill();
+    void timeHandler(float dt);
+    void start();
+    void pause();
+    void startAttack(int triggerType);
+    int selectSkill();
+    void spell(); //吟唱（引导）
+    void cast();  //施法
+    void throwing(); //仍东西
+    void buildup(); //蓄力
+    void attacked(); //受击
+    void die();
+private:
+    //std::vector<int> skills; //技能
+    float castTime; //吟唱时间
+    float cd; //
+    int rowNum; //0,1,2 前，中，后
+    
+    
+public:
+    int attack=100; //攻击
+    int def=80;    //防御
+    int mDef=80;   //魔法防御
+    int hp=100;     //生命
+    int mp=0;     //
+    
+    int dodge=10;  //闪避
+    int ch=10;     //爆击
+    int reHp=3;   //生命恢复力
+    int remp=3;    //魔法回复力
+    
+    int dis;
+    int pos; //0-4 5-9
+    int row; //front mid back 0,1,2
+    int level=1;
+    
+    int propEffect;
+    std::vector<int>buffers;
+    
+//    int baseSkill;
+//    int passiveSkill1;
+//    int passiveSkill2;
+//    int skill;
+    Vector<Skill*> skills;
+    
+    fstate currentState;
+    Fighter* view;
+    MFighter* foe;
+ 
+
+};
+#endif /* defined(__fancyHeart__MFighter__) */

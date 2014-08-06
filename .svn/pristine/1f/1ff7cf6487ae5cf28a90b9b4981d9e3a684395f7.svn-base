@@ -1,0 +1,14 @@
+package com.doteyplay.game.domain.npc;
+
+import com.doteyplay.game.domain.property.AbstractSpritePropertyManager;
+import com.doteyplay.game.domain.sprite.AbstractSprite;
+
+public class NpcPropertyManager extends AbstractSpritePropertyManager
+{
+
+	public NpcPropertyManager(AbstractSprite owner)
+	{
+		super(owner);
+	}
+
+}

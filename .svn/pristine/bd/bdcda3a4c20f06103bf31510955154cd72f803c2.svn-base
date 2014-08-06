@@ -1,0 +1,27 @@
+//
+//  BData.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-11.
+//
+//
+
+#ifndef __fancyHeart__BData__
+#define __fancyHeart__BData__
+
+#include <iostream>
+#include <fstream>
+#include "cocos2d.h"
+using namespace cocos2d;
+
+class BData{
+protected:
+    void setData(std::ifstream& ifile,int& field);
+    void setData(std::ifstream& ifile,unsigned char& field);
+    void setData(std::ifstream& ifile,std::string& field);
+    void setData(std::ifstream& ifile,bool& field);
+public:
+    BData(){};
+    virtual void load(Value v)=0;
+};
+#endif /* defined(__fancyHeart__BData__) */

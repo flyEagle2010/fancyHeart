@@ -1,0 +1,79 @@
+package com.doteyplay.game.action.common;
+
+import com.doteyplay.net.message.AbstractMessage;
+import com.doteyplay.net.message.IMessageAction;
+import com.doteyplay.net.message.IMessageActionHelper;
+import com.doteyplay.net.message.MessageActionParameterResolver;
+
+public class MessageActionHelper implements IMessageActionHelper
+{
+
+	private final MessageActionParameterResolver<?> resolver;
+	private final IMessageAction<? extends AbstractMessage, ?> action;
+	/**
+	 * 该Action是否关闭(true为关闭不可用)
+	 */
+	private boolean closed = false;
+	
+	/**
+	 * 该Action是否是绑定状态，不能通过外部来控制
+	 */
+	private boolean binded = true;
+	
+	/**
+	 * 
+	 */
+	public MessageActionHelper(IMessageAction<? extends AbstractMessage, ?> action)
+	{
+		this.action = action;		
+		this.resolver = this.getParameterResolver(action);
+	}
+
+	private MessageActionParameterResolver<?> getParameterResolver(IMessageAction<? extends AbstractMessage, ?> action)
+	{
+		if (action instanceof ServiceMessageAction)
+			return null;
+		else if (action instanceof SessionMessageAction)
+			return SessionMessageActionParameterResolver.getInstance();
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @see com.doteyplay.net.message.IMessageActionHelper#getResolver()
+	 */
+	public MessageActionParameterResolver<?> getResolver()
+	{
+		return resolver;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @see com.doteyplay.net.message.IMessageActionHelper#getAction()
+	 */
+	public IMessageAction<?, ?> getAction()
+	{
+		return action;
+	}
+	
+	public void close(){
+		closed = true;
+	}
+	
+	public void open(){
+		closed = false;
+	}
+	
+	public boolean isClosed(){
+		return closed;
+	}
+	
+	public boolean isBinded(){
+		return binded;
+	}
+	
+	public void setBinded(boolean binded){
+		this.binded = binded;
+	}
+	
+}

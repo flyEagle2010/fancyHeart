@@ -1,0 +1,64 @@
+//
+//  MFight.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-15.
+//
+//
+
+#ifndef __fancyHeart__MFight__
+#define __fancyHeart__MFight__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "MFighter.h"
+#include "external/json/rapidjson.h"
+#include "external/json/document.h"
+#include "FightScene.h"
+#include "XMonster.h"
+#include "XRole.h"
+#include "XRoleData.h"
+#include "XRoleStar.h"
+#include "XGate.h"
+#include "FData.h"
+#include "XBattle.h"
+using namespace cocos2d;
+
+#define RANDOM_0_1() ((float)rand()/RAND_MAX)
+#define HERO_SKILL_COLDDOWN "hero_skill_colddown"
+#define HERO_DIE_TAG 2000
+#define GRID_SIZE 40.0
+
+class MFighter;
+class FightScene;
+class FData;
+class FightMgr:public Ref{
+private:
+    void initNpc();
+    void initHero(std::vector<long> heros);
+    static bool sortGrid(int f1,int f2);
+    std::vector<int> groups;
+    
+    int gateID;
+    int nodeID;
+public:
+    FightMgr(){};
+    static FightMgr* getInstance();
+    void init(std::vector<long>heros,int nodeID,int gateID=0);
+    void init(rapidjson::Value& data);
+    void handleResult(int pos);
+//    MFighter* getHero(int pos);
+    Vector<MFighter*>getFoes(int pos,bool isMe=false);
+    MFighter* getFirst(int pos);
+    MFighter* getRole();
+    void clear();
+
+    Vector<MFighter*> heros;
+    Vector<MFighter*> npcs;
+    
+    rapidjson::Value data;
+    FightScene* view;
+    int roleMp;
+};
+
+#endif /* defined(__fancyHeart__MFight__) */

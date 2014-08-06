@@ -1,0 +1,92 @@
+package com.doteyplay.game.config.template;
+
+import com.doteyplay.game.util.SimpleReflectUtils;
+import com.doteyplay.game.util.excel.ExcelCellBinding;
+import com.doteyplay.game.util.excel.ExcelRowBinding;
+import com.doteyplay.game.util.excel.TemplateConfigException;
+import com.doteyplay.game.util.excel.TemplateObject;
+
+@ExcelRowBinding
+public class TollgateDataTemplate extends TemplateObject {
+
+	/**
+	 * 关卡名id
+	 */
+	@ExcelCellBinding
+	protected int tollgateNameId;
+
+	/**
+	 * 关卡描述id
+	 */
+	@ExcelCellBinding
+	protected int tollgateDescId;
+	/**
+	 * 显示分类
+	 */
+	@ExcelCellBinding
+	protected int tollgateShowType;
+
+	/**
+	 * 关卡形象资源id
+	 */
+	@ExcelCellBinding
+	protected int tollgateShowIconId;
+	/**
+	 * 关卡地图资源id
+	 */
+	@ExcelCellBinding
+	protected int tollgateMapResourceId;
+
+	@Override
+	public void check() throws TemplateConfigException {
+		// TODO Auto-generated method stub
+
+	}
+
+	public int getTollgateNameId() {
+		return tollgateNameId;
+	}
+
+	public void setTollgateNameId(int tollgateNameId) {
+		this.tollgateNameId = tollgateNameId;
+	}
+
+	public int getTollgateDescId() {
+		return tollgateDescId;
+	}
+
+	public void setTollgateDescId(int tollgateDescId) {
+		this.tollgateDescId = tollgateDescId;
+	}
+
+	public int getTollgateShowType() {
+		return tollgateShowType;
+	}
+
+	public void setTollgateShowType(int tollgateShowType) {
+		this.tollgateShowType = tollgateShowType;
+	}
+
+	public int getTollgateShowIconId() {
+		return tollgateShowIconId;
+	}
+
+	public void setTollgateShowIconId(int tollgateShowIconId) {
+		this.tollgateShowIconId = tollgateShowIconId;
+	}
+
+	public int getTollgateMapResourceId() {
+		return tollgateMapResourceId;
+	}
+
+	public void setTollgateMapResourceId(int tollgateMapResourceId) {
+		this.tollgateMapResourceId = tollgateMapResourceId;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString()+SimpleReflectUtils.reflect(this);
+	}
+
+}

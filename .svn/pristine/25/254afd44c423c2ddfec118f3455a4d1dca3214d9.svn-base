@@ -1,0 +1,135 @@
+//
+//  FightMgr.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-15.
+//
+//
+
+#include "FightMgr.h"
+
+static FightMgr* instance=nullptr;
+
+FightMgr* FightMgr::getInstance(){
+    if(instance==nullptr){
+        instance=new FightMgr();
+    }
+    return instance;
+}
+
+void FightMgr::init(std::vector<int>heros,int mID)
+{
+    auto scene=FightScene::createScene();
+    Director::getInstance()->replaceScene(scene);
+    this->view=(FightScene*)scene->getChildByTag(0);
+    
+    //初始化角色
+    heros={100,101,102,100,102};
+    Vector<FData*> arr;
+    for(int i=0;i<heros.size();i++)
+    {
+        int xid=heros.at(i);
+        //id lv rate star pos
+        BData bd={xid,1,1,1,i};
+        arr.pushBack(FData::create(bd));
+    }
+    
+    //xid lv rate star
+    mID=100001;
+    this->initMData(mID, arr);
+    
+    this->heros=view->initHero(arr);
+}
+
+void FightMgr::init(rapidjson::Value& data)
+{
+    
+}
+
+void FightMgr::initMData(int groupID,Vector<FData*>& arr)
+{
+    XMonster* xm=XMonster::record(Value(groupID));
+    
+    int mid=xm->getMID1();
+    BData bd={mid/10,xm->getMLv1(),mid%1000,xm->getMStar1(),5};
+    FData* data=FData::create(bd);
+    arr.pushBack(data);
+    if(xm->getIsBoss()) return;
+    
+    mid=xm->getMID2();
+    if(mid > 0)
+    {
+        BData bd={mid/10,xm->getMLv2(),mid%1000,xm->getMStar2(),6};
+        arr.pushBack(FData::create(bd));
+    }
+    mid=xm->getMID3();
+    if(mid > 0)
+    {
+        BData bd={mid/10,xm->getMLv3(),mid%1000,xm->getMStar3(),7};
+        arr.pushBack(FData::create(bd));
+    }
+    mid=xm->getMID4();
+    if(mid > 0)
+    {
+        BData bd={mid/10,xm->getMLv4(),mid%1000,xm->getMStar4(),8};
+        arr.pushBack(FData::create(bd));
+    }
+    mid=xm->getMID5();
+    if(mid > 0)
+    {
+        BData bd={mid/10,xm->getMLv5(),mid%1000,xm->getMStar5(),9};
+        arr.pushBack(FData::create(bd));
+    }
+}
+
+MFighter* FightMgr::getHero(int pos)
+{
+    for(MFighter* mf : this->heros)
+    {
+        if(pos == mf->pos) return mf;
+    }
+    return nullptr;
+}
+
+Vector<MFighter*> FightMgr::getFoes(int pos,bool isMe)
+{
+    Vector<MFighter*> arr;
+    for(MFighter* mf : heros)
+    {
+        if(mf->state==fstate::die) continue;
+        
+        if(!isMe && ((pos<5 && mf->pos>4) || (pos>4 && mf->pos<5))){
+            arr.pushBack(mf);
+        }
+        if(isMe && ((pos<5 && mf->pos<5) || (pos>4 && mf->pos>4))){
+            arr.pushBack(mf);
+        }
+    }
+    return arr;
+}
+
+MFighter* FightMgr::getFirst(int pos)
+{
+    if(pos < 5) return heros.at(0);
+    for(int i=0;i<this->heros.size();i++)
+    {
+        if(heros.at(i)->pos >=5 ){
+            return heros.at(i);
+        }
+    }
+    return nullptr;
+}
+
+void FightMgr::handleResult()
+{
+    log("战斗结束.......");
+    for(MFighter* mf :heros)
+    {
+        mf->pause();
+    }
+}
+
+void FightMgr::clear()
+{
+    this->heros.clear();
+}

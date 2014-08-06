@@ -1,0 +1,182 @@
+//
+//  Manager.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-4.
+//
+//
+
+#include "Manager.h"
+#include "Loading.h"
+static Manager* instance=nullptr;
+
+Manager* Manager::getInstance(){
+    if(instance==nullptr){
+        instance=new Manager();
+    }
+    return instance;
+}
+
+void Manager::switchScence(Scene* scene)
+{
+    auto curScene=Director::getInstance()->getRunningScene();
+    if (curScene) {
+        Director::getInstance()->replaceScene(scene);
+    }else{
+        Director::getInstance()->runWithScene(scene);
+    }
+    if(this->scene && this->scene->getChildByTag(-100)){
+        this->scene->removeChildByTag(-100);
+    }
+    this->scene=scene;
+    this->scene->addChild(Loading::getInstance(),LOADING_LAY,-100);
+    Loading::getInstance()->show();
+}
+
+void Manager::setRoleData(NetMsg* msg)
+{
+    if(this->roleData) delete this->roleData;
+    this->roleData=new LoginResp();
+    this->roleData->ParseFromArray(msg->bytes, msg->len);
+}
+
+PRole Manager::Role()
+{
+    return this->roleData->role();
+}
+
+void Manager::upRole(NetMsg* msg)
+{
+    PUpRole role;
+    role.ParseFromArray(msg->bytes,msg->len);
+    switch (role.fieldtype()) {
+        case RoleFields::coin:
+        {
+            this->Role().set_coin(role.finalvalue());
+            break;
+        }
+        case RoleFields::level:
+        {
+            this->Role().set_level(role.finalvalue());
+            break;
+        }
+        case RoleFields::rmb:
+        {
+            this->Role().set_rmb(role.finalvalue());
+            break;
+        }
+        case RoleFields::stamina:
+        {
+            this->Role().set_stamina(role.finalvalue());
+            break;
+        }
+        case RoleFields::vipLvl:
+        {
+            this->Role().set_viplvl(role.finalvalue());
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+void Manager::upItem(NetMsg* msg)
+{
+//    PUpItem item;
+//    item.ParseFromArray(msg->bytes, msg->len);
+//    
+//    google::protobuf::RepeatedPtrField< ::PItem >::iterator it=item.itemlist().begin();
+//    for (; it!=item.itemlist().end(); ++it)
+//    {
+//        if(it->npcid()!=0)//更新英雄身上的装备
+//        {
+//            //PNpc pNpc=this->getNpc(it->npcid());
+//            //RepeatedPtrField<PItem>* equiList = pNpc.mutable_equiplist();
+////            bool isRemove=it->itemnum()==0;
+////            bool isFound=false;
+////            google::protobuf::RepeatedPtrField< ::PItem >::iterator itItem=equiList->begin();
+//            
+//        }
+//        else
+//        {
+//            
+//        }
+//    }
+}
+
+google::protobuf::RepeatedPtrField< ::PNpc > Manager::npcList()
+{
+    return this->roleData->npclist();
+}
+
+PNpc Manager::getNpc(long npcId)
+{
+    
+    PNpc pnpc;
+    for (const auto &npc : this->npcList())
+    {
+        if (npc.roleid()==npcId) {
+            pnpc=npc;
+            break;
+        }
+    }
+    return pnpc;
+    
+}
+
+google::protobuf::RepeatedPtrField< ::PItem > Manager::itemlist()
+{
+    return this->roleData->itemlist();
+}
+
+PGateResp Manager::Gate()
+{
+    return this->roleData->gate();
+}
+
+void Manager::showMsg(const char* msg)
+{
+    if (!this->scene)
+    {
+        return;
+    }
+    auto msgLayer=Node::create();
+    Size size=CCDirector::getInstance()->getWinSize();
+    this->scene->addChild(msgLayer, MSG_LAY);
+    
+    cocos2d::extension::Scale9Sprite* messagBg = cocos2d::extension::Scale9Sprite::create("loading_bg.png");
+    messagBg->setPosition(Vec2(size.width/2, size.height/2));
+    messagBg->setCapInsets(Rect(50, 50, messagBg->getContentSize().width-100, messagBg->getContentSize().height-100));
+    msgLayer->addChild(messagBg,0,1);
+    
+    Label* label=Label::createWithSystemFont(msg, "Arial", 24,Size(355,80),TextHAlignment::CENTER,TextVAlignment::CENTER);
+    label->setTag(100);
+    msgLayer->addChild(label,0,1);
+    label->setPosition(Vec2(size.width/2,size.height/2));
+    messagBg->setContentSize(Size(label->getContentSize().width+50, label->getContentSize().height+20));
+    messagBg->setOpacity(0);
+    Sequence* seqBg=Sequence::create(FadeIn::create(0.2),DelayTime::create(1),CCFadeOut::create(0.2),CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, msgLayer)),NULL);
+    messagBg->runAction(seqBg);
+    
+}
+
+std::string Manager::getLang(string arg,...)
+{
+    va_list args;
+    va_start(args, arg);
+    char* str = va_arg(args, char*);
+    int i=1;
+    while(str)
+    {
+        char buf[10];
+        sprintf(buf,"%d",i);
+        string format="";
+        format+="{";
+        format+=string(buf);
+        format+="}";
+        arg.replace(arg.find(format), 3, str);
+        str =va_arg(args, char*);
+        i++;
+    }
+    return  arg;
+}

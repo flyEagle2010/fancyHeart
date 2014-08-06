@@ -1,0 +1,8 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "CommonTipsProBuf";
+
+message PTipsResp{
+	 optional int32 state= 1;//状态
+   optional int32 msgId=2;//消息
+   repeated string param =3;//参数
+}

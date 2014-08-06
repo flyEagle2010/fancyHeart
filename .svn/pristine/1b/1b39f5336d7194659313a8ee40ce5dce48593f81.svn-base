@@ -1,0 +1,208 @@
+package com.doteyplay.game.service.bo.item;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import javax.management.RuntimeErrorException;
+
+import org.apache.log4j.Logger;
+
+import com.doteyplay.core.bhns.AbstractSimpleService;
+import com.doteyplay.core.dbcs.DBCS;
+import com.doteyplay.game.constants.item.OutfitInstallResult;
+import com.doteyplay.game.constants.item.OutfitUpgradeResult;
+import com.doteyplay.game.domain.gamebean.ItemBean;
+import com.doteyplay.game.domain.item.RoleItem;
+import com.doteyplay.game.domain.outfit.Outfit;
+import com.doteyplay.game.domain.pet.Pet;
+import com.doteyplay.game.domain.role.Role;
+import com.doteyplay.game.domain.sprite.AbstractSprite;
+import com.doteyplay.game.persistence.serverdata.item.IItemBeanDao;
+import com.doteyplay.game.service.runtime.GlobalRoleCache;
+import com.sun.corba.se.impl.oa.poa.AOMEntry;
+
+public class ItemService extends AbstractSimpleService<IItemService> implements
+		IItemService
+{
+	private static final Logger logger = Logger.getLogger(ItemService.class);
+
+	private ItemLock lock;
+
+	private List<RoleItem> allItemList = new ArrayList<RoleItem>();
+	private Map<Integer, RoleItem> bagItemMap = new HashMap<Integer, RoleItem>();
+	private Map<Long, Outfit> outfitMap = new HashMap<Long, Outfit>();
+
+	@Override
+	public int getPortalId()
+	{
+		return IItemService.PORTAL_ID;
+	}
+
+	@Override
+	public void initialize()
+	{
+		lock = new ItemLock(getServiceId());
+
+		Role role = GlobalRoleCache.getInstance().getRoleById(getServiceId());
+
+		outfitMap.put(role.getId(), new Outfit(getServiceId(), role));
+
+		for (Pet pet : role.getPetManager().getPetMap().values())
+			outfitMap.put(pet.getId(), new Outfit(getServiceId(), pet));
+
+		IItemBeanDao dao = DBCS.getExector(IItemBeanDao.class);
+		List<ItemBean> itemBeanList = dao
+				.selectItemBeanListByRoleId(getServiceId());
+
+		for (ItemBean bean : itemBeanList)
+		{
+			RoleItem roleItem = new RoleItem(bean);
+			allItemList.add(roleItem);
+
+			if (bean.getDressedSpriteId() <= 0)
+				bagItemMap.put(bean.getItemId(), roleItem);
+			else
+			{
+				Outfit outfit = outfitMap.get(bean.getDressedSpriteId());
+				outfit.getOutfitMap().put(roleItem.getBean().getItemId(),
+						roleItem);
+			}
+		}
+
+	}
+
+	public OutfitUpgradeResult upgradeQualityRemoveOutfit(long spriteId)
+	{
+		this.lockCheck();
+
+		Outfit outfit = getOutfit(spriteId);
+		if (outfit == null)
+			return OutfitUpgradeResult.NOT_FOUND_SPRITE;
+
+		boolean isFull = outfit.isOutfitFull();
+		if (!isFull)
+			return OutfitUpgradeResult.ITEM_NOT_ENOUGH;
+
+		outfit.removeAll();
+
+		return OutfitUpgradeResult.SUCCESS;
+	}
+
+	@Override
+	public RoleItem addOrRemoveItem(int itemId, int deltaItemNum)
+	{
+		this.lockCheck();
+
+		IItemBeanDao dao = DBCS.getExector(IItemBeanDao.class);
+		RoleItem item = bagItemMap.get(itemId);
+
+		if (item == null)
+		{
+			if (deltaItemNum <= 0)
+				return null;
+
+			item = RoleItem
+					.createRoleItem(getServiceId(), itemId, deltaItemNum);
+			bagItemMap.put(itemId, item);
+			dao.insertItemBean(item.getBean());
+		} else
+		{
+			item.getBean()
+					.setItemId(item.getBean().getItemNum() + deltaItemNum);
+			if (item.getBean().getItemNum() <= 0)
+			{
+				dao.deleteItemBean(item.getBean());
+				bagItemMap.remove(item.getBean().getItemId());
+			} else
+				dao.updateItemBean(item.getBean());
+		}
+
+		return item;
+
+	}
+
+	public boolean hasItemInBag(int itemId)
+	{
+		return this.findItemInBag(itemId) != null;
+	}
+
+	public RoleItem findItemInBag(int itemId)
+	{
+		return bagItemMap.get(itemId);
+	}
+
+	@Override
+	public boolean useItem(int itemId, int itemNum)
+	{
+		this.lockCheck();
+
+		return false;
+	}
+
+	public OutfitInstallResult installOutfit(long spriteId, int outfitIdx)
+	{
+		this.lockCheck();
+
+		Outfit outfit = getOutfit(spriteId);
+		if (outfit == null)
+			return OutfitInstallResult.NOT_FOUND_SPRITE;
+
+		int itemId = outfit.getQualityItemIdList().get(outfitIdx);
+		RoleItem item = findItemInBag(itemId);
+		if (item == null)
+			return OutfitInstallResult.NOT_FOUND_ITEM;
+
+		if (item.getData().getLevelLimit() > outfit.getSprite().getLevel())
+			return OutfitInstallResult.LEVEL_LIMIT;
+
+		this.addOrRemoveItem(item.getBean().getItemId(), -1);
+
+		OutfitInstallResult result = outfit.installOutfit(item);
+		return result;
+	}
+
+	private Outfit getOutfit(long spriteId)
+	{
+		Role role = GlobalRoleCache.getInstance().getRoleById(getServiceId());
+
+		Outfit outfit = outfitMap.get(spriteId);
+		if (outfit == null)
+		{
+			AbstractSprite sprite = null;
+			if (spriteId == getServiceId())
+				sprite = role;
+			else
+			{
+				sprite = role.getPetManager().getPetMap().get(spriteId);
+				if (sprite == null)
+					return null;
+			}
+			outfit = new Outfit(getServiceId(), role);
+
+			outfitMap.put(spriteId, outfit);
+		}
+
+		return outfit;
+	}
+
+	private void lockCheck()
+	{
+		if (!lock.locked())
+			throw new RuntimeException("没有lock的情况下操作物品");
+	}
+
+	@Override
+	public boolean lock()
+	{
+		return lock.lock();
+	}
+
+	@Override
+	public void unlock()
+	{
+		lock.unlock();
+	}
+}

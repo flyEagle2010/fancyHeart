@@ -1,0 +1,66 @@
+2014-05-05 14:47:51
+初始化GameServer失败
+com.doteyplay.game.util.excel.ConfigException: java.lang.ClassNotFoundException: com.pwrd.game.config.template.SkillDataTemplate
+	at com.doteyplay.game.util.excel.TemplateService.loadConfig(TemplateService.java:105)
+	at com.doteyplay.game.util.excel.TemplateService.init(TemplateService.java:34)
+	at com.doteyplay.game.startservice.ConfigService.onReady(ConfigService.java:41)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:75)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:224)
+	at com.doteyplay.game.GameServer.main(GameServer.java:242)
+Caused by: java.lang.ClassNotFoundException: com.pwrd.game.config.template.SkillDataTemplate
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at com.doteyplay.game.util.excel.TemplateService.loadConfig(TemplateService.java:101)
+	... 5 more
+2014-05-05 14:48:44
+消息注册错误,可以被忽略
+java.lang.ClassNotFoundException: com.pwrd.game.action.common.MessageActionHelperCreator
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at com.doteyplay.core.configloader.MessageRegistry.loadActionCreator(MessageRegistry.java:120)
+	at com.doteyplay.core.configloader.MessageRegistry.loadConfig(MessageRegistry.java:78)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:79)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:224)
+	at com.doteyplay.game.GameServer.main(GameServer.java:242)
+2014-05-05 14:48:44
+初始化GameServer失败
+java.io.FileNotFoundException: 找不到任何消息配置文件
+	at com.doteyplay.core.configloader.MessageRegistry.loadConfig(MessageRegistry.java:98)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:79)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:224)
+	at com.doteyplay.game.GameServer.main(GameServer.java:242)
+2014-05-05 14:50:36
+消息注册错误,可以被忽略
+java.lang.ClassNotFoundException: com.pwrd.game.action.common.MessageActionHelperCreator
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at com.doteyplay.core.configloader.MessageRegistry.loadActionCreator(MessageRegistry.java:120)
+	at com.doteyplay.core.configloader.MessageRegistry.loadConfig(MessageRegistry.java:78)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:79)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:224)
+	at com.doteyplay.game.GameServer.main(GameServer.java:242)
+2014-05-05 14:50:36
+初始化GameServer失败
+java.io.FileNotFoundException: 找不到任何消息配置文件
+	at com.doteyplay.core.configloader.MessageRegistry.loadConfig(MessageRegistry.java:98)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:79)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:224)
+	at com.doteyplay.game.GameServer.main(GameServer.java:242)

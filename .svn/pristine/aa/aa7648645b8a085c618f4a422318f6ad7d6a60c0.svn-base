@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<project basedir="." default="publishExe" name="XEditor">
+	<property environment="env" />
+	<property name="jsmooth_skeleton" value="C:/Program Files/JSmooth 0.9.7/skeletons"/>
+	<property name="target" value="1.6" />
+	<property name="source" value="1.6" />
+	<property name="project-name" value="XEditor" />
+	<property name="GameCommon" value="../GameCommon/src" />
+	<property name="build" value="build" />
+	<property name="dist" value="jar" />
+	<property name="lib" value="lib" />
+	<property name="src" value="src" />
+	<property name="res" value="res" />
+	<property name="resources" value="conf" />
+	<property name="exe" value="exe" />
+	<property name="svn" value="." />
+	<property name="build.classes" value="${build}/classes" />
+	
+	<property file="build.properties" />
+	<property name="jar-file-name" value="${project-name}" />
+
+	<echo>${ant.java.version}</echo>
+	<echo>$</echo>
+
+	<!--定义JSmooth的Task-->
+	<taskdef name="jsmoothgen" onerror="report" classname="net.charabia.jsmoothgen.ant.JSmoothGen" classpath="${lib}/jsmoothgen-ant.jar"/>
+	
+	<!--设置Classpath-->
+	<path id="classpath">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<!--执行清除操作-->
+	<target name="clean">
+		<echo>执行清除历史文件操作</echo>
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+		
+		<echo>拷贝资源文件到目标路径</echo>
+		<copy todir="${build}">
+			<fileset dir="${res}">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${build}">
+			<fileset dir="${src}">
+				<exclude name="**/*.*"/>
+			</fileset>
+			<fileset dir="${src}">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+	</target>
+	<!--执行初始化操作-->
+	<target name="init" depends="clean">
+		<echo>执行创建文件夹操作：build,dist</echo>
+		<mkdir dir="${build}"/>
+		<mkdir dir="${dist}"/>
+	</target>
+
+	<!--编译GameCommon-->
+	<target name="build_GameCommon" depends="init">
+		<echo>编译GameCommon</echo>
+		<javac destdir="${build}" debug="true">
+			<src path="${GameCommon}" />
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+
+	<!--编译XEditor-->
+	<target name="build_XEditor" depends="build_GameCommon">
+		<echo>编译XEditor</echo>
+		<javac destdir="${build}" debug="true" nowarn="on" fork="true" memorymaximumsize="500M">
+			<src path="${src}"/>
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+
+	<!--生成XEditor Jar文件-->
+	<target name="createJar" depends="build_XEditor">
+		<echo>生成XEditor Jar文件</echo>
+		<jar jarfile="${dist}/${project-name}.jar" basedir="${build}">
+			<include name="**/*"/>
+		</jar>
+	</target>
+
+	<!--生成目标的可执行文件-->
+	<target name="createExe" depends="createJar">
+		<echo>生成目标的可执行文件</echo>
+		<jsmoothgen project="xeditor.jsmooth" skeletonroot="${jsmooth_skeleton}" destdir="${exe}" />
+	</target>
+	
+	<!--发布目标的可执行文件-->
+	<target name="publishExe" depends="createExe">
+		<echo>拷贝生成文件到SVN发布目录</echo>
+		<copy todir="${svn}">
+			<fileset dir="${exe}">
+				<include name="xeditor.exe"/>
+			</fileset>
+		</copy>
+	</target>
+	
+</project>
+

@@ -1,0 +1,58 @@
+//
+//  SkillLevelData.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-10.
+//
+//
+
+#include "SLData.h"
+
+void SLData::loadData(std::ifstream& ifile)
+{
+
+    BData::setData(ifile, level);
+    BData::setData(ifile, skillTriggerPercent);
+    BData::setData(ifile, effectDataParam);
+    unsigned char skillEffect;
+    BData::setData(ifile, skillEffect);
+    this->effectType=(SkillEffectType)skillEffect;
+    BData::setData(ifile, effectDataParam);
+    BData::setData(ifile, buffId);
+    BData::setData(ifile, buffTriggerPercent);
+}
+
+int SLData::getLevel()
+{
+    return this->level;
+}
+
+int SLData::getSkillTrigerPer()
+{
+    return this->skillTriggerPercent;
+}
+
+std::string SLData::getEffectRangeParam()
+{
+    return this->effectRangeParam;
+}
+
+SkillEffectType SLData::getEffectType()
+{
+    return this->effectType;
+}
+
+std::string SLData::getEffectDataParam()
+{
+    return this->effectDataParam;
+}
+
+int SLData::getBuffID()
+{
+    return this->buffId;
+}
+
+int SLData::getBufTriggerPer()
+{
+    return this->buffTriggerPercent;
+}

@@ -1,0 +1,124 @@
+package com.doteyplay.game.domain.sprite;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.doteyplay.game.CommonConstants;
+import com.doteyplay.game.domain.common.GameObjectManager;
+import com.doteyplay.game.domain.gamebean.SpriteBean;
+import com.doteyplay.game.domain.property.AbstractSpritePropertyManager;
+
+/**
+ * 精灵基类
+ */
+public abstract class AbstractSprite<T extends SpriteBean> extends AbstractSceneObject implements
+		ISpritePropAffect
+{
+	protected int spriteType;
+
+	protected SpriteGameObject spriteGameObject;
+
+	protected AbstractSpritePropertyManager propertyManager;
+
+	protected AbstractSprite topOwner;
+	
+	protected List<Integer> starPosList;
+	
+	protected T bean;
+
+	public AbstractSprite(int spriteType, T dataBean, AbstractSprite owner)
+	{
+		super(CommonConstants.SCENE_OBJECT_TYPE_SPRITE);
+		
+		this.bean = dataBean;
+		this.id = dataBean.getId();
+		
+		this.spriteType = spriteType;
+		this.spriteGameObject = GameObjectManager.getInstance().get(bean.getSpriteId(),
+				SpriteGameObject.class);
+
+		if (owner == null)
+			topOwner = this;
+		else
+			topOwner = owner;
+		
+	}
+
+	public void init()
+	{
+		this.propertyManager.init();
+		
+		//星位初始化
+		String tmpStr = bean.getCurStarPosList();
+		if(tmpStr != null && !"".equals(tmpStr))
+		{
+			starPosList = new ArrayList<Integer>();
+			for(String tmpPos:tmpStr.split(CommonConstants.COMMON_LIST_TO_STRING_SPLIT_FLAG))
+				starPosList.add(Integer.parseInt(tmpPos));
+		}
+	}
+
+	public void save()
+	{
+		if(this.starPosList != null && this.starPosList.size() > 0)
+		{
+			String starPosListStr = "";
+			for(Integer pos:this.starPosList)
+			{
+				starPosListStr += String.valueOf(pos);
+				starPosListStr += CommonConstants.COMMON_LIST_TO_STRING_SPLIT_FLAG;
+			}
+			this.bean.setCurStarPosList(starPosListStr);
+		}
+	}
+	
+	@Override
+	public int getQuality()
+	{
+		return bean.getQuality();
+	}
+
+	@Override
+	public int getStar()
+	{
+		return bean.getStar();
+	}
+
+	@Override
+	public int getLevel()
+	{
+		return bean.getLevel();
+	}
+
+	@Override
+	public List<Integer> getCurStarPosList()
+	{
+		return starPosList; 
+	}
+	
+	public int getSpriteType()
+	{
+		return spriteType;
+	}
+
+	public AbstractSpritePropertyManager getPropertyManager()
+	{
+		return propertyManager;
+	}
+
+	public void setSpriteType(int spriteType)
+	{
+		this.spriteType = spriteType;
+	}
+
+	public AbstractSprite getTopOwner()
+	{
+		return topOwner;
+	}
+
+	public SpriteGameObject getSpriteGameObject()
+	{
+		return spriteGameObject;
+	}
+
+}

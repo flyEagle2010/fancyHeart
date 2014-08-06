@@ -1,0 +1,21 @@
+//
+//  GConfig.h
+//  fancyHeart
+//
+//  Created by zhai on 14-7-8.
+//
+//
+
+#ifndef fancyHeart_GConfig_h
+#define fancyHeart_GConfig_h
+
+enum RoleFields
+{
+    level=1,//等级
+    vipLvl=2,//vip等级
+    coin=3,//游戏币
+    rmb=4,//人民币
+    stamina=5//体力
+};
+
+#endif

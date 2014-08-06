@@ -1,0 +1,15 @@
+package com.doteyplay.net.protocol;
+
+import com.doteyplay.net.message.AbstractMessage;
+import com.doteyplay.net.message.IMessageAction;
+import com.doteyplay.net.message.IMessageActionHelper;
+
+/**
+ * ActionHelper´´½¨Õß
+ * @author 
+ *
+ */
+public interface IHelperCreator {
+
+	public IMessageActionHelper createActionHelper(IMessageAction<? extends AbstractMessage, ?> action);
+}

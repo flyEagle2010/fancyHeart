@@ -1,0 +1,58 @@
+//
+//  Fighter.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-6.
+//
+//
+
+#ifndef __fancyHeart__Fighter__
+#define __fancyHeart__Fighter__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "Manager.h"
+#include "ui/CocosGUI.h"
+#include "cocostudio/CocoStudio.h"
+
+USING_NS_CC;
+using namespace ui;
+using namespace cocostudio;
+
+class MFighter;
+class Fighter:public Node
+{
+public:
+
+    static Fighter* create(std::string fPath,std::string rPath,int pos);
+    bool init(std::string fPath,std::string rPath,int pos);
+    virtual void onEnter();
+    virtual void onExit();
+    virtual void update(float delta);
+    void stand();
+    float runTo(cocos2d::Point p);
+    void run();
+    void attack();
+    void skillAttak();
+    void spell();
+    void attacked();
+    void lineThrow(); //直线
+    void arcThrow();  //弧线
+    void impaleThrow(); //穿刺
+    void fallHp(Value num);
+    void hitWord();
+    void die();
+    void playBuffer();
+    int pos;
+    MFighter* delegate;
+
+    EventDispatcher* cEventDispatcher;
+private:
+    int tickCount=0;
+    
+    Armature* armature;
+    void tick(float dt);
+    void runEnd();
+    void onFrameEvent(Bone *bone, const std::string& evt, int originFrameIndex, int currentFrameIndex);
+};
+#endif /* defined(__fancyHeart__Fighter__) */

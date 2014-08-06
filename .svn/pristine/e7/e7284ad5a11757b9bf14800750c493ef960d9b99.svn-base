@@ -1,0 +1,53 @@
+//
+//  MFight.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-15.
+//
+//
+
+#ifndef __fancyHeart__MFight__
+#define __fancyHeart__MFight__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "MFighter.h"
+#include "external/json/rapidjson.h"
+#include "external/json/document.h"
+#include "FightScene.h"
+#include "XMonster.h"
+#include "XRole.h"
+#include "XRoleData.h"
+#include "XRoleStar.h"
+#include "XGate.h"
+using namespace cocos2d;
+
+#define RANDOM_0_1() ((float)rand()/RAND_MAX)
+#define HERO_SKILL_COLDDOWN "hero_skill_colddown"
+class MFighter;
+class FightScene;
+
+class FightMgr:public Ref{
+    MFighter* attacker;
+public:
+    FightMgr(){};
+    static FightMgr* getInstance();
+    void init(std::vector<int>heros,int mID);
+    void init(rapidjson::Value& data);
+    void handleResult();
+    MFighter* getHero(int pos);
+    Vector<MFighter*>getFoes(int pos,bool isMe=false);
+    MFighter* getFirst(int pos);
+    void clear();
+
+    Vector<MFighter*> heros;
+
+    rapidjson::Value data;
+    
+    FightScene* view;
+    
+    MFighter* mf;
+    
+};
+
+#endif /* defined(__fancyHeart__MFight__) */

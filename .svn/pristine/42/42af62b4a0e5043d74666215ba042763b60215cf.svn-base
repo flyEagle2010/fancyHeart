@@ -1,0 +1,78 @@
+//
+//  DramaAni.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-7-30.
+//
+//
+
+#include "DramaAni.h"
+#include "FightMgr.h"
+DramaAni* dram=nullptr;
+
+DramaAni* DramaAni::getInstance()
+{
+    if(dram==nullptr){
+        dram=new DramaAni();
+    }
+    return dram;
+}
+
+bool DramaAni::init()
+{
+	if(!BaseUI::init("publish/DramaAni.json"))
+	{
+		return false;
+	}
+	//如果需要对cocostudio 设计的ui进行调整
+
+	return true;
+}
+
+void DramaAni::onEnter()
+{
+
+}
+
+void DramaAni::startPre(int groupID)
+{
+    //动画结束后调用
+    FightMgr::getInstance()->startBattle();
+}
+
+void DramaAni::startEnd(int groupID)
+{
+    //动画结束后调用
+    FightMgr::getInstance()->handleResult();
+}
+
+void DramaAni::show(BaseUI* preUI,int effectType)
+{
+    BaseUI::show(preUI,effectType);
+}
+
+void DramaAni::clear(bool isDel)
+{
+    BaseUI::clear(isDel);
+}
+
+void DramaAni::touchButtonEvent(Ref *pSender, TouchEventType type)
+{
+    if(type!=TouchEventType::ENDED){
+        return;
+    }
+    Button* btn=(Button*)pSender;
+
+    switch (btn->getTag())
+    {
+        case 1001:
+            break;
+        default:
+            break;
+    }
+}
+
+void DramaAni::onExit()
+{
+    
+}

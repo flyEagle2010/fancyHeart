@@ -1,0 +1,15 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "ChapterMapProBuf";
+
+message PackageChapterMapReq{
+	required int32 id=1;//副本id
+}
+message TroopInfo{
+	required int32 star=1;//通过某一小关的星级
+	required int64 id=2;//战役id
+	
+}
+message PackageChapterMapResp{
+  
+   repeated TroopInfo troopInfos =1;//服务器返回的列表
+}

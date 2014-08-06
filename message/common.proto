@@ -1,0 +1,12 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "CommonProBuf";
+
+//通用文本信息对象
+message CommonStringObject{
+	//替换标示符
+	required string regularStr = 1;
+	//文本id
+  required int32 textId = 2;
+  //替换内容列表
+  repeated string replaceList = 3;
+}

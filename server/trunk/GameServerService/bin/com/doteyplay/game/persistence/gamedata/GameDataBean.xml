@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GameDataBean">
+	<typeAlias alias="gameDatabean" type="com.doteyplay.game.domain.gamedatabean.GameDataBean" />
+
+	<select id="selectGameDataBeanByPKId" resultClass="gameDatabean" parameterClass="int">
+		SELECT
+		PKId,
+		resourceId,
+		resourceType,
+		name,
+		gd_serverData as serverData,
+		openFlag 
+		FROM t_game_resource_data
+		WHERE PKId = #value#
+	</select>
+
+	<select id="selectGameDataBean" resultClass="gameDatabean" parameterClass="java.util.Map">
+		SELECT
+		PKId,
+		resourceId,
+		resourceType,
+		name,
+		gd_serverData as serverData,
+		openFlag 
+		FROM t_game_resource_data
+		WHERE resourceId=#resourceId# and resourceType=#resourceType#
+	</select>
+
+	<select id="selectGameDataBeanAll" resultClass="gameDatabean" >
+		SELECT
+		PKId,
+		resourceId,
+		resourceType,
+		name,
+		gd_serverData as serverData,
+		openFlag 
+		FROM t_game_resource_data
+	</select>
+
+
+</sqlMap>

@@ -1,0 +1,21 @@
+2013-11-11 17:39:31
+消息注册错误,可以被忽略
+com.pwrd.exception.MessageProcessException: 解析错误actionClass=class com.pwrd.game.action.login.JoinGameMessageAction,messageClass=class com.pwrd.game.message.login.JoinGameMessage
+	at com.pwrd.core.configloader.MessageRegistry.processMessage(MessageRegistry.java:337)
+	at com.pwrd.core.configloader.MessageRegistry.loadPackage(MessageRegistry.java:213)
+	at com.pwrd.core.configloader.MessageRegistry.loadConfig(MessageRegistry.java:100)
+	at com.pwrd.game.GameServer.initialize(GameServer.java:71)
+	at com.pwrd.game.GameServer.startGameServer(GameServer.java:200)
+	at com.pwrd.game.GameServer.main(GameServer.java:215)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:513)
+	at com.pwrd.core.configloader.MessageRegistry.processMessage(MessageRegistry.java:313)
+	... 5 more
+Caused by: java.lang.Error: Unresolved compilation problem: 
+	JOIN_GAME_MESSAGE cannot be resolved or is not a field
+
+	at com.pwrd.game.message.login.JoinGameMessage.<init>(JoinGameMessage.java:18)
+	... 10 more

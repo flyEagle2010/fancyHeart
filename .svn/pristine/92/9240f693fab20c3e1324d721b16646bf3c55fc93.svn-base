@@ -1,0 +1,35 @@
+//
+//  TestScene.cpp
+//  fancyHeart
+//
+//  Created by zhai on 14-6-12.
+//
+//
+
+#include "TestScene.h"
+TestScene::TestScene(){
+
+}
+
+TestScene::~TestScene(){
+
+}
+
+Scene* TestScene::createScene(){
+	auto scene = Scene::create();
+    auto layer=TestScene::create();
+    scene->addChild(layer);
+	return scene;
+}
+
+bool TestScene::init(){
+	if(!Layer::init()){
+		return false;
+	}
+	//init ui
+    sprite=Sprite::create("bluefire.png");
+    addChild(sprite);
+    sprite->setPosition(Vec2(100,200));
+    //Tools::BezierRotate(sprite, Vec2(100,200), Vec2(600, 400), 0, 120, 0.6);
+	return true;
+}

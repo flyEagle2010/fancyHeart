@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OutfitBean">
+	<typeAlias alias="outfitBean" type="com.doteyplay.game.domain.gamebean.OutfitBean" />
+
+	<insert id="insertOutfitBean" parameterClass="outfitBean">
+		INSERT INTO
+		t_outfit
+		(
+			roleId,petId,outfitData
+		)
+		VALUES
+		(
+			 #roleId#,#petId#,#outfitData#
+		)
+	</insert>
+
+
+	<select id="selectOutfitBeanListByRoleId" resultClass="outfitBean"
+		parameterClass="long">
+		SELECT 
+		roleId,petId,outfitData 
+		FROM t_outfit
+		WHERE roleId=#value#
+	</select>
+
+	<update id="updateOutfitBean" parameterClass="outfitBean">
+		update 
+		t_outfit 
+		set 
+		outfitData = #outfitData# 
+		WHERE roleId=#roleId# and petId=#petId#
+	</update>
+</sqlMap>

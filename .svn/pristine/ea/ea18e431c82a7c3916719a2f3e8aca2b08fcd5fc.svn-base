@@ -1,0 +1,33 @@
+//XRoleData自动生成类
+#ifndef __fancyHeart__XRoleData__
+#define __fancyHeart__XRoleData__
+#include <iostream>
+#include "external/json/document.h"
+#include "cocos2d.h"
+#include "cocos-ext.h"
+USING_NS_CC;
+class XRoleData{
+
+private:
+	Value v;
+public:
+	static XRoleData* record(Value v);
+	rapidjson::Document doc;
+	/*陈天华:
+前3位是角色id
+第四位是品质
+·*/
+	std::string getId();
+	int getHp();
+	int getHpRate();
+	int getAtk();
+	int getAtkRate();
+	int getDf();
+	int getDfRate();
+	int getMDf();
+	int getMDfRate();
+	int getMiss();
+	int getCrh();
+	int getHeal();
+};
+#endif // defined(__dx__Data__)

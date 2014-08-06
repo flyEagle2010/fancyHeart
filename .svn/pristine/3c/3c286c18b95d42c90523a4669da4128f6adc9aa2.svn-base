@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGuidesProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GuidesProject>
+    <Project>home</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>login</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>fight</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>dlg</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>map</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>gate</Project>
+    <GuidesList />
+  </GuidesProject>
+</ArrayOfGuidesProject>

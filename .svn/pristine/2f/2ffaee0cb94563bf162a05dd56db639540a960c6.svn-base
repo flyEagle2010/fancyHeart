@@ -1,0 +1,6 @@
+package com.doteyplay.game.action.common;
+
+public class MessageActionHelperConstants {
+	public static final int COMMAND_ID[] = {};
+	public static final boolean ACTION_BINDED[] = {};
+}

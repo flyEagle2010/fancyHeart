@@ -1,0 +1,16 @@
+package com.doteyplay.game.domain.gamebean;
+
+public class PetBean extends SpriteBean
+{
+	private long roleId;
+
+	public long getRoleId()
+	{
+		return roleId;
+	}
+
+	public void setRoleId(long roleId)
+	{
+		this.roleId = roleId;
+	}
+}

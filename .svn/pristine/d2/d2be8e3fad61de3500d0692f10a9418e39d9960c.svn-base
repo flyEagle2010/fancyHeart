@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scripts>
+	<file name="文本.xls">
+		<sheet class="com.doteyplay.game.config.template.TextDataTemplate" />
+	</file>
+
+	<file name="buff表.xls">
+		<sheet class="com.doteyplay.game.config.template.BuffDataTemplate" />
+	</file>
+	
+	<file name="skill表.xls">
+		<sheet class="com.doteyplay.game.config.template.SkillDataObject" />
+	</file>
+	
+</scripts>

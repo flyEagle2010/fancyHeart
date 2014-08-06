@@ -1,0 +1,47 @@
+//XRole自动生成类
+#ifndef __fancyHeart__XRole__
+#define __fancyHeart__XRole__
+#include <iostream>
+#include "external/json/document.h"
+#include "cocos2d.h"
+#include "cocos-ext.h"
+USING_NS_CC;
+class XRole{
+
+private:
+	Value v;
+public:
+	static XRole* record(Value v);
+	rapidjson::Document doc;
+	int getId();
+	int getNameID();
+	int getDes();
+	int getSlogan();
+	/*陈天华:
+0物理
+1法术*/
+	int getAttackType();
+	/*陈天华:
+0前排
+1中排
+2后排*/
+	int getPos();
+	std::string getAvatar();
+	std::string getCard();
+	std::string getIcon();
+	std::string getPotrait();
+	std::string getAnim();
+	int getSkill1();
+	int getSkill2();
+	int getSkill3();
+	int getSkill4();
+	int getSkill5();
+	int getSkill6();
+	int getIsRecruit();
+	int getCost();
+	/*Administrator:
+就是角色被召唤后出来后的星级是多少*/
+	int getInitStar();
+	int getLockGrid();
+};
+#endif // defined(__dx__Data__)

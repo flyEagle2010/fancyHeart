@@ -1,0 +1,19 @@
+//Xgate_reward自动生成类
+#ifndef __fancyHeart__Xgate_reward__
+#define __fancyHeart__Xgate_reward__
+#include <iostream>
+#include "external/json/document.h"
+#include "cocos2d.h"
+#include "cocos-ext.h"
+USING_NS_CC;
+class Xgate_reward{
+
+private:
+	rapidjson::Value item;
+public:
+rapidjson::Document doc;
+	static Xgate_reward* record(const char* key);
+	int getId();
+	std::string getName();
+};
+#endif // defined(__dx__Data__)

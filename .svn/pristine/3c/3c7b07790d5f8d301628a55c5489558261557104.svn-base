@@ -1,0 +1,28 @@
+//
+//  HeroData.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-27.
+//
+//
+
+#ifndef __fancyHeart__HeroData__
+#define __fancyHeart__HeroData__
+
+#include <iostream>
+
+
+class HeroData {
+    int descId;
+    std::string imageId = "";
+    std::string cardId = "";
+	
+//	public SpriteAttackType attackType = SpriteAttackType.ATTACK_TYPE_PHYSICS;
+//	public SpritePositionType positionType = SpritePositionType.POSITION_TYPE_F;
+//	
+//	public List<SpriteBasePropData> propDataList = new ArrayList<SpriteBasePropData>();
+//	public List<SpriteStarData> starDataList = new ArrayList<SpriteStarData>();
+    
+public:
+};
+#endif /* defined(__fancyHeart__HeroData__) */

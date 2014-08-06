@@ -1,0 +1,60 @@
+package com.doteyplay.core.bhns.source;
+
+import com.doteyplay.core.bhns.AbstractSimpleService;
+import com.doteyplay.core.bhns.IServicePortal;
+import com.doteyplay.core.bhns.ISimpleService;
+import com.doteyplay.core.bhns.data.ServiceData;
+import com.doteyplay.core.bhns.event.IEventListener;
+import com.doteyplay.core.bhns.event.IMultipleEventListener;
+import com.doteyplay.core.bhns.event.IMultipleServiceEvent;
+
+public interface IEndpointSource extends IEventListener,IMultipleEventListener
+{
+	public void initialize();
+
+	public boolean isLocalImplemention();
+
+	public boolean supportCluster();
+
+	public byte getEndpointId();
+
+	public int getPortalId();
+
+	public int getVersion();
+	
+	public boolean updateServiceImplClz(Class<? extends ISimpleService> clz);
+	
+	public Class<? extends ISimpleService> getServiceImplClz();
+	
+	public String getConfigFile();
+	
+	public String getDataBlocks();
+
+	public boolean isAvailable();
+
+	public IServicePortal<? extends ISimpleService> getServicePortalImpl();
+
+	public AbstractSimpleService<?> createServiceImpInstance();
+
+	public void destroyService(long svrid);
+	
+	public String postPortalCommand(int portalId,String requestCommand);
+
+	public <T extends ISimpleService> T findService(int portalId, long svrid);
+	
+	public <T extends ISimpleService> T findService(long svrid);
+
+	public <T extends ISimpleService> T getPortalService(int portalId);
+
+	public <T extends ISimpleService> T activeService(long svrid, boolean isOrderActive);
+	
+	public boolean isActive(long svrid);
+	
+	public ServiceData getServiceData(long serviceId);
+	
+	public boolean regMultipleEventListener(IMultipleServiceEvent event);
+	
+	public void rmMultipleEventListener(int eventid,Object key);
+	
+	public boolean isSyncPortalCommand(int portalId, String requestCommand);
+}	

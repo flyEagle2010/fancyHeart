@@ -1,0 +1,35 @@
+//
+//  Register.h
+//  fancyHeart
+//
+//  Created by doteyplay on 14-7-31.
+//
+//
+
+#ifndef __fancyHeart__Register__
+#define __fancyHeart__Register__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "Manager.h"
+#include "BaseUI.h"
+#include "LoginScene.h"
+USING_NS_CC;
+using namespace cocos2d;
+using namespace ui;
+using namespace cocostudio;
+class Register:public BaseUI{
+public:
+	static Register* create(LoginScene*loginScene);
+	virtual bool init(std::string fileName,LoginScene*loginScene);
+    virtual void onEnter();
+    virtual void onExit();
+
+private:
+    void touchButtonEvent(cocos2d::Ref *pSender, TouchEventType type);
+    LoginScene*login;
+    TextField* accountInput;
+    TextField* passwordInput;
+    
+};
+#endif /* defined(__fancyHeart__Register__) */

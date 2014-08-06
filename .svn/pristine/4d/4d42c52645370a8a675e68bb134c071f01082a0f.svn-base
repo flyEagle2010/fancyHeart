@@ -1,0 +1,77 @@
+package com.doteyplay.game.constants.sprite;
+
+public enum SpriteQualityType
+{
+	QUALITY_0()
+	{
+		@Override
+		public String toString()
+		{
+			return "白色";
+		}
+	},
+	QUALITY_1()
+	{
+		@Override
+		public String toString()
+		{
+			return "绿色";
+		}
+	},
+	QUALITY_2()
+	{
+		@Override
+		public String toString()
+		{
+			return "蓝色";
+		}
+	},
+	QUALITY_3()
+	{
+		@Override
+		public String toString()
+		{
+			return "蓝+1";
+		}
+	},
+	QUALITY_4()
+	{
+		@Override
+		public String toString()
+		{
+			return "蓝+2";
+		}
+	},
+	QUALITY_5()
+	{
+		@Override
+		public String toString()
+		{
+			return "紫色";
+		}
+	},
+	QUALITY_6()
+	{
+		@Override
+		public String toString()
+		{
+			return "紫+1";
+		}
+	},
+	QUALITY_7()
+	{
+		@Override
+		public String toString()
+		{
+			return "紫+2";
+		}
+	},
+	QUALITY_8()
+	{
+		@Override
+		public String toString()
+		{
+			return "金色";
+		}
+	},
+}

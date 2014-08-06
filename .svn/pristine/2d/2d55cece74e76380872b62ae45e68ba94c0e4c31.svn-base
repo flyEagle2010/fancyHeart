@@ -1,0 +1,40 @@
+package com.doteyplay.game.gamedata.data.sprite;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import com.doteyplay.game.constants.sprite.SpritePropType;
+import com.doteyplay.game.constants.sprite.SpriteQualityType;
+import com.doteyplay.game.gamedata.data.IGameData;
+
+public class SpriteBasePropData implements IGameData
+{
+	public SpritePropType spritePropType = SpritePropType.HP;
+	public SpriteQualityType spriteQualityType = SpriteQualityType.QUALITY_0;
+	public int baseValue;
+	public int rate;
+
+	@Override
+	public void load(DataInputStream in) throws IOException
+	{
+
+		spritePropType = SpritePropType.values()[in.readByte()];
+		spriteQualityType = SpriteQualityType.values()[in.readByte()];
+
+		baseValue = in.readInt();
+		rate = in.readInt();
+	}
+
+	@Override
+	public void save(DataOutputStream out) throws IOException
+	{
+		out.writeByte(spritePropType.ordinal());
+		out.writeByte(spriteQualityType.ordinal());
+
+		out.writeInt(baseValue);
+		out.writeInt(rate);
+	}
+}

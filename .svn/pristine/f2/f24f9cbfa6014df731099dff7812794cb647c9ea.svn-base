@@ -1,0 +1,143 @@
+#include "LoginScene.h"
+#include "external/json/document.h"
+#include "extensions/cocos-ext.h"
+#include "ui/CocosGUI.h"
+#include "cocostudio/CocoStudio.h"
+#include "ShaderNode.h"
+
+
+Scene* LoginScene::createScene()
+{
+    auto scene = Scene::create();
+    auto layer = LoginScene::create();
+    scene->addChild(layer);
+    return scene;
+}
+
+LoginScene* LoginScene::create()
+{
+    LoginScene* loginScene=new LoginScene();
+    if (loginScene && loginScene->init("login.json")) {
+        loginScene->autorelease();
+        return loginScene;
+    }
+    CC_SAFE_DELETE(loginScene);
+    return nullptr;
+}
+
+bool LoginScene::init(std::string fileName)
+{
+    if(!BaseUI::init(fileName))
+    {
+        return false;
+    }
+    Size sSize=Director::getInstance()->getOpenGLView()->getFrameSize();
+    Size winsize=Director::getInstance()->getWinSize();
+    return true;
+}
+
+void LoginScene::onEnter()
+{
+    BaseUI::onEnter();
+    auto btn=static_cast<ui::Button*>(layout->getChildByName("Button_9"));
+    btn->addTouchEventListener(CC_CALLBACK_2(LoginScene::touchEvent,this));
+    btn->setTouchEnabled(true);
+    
+    
+    this->initGame();
+}
+
+//init 游戏服务器 服务器认证
+void LoginScene::initGame()
+{
+    WebHttp::getInstance()->send(HTTP_URL, CC_CALLBACK_1(LoginScene::initGameCallback, this),"account=zhai5&password=ceshi2");
+}
+
+void LoginScene::initGameCallback(std::vector<char> *data)
+{
+    std::string str(data->begin(),data->end());
+    sData.Parse<0>(str.c_str());
+    log(str.c_str());
+    log("loginState:%d,arealistSize:%d",sData["loginState"].GetInt(),sData["areaList"].Size());
+    if (sData["loginState"].GetInt()!=0) {//先用以后修改
+        log("登录认证失败！");
+    }else if(sData["areaList"].Size()<1){
+        log("服务列表数据长度不够");
+    }
+    
+}
+
+void LoginScene::onDlgClose(rapidjson::Value &data)
+{
+    BaseUI::onDlgClose(data);
+    std::string btnName=data.GetString();
+    log("you click confirm %s",btnName.c_str());
+}
+
+void LoginScene::touchEvent(Ref *pSender, Widget::TouchEventType type)
+{
+    switch (type)
+    {
+        case TouchEventType::BEGAN:
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+        {
+            string ip=this->sData["areaList"][2]["ip"].GetString();
+            int port=this->sData["areaList"][2]["port"].GetInt();
+            
+            Manager::getInstance()->socket=new Socket();
+            Manager::getInstance()->socket->init(ip, port);
+            Manager::getInstance()->switchScence(HomeScene::createScene());
+
+            break;
+        }
+        case TouchEventType::CANCELED:
+            break;
+        default:
+            break;
+    }
+}
+
+void LoginScene::initNetEvent(){
+    auto listener = EventListenerCustom::create(NET_MESSAGE, [=](EventCustom* event){
+        NetMsg* msg = static_cast<NetMsg*>(event->getUserData());
+//        log("Custom event 1 received:%d,%d",msg->msgId,msg->len);
+        switch (msg->msgId)
+        {
+            case CONNECT_ERROR:
+            {
+                
+#if COCOS2D_DEBUG
+                Manager::getInstance()->showMsg("进入单机模式，本地数据启动");
+                Manager::getInstance()->switchScence(HomeScene::createScene());
+#endif
+                break;
+            }
+            case CONNECTED:
+            {
+                LoginReq pbLogin;
+                pbLogin.set_account(sData["userBean"]["name"].GetString());
+                pbLogin.set_key(sData["key"].GetString());
+                pbLogin.set_areaid(sData["areaList"][2]["id"].GetInt());
+                Manager::getInstance()->socket->send(C_LOGIN, &pbLogin);
+                break;
+            }
+            case C_LOGIN:
+            {
+                 Manager::getInstance()->switchScence(HomeScene::createScene());
+                break;
+            }
+            default:
+                break;
+        }
+    });
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+    
+}
+void LoginScene::onExit()
+{
+    BaseUI::onExit();
+}
+

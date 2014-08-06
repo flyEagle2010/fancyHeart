@@ -1,0 +1,23 @@
+package com.doteyplay.game.action.instance;
+
+import com.doteyplay.core.action.ServiceMessageAction;
+import com.doteyplay.exception.MessageProcessException;
+import com.doteyplay.game.message.tollgate.TollgateAndNodeChangeInfoMessage;
+import com.doteyplay.game.service.bo.tollgate.ITollgateInfoService;
+
+/**
+ * @className:ShowInstanceDetailMessageAction.java
+ * @classDescription: 向用户展示副本的详细信息。
+ * @author:Tom.Zheng
+ * @createTime:2014年6月24日 下午4:08:03
+ */
+public class TollgateAndNodeChangeInfoMessageAction implements ServiceMessageAction<TollgateAndNodeChangeInfoMessage, ITollgateInfoService>{
+
+	@Override
+	public void processMessage(TollgateAndNodeChangeInfoMessage message, ITollgateInfoService service)
+			throws MessageProcessException {
+		// TODO Auto-generated method stub
+		service.sendTollgateAndNodeChangeInfo(message.getTollgateId(),message.getNodeId());
+	}
+
+}

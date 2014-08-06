@@ -1,0 +1,73 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "GateProBuf";
+message PGateReq{
+
+}
+
+message PNodeItem{
+	required int32 xID=2; //节点id
+	required int32 star=1;  //通过某一小关的星级，如果是传送点星级为-1
+	required int32 times=3;	//次数
+}
+
+message PGateItem{
+	required bool isLock=1; //是否解锁0关闭1解锁
+	required int32 gateID=2; //副本id
+	repeated PNodeItem items =3;//服务器返回的地图列表
+	
+}
+
+message PUpdateGates{
+	repeated PGateItem gates=1;	
+}
+
+message PUpdateNode{
+	required PNodeItem nodeItem=1;//更新的节点
+        required int32 type=2;//0代表删除1代表增加一个节点2代表更新节点
+}
+
+message PUpdateNodes{
+	required int32 gateID=1; //副本id
+	repeated PUpdateNode nodeItems=2;
+}
+
+message PGateResp{
+   repeated PGateItem gates=1; //副本列表
+}
+
+
+message PNodeReq{
+    required int32 gateId=1;//关卡id
+    required int32 xId=2;//节点id
+    required int32 groupId=3;//组id
+}
+message PNodeResp{
+   
+}
+
+message PNpcRes{//npc结果对象
+    required int64 xId=1;//
+    required int32 addLvl=2;//
+    required int32 addExp=3;//
+}
+
+message PItemRes{//道具结果对象
+    required int32 itemId=1;//道具id
+    required int32 itemNum=2; //物品数量
+}
+
+
+message PResultReq{//请求战斗结果
+    required int32 gateId=1;//关卡id
+    required int32 xId=2;//节点id
+    required int32 star=3;//星级
+    
+}
+message PResultResp{//战斗结果返回
+   required int32 star=1;//星级
+   required int32 groupLvl=2;//
+   required int32 groupExp=3;//
+   required int32 coin=4;//
+   repeated PNpcRes npcs=5;//
+   repeated PItemRes items=6;//
+}

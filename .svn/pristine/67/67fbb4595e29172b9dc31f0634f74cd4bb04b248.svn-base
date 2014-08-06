@@ -1,0 +1,14 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "MapProBuf";
+
+message PMapReq{
+	required int32 mapID=1; //地图id
+}
+message PMapItem{
+	required int32 star=1;  //通过某一小关的星级
+	required int32 xItem=2; //怪物组id(或者地图id)(monster group/ map) 
+}
+message PMapResp{
+  
+   repeated PMapItem items =1;//服务器返回的地图列表
+}

@@ -1,0 +1,222 @@
+//
+//  Manager.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-4.
+//
+//
+
+#include "Manager.h"
+#include "Loading.h"
+static Manager* instance=nullptr;
+
+Manager* Manager::getInstance(){
+    if(instance==nullptr){
+        instance=new Manager();
+    }
+    return instance;
+}
+
+void Manager::switchScence(Scene* scene)
+{
+    auto curScene=Director::getInstance()->getRunningScene();
+    if (curScene) {
+        Director::getInstance()->replaceScene(scene);
+    }else{
+        Director::getInstance()->runWithScene(scene);
+    }
+    if(this->scene && this->scene->getChildByTag(-100)){
+        this->scene->removeChildByTag(-100);
+    }
+    this->scene=scene;
+    this->scene->addChild(Loading::getInstance(),LOADING_LAY,-100);
+    Loading::getInstance()->show();
+}
+
+void Manager::setRoleData(NetMsg* msg)
+{
+    if(this->roleData) delete this->roleData;
+    this->roleData=new LoginResp();
+    this->roleData->ParseFromArray(msg->bytes, msg->len);
+}
+
+LoginResp* Manager::getRoleData()
+{
+    return this->roleData;
+}
+
+void Manager::updateRole(NetMsg* msg)
+{
+    PUpRole role;
+    role.ParseFromArray(msg->bytes,msg->len);
+    if (role.updatepkid()==this->roleData->mutable_role()->roleid()) {
+        switch (role.fieldtype()) {
+            case RoleFields::MONEY:
+            {
+                this->roleData->mutable_role()->set_coin(role.finalvalue());
+                break;
+            }
+            case RoleFields::LEVEL:
+            {
+                this->roleData->mutable_role()->set_level(role.finalvalue());
+                break;
+            }
+            case RoleFields::RMB:
+            {
+                this->roleData->mutable_role()->set_rmb(role.finalvalue());
+                break;
+            }
+            case RoleFields::EXP:
+            {
+                this->roleData->mutable_role()->set_exp(role.finalvalue());
+                break;
+            }
+            case RoleFields::VIP_LEVEL:
+            {
+                this->roleData->mutable_role()->set_viplvl(role.finalvalue());
+                break;
+            }
+            case RoleFields::ENERGY:
+            {
+                this->roleData->mutable_role()->set_stamina(role.finalvalue());
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    else if(role.updatepkid()!=this->roleData->mutable_role()->roleid())
+    {
+        PNpc* pNpc=this->getNpc(role.updatepkid());//通过id获取npc指针
+        if (pNpc) {
+            switch (role.fieldtype()) {
+                case RoleFields::LEVEL:
+                {
+                    pNpc->set_level(role.finalvalue());
+                    break;
+                }
+                case RoleFields::EXP:
+                {
+                    pNpc->set_exp(role.finalvalue());
+                    break;
+                }
+                case RoleFields::QUALITY:
+                {
+                    pNpc->set_quality(role.finalvalue());
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+    
+}
+
+void Manager::updateItems(NetMsg* msg)
+{
+    PUpItem item;
+    item.ParseFromArray(msg->bytes, msg->len);
+    google::protobuf::RepeatedPtrField< ::PItemChangeLog >::iterator it=item.mutable_itemloglist()->begin();
+    for (; it!=item.mutable_itemloglist()->end(); ++it)
+    {
+        if(it->npcid()!=0)//更新英雄身上的装备
+        {
+            PNpc* pNpc=this->getNpc(it->npcid());
+            this->updateItem(it, pNpc->mutable_equiplist());
+        }
+        else if(it->npcid()==0)//背包中添加
+        {
+            this->updateItem(it, this->roleData->mutable_itemlist());
+        }
+    }
+}
+
+void Manager::updateItem(RepeatedPtrField< ::PItemChangeLog >::iterator it,RepeatedPtrField< ::PItem > *items)
+{
+    bool isFound=false;
+    for (int i=0;i<items->size();i++)
+    {
+        PItem item=items->Get(i);
+        if (item.itemid()==it->itemid()) {
+            if (it->itemfinalnum()==0)//为0要从背包删除此物品
+            {
+                items->DeleteSubrange(i, 1);
+            }
+            else if(it->itemfinalnum()!=0)//不为0更新
+            {
+                item.set_itemnum(it->itemfinalnum());
+            }
+            isFound=true;
+            break;
+        }
+        
+    }
+    if (!isFound) {//不存在添加
+        PItem* item=new PItem();
+        item->set_itemnum(it->itemfinalnum());
+        item->set_itemid(it->itemid());
+        item->set_npcid(it->npcid());
+        items->AddAllocated(item);
+    }
+
+}
+
+PNpc* Manager::getNpc(long npcId)
+{
+    for (int i=0;i<this->roleData->npclist_size();i++)
+    {
+        PNpc* pnpc=this->roleData->mutable_npclist(i);
+        if (pnpc->roleid()==npcId) {
+            return pnpc;
+            break;
+        }
+    }
+    return nullptr;
+    
+}
+
+
+
+
+void Manager::showMsg(const char* msg)
+{
+    if (!this->scene)
+    {
+        return;
+    }
+    auto msgLayer=Node::create();
+    Size size=CCDirector::getInstance()->getWinSize();
+    this->scene->addChild(msgLayer, MSG_LAY);
+    
+    cocos2d::extension::Scale9Sprite* messagBg = cocos2d::extension::Scale9Sprite::create("loading_bg.png");
+    messagBg->setPosition(Vec2(size.width/2, size.height/2));
+    messagBg->setCapInsets(Rect(50, 50, messagBg->getContentSize().width-100, messagBg->getContentSize().height-100));
+    msgLayer->addChild(messagBg,0,1);
+    
+    Label* label=Label::createWithSystemFont(msg, "Arial", 24,Size(355,80),TextHAlignment::CENTER,TextVAlignment::CENTER);
+    label->setTag(100);
+    msgLayer->addChild(label,0,1);
+    label->setPosition(Vec2(size.width/2,size.height/2));
+    messagBg->setContentSize(Size(label->getContentSize().width+50, label->getContentSize().height+20));
+    messagBg->setOpacity(0);
+    Sequence* seqBg=Sequence::create(FadeIn::create(0.2),DelayTime::create(1),CCFadeOut::create(0.2),CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, msgLayer)),NULL);
+    messagBg->runAction(seqBg);
+    
+}
+
+std::string Manager::getLang(string arg,...)
+{
+    va_list args;
+    va_start(args, arg);
+    char* str = va_arg(args, char*);
+    int i=1;
+    while(str)
+    {
+        string format="{"+Value(i).asString()+"}";
+        arg.replace(arg.find(format), 3, str);
+        str =va_arg(args, char*);
+        i++;
+    }
+    return  arg;
+}

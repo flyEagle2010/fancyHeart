@@ -1,0 +1,59 @@
+//
+//  MFight.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-15.
+//
+//
+
+#ifndef __fancyHeart__MFight__
+#define __fancyHeart__MFight__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "MFighter.h"
+#include "external/json/rapidjson.h"
+#include "external/json/document.h"
+#include "FightScene.h"
+
+using namespace cocos2d;
+
+#define RANDOM_0_1() ((float)rand()/RAND_MAX)
+class MFighter;
+class FightScene;
+
+class FightMgr:public Ref{
+    MFighter* attacker;
+    //移动，检查目标（攻击，走＋攻击）
+    int selectSkill();
+    std::vector<int> selectTarget();
+    std::vector<int> selectStrategy(int num,Vector<MFighter*> arr);
+
+    void castSpell(int skill); //施法
+    void evaluteResult(); //结果评估，闪避，免疫，爆击，正常命中
+    void hitDeal();// 命中处理，1遍历技能效果，2追加计算结果，3检查出发事项（buff,被动触发，事件触发）
+    void changeResult(); //爆击等改变最终值
+    void checkDie(); //检查是死亡
+    
+    
+    void onFrame(float dt);
+public:
+    FightMgr(){};
+    static FightMgr* getInstance();
+    void init(std::vector<int> leftVec,std::vector<int> rightVec);
+    void init(rapidjson::Value& data);
+//    std::vector<MFighter*>leftArr;
+//    std::vector<MFighter*>rightArr;
+//    void attack(MFighter* mf,int triggerType);
+    Vector<MFighter*>leftArr;
+    Vector<MFighter*>rightArr;
+    void clear();
+
+    rapidjson::Value data;
+    
+    FightScene* view;
+    
+    MFighter* mf;
+};
+
+#endif /* defined(__fancyHeart__MFight__) */

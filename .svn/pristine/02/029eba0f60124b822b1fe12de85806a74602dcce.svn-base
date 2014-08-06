@@ -1,0 +1,16 @@
+package com.doteyplay.game;
+
+
+/**
+ *
+ */
+public class BOConst {
+
+	public final static int BO_GATEWAY = 3;
+	
+	public final static int BO_WORLD = 4;
+	
+	public final static int BO_ROLEINFO = 5;
+	
+	public final static int BO_BATTLE = 6;
+}

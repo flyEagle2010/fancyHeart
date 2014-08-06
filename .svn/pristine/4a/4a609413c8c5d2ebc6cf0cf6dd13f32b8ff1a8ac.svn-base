@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root name="移动网游平台配置">   
+	<mobile_platform_url description="移动网游平台的URL">gmpbeta.i139.cn</mobile_platform_url>
+	<mobile_platform_login_url description="移动网游友平台认证的URL">/bizcontrol/LoginOnlineGame?sender=202&amp;cpId=C00122&amp;cpServiceId=120121974000&amp;fid=1000</mobile_platform_login_url>
+</root>
+
+

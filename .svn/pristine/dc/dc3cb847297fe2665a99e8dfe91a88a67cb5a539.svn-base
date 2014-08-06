@@ -1,0 +1,67 @@
+package com.doteyplay.game.domain.tollgate;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @className:NodeArray.java
+ * @classDescription:
+ * @author:Tom.Zheng
+ * @createTime:2014年6月24日 下午2:32:14
+ */
+public class NodeArray<K, T> {
+
+	private List<T> nodeList;
+
+	private Map<K, T> nodeMap;
+
+	public NodeArray() {
+		initlize();
+	}
+	/**
+	 * 初始化内存空间
+	 */
+	private void initlize() {
+		nodeList = new ArrayList<T>();
+		nodeMap = new HashMap<K, T>();
+	}
+
+	public void addValue(K k, T t) {
+		nodeList.add(t);
+		nodeMap.put(k, t);
+	}
+
+	public boolean containKey(K k) {
+		return nodeMap.containsKey(k);
+	}
+
+	public void remove(K k, T t) {
+		nodeList.remove(t);
+		nodeMap.remove(k);
+	}
+
+	public int size() {
+		// TODO Auto-generated method stub
+		return nodeList.size();
+	}
+	
+	/**
+	 * 返回不可以修改的List
+	 * @return
+	 */
+	public List<T> getNodeList(){
+		return Collections.unmodifiableList(nodeList);
+	}
+	
+	public T get(K k){
+		return nodeMap.get(k);
+	}
+	
+	public void clear(){
+		nodeList.clear();
+		nodeMap.clear();
+	}
+}

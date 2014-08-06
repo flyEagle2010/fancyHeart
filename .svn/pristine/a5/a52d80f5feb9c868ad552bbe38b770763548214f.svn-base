@@ -1,0 +1,65 @@
+//
+//  FData.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-23.
+//
+//
+
+#ifndef __fancyHeart__FData__
+#define __fancyHeart__FData__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "XRole.h"
+#include "XRoleData.h"
+#include "XRoleStar.h"
+#include "Buff.h"
+#include "XMonster.h"
+using namespace cocos2d;
+class Buff;
+struct BData{
+    int xid;
+    int lv;
+    int rate;
+    int star;
+    int pos;
+};
+class FData:public Ref
+{
+    //攻击 物防	法防	暴击	闪避
+//    CC_SYNTHESIZE(int, buffAtc, BuffAtc);
+//    CC_SYNTHESIZE(int, buffDef, BuffDef);
+//    CC_SYNTHESIZE(int, buffMDef, BuffMdef);
+//    CC_SYNTHESIZE(int, buffCrh, BuffCrh);
+//    CC_SYNTHESIZE(int, buffMiss, BuffMiss);
+public:
+    BData bd;
+    int lv;
+    int hp;
+    int mp;
+    int row;
+    int star;
+    int grade;
+    int roleID;
+    int atc;
+    int mAtc;
+    int def;
+    int mDef;
+    int miss;
+    int reHp;
+public:
+    static FData* create(BData bd);
+    bool init(BData bd);
+//    int getHp();
+//    int getAtc();
+//    int getDef();
+//    int getMDef();
+//    int getMiss();
+//    int getCrh();
+//    int getReHp();
+    void addBuff(Buff* buff);
+    void delBuff(Buff* buff);
+private:
+};
+#endif /* defined(__fancyHeart__FData__) */

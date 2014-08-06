@@ -1,0 +1,7 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "CommonRespProBuf";
+
+message PCommonResp{
+    required int32 resultType=1;//结果类型
+    required int32 status=2;//请求状态0成功其他是失败
+}

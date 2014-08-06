@@ -1,0 +1,19 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "ItemProBuf";
+
+message PItem{
+   required int32 itemId=1;//道具id
+   required int32 itemNum=2; //物品数量
+   required int64 npcId=3;//英雄id
+}
+
+message PItemChangeLog{
+   required int32 itemId=1;//道具id
+   required int32 itemAddNum=2; //物品变化数量
+   required int32 itemFinalNum=3; //物品最终
+   required int64 npcId=4;//英雄id
+}
+
+message PUpItem{
+   repeated PItemChangeLog itemLogList=1;
+}

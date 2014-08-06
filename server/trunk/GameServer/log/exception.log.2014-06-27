@@ -1,0 +1,86 @@
+2014-06-27 18:24:29
+?????????????????ò????????????????null Nested exception: null
+org.dom4j.DocumentException: null Nested exception: null
+	at org.dom4j.io.SAXReader.read(SAXReader.java:484)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.doteyplay.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.doteyplay.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.doteyplay.game.startservice.ConfigService.onReady(ConfigService.java:43)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:80)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:230)
+	at com.doteyplay.game.GameServer.main(GameServer.java:249)
+Nested exception: 
+java.net.MalformedURLException
+	at java.net.URL.<init>(URL.java:601)
+	at java.net.URL.<init>(URL.java:464)
+	at java.net.URL.<init>(URL.java:413)
+	at com.sun.org.apache.xerces.internal.impl.XMLEntityManager.setupCurrentEntity(XMLEntityManager.java:647)
+	at com.sun.org.apache.xerces.internal.impl.XMLVersionDetector.determineDocVersion(XMLVersionDetector.java:186)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:779)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:744)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:128)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1208)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:543)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:465)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.doteyplay.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.doteyplay.game.config.ConfigLoader.initConfig(ConfigLoader.java:30)
+	at com.doteyplay.game.startservice.ConfigService.onReady(ConfigService.java:43)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:80)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:230)
+	at com.doteyplay.game.GameServer.main(GameServer.java:249)
+2014-06-27 18:24:29
+?????????????????ò????????????????null Nested exception: null
+org.dom4j.DocumentException: null Nested exception: null
+	at org.dom4j.io.SAXReader.read(SAXReader.java:484)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.doteyplay.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.doteyplay.game.config.ConfigLoader.initConfig(ConfigLoader.java:34)
+	at com.doteyplay.game.startservice.ConfigService.onReady(ConfigService.java:43)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:80)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:230)
+	at com.doteyplay.game.GameServer.main(GameServer.java:249)
+Nested exception: 
+java.net.MalformedURLException
+	at java.net.URL.<init>(URL.java:601)
+	at java.net.URL.<init>(URL.java:464)
+	at java.net.URL.<init>(URL.java:413)
+	at com.sun.org.apache.xerces.internal.impl.XMLEntityManager.setupCurrentEntity(XMLEntityManager.java:647)
+	at com.sun.org.apache.xerces.internal.impl.XMLVersionDetector.determineDocVersion(XMLVersionDetector.java:186)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:779)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:744)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:128)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1208)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:543)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:465)
+	at org.dom4j.io.SAXReader.read(SAXReader.java:343)
+	at com.doteyplay.core.configloader.KeyValueXMLReflection.reflect(KeyValueXMLReflection.java:40)
+	at com.doteyplay.game.config.ConfigLoader.initConfig(ConfigLoader.java:34)
+	at com.doteyplay.game.startservice.ConfigService.onReady(ConfigService.java:43)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:80)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:230)
+	at com.doteyplay.game.GameServer.main(GameServer.java:249)
+2014-06-27 18:24:29
+初始化GameServer失败
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at com.doteyplay.core.resourcebundle.WordResource._init(WordResource.java:24)
+	at com.doteyplay.core.resourcebundle.WordResource.init(WordResource.java:62)
+	at com.doteyplay.game.startservice.ConfigService.onReady(ConfigService.java:46)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:80)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:230)
+	at com.doteyplay.game.GameServer.main(GameServer.java:249)
+2014-06-27 18:26:17
+初始化GameServer失败
+com.doteyplay.game.util.excel.ConfigException: Errors occurs while parsing xls file:怪物表.xls
+	at com.doteyplay.game.util.excel.TemplateService.init(TemplateService.java:67)
+	at com.doteyplay.game.startservice.DataStoreService.onReady(DataStoreService.java:25)
+	at com.doteyplay.game.GameServer.initialize(GameServer.java:90)
+	at com.doteyplay.game.GameServer.startGameServer(GameServer.java:230)
+	at com.doteyplay.game.GameServer.main(GameServer.java:249)
+Caused by: java.io.FileNotFoundException: C:\Users\AllenGao\Desktop\project2\data/怪物表.xls (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:120)
+	at java.io.FileInputStream.<init>(FileInputStream.java:79)
+	at com.doteyplay.game.util.excel.TemplateService.init(TemplateService.java:61)
+	... 4 more

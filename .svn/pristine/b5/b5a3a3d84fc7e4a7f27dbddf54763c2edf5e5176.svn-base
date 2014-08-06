@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PetBean">
+	<typeAlias alias="petBean" type="com.doteyplay.game.domain.gamebean.petBean" />
+
+	<insert id="insertPetBean" parameterClass="petBean">
+		INSERT INTO
+		t_pet
+		(
+			id,roleId,level,areaId,quality,star,curStarPosList,exp
+		)
+		VALUES
+		(
+			#id#,#roleId#,#level#,#areaId#,#quality#,#star#,#curStarPosList# 
+		)
+	</insert>
+
+
+	<select id="selectPetBean" resultClass="petBean"
+		parameterClass="int">
+		SELECT
+		id,
+		roleId,
+		level,
+		areaId,
+		quality,
+		star,
+		exp,
+		curStarPosList 
+		FROM t_pet
+		WHERE id =
+		#value#
+	</select>
+	
+	<select id="selectPetBeanListByRoleId" resultClass="petBean"
+		parameterClass="int">
+		SELECT
+		id,
+		roleId,
+		level,
+		areaId,
+		quality,
+		star,
+		exp,
+		curStarPosList  
+		FROM t_pet
+		WHERE roleId =
+		#value#
+	</select>
+
+	<select id="updatePetBean" parameterClass="petBean">
+		update 
+		t_pet 
+		set 
+		roleId = #roleId#,
+		name = #name#,
+		level = #level#,
+		areaId = #areaId#,
+		quality = #quality#
+		star = #star#,
+		exp = #exp#,
+		curStarPosList = #curStarPosList#  
+		WHERE id =
+		#value#
+	</select>
+
+</sqlMap>

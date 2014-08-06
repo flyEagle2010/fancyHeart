@@ -1,0 +1,27 @@
+//
+//  chat.h
+//  fancyHeart
+//
+//  Created by zhai on 14-7-9.
+//
+//
+
+#ifndef __fancyHeart__chat__
+#define __fancyHeart__chat__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "Manager.h"
+using namespace cocos2d;
+using namespace ui;
+using namespace cocostudio;
+class Chat:public BaseUI{
+public:
+	static Chat* getInstance();
+	virtual void onEnter();
+	virtual bool init();
+    void touchButtonEvent(Ref *pSender, TouchEventType type);
+private:
+
+};
+#endif /* defined(__fancyHeart__chat__) */

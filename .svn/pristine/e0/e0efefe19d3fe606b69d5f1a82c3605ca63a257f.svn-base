@@ -1,0 +1,168 @@
+package com.doteyplay.game.action.common;
+
+import org.apache.log4j.Logger;
+import org.apache.mina.core.buffer.IoBuffer;
+import org.apache.mina.core.session.IoSession;
+
+import com.doteyplay.core.bhns.BOServiceManager;
+import com.doteyplay.core.bhns.ISimpleService;
+import com.doteyplay.core.configloader.MessageRegistry;
+import com.doteyplay.core.objectpool.SimpleByteArrayPool;
+import com.doteyplay.game.MessageCommands;
+import com.doteyplay.game.domain.session.SessionHolder;
+import com.doteyplay.game.service.runtimecache.GlobalSessionCache;
+import com.doteyplay.net.message.AbstractMessage;
+import com.doteyplay.net.message.IMessageAction;
+import com.doteyplay.net.message.IMessageActionHelper;
+import com.doteyplay.net.message.MessageActionParameterResolver;
+
+public class GatewayServerPipeline
+{
+	private static Logger logger = Logger
+			.getLogger(GatewayServerPipeline.class);
+
+	private SimpleByteArrayPool pool = new SimpleByteArrayPool(500, 2048);
+
+	public void dispatchAction(IoSession session, IoBuffer buffer)
+	{
+		short commandId = buffer
+				.getShort(AbstractMessage.MESSAGE_COMMANDID_INDEX);
+
+		if (commandId > MessageCommands.MESSAGE_NUM)
+		{
+			logger.error("消息号不合法");
+			return;
+		}
+
+		logger.debug("RECV_MESSAGE:"
+				+ MessageCommands.getMessageCommandName(commandId));
+		IMessageActionHelper helper = MessageRegistry.getInstance()
+				.getMessageActionHelper(commandId);
+
+		MessageActionParameterResolver<?> resolver = helper.getResolver();
+
+		MessageCommands command = MessageCommands.values()[commandId];
+		int boId = MessageCommands.getBoIdByCommandId(commandId);
+		try
+		{
+			// ServiceMessageAction 消息转发到服务的节点
+			if (resolver == null)
+			{
+				SessionHolder sessionHolder = GlobalSessionCache.getInstance()
+						.getBySession(session);
+				if (sessionHolder == null && command.IS_NEED_AUTH)
+				{
+					logger.error("未登录，不能转发服务请求");
+					return;
+				}
+
+				long sessionId = sessionHolder == null ? GlobalSessionCache
+						.getSessionIdByGatewayEndpoint(session) : sessionHolder
+						.getSessionId();
+
+				ISimpleService service = null;
+				if (sessionHolder != null)
+					service = BOServiceManager.findService(boId,
+							sessionHolder.getCurRoleId());
+				else
+				{
+					service = BOServiceManager.findDefaultService(boId);
+					GlobalSessionCache.getInstance().addSession(session);
+				}
+
+				int byteLength = buffer.limit();
+				byte[] tmpMessageBytes = pool.borrow();
+				buffer.get(tmpMessageBytes, 0, byteLength);
+				if (service.isValid())
+				{
+					service.messageReceived(tmpMessageBytes, sessionId);
+				} else
+				{
+					logger.error(
+							"未激活服务，roleId = " + sessionHolder.getCurRoleId(),
+							new UnsupportedOperationException("未激活服务，roleId = "
+									+ sessionHolder.getCurRoleId()));
+				}
+				pool.free(tmpMessageBytes);
+				return;
+			}
+
+		} catch (Exception e)
+		{
+			logger.error("获取消息处理类失败", e);
+		}
+
+		AbstractMessage message = MessageRegistry.getInstance().getMessage(
+				commandId);
+		if (message == null)
+		{
+			return;
+		}
+
+		try
+		{
+			message.decodeMessage(buffer);
+		} catch (Exception e)
+		{
+			logger.error(
+					"dispatchAction(IoSession, IoBuffer) -消息解析错误- buffer=" + buffer + ", commandId=" + commandId + ", message=" + message, e); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		}
+
+		try
+		{
+			if (session == null)
+			{
+				logger.error("session can not null.");
+				return;
+			}
+
+			if (!session.isConnected())
+			{
+				logger.error("session is not connected.");
+				return;
+			}
+
+			long timestampBeforeUpdate = System.currentTimeMillis();
+
+			IMessageAction action = helper.getAction();
+			Object secondParameter = resolver
+					.resolveParameter(session, message);
+
+			if (secondParameter != null)
+			{
+				try
+				{
+					boolean canUseAction = true;
+					if (canUseAction)
+					{
+						action.processMessage(message, secondParameter);
+					}
+				} catch (Exception e)
+				{
+					String str = e.getMessage();
+					if (str == null)
+						str = "";
+					StringBuilder sb = new StringBuilder(str);
+					sb.append("\n参数：").append(secondParameter);
+					sb.append("\n消息：").append(message);
+					logger.error(sb.toString(), e);
+				}
+			} else
+			{
+				logger.error("****强制关闭会话**** : 消息处理时参数对象为空[session=" + session
+						+ ",commandId=" + "(" + commandId + "),message="
+						+ message + "]");
+				session.close(true);
+				return;
+			}
+
+		} catch (Exception e)
+		{
+
+			logger.error(
+					"dispatchAction(IoSession, AbstractMessage) -消息处理错误- message=" + message, e); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		}
+
+		MessageRegistry.getInstance().getFactory().freeMessage(message);
+	}
+}

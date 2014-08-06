@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleBean">
+	<typeAlias alias="roleBean" type="com.doteyplay.game.domain.gamebean.RoleBean" />
+
+	<insert id="insertRoleBean" parameterClass="roleBean">
+		INSERT INTO
+		t_role
+		(
+			id,userId,name, level,areaId,quality,star,curStarPosList,exp,spriteId
+		)
+		VALUES
+		(
+			#id#,#userId#,#name#,#level#,#areaId#,#quality#,#star#,#curStarPosList#,#exp#,#spriteId# 
+		)
+	</insert>
+
+
+	<select id="selectRoleBean" resultClass="roleBean"
+		parameterClass="long">
+		SELECT
+		id,
+		userId,
+		name,
+		level,
+		areaId,
+		spriteId,
+		quality,
+		star,
+		exp,
+		curStarPosList 
+		FROM t_role
+		WHERE id =
+		#value#
+	</select>
+	
+	<select id="selectRoleBeanByUserId" resultClass="roleBean"
+		parameterClass="long">
+		SELECT
+		id,
+		userId,
+		name,
+		level,
+		areaId,
+		spriteId,
+		quality,
+		star,
+		exp,
+		curStarPosList  
+		FROM t_role
+		WHERE userId =
+		#value#
+	</select>
+
+	<select id="selectRoleBeanByName" resultClass="roleBean"
+		parameterClass="String">
+		SELECT
+		id,
+		userId,
+		name,
+		level,
+		areaId,
+		spriteId,
+		quality
+		star,
+		exp,
+		curStarPosList  
+		FROM t_role
+		WHERE name =
+		#value#
+	</select>
+
+	<select id="updateRoleBean" parameterClass="roleBean">
+		update 
+		t_role 
+		set 
+		userId = #userId#,
+		name = #name#,
+		level = #level#,
+		areaId = #areaId#,
+		spriteId= #spriteId#,
+		quality = #quality#,
+		star = #star#,
+		exp = #exp#,
+		curStarPosList = #curStarPosList#  
+		WHERE id =
+		#id#
+	</select>
+
+</sqlMap>

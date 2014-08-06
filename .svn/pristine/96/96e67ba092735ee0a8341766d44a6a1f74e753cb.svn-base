@@ -1,0 +1,64 @@
+//
+//  RotatList.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-30.
+//
+//
+
+#ifndef __fancyHeart__RotatList__
+#define __fancyHeart__RotatList__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "ui/UILayout.h"
+#include "ui/UIScrollInterface.h"
+using namespace cocos2d;
+using namespace cocos2d::ui;
+
+class RotateList:public Layout
+{
+public:
+	static RotateList* create();
+    virtual void onEnter() override;
+    
+	virtual bool onTouchBegan(Touch *touch, Event *unusedEvent) override;
+    virtual void onTouchMoved(Touch *touch, Event *unusedEvent) override;
+    virtual void onTouchEnded(Touch *touch, Event *unusedEvent) override;
+    virtual void onTouchCancelled(Touch *touch, Event *unusedEvent) override;
+    
+    virtual void update(float dt) override;//移动还有角度变化
+    
+    virtual bool init() override;
+    
+    virtual void addChild(Node * child) override;
+    virtual void addChild(Node* child, int zOrder, int tag) override;
+    void setItemModel(Widget* model);//设置样式
+    void setMoveType(Node* widget,int x);
+    
+private:
+    int goDistance;//触摸移动的横向位移
+    void goBack();
+    int itemNum;//需要制作多少模版
+    void changePos(const Vec2 &realOffset);
+    float itemWidth;//记录单个模版的宽度
+    int haveItemNum;//整个显示界面当前放几个模版
+    bool isBack;//是否回弹（当到最左边和最右边不能走到时候不能回弹）
+    
+protected:
+    virtual void initRenderer() override;
+    virtual bool scrollChildren(float touchOffsetX, float touchOffsetY);//移动坐标
+    void handleReleaseLogic(const Vec2 &touchPoint);
+    bool _bePressed;
+    float _slidTime;
+    Vec2 _touchBeganPoint;
+    Vec2 _touchMovedPoint;
+    Vec2 _touchEndedPoint;
+    Vec2 _touchMovingPoint;
+
+    virtual void checkChildInfo(int handleState,Widget* sender,const Vec2 &touchPoint) override;
+    float _childFocusCancelOffset;
+    void change();
+    
+};
+#endif /* defined(__fancyHeart__RotateList__) */

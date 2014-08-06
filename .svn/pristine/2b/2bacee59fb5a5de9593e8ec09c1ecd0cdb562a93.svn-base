@@ -1,0 +1,81 @@
+package com.doteyplay.manager;
+
+import com.doteyplay.bean.UserBean;
+import com.doteyplay.core.dbcs.DBCS;
+import com.doteyplay.dao.IUserBeanDao;
+import com.doteyplay.domain.LoginResponse;
+import com.doteyplay.manager.NosqlCached.CacheType;
+import com.google.gson.Gson;
+
+public class AuthManager
+{
+	private Gson gson = new Gson();
+
+	private AuthManager()
+	{
+
+	}
+
+	public String login(String account, String password)
+	{
+		LoginResponse response = new LoginResponse();
+		if (account == null || "".equals(account))
+		{
+			response.setLoginState(LoginResponse.LOGIN_STATE_ACCOUNT_NULL);
+			return gson.toJson(response);
+		}
+
+		UserBean userBean = NosqlCached.getInstance().getObject(CacheType.USER,
+				account);
+		if (userBean == null)
+		{
+			IUserBeanDao userDao = DBCS.getExector(IUserBeanDao.class);
+			userBean = userDao.selectUserBeanByName(account);
+
+			if (userBean == null)
+			{
+				userBean = new UserBean();
+				userBean.setName(account);
+				userBean.setPassword(password);
+				long userId = userDao.insertUserBean(userBean);
+				userBean.setId(userId);
+			}
+		}
+
+		NosqlCached.getInstance().put(CacheType.USER, userBean.getName(),
+				userBean);
+
+		String sessionKey = account
+				+ String.valueOf(System.currentTimeMillis());
+
+		NosqlCached.getInstance().put(CacheType.SESSION_KEY, account,
+				sessionKey);
+
+		response.setUserBean(userBean);
+		response.setAreaList(AreaManager.getInstance().getAreaList());
+		response.setKey(sessionKey);
+		response.setLoginState(LoginResponse.LOGIN_STATE_SUCCESS);
+
+		return gson.toJson(response);
+	}
+
+	public UserBean checkAuth(String account, String sessionKey)
+	{
+		String record = NosqlCached.getInstance().getObject(
+				CacheType.SESSION_KEY, account);
+		if (record != null && record.equals(sessionKey))
+		{
+			NosqlCached.getInstance().remove(CacheType.SESSION_KEY, account);
+			return NosqlCached.getInstance().getObject(CacheType.USER, account);
+		}
+		return null;
+	}
+
+	// /////////////////////////////////////////////////////////////////////////
+	private final static AuthManager instance = new AuthManager();
+
+	public final static AuthManager getInstance()
+	{
+		return instance;
+	}
+}

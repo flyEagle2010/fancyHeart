@@ -1,0 +1,17 @@
+package com.doteyplay.game.persistence.serverdata.user;
+
+import com.doteyplay.core.dbcs.daoproxy.IDaoExecutor;
+import com.doteyplay.core.dbcs.executor.DAOInfo;
+import com.doteyplay.game.domain.gamebean.UserBean;
+
+public interface IUserBeanDao extends IDaoExecutor {
+	@DAOInfo(Params = "")
+	public UserBean selectUserBean(int userId);
+	
+	@DAOInfo(Params = "")
+	public UserBean selectUserBeanByName(String userName);
+
+	@DAOInfo(Params = "")
+	public void insertUserBean(UserBean userBean);
+
+}

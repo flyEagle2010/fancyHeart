@@ -1,0 +1,45 @@
+//
+//  BaseData.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-11.
+//
+//
+
+#include "BData.h"
+void BData::setData(std::ifstream& ifile,int& field)
+{
+    ifile.read((char*)&field, sizeof(int));
+    //log("int:%d,%d",field,htonl(field));
+    field=htonl(field);
+    log("int:%d",field);
+}
+
+void BData::setData(std::ifstream& ifile,unsigned char& field)
+{
+    ifile.read((char*)&field, sizeof(char));
+    log("char:%d",field);
+}
+
+void BData::setData(std::ifstream& ifile, std::string& field)
+{
+    short len=0;
+    ifile.read((char*)&len, 2);
+    len=htons(len);
+    if(len==0){
+        field="";
+    }else{
+        char arr[len];
+        arr[len]=0;
+        ifile.read((char*)&arr, len);
+        field=(const char*)arr;
+    }
+    
+    log("string filed:%d,%s",len,field.c_str());
+}
+
+void BData::setData(std::ifstream &ifile, bool& field)
+{
+    ifile.read((char*)&field, sizeof(bool));
+    log("bool:%d",field);
+}

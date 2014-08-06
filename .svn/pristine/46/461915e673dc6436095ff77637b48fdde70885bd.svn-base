@@ -1,0 +1,146 @@
+//
+//  FightScene.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-5.
+//
+//
+
+#include "FightScene.h"
+#include "HomeScene.h"
+
+Scene* FightScene::createScene(){
+	auto scene = Scene::create();
+    auto layer = FightScene::create();
+    scene->addChild(layer,0,0);
+	return scene;
+}
+
+FightScene* FightScene::create()
+{
+    FightScene* pRet=new FightScene();
+    if (pRet && pRet->init("publish/fight/fight.ExportJson")) {
+        pRet->autorelease();
+        return pRet;
+    }
+    CC_SAFE_DELETE(pRet);
+    return nullptr;
+}
+
+bool FightScene::init(const char* fileName){
+
+
+    if(!BaseUI::init(fileName)){
+        return false;
+    }
+    this->heroNode=this->layout->getChildByName("heroNode");
+    this->effectNode=this->layout->getChildByName("effect");
+    
+    Size dSize(1136,640);
+    Size size=Director::getInstance()->getWinSize();
+    float scale=fmin(size.width/dSize.width,size.height/dSize.height);
+  
+    auto top=this->layout->getChildByName("top");
+    top->setScale(scale);
+    top->setPosition(Vec2(0,size.height*(1-scale)));
+    
+    this->skillNode=this->layout->getChildByName("skill");
+    this->skillNode->setScale(scale);
+    
+    this->bossInfo=top->getChildByName("bossBg");
+    this->bossInfo->setVisible(false);
+    
+ 
+    ui::Button* btn_pause=static_cast<ui::Button*>(top->getChildByName("btn_pause"));
+    btn_pause->addTouchEventListener(CC_CALLBACK_2(FightScene::touchEvent,this));
+    ui::Button* btn_auto=static_cast<ui::Button*>(skillNode->getChildByName("btn_auto"));
+    btn_auto->addTouchEventListener(CC_CALLBACK_2(FightScene::touchEvent, this));
+    
+    for(int i=0;i<5;i++){
+        
+    }
+    
+    
+    return true;
+}
+
+void FightScene::onEnter()
+{
+    Node::onEnter();
+}
+
+Vector<MFighter*> FightScene::initHero(Vector<FData*> arr)
+{
+    Size winSize=Director::getInstance()->getWinSize();
+    Vector<MFighter*> vec;
+    for(int i=0;i<arr.size();i++)
+    {
+        FData* fd=arr.at(i);
+        int pos = fd->bd.pos;
+        MFighter* mf=MFighter::create(fd);
+        mf->view=Fighter::create("bodydaobing2", "bodydaobing20", pos);
+        if(pos > 4){
+            mf->view->setPosition(Vec2(GRID_SIZE*2*(i-5)+winSize.width,winSize.height/2+(pos%2?GRID_SIZE:-GRID_SIZE)));
+        }else{
+            mf->view->setPosition(Vec2(-GRID_SIZE*2*i,winSize.height/2+(pos%2?-GRID_SIZE:GRID_SIZE)));
+        }
+        
+        this->addChild(mf->view,pos);
+        mf->view->delegate=mf;
+        vec.pushBack(mf);
+        
+        mf->start();
+    }
+    return vec;
+}
+
+void FightScene::bounce(MFighter *mf)
+{
+    
+}
+
+void FightScene::skillColdDown(int skillID)
+{
+    auto skill1=this->skillNode->getChildByName("skill0");
+    skill1->setVisible(false);
+    
+}
+
+void FightScene::touchEvent(cocos2d::Ref *pSender, Widget::TouchEventType type)
+{
+    Widget* sender=dynamic_cast<Widget*>(pSender);
+    log("sender:%d",sender->getTag());
+    switch (type)
+    {
+        case TouchEventType::BEGAN:
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+            if(sender->getTag()==10125){ //pause
+                log("pause..............");
+                FightMgr::getInstance()->clear();
+                Director::getInstance()->replaceScene(HomeScene::createScene());
+            }
+            if(sender->getTag()==10145){ //auto
+                log("auto..............");
+            }
+            
+            break;
+        case TouchEventType::CANCELED:
+            break;
+        default:
+            break;
+    }
+}
+
+void FightScene::onMessage(Socket* socket, const NetMsg& data)
+{
+    
+}
+
+void FightScene::onExit()
+{
+    FightMgr::getInstance()->clear();
+    Node::onExit();
+}

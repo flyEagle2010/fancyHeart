@@ -1,0 +1,80 @@
+//
+//  FighterCtrl.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-5.
+//
+//
+
+#ifndef __fancyHeart__MFighter__
+#define __fancyHeart__MFighter__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "external/json/rapidjson.h"
+#include "Manager.h"
+#include "Fighter.h"
+#include "FightMgr.h"
+#include "Utils.h"
+#include "Skill.h"
+#include "Buff.h"
+#include "FData.h"
+using namespace cocos2d;
+class Skill;
+class Buff;
+class FData;
+enum fstate{
+    idle, //空闲
+    start, //开始攻击
+    spell, //吟唱
+    buildup, //蓄力
+    throwing, //仍东西
+    cast,  //正式攻击
+    die //死亡
+};
+
+class MFighter:public Ref{
+public:
+    static MFighter* create(int pos);
+    ~MFighter();
+    bool init(int pos);
+    void initSkill();
+    void timeHandler(float dt);
+    void start();
+    void pause();
+    void startAttack(int triggerType);
+    Skill* selectSkill();
+    void spell(); //吟唱（引导）
+    void cast();  //施法
+    void shoot(MFighter* mf,int type); //仍东西(射击)1抛射 2直射 3穿刺
+    void buildup(); //蓄力
+    void bounce(); //弹射（弹的过程）
+    void attacked(); //受击
+    void fallHp(int num);
+    void die();
+    
+    int getGrid();
+    bool hpLessSort();
+    bool hpMostSort();
+    bool hpNearSort();
+    bool hpFarSort();
+    void clearBuff(Buff* buff);
+private:
+    float castTime; //吟唱时间
+    float cd; //
+    int rowNum; //0,1,2 前，中，后
+    
+    
+public:
+    FData* data;
+    int xid;
+    int pos;
+    Vector<Skill*> skills;
+    Vector<Buff*> buffs;
+    fstate currentState;
+    Fighter* view;
+    MFighter* foe;
+ 
+
+};
+#endif /* defined(__fancyHeart__MFighter__) */

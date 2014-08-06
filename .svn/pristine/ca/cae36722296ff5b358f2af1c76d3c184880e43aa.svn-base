@@ -1,0 +1,7 @@
+package com.doteyplay.core.util.dependence;
+
+public interface IDependenceAssembly
+{
+	public IDependence getItem(String name);
+
+}

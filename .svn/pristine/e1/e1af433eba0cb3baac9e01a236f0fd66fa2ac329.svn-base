@@ -1,0 +1,36 @@
+package com.doteyplay.game.action.common;
+
+import org.apache.mina.core.session.IoSession;
+
+import com.doteyplay.net.message.AbstractMessage;
+import com.doteyplay.net.message.MessageActionParameterResolver;
+
+/**
+ * SessionMessageAction的参数解析助手
+ * 
+ */
+public class SessionMessageActionParameterResolver 
+			implements MessageActionParameterResolver<IoSession>
+{
+	private final static MessageActionParameterResolver<?> instance = new SessionMessageActionParameterResolver();
+	
+	public static MessageActionParameterResolver<?> getInstance()
+	{
+		return instance;
+	}
+
+	private SessionMessageActionParameterResolver()
+	{
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @see com.doteyplay.net.message.MessageActionParameterResolver#resolveParameter(org.apache.mina.common.IoSession, com.doteyplay.net.message.AbstractMessage)
+	 */
+	@Override
+	public IoSession resolveParameter(IoSession session, AbstractMessage message)
+	{
+		return session;
+	}
+
+}

@@ -1,0 +1,196 @@
+//
+//  FightMgr.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-15.
+//
+//
+
+#include "FightMgr.h"
+
+static FightMgr* instance=nullptr;
+
+FightMgr* FightMgr::getInstance(){
+    if(instance==nullptr){
+        instance=new FightMgr();
+    }
+    return instance;
+}
+
+void FightMgr::init(std::vector<int>heros,int battleID)
+{
+    auto scene=FightScene::createScene();
+    Director::getInstance()->replaceScene(scene);
+    this->view=(FightScene*)scene->getChildByTag(0);
+    battleID=1001;
+    XBattle* xb=XBattle::record(Value(battleID));
+    if(xb->getMGroup1()>0) this->groups.push_back(xb->getMGroup1());
+    if(xb->getMGroup2()>0) this->groups.push_back(xb->getMGroup2());
+    if(xb->getMGroup3()>0) this->groups.push_back(xb->getMGroup3());
+    if(xb->getMGroup4()>0) this->groups.push_back(xb->getMGroup4());
+    if(xb->getMGroup5()>0) this->groups.push_back(xb->getMGroup5());
+    
+    this->initHero();
+    this->initNpc();
+}
+
+void FightMgr::init(rapidjson::Value& data)
+{
+    
+}
+
+void FightMgr::initHero()
+{
+    //初始化角色100
+    std::vector<int> heros={100,101,101,102,999};
+//    std::vector<int> heros={999};
+    Size winSize=Director::getInstance()->getWinSize();
+    sort(heros.begin(),heros.end(), FightMgr::sortGrid);
+
+    Vector<FData*> arr;
+    for(int i=0;i<heros.size();i++)
+    {
+        int xid=heros.at(i);
+        //xid lv rate star pos
+        BData bd={xid,1,1,1,i};
+        if(xid==999 || xid==998){
+            bd={xid,1,9,1,i};
+        }
+        FData* fd=FData::create(bd);
+        int pos = fd->bd.pos;
+        MFighter* mf=MFighter::create(fd);
+        mf->view=Fview::create("man animation", "man animation0", pos);
+        mf->view->setPosition(Vec2(-GRID_SIZE*2*i,winSize.height/2+(pos%2?-GRID_SIZE:GRID_SIZE)));
+        this->view->heroNode->addChild(mf->view,640-abs(mf->view->getPositionY()));
+        mf->view->delegate=mf;
+        this->heros.pushBack(mf);
+        
+        mf->start();
+    }
+}
+
+void FightMgr::initNpc()
+{
+    int groupID=this->groups.at(0);
+    this->groups.erase(groups.begin());
+    this->view->resetProgress();
+
+    //Vector<FData*> arr;
+    std::vector<int> npc;
+    XMonster* xm=XMonster::record(Value(groupID));
+    int mid=xm->getMID1();
+
+    npc.push_back(mid/10);
+    
+    
+    mid=xm->getMID2();
+    if(mid > 0) npc.push_back(mid/10);
+
+    mid=xm->getMID3();
+    if(mid > 0) npc.push_back(mid/10);
+    
+    mid=xm->getMID4();
+    if(mid > 0) npc.push_back(mid/10);
+    
+    mid=xm->getMID5();
+    if(mid > 0) npc.push_back(mid/10);
+    
+    //init modle & view
+    Size winSize=Director::getInstance()->getWinSize();
+    sort(npc.begin(), npc.end(), this->sortGrid);
+    
+    for(int i=0;i<npc.size();i++)
+    {
+        BData bd={npc.at(i),xm->getMLv2(),mid%1000,xm->getMStar2(),i+5};
+        FData* fd=FData::create(bd);
+        int pos = fd->bd.pos;
+        MFighter* mf=MFighter::create(fd);
+        mf->view=Fview::create("man animation", "man animation0", pos);
+        mf->view->setPosition(Vec2(GRID_SIZE*2*i+winSize.width,winSize.height/2+(pos%2?GRID_SIZE:-GRID_SIZE)));
+        this->view->heroNode->addChild(mf->view,640-mf->view->getPositionY());
+        mf->view->delegate=mf;
+        this->npcs.pushBack(mf);
+        
+        mf->start();
+    }
+}
+
+bool FightMgr::sortGrid(int f1,int f2)
+{
+    int dis1=XRole::record(Value(f1))->getLockGrid();
+    int dis2=XRole::record(Value(f2))->getLockGrid();
+    return dis1-dis2<0;
+}
+
+Vector<MFighter*> FightMgr::getFoes(int pos,bool isMe)
+{
+    Vector<MFighter*> arr;
+    if((pos<5 && isMe) || (pos>4 && !isMe)){
+        for(MFighter* mf : heros){
+            if(mf->state==fstate::die) continue;
+            arr.pushBack(mf);
+        }
+    }
+    if((pos<5 && !isMe) || (pos>4 && isMe)){
+        for(MFighter* mf : npcs){
+            if(mf->state==fstate::die) continue;
+            arr.pushBack(mf);
+        }
+    }
+    return arr;
+}
+
+MFighter* FightMgr::getFirst(int pos)
+{
+    MFighter* pRet=nullptr;
+    if(pos < 5){
+        pRet=heros.at(0);
+        for(MFighter* mf : heros){
+            if(mf->view->getPositionX()>pRet->view->getPositionX()){
+                pRet=mf;
+            }
+        }
+    }else{
+        pRet=npcs.at(0);
+        for(MFighter* mf :npcs){
+            if(mf->view->getPositionX()<pRet->view->getPositionX()){
+                pRet=mf;
+            }
+        }
+    }
+    return pRet;
+}
+
+MFighter* FightMgr::getRole()
+{
+    for(auto mf : this->heros){
+        if(mf->getIsRole()){
+            return mf;
+        }
+    }
+    return nullptr;
+}
+
+void FightMgr::handleResult(int pos)
+{
+    if(pos>4 && this->groups.size()){
+        this->view->nextBattle();
+        return;
+    }
+    log("fight end result");
+    rapidjson::Document data;
+    //Confirm* alert=Confirm::create(this->view, "aa");
+    //alert->show(this->view);
+    for(MFighter* mf :heros){
+        mf->pause();
+    }
+    for(MFighter* npc : npcs){
+        npc->pause();
+    }
+}
+
+void FightMgr::clear()
+{
+    this->heros.clear();
+    this->npcs.clear();
+}

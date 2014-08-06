@@ -1,0 +1,12 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "AccountProBuf";
+
+message PackageLoginReq{
+  required string name = 1;
+  required string passwd = 2;
+}
+message PackageLoginResp{
+  required bool status = 1;
+  optional int64 id = 2;
+  optional string name = 3;
+}

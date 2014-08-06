@@ -1,0 +1,158 @@
+package com.doteyplay.game.service.bo.tollgate;
+
+import com.doteyplay.core.bhns.AbstractSimpleService;
+import com.doteyplay.game.config.template.TollgateDataManager;
+import com.doteyplay.game.config.template.TollgateNodeDataTemplate;
+import com.doteyplay.game.domain.tollgate.RoleTollgate;
+import com.doteyplay.game.message.tollgate.ShowTollgateDetailMessage;
+import com.doteyplay.game.message.tollgate.TollgateAndNodeChangeInfoMessage;
+
+import common.Logger;
+
+public class TollgateInfoService extends
+		AbstractSimpleService<ITollgateInfoService> implements
+		ITollgateInfoService {
+	private static Logger logger = Logger.getLogger(TollgateInfoService.class);
+
+	private RoleTollgate roleTollgate = null;
+
+	@Override
+	public int getPortalId() {
+		// TODO Auto-generated method stub
+		return PORTAL_ID;
+	}
+
+	@Override
+	public void initlize() {
+		// TODO Auto-generated method stub
+		
+		roleTollgate = new RoleTollgate(this.getServiceId());
+		
+		roleTollgate.initlize();
+
+		logger.error("角色的副本数据加载成功！");
+
+	}
+	/**
+	 * 向用户发送所有的关卡信息.
+	 */
+	@Override
+	public void showTollgateDetailInfo() {
+		// TODO Auto-generated method stub
+		ShowTollgateDetailMessage message = new ShowTollgateDetailMessage();
+		roleTollgate.buildData();
+		message.setTollgateInfo(roleTollgate.getTollgateBean().getTollgateInfo());
+		
+		this.sendMessage(message);
+	}
+	/**
+	 * 发送增量关卡及结点改变信息.
+	 */
+	@Override
+	public void sendTollgateAndNodeChangeInfo(int tollgateId,int nodeId){
+		TollgateAndNodeChangeInfoMessage message = new TollgateAndNodeChangeInfoMessage();
+		
+		boolean isOpen = roleTollgate.isExistTollgateNode(tollgateId,nodeId);
+		if(isOpen){
+			return;
+		}
+		//此处缺少事件触发机制.
+		//找到下一开启的节点.进行开启,允许玩家进入.
+		if(!TollgateDataManager.getInstance().isValidateNodeExsit(tollgateId, nodeId)){
+			//发送错误信息.
+			return ;
+		}
+		//开启某个节点.
+		roleTollgate.openTollgateAndNode(tollgateId, nodeId);
+		
+		//组装成消息.protobuff
+		
+		//传递给客户端.
+		
+		
+	}
+	
+	@Override
+	public void enterNode(int tollgateId,int nodeId) {
+		// TODO Auto-generated method stub
+		//进入关卡或者战斗事件.
+		//1.检查已经激活.2.如果结点是用于进入战场,回复成功.3.如果结点用于进入其它关卡,帮助其激活其它关卡,并返回正常.
+		boolean isOpenTollgateAndNode = roleTollgate.isOpenTollgateAndNode(tollgateId, nodeId);
+		
+		if(isOpenTollgateAndNode){
+			//发送错误信息.
+		}
+		
+		
+		openNewTollgate(tollgateId, nodeId);
+	}
+	/**
+	 * 由某关卡节点,打开某关卡及节点.
+	 * @param sourceTollgateId
+	 * @param sourceNodeId
+	 */
+	private void openNewTollgate(int sourceTollgateId, int sourceNodeId) {
+		//查找原型数据,从中取出要进战斗,还是进入其它关卡.
+		TollgateNodeDataTemplate tollgateData = TollgateDataManager.getInstance().getTollgateData(sourceTollgateId, sourceNodeId);
+		
+		int opreateType = tollgateData.getOpreateType();
+		
+		int opreateId = tollgateData.getOpreateId();
+		//如果进入其它关卡.
+		if(opreateType==0){
+			//根据opreateId 发送给client 具体的关卡内容.
+			//检查关卡内容是否已经激活,如果没有激活,发给它.
+			if(!roleTollgate.isOpenTollgate(opreateId)){
+				int nodeId = TollgateDataManager.getInstance().getFirstNodeId(opreateId);
+				roleTollgate.openTollgateAndNode(opreateId, nodeId);	
+				//向客户端发送新开启的副本的数组.
+				sendTollgateOpenMessageToClient(opreateId, sourceNodeId);
+			}else{
+				
+			}
+			
+			
+		}
+		
+		if(opreateType == 1){
+			//发送客户端,开启一个战场.
+			
+			openBattleSuccssfulToClient(opreateId);
+		}
+		
+		sendEnterSuccessful();
+	}
+	
+	private void openNextTollgateAndNode(int sourceTollgateId, int sourceNodeId){
+		
+	}
+	
+	//发送可以进入的消息.
+	private void sendEnterSuccessful() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 发送某个结点的信息.toclient
+	 * @param tollgateId
+	 * @param nodeId
+	 */
+	private void sendTollgateOpenMessageToClient(int tollgateId,int nodeId){
+		
+	}
+
+	private void openBattleSuccssfulToClient(int battleId){
+		//服务器开启一个战场,并发送给客户端.
+		
+		
+	}
+
+	public void release(){
+		if(roleTollgate!=null){
+			roleTollgate.release();
+			roleTollgate = null;
+		}
+	}
+
+}

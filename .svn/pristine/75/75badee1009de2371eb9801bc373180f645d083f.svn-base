@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root name="游戏参数配置">   
+	<fcm description="防沉迷开关">false</fcm>
+	<timing_reward_new description="新玩家定时奖励开关">true</timing_reward_new> 
+	<timing_reward_old description="老玩家定时奖励开关">true</timing_reward_old> 
+	<timing_reward_level_limit description="定时奖励老玩家等级限制">30</timing_reward_level_limit>
+	<timing_reward_create_time_limit description="定时奖励新玩家注册时间限制">2010-03-16 17:00:01</timing_reward_create_time_limit>
+	<offline_exp_on_off description="离线经验开关">false</offline_exp_on_off>
+	<logout_msg description="退出游戏时提示信息">谢谢光临</logout_msg>
+	<logout_url_guanwang description="退出游戏时候返回官网的URL">www.wanmei.com</logout_url_guanwang>
+	<buff_reward description="领取buff功能开关">true</buff_reward>
+	<buff_reward_base_money description="购买buff时花费的基数，在此基础上翻倍">1</buff_reward_base_money>
+	<recommend_laborage description="领取推荐人奖励开关">true</recommend_laborage>
+	<recommend_upgrade_reward_level_limit description="被推荐人能贡献升级奖励的等级下线">30</recommend_upgrade_reward_level_limit>
+	<create_role_limit description="是否开放创建角色开关:true开放  false关闭">true</create_role_limit>
+	<cheat_locked_on_off description="作弊限时封号开关:true开放">false</cheat_locked_on_off>
+	<cheat_kick_on_off description="作弊踢人开关:true开放">false</cheat_kick_on_off>
+	<game_value_system_flag description="游戏数值体系标识  0:旧数值公式  1:新数值公式">1</game_value_system_flag>
+	<id_type_of_integer_maxnum description="本渠道中允许int类型的ID的上限为">2097152</id_type_of_integer_maxnum>
+	<id_type_of_long_maxnum description="本渠道中允许long类型的ID的上限为">9007199254740992</id_type_of_long_maxnum>
+	<copyright_word_filter description="版署关键字过滤开关">false</copyright_word_filter>
+	<hefu_modify_name_limit_time description="合服后修改重名操作的截止时间">2010-06-30 00:00:00</hefu_modify_name_limit_time>
+	<service_flag description="服务器标识 0:内网 1:外网">0</service_flag>		
+	<limit_total_counts_perday description="每个帐号每天最多充值次数">50</limit_total_counts_perday>
+	<limit_inteval_time description="每次操作间隔时间10秒">10000</limit_inteval_time>
+	<game_room_limit description="单个房间服务器负载上限">1000</game_room_limit>
+	<!-- 
+	<offline_xiuwei_max_time description="离线状态计算修为值最大小时数">10</offline_xiuwei_max_time>
+	<offline_xiuwei description="离线单位小时修为值">1</offline_xiuwei>
+	<online_xiuwei_max_time description="在线状态计算修为值最大小时数">8</online_xiuwei_max_time>
+	<online_xiuwei description="在线单位小时修为值">1</online_xiuwei>
+	<online_xiuwei_tick description="在线修为帧频计算数">60</online_xiuwei_tick>
+	<prosperity_level description="江湖繁荣级别">0</prosperity_level>
+	<prosperity_degree description="江湖繁荣度[百分之]">0</prosperity_degree>
+	<role_max_level description="人物最大级别">60</role_max_level>
+	<exp_role_additional_percent description="人物经验值加成[万分之]">0</exp_role_additional_percent>
+	<exp_pet_additional_percent description="宠物经验值加成[万分之]">0</exp_pet_additional_percent>
+	<cost_discount_percent description="装备花费折扣[万分之]">0</cost_discount_percent>-->
+</root>
+
+

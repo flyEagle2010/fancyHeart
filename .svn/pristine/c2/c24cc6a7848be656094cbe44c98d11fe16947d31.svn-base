@@ -1,0 +1,125 @@
+//
+//  GateMap.cpp
+//  fancyHeart
+//
+//  Created by zhai on 14-6-18.
+//
+//
+
+#include "GateMap.h"
+
+GateMap* GateMap::create(BaseUI* delegate,int  gateId)
+{
+    GateMap* gateMap=new GateMap();
+    if (gateMap && gateMap->init("publish/gateMap/gateMap.ExportJson",gateId)) {
+        gateMap->autorelease();
+        return gateMap;
+    }
+    CC_SAFE_DELETE(gateMap);
+    return nullptr;
+}
+
+bool GateMap::init(std::string fileName,int gateId)
+{
+	if(!BaseUI::init(fileName))
+	{
+		return false;
+	}
+    this->resetUI(gateId);
+	return true;
+}
+
+void GateMap::resetUI(int gateId)//init map
+{
+    auto size=Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
+    size.width=(size.width-layout->getContentSize().width)/2;
+    gateItem=Manager::getInstance()->getGateItem(gateId);
+    Widget* bg=layout->getChildByName("bg");
+    Widget* gateNode=bg->getChildByName("map_node");
+    auto button=static_cast<Button*>(bg->getChildByName("btn_return"));
+    button->addTouchEventListener(CC_CALLBACK_2(GateMap::touchButtonEvent, this));
+    Widget* node=nullptr;
+    for (int i=0; i<gateItem->items_size(); i++) {
+        PNodeItem* nodeItem= gateItem->mutable_items(i);
+        XNode* xn=XNode::record(Value(nodeItem->xid()));
+        Vec2 p=PointFromString(xn->getPos());
+        p.y=640-p.y-100;
+        if (i==0) {
+            node=gateNode;
+        }else{
+            node=gateNode->clone();
+            bg->addChild(node);
+        }
+        node->setPosition(p);
+        auto img=static_cast<Widget*>(node->getChildByName("img_node"));
+        img->setTag(nodeItem->xid());
+        img->setTouchEnabled(true);
+        img->addTouchEventListener(CC_CALLBACK_2(GateMap::touchEvent, this));
+    }
+}
+
+void GateMap::touchButtonEvent(Ref *pSender, TouchEventType type)
+{
+    auto btn=static_cast<Button*>(pSender);
+    if (!btn) {
+        return;
+    }
+    switch (type)
+    {
+        case TouchEventType::BEGAN:
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+        {
+            switch (btn->getTag()) {
+                case 10705:
+                    this->clear(true);
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+            break;
+        case TouchEventType::CANCELED:
+            break;
+        default:
+            break;
+    }
+}
+
+void GateMap::touchEvent(Ref *pSender, TouchEventType type)
+{
+    Widget* widget=static_cast<Widget*>(pSender);
+    switch (type)
+    {
+        case TouchEventType::BEGAN:
+            widget->stopAllActions();
+            widget->runAction(Sequence::create(ScaleTo::create(0.15,1.1),ScaleTo::create(0.15, 1),NULL) );
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+        {
+            for (int i=0; i<gateItem->items_size(); i++) {
+                PNodeItem nodeItem= gateItem->items(i);
+                if (nodeItem.xid()==widget->getTag()) {
+                    XNode* xn=XNode::record(Value(nodeItem.xid()));
+                    if (xn->getType()==1) {//进战役
+                        GateSelect* gateSelect=GateSelect::create(this, gateItem->gateid(),nodeItem.xid());
+                        gateSelect->show(this);
+                    }else if(xn->getType()==0){//进关卡
+                        this->resetUI(xn->getGateID());
+                    }
+                }
+            }
+        }
+            break;
+        case TouchEventType::CANCELED:
+            break;
+        default:
+            break;
+    }
+}
+

@@ -1,0 +1,217 @@
+package com.doteyplay.game.config.template;
+
+import com.doteyplay.game.util.excel.ExcelCellBinding;
+import com.doteyplay.game.util.excel.ExcelRowBinding;
+import com.doteyplay.game.util.excel.TemplateConfigException;
+import com.doteyplay.game.util.excel.TemplateObject;
+
+@ExcelRowBinding
+public class ItemDataTemplate extends TemplateObject
+{
+	@ExcelCellBinding
+	protected int nameId;
+
+	@ExcelCellBinding
+	protected int descId;
+
+	@ExcelCellBinding
+	protected int quality;
+
+	@ExcelCellBinding
+	protected int type;
+
+	@ExcelCellBinding
+	protected int levelLimit;
+
+	@ExcelCellBinding
+	protected int eventId;
+
+	@ExcelCellBinding
+	protected int sellPrice;
+
+	@ExcelCellBinding
+	protected int crh;
+
+	@ExcelCellBinding
+	protected int dodge;
+
+	@ExcelCellBinding
+	protected int pd;
+
+	@ExcelCellBinding
+	protected int md;
+
+	@ExcelCellBinding
+	protected int ap;
+
+	@ExcelCellBinding
+	protected int hp;
+
+	@ExcelCellBinding
+	protected int heal;
+
+	@ExcelCellBinding
+	protected String resId;
+
+	public int getNameId()
+	{
+		return nameId;
+	}
+
+	public void setNameId(int nameId)
+	{
+		this.nameId = nameId;
+	}
+
+	public int getDescId()
+	{
+		return descId;
+	}
+
+	public void setDescId(int descId)
+	{
+		this.descId = descId;
+	}
+
+	public int getQuality()
+	{
+		return quality;
+	}
+
+	public void setQuality(int quality)
+	{
+		this.quality = quality;
+	}
+
+	public int getType()
+	{
+		return type;
+	}
+
+	public void setType(int type)
+	{
+		this.type = type;
+	}
+
+	public int getLevelLimit()
+	{
+		return levelLimit;
+	}
+
+	public void setLevelLimit(int levelLimit)
+	{
+		this.levelLimit = levelLimit;
+	}
+
+	public int getEventId()
+	{
+		return eventId;
+	}
+
+	public void setEventId(int eventId)
+	{
+		this.eventId = eventId;
+	}
+
+	public int getSellPrice()
+	{
+		return sellPrice;
+	}
+
+	public void setSellPrice(int sellPrice)
+	{
+		this.sellPrice = sellPrice;
+	}
+
+	public int getCrh()
+	{
+		return crh;
+	}
+
+	public void setCrh(int crh)
+	{
+		this.crh = crh;
+	}
+
+	public int getDodge()
+	{
+		return dodge;
+	}
+
+	public void setDodge(int dodge)
+	{
+		this.dodge = dodge;
+	}
+
+	public int getPd()
+	{
+		return pd;
+	}
+
+	public void setPd(int pd)
+	{
+		this.pd = pd;
+	}
+
+	public int getMd()
+	{
+		return md;
+	}
+
+	public void setMd(int md)
+	{
+		this.md = md;
+	}
+
+	public int getAp()
+	{
+		return ap;
+	}
+
+	public void setAp(int ap)
+	{
+		this.ap = ap;
+	}
+
+	public int getHp()
+	{
+		return hp;
+	}
+
+	public void setHp(int hp)
+	{
+		this.hp = hp;
+	}
+
+	public int getHeal()
+	{
+		return heal;
+	}
+
+	public void setHeal(int heal)
+	{
+		this.heal = heal;
+	}
+
+	public String getResId()
+	{
+		return resId;
+	}
+
+	public void setResId(String resId)
+	{
+		this.resId = resId;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "ItemDataTemplate [nameId=" + nameId + ", descId=" + descId
+				+ ", quality=" + quality + ", type=" + type + ", levelLimit="
+				+ levelLimit + ", eventId=" + eventId + ", sellPrice="
+				+ sellPrice + ", crh=" + crh + ", dodge=" + dodge + ", pd="
+				+ pd + ", md=" + md + ", ap=" + ap + ", hp=" + hp + ", heal="
+				+ heal + ", resId=" + resId + "]";
+	}
+
+}

@@ -1,0 +1,8 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "ChatProBuf";
+message PChatReq{
+   required string msg=1;//消息
+}
+message PChatResp{
+   optional string msg=1;//消息
+}

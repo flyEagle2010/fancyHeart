@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <!-- 基本设置 -->
+  <config usedb="1" />
+  
+  <!-- 数据库设置 -->
+  <database id="1" title="游戏数据库" publisher="0" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://127.0.0.1:3306/game_data?useUnicode=true&amp;characterEncoding=UTF-8" maxactive="4" maxwait="4" username="root" password="root"/>
+    
+  <!-- 数据组设置 --> 
+  <datagroup id="0" name="文本" class="text" prefix="Text" listtype="0" suf="text"/>
+  <datagroup id="1" name="精灵" class="sprite" prefix="Sprite" listtype="0" suf="sprite"/>
+  <datagroup id="2" name="技能" class="skill" prefix="Skill" listtype="0" suf="skill"/>
+  <datagroup id="3" name="buff" class="buff" prefix="Buff" listtype="0" suf="buff"/>
+   <!--附加权限点 -->
+  <permission name="view" desc="查看"/>
+  <permission name="edit" desc="编辑"/>
+  
+  <rolegroup id="0" name="本地组" desc="本地编辑" permission="*" />
+  <rolegroup id="1" name="管理员" desc="所有权限" permission="*" />
+  <rolegroup id="2" name="策划组" desc="游戏策划" permission="*" />
+  <rolegroup id="3" name="美术组" desc="游戏美术" permission="*" />
+  <rolegroup id="4" name="运营组" desc="游戏运营" permission="*" />
+  <rolegroup id="5" name="所有发布权限组" desc="数据同步" permission="*" />
+</root>  

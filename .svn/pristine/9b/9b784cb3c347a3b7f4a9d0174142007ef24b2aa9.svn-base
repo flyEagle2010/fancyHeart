@@ -1,0 +1,40 @@
+#ifndef __fancyHeart__LoginScene__
+#define __fancyHeart__LoginScene__
+
+#include "cocos2d.h"
+#include "UIButton.h"
+#include "UIText.h"
+#include "Manager.h"
+#include "WebHttp.h"
+#include "Loading.h"
+#include "Confirm.h"
+#include "HomeScene.h"
+USING_NS_CC;
+using namespace ui;
+using namespace cocostudio;
+class LoginScene : public BaseUI
+{
+public:
+    ~LoginScene();
+    LoginScene();
+    // there's no 'id' in cpp, so we recommend returning the class instance pointer
+    static cocos2d::Scene* createScene();
+    static LoginScene* create();
+    // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
+    virtual bool init(std::string fileName);
+    virtual bool init();
+    virtual void onEnter();
+    virtual void onDlgClose(rapidjson::Value &data);
+    // a selector callback
+    
+    // implement the "static create()" method manually
+    //CREATE_FUNC(LoginScene);
+private:
+    rapidjson::Document json;
+    void initGame();
+    void initGameCallback(std::vector<char> *data);
+    void initNetEvent();
+    void touchEvent(Ref *pSender, Widget::TouchEventType type);
+};
+
+#endif // __HELLOWORLD_SCENE_H__

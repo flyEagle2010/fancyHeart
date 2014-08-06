@@ -1,0 +1,27 @@
+//
+//  TestScene.h
+//  fancyHeart
+//
+//  Created by zhai on 14-6-12.
+//
+//
+
+#ifndef __fancyHeart__TestScene__
+#define __fancyHeart__TestScene__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "Manager.h"
+USING_NS_CC;
+class TestScene:public Layer{
+public:
+	TestScene();
+	~TestScene();
+	static Scene* createScene();
+	virtual bool init();
+	CREATE_FUNC(TestScene);
+
+private:
+    Sprite* sprite;
+};
+#endif /* defined(__fancyHeart__TestScene__) */

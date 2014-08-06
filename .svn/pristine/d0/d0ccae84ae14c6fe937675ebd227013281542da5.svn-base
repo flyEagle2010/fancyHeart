@@ -1,0 +1,80 @@
+//
+//  HomeScene.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-12.
+//
+//
+
+#include "HomeScene.h"
+
+HomeScene::HomeScene(){
+
+}
+
+HomeScene::~HomeScene(){
+
+}
+
+Scene* HomeScene::createScene(){
+	auto scene = Scene::create();
+    auto layer = HomeScene::create();
+    scene->addChild(layer);
+	return scene;
+}
+
+bool HomeScene::init(){
+//	if(!Layer::init()){
+//		return false;
+//	}
+	//init ui
+    auto layout=static_cast<Layout*>(cocostudio::GUIReader::getInstance()->widgetFromJsonFile("home.json"));
+    this->addChild(layout);
+    auto panel=static_cast<ImageView*>(layout->getChildByName("Panel_2"));
+
+//    panel->addTouchEventListener(this, SEL_TouchEvent(&HomeScene::touchEvent));
+    panel->addTouchEventListener(CC_CALLBACK_2(HomeScene::touchEvent,this));
+
+    srand((int)time(0));
+    log("==time:%ld",Utils::getTime());
+	return true;
+}
+
+void HomeScene::touchEvent(cocos2d::Ref *pSender, TouchEventType type)
+{
+    switch (type) {
+        case TouchEventType::BEGAN:
+            break;
+        case TouchEventType::MOVED:
+            break;
+        case TouchEventType::ENDED:
+        {
+            auto scene=FightScene::createScene();
+            Director::getInstance()->replaceScene(scene);
+        }
+            break;
+        case TouchEventType::CANCELED:
+            break;
+        default:
+            break;
+    }
+}
+
+void HomeScene::initNetEvent(){
+    auto listener = EventListenerCustom::create(NET_MESSAGE, [=](EventCustom* event){
+        NetMsg* msg = static_cast<NetMsg*>(event->getUserData());
+        log("Custom event 1 received:%d,%d",msg->msgId,msg->len);
+        switch (msg->msgId)
+        {
+            case C_LOGIN:
+            {
+                PackageLoginResp* pm=new PackageLoginResp();
+                pm->ParseFromArray(msg->bytes, msg->len);
+            }
+                break;
+            default:
+                break;
+        }
+    });
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener,1);
+}

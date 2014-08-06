@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TollgateBean">
+	<typeAlias alias="tollgateBean" type="com.doteyplay.game.domain.gamebean.TollgateBean" />
+
+	<select id="selectTollgateBean" resultClass="tollgateBean"
+		parameterClass="long">
+		SELECT
+		roleId,
+		tollgateInfo
+		FROM t_role_tollgate
+		WHERE roleId =
+		#value#
+	</select>
+
+	<insert id="insertTollgateBean" parameterClass="tollgateBean">
+		INSERT INTO
+		t_role_tollgate
+		(
+			roleId,tollgateInfo
+		)
+		VALUES
+		(
+			#roleId#,#tollgateInfo# 
+		)
+	</insert>
+
+
+	
+
+	<update id="updateTollgateBean" parameterClass="tollgateBean">
+		update 
+		t_role_tollgate 
+		set 
+		tollgateInfo = #tollgateInfo#
+		
+		WHERE roleId =
+		#roleId#
+	</update>
+
+</sqlMap>

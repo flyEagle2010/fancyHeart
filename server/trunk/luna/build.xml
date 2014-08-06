@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="GBK"?>
+<project name="luna" default="all" basedir=".">
+
+    <!-- 环境变量 -->
+    <property environment="env"/>
+    <property name="build" value="build"/>
+    <property name="dist" value="."/>
+	<property name="src" value="src"/>
+	<property name="game-server-service-lib" value="../GameServerService/lib" />
+	<property name="game-server-lib" value="../GameServer/lib" />
+	<property name="game-server-core-lib" value="../GameServerCore/lib" />
+ 
+ 
+    <path id="classpath">
+        <fileset dir=".">
+            <include name="lib/*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="init">
+        <mkdir dir="${build}"/>
+        <tstamp/>
+        <echo message="${TSTAMP}"></echo>
+    </target>
+
+    <target name="all" depends="clean,init,build"/>
+
+    <target name="build">
+        <javac destdir="${build}" debug="true">
+            <src path="${src}"/>
+            <classpath refid="classpath"/>
+        </javac> 
+    	<copy todir="${build}">
+			<fileset dir="${src}">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+        <jar jarfile="${dist}/luna-1.0.jar" basedir="${build}">
+            <include name="**/*.*"/>
+        	<exclude name="**/*.xml"/>
+        </jar>
+    	
+    	<copy todir="${game-server-service-lib}">
+			<fileset dir="${dist}">
+				<include name="luna-1.0.jar"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${game-server-lib}">
+			<fileset dir="${dist}">
+				<include name="luna-1.0.jar"/>
+			</fileset>
+		</copy>
+    	
+    	<copy todir="${game-server-core-lib}">
+    		<fileset dir="${dist}">
+    			<include name="luna-1.0.jar"/>
+    		</fileset>
+    	</copy>
+    </target>
+ 
+    <target name="clean">
+        <delete dir="${build}"/>
+    </target>
+</project>

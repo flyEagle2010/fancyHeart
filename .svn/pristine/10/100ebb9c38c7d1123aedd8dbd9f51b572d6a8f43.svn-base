@@ -1,0 +1,7 @@
+package com.doteyplay.game.constants;
+
+public enum SkillFromType
+{
+	card,
+	skill
+}

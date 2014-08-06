@@ -1,0 +1,217 @@
+package com.doteyplay.core.util.servertask;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.doteyplay.constant.DateTimeConstants;
+import com.doteyplay.core.server.servertaskimpl.AbstractTaskItem;
+import com.doteyplay.core.server.task.Task;
+import com.doteyplay.core.server.task.TaskCallbackHandler;
+import com.doteyplay.core.util.CheckTime;
+
+
+/**
+ * ServerTask的调度的真正执行单元
+ * 
+ */
+class ServerTaskUnit implements Task
+{
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger.getLogger(ServerTaskUnit.class);
+	
+	private static HashMap<String, ServerTaskParameter> parameterMap = new HashMap<String,ServerTaskParameter>(); 
+	
+	private ServerTaskInfo info;
+
+	private final ServerTaskType taskType;
+	
+	private final CheckTime checkTime;
+	
+	private final ServerTask<ServerTaskInfo, ServerTaskParameter> task;
+	
+	private final ServerTaskParameter parameter;
+	
+	private long lastUpdate;
+	private long nextUpdateTime;
+	
+	private TaskCallbackHandler handle = null;
+	
+	private List<AbstractTaskItem> items;
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public ServerTaskUnit(ServerTaskInfo info)
+	{
+		this.info = info;
+		
+		try
+		{
+			Class<?> cls = Class.forName(info.getTaskClassName());
+			this.task = (ServerTask)cls.newInstance();
+		}
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException(info.getName() + "初始化任务执行类失败", e);
+		}
+		
+		if(info.getParameterClassName() == null || info.getParameterClassName().length() == 0)
+		{
+			this.parameter = null;
+		}
+		else
+		{
+			try
+			{
+				//真难看的代码，先这样吧
+				if(parameterMap.containsKey(info.getParameterClassName())){
+					this.parameter = parameterMap.get(info.getParameterClassName());
+				}else{
+					Class c = Class.forName(info.getParameterClassName());				
+					this.parameter = (ServerTaskParameter)c.newInstance();
+					parameterMap.put(info.getParameterClassName(), parameter);
+				}
+				this.task.setParameter(parameter);
+				
+				ServerTaskInfo tmpInfo = parameter.getServerTaskInfo(info.getId());
+				if(tmpInfo!=null)
+					this.nextUpdateTime = tmpInfo.getLastExecuteTime();
+				
+			}
+			catch (Exception e)
+			{
+				throw new IllegalArgumentException(info.getName() + "初始化任务参数类失败", e);
+			}
+		}
+		
+		this.taskType = info.getServerTaskType();
+		this.checkTime = new CheckTime(info.getMonth(), info.getDay(), info.getWeek(), 
+										info.getHour(), info.getMinute());
+		
+		if(this.nextUpdateTime <= 0)
+			this.nextUpdateTime = this.info.getLastExecuteTime();
+		
+		if(this.nextUpdateTime <= 0)
+			this.setupNextUpdateTime();
+				
+		/**
+		 * 加载具体项目
+		 */
+		if(info.getItemClassName() != null && info.getItemClassName().length>0){			
+
+			try{
+				for(String className:info.getItemClassName()){
+//					logger.error(className);
+					Class c= Class.forName(className);
+					task.addTaskItem((AbstractTaskItem)c.newInstance());
+				}
+			}
+			catch (Exception e)
+			{
+				throw new IllegalArgumentException(info.getName() + "初始化任务参数类失败", e);
+			}
+
+		}
+		
+		if(logger.isInfoEnabled())
+			logger.info("服务器定时调度任务[" + info.getName() + "]下次调度时间:"
+						+ DateTimeConstants.getTimeString(this.nextUpdateTime));
+	}
+	
+//	//设置最后一次更新的时间
+//	private void setupLastUpdateTime()
+//	{
+//		long now = System.currentTimeMillis();
+//		Calendar cal = this.checkTime.setupFor(now);
+//		this.lastUpdate = cal.getTimeInMillis();
+//		if(this.lastUpdate > now)
+//		{
+//			this.lastUpdate -= taskType.getPeriodic();
+//		}
+//	}
+	
+	private void setupNextUpdateTime(){
+		long now = System.currentTimeMillis();
+		Calendar cal = this.checkTime.setupFor(now);
+		lastUpdate = cal.getTimeInMillis();
+		if(this.lastUpdate > now)
+		{
+			this.lastUpdate -= taskType.getPeriodic();
+		}
+		taskType.getNextTime(cal);
+		nextUpdateTime = cal.getTimeInMillis();
+	}
+	
+	@Override
+	public void run()
+	{
+		final Calendar now = Calendar.getInstance();
+		final long nowTime = now.getTimeInMillis();
+		//上次更新以来间隔的时间
+//		final long delta = nowTime - lastUpdate;		
+		//自上次更新以来的时间间隔满足了再次更新的要求
+//		if(delta >= taskType.getPeriodic())
+		if(nowTime>nextUpdateTime)
+			doTask();
+	}
+	
+	//执行真正的任务调度
+	private void doTask()
+	{
+		try
+		{
+			task.run();
+			
+			//设置最后一次更新的时间
+//			this.setupLastUpdateTime();
+			this.setupNextUpdateTime();
+			
+			//将此更新时间戳持久化
+			task.afterTaskExecuted(info, this.nextUpdateTime);
+			
+			if(logger.isInfoEnabled())
+			{
+				logger.info("调度服务器定时任务完毕:[" + info.getName()
+						+ "], 下次执行时间设置为:" 
+						+ DateTimeConstants.getTimeString(this.nextUpdateTime));
+			}
+		}
+		catch (Exception e)
+		{
+			logger.error(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * @param handle the handle to set
+	 */
+	void setHandle(TaskCallbackHandler handle)
+	{
+		this.handle = handle;
+	}
+
+	/**
+	 * @return the info
+	 */
+	ServerTaskInfo getInfo()
+	{
+		return info;
+	}
+	
+	long getLastExecuteTime()
+	{
+		return lastUpdate;
+	}
+	
+	long getNextExecuteTime()
+	{
+		return nextUpdateTime;
+	}
+	
+	public void setOpen(String itemClassName, boolean open){
+		this.task.setOpen(itemClassName, open);
+	}
+}

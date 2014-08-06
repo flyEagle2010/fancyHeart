@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="img"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre6"/>
+	<classpathentry kind="lib" path="lib/ant-junit.jar"/>
+	<classpathentry kind="lib" path="lib/ant-launcher.jar"/>
+	<classpathentry kind="lib" path="lib/ant.jar"/>
+	<classpathentry kind="lib" path="lib/antlr.jar"/>
+	<classpathentry kind="lib" path="lib/commons-dbcp-1.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-pool-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/ibatis-2.3.4.726.jar"/>
+	<classpathentry kind="lib" path="lib/ibatis-dao-2.jar"/>
+	<classpathentry kind="lib" path="lib/jaxen-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jmf.jar"/>
+	<classpathentry kind="lib" path="lib/jsmoothgen-ant.jar"/>
+	<classpathentry kind="lib" path="lib/jxl.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-3.1.12-bin.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GameCommon"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

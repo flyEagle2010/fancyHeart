@@ -1,0 +1,50 @@
+//
+//  ___FILENAME___
+//  ___PROJECTNAME___
+//
+//  Created by ___FULLUSERNAME___ on ___DATE___.
+//___COPYRIGHT___
+//
+
+#include "___FILEBASENAME___.h"
+
+Scene* ___FILEBASENAMEASIDENTIFIER___::createScene()
+{
+	auto scene = Scene::create();
+	return scene;
+}
+
+___FILEBASENAMEASIDENTIFIER___* ___FILEBASENAMEASIDENTIFIER___::create()
+{
+	___FILEBASENAMEASIDENTIFIER___* pRet=new ___FILEBASENAMEASIDENTIFIER___();
+	if(pRet && pRet->init("publish/___FILEBASENAMEASIDENTIFIER___.json"))
+	{
+		pRet->autorelease();
+		return pRet;
+	}
+	CC_SAFE_DELETE(pRet);
+	return nullptr;
+}
+
+bool ___FILEBASENAMEASIDENTIFIER___::init(std::string fileName)
+{
+	if(!BaseUI::init(fileName,true))
+	{
+		return false;
+	}
+	//如果需要对cocostudio 设计的ui进行调整
+
+	return true;
+}
+
+void ___FILEBASENAMEASIDENTIFIER___::onEnter()
+{
+
+}
+
+
+
+void ___FILEBASENAMEASIDENTIFIER___::onExit()
+{
+
+}

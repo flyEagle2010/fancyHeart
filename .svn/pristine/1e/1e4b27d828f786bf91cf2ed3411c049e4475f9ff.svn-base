@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="IdBean">
+	<typeAlias alias="idbean" type="com.doteyplay.game.domain.gamebean.IdBean" />
+
+ <select id="selectIdBean" parameterClass="java.util.Map" resultClass="idbean">
+    	<![CDATA[select max($keyName$) as num,$groupName$ as gameAreaId from $tableName$ group by $groupName$]]>
+  </select>
+  
+</sqlMap>

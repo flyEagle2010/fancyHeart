@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<tasks name="定时任务">
+
+<handler class="com.doteyplay.core.server.servertaskimpl.CommonUpdateTaskImpl" dbManagerClass="com.doteyplay.game.service.servertask.ServerTaskDBManager"/>
+
+	<task uid="1" id="TaskForDay" name="每日任务" description="每日任务更新">
+		<!-- 这个执行时间是有限制的.只能是每日，每周，每月，每年这样的，不能每20分钟。写了也不支持 -->
+		<time cron-expression="0 0 3 * * ?" precision="2"/>
+		<items>
+			<package value="com.doteyplay.game.service.servertask.day">
+			</package>
+		</items>
+	</task>
+	<task uid="2" id="TaskForDayPM" name="每日下午任务" description="每日下午任务更新">
+		<!-- 这个执行时间是有限制的.只能是每日，每周，每月，每年这样的，不能每20分钟。写了也不支持 -->
+		<time cron-expression="0 0 15 * * ?" precision="2"/>
+		<items>			
+			<package value="com.doteyplay.game.service.servertask.pmday">
+			</package>
+		</items>
+	</task>
+	<task uid="3" id="TaskForWeek" name="每周计划" description="每周任务更新">
+		<!-- 这个执行时间是有限制的.只能是每日，每周，每月，每年这样的，不能每20分钟。写了也不支持 -->
+		<time cron-expression="0 1 12 ? * 2" precision="2"/>
+		<items>			
+			<package value="com.doteyplay.game.service.servertask.week">
+			</package>
+		</items>
+	</task>
+	<task uid="4" id="TaskForMonth" name="每月任务" description="每月任务更新">
+		<!-- 这个执行时间是有限制的.只能是每日，每周，每月，每年这样的，不能每20分钟。写了也不支持 -->
+		<time cron-expression="0 1 12 1 * ?" precision="2"/>
+		<items>			
+			<package value="com.doteyplay.game.service.servertask.month">
+			</package>
+		</items>
+	</task>
+	
+</tasks>
+
+

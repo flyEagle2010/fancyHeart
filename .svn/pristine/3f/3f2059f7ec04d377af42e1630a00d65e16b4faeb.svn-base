@@ -1,0 +1,42 @@
+//
+//  Skill.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-4.
+//
+//
+
+#ifndef __fancyHeart__Skill__
+#define __fancyHeart__Skill__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "MFighter.h"
+
+using namespace cocos2d;
+
+class Skill:public Ref
+{
+public:
+    ~Skill();
+    static Skill* create(MFighter* attacker,int skillID);
+    bool init(MFighter* attacker,int skillID);
+    void start();
+    std::vector<int> selectTarget();
+    std::vector<int> selectStrategy(int num,Vector<MFighter*>arr);
+    void cast(); //施法（攻击）
+    void shoot(MFighter* mf); //弹道
+    void hit(MFighter* mf); //击中算伤害
+    
+    void setIsReady(bool isReady);
+    bool getIsReady();
+private:
+    MFighter* attacker;
+    int skillID;
+    Vector<MFighter*> targets;
+    void coldDown();
+    
+    bool isReady;
+};
+
+#endif /* defined(__fancyHeart__Skill__) */

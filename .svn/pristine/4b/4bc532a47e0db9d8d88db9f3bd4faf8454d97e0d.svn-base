@@ -1,0 +1,96 @@
+//
+//  Register.cpp
+//  fancyHeart
+//
+//  Created by doteyplay on 14-7-31.
+//
+//
+
+#include "Register.h"
+#include "LoginScene.h"
+
+Register* Register::create(LoginScene*loginScene)
+{
+    Register* registerScent=new Register();
+    if (registerScent && registerScent->init("publish/register/register.ExportJson",loginScene)) {
+        registerScent->autorelease();
+        return registerScent;
+    }
+    CC_SAFE_DELETE(registerScent);
+    
+    return nullptr;
+}
+
+bool Register::init(std::string fileName,LoginScene*loginScene)
+{
+	if(!BaseUI::init(fileName))
+    {
+        return false;
+    }
+    login = loginScene;
+    auto bottom=static_cast<Widget*>(layout->getChildByName("bottom"));
+    auto sureBtn=bottom->getChildByName("sureBtn");
+    auto cancelBtn=bottom->getChildByName("cancelBtn");
+    accountInput=static_cast<TextField*>(bottom->getChildByName("accountInput"));
+    passwordInput=static_cast<TextField*>(bottom->getChildByName("passwordInput"));
+    
+    accountInput->setText("");
+    passwordInput->setText("");
+    
+    sureBtn->setTouchEnabled(true);
+    sureBtn->addTouchEventListener(CC_CALLBACK_2(Register::touchButtonEvent,this));
+    cancelBtn->setTouchEnabled(true);
+    cancelBtn->addTouchEventListener(CC_CALLBACK_2(Register::touchButtonEvent,this));
+    
+
+	return true;
+}
+
+void Register::onEnter()
+{
+    Layout::onEnter();
+}
+
+void Register::touchButtonEvent(cocos2d::Ref *pSender, TouchEventType type)
+{
+    auto button=static_cast<Button*>(pSender);
+    if (!button) {
+        return;
+    }
+    if(type!=TouchEventType::ENDED){
+        return;
+    }
+    switch (button->getTag()) {
+        case 11189://确定按钮
+        {
+//            txtInput->getStringValue().c_str()
+            if (accountInput->getStringValue() != ""  && passwordInput->getStringValue() != "") {
+                UserDefault::getInstance()->setBoolForKey("isExisted",true);
+                //添加一个字符串数据到指定key
+                UserDefault::getInstance()->setStringForKey("account","account="+string(accountInput->getStringValue().c_str()));
+                UserDefault::getInstance()->setStringForKey("password","password="+string(passwordInput->getStringValue().c_str()));
+                //提交,生成xml文件
+                UserDefault::getInstance()->flush();
+                
+                this->login->webSend();
+                this->clear(true);
+            }
+ 
+            break;
+        }
+        case 11190://取消按钮
+        {
+            accountInput->setText("");
+            passwordInput->setText("");
+            break;
+        }
+        default:
+            break;
+    }
+
+}
+
+void Register::onExit()
+{
+    Layout::onExit();
+}

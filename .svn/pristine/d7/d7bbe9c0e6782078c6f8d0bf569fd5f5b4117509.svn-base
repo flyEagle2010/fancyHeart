@@ -1,0 +1,80 @@
+package com.doteyplay.core.util.dependence;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * “¿¿µπÿœµ≈≈–Ú
+ */
+public class DepandenceSorter
+{
+	private final List<Integer> result;
+	private final List<Element> unsortList;
+
+	public DepandenceSorter()
+	{
+		result = new ArrayList<Integer>();
+		unsortList = new ArrayList<DepandenceSorter.Element>();
+	}
+
+	public void addElement(int pid, int... depands)
+	{
+		Element e = new Element();
+
+		e.pId = pid;
+		if (depands != null)
+		{
+			for (int tmp : depands)
+				e.depands.add(tmp);
+		}
+		unsortList.add(e);
+	}
+
+	public List<Integer> sort()
+	{
+		for (int i = unsortList.size() - 1; i >= 0; --i)
+		{
+			Element e = unsortList.get(i);
+			if (e.depands == null || e.depands.size() == 0)
+			{
+				result.add(e.pId);
+				unsortList.remove(i);
+
+				removeParent(e.pId);
+			}
+		}
+
+		if (unsortList.size() > 0)
+			return this.sort();
+		else
+			return result;
+	}
+
+	private void removeParent(int pId)
+	{
+		for (Element e : unsortList)
+			if (e.depands != null)
+				e.depands.remove(new Integer(pId));
+	}
+
+	private class Element
+	{
+		List<Integer> depands = new ArrayList<Integer>();
+		int pId;
+	}
+	
+	
+	// public static void main(String[] args)
+	// {
+	// DepandSorter s = new DepandSorter();
+	// s.addElement(1);
+	// s.addElement(2);
+	// s.addElement(3);
+	// s.addElement(4,1,3);
+	// s.addElement(5, 3);
+	// s.addElement(6,4,5,8);
+	// s.addElement(7, 3);
+	// s.addElement(8, 7);
+	// System.out.println(s.sort().toString());
+	// }
+}

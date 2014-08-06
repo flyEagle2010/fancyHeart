@@ -1,0 +1,40 @@
+package com.doteyplay.game.startservice;
+
+import com.doteyplay.core.server.service.IServerService;
+import com.doteyplay.core.server.service.IServerServiceException;
+import com.doteyplay.game.util.FileUtil;
+import com.doteyplay.game.util.excel.TemplateService;
+
+public class DataStoreService implements IServerService {
+
+	/**
+	 * 单例模式
+	 */
+	private static DataStoreService service = new DataStoreService();
+
+	private DataStoreService() {
+	}
+
+	public static DataStoreService getInstance() {
+		return service;
+	}
+
+	@Override
+	public void onReady() throws IServerServiceException {
+		// 获取配置信息的加载项，初始化数据
+		TemplateService.getInstance().init(FileUtil.getConfigURL("template.xml"));
+//		for(BattleDataTemplate data:TemplateService.getInstance().getAll(BattleDataTemplate.class).values())
+//		{
+//			System.out.println(data);
+//		}
+	}
+
+	@Override
+	public void onStart() throws IServerServiceException {
+	}
+
+	@Override
+	public void onDown() throws IServerServiceException {
+	}
+
+}

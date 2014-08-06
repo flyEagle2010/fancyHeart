@@ -1,0 +1,14 @@
+//
+//  KickData.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-7-8.
+//
+//
+
+#ifndef __fancyHeart__KickData__
+#define __fancyHeart__KickData__
+
+#include <iostream>
+
+#endif /* defined(__fancyHeart__KickData__) */

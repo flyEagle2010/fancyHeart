@@ -1,0 +1,13 @@
+package com.doteyplay.core.util.servertask;
+
+/**
+ * 
+ */
+public interface ServerTaskParameter
+{
+	public void setServerTaskInfo(ServerTaskInfo taskInfo);
+	
+	public ServerTaskInfo getServerTaskInfo(int id);
+	
+	public void updateTaskInfo(int id, long time);
+}

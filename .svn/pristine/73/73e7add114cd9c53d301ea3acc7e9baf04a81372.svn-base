@@ -1,0 +1,14 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = “GateProBuf";
+
+message PGateReq{
+	required int32 type=1;//副本类型 精英，获得等
+}
+message PGateItem{
+	required bool isLock=1;//是否解锁
+	required int32 gateID=2;//副本id
+	
+}
+message PGateResp{
+   repeated GateItem gates=1;//副本列表
+}

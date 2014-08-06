@@ -1,0 +1,22 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "AccountProBuf";
+
+
+import "role.proto";
+import "item.proto";
+import "gate.proto";
+
+message LoginReq{
+  required string account = 1;
+  required string key = 2;
+}
+
+message LoginResp{
+  required int32 result = 1;
+  optional PRole role=2;
+  repeated Item itemList=3;
+  repeated PGateResp gate=4;
+}
+
+
+

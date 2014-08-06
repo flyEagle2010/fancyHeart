@@ -1,0 +1,45 @@
+//
+//  TextData.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-12.
+//
+//
+
+#include "TextData.h"
+TextData* textData;
+
+TextData* TextData::getInstance(Value v)
+{
+    if(textData==nullptr)
+    {
+        textData=new TextData();
+        if(textData->ID.asString() != v.asString())
+        {
+            textData->load(v);
+        }
+    }
+    return textData;
+}
+
+void TextData::load(Value v)
+{
+    std::string fullPath=FileUtils::getInstance()->fullPathForFilename(v.asString());
+    std::ifstream ifile(fullPath.c_str(),std::ios::in|std::ios::binary);
+    int ID,id2;
+    BData::setData(ifile, ID);
+    BData::setData(ifile, id2);
+    BData::setData(ifile, name);
+    BData::setData(ifile, txt);
+    this->ID=Value(ID);
+}
+
+std::string TextData::getName()
+{
+    return this->name;
+}
+
+std::string TextData::getTxt()
+{
+    return this->txt;
+}

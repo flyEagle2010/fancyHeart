@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="gb2312"?>
+<project name="javagame" default="all" basedir=".">
+
+    <!-- 环境变量 -->
+    <property environment="env"/>
+    <property name="build" value="build"/>
+	<!-- <property name="build-common" value="build-common"/ -->
+    <property name="dist" value="dist"/>
+	<property name="src" value="src/main/java"/>
+	<property name="resource" value="src/main/resources"/>
+
+    <property name="tool" value="BenchServer"/>
+	 <property name="version" value="1.0"/>
+	<!--<property name="common-src" value="../GameCommon/src/"/>
+	 <property name="gm-common" value="../GMCommon/src"/>
+	<property name="log-comm" value="../LogCommon/src"/>
+	-->
+	 
+    <property name="mina" value="Mina2.0"/>
+    <property name="tool" value="src"/>
+
+ 
+    <path id="classpath">
+        <fileset dir=".">
+            <include name="${dist}/**/*.jar"/>
+			 <include name="lib/**/*.jar"/>
+			 <include name="devlib/**/*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="all" depends="startClean,init,make-server,endClean"/>
+    
+    <target name="startClean">
+        <delete dir="${build}"/>
+		<!-- <delete dir="${build-common}"/ -->
+        <delete dir="${dist}"/>
+    </target>
+    
+     <target name="init">
+        <mkdir dir="${build}"/>
+        <mkdir dir="${dist}"/>
+		<!-- <mkdir dir="${build-common}"/ -->
+        <tstamp/>
+        <echo message="${TSTAMP}"></echo>
+
+        <uptodate property="gamserver.uptodate" targetfile="${dist}/game-server-${version}.jar">
+            <srcfiles dir="${src}" includes="*"/>
+        </uptodate>
+    </target>
+
+	 <!--target name="make-common" unless="gamserver.uptodate">
+        <javac destdir="${build-common}" debug="true">
+            <src path="${common-src}"/>
+            <classpath refid="classpath"/>
+        </javac>
+		 javac destdir="${build-common}" debug="true">
+            <src path="${may-comm-base}"/>
+            <classpath refid="classpath"/>
+        </javac
+		 <javac destdir="${build-common}" debug="true">
+            <src path="${gm-common}"/>
+            <classpath refid="classpath"/>
+        </javac>
+		 <javac destdir="${build-common}" debug="true">
+			 <src path="${log-comm}"/>
+			 <classpath refid="classpath"/>
+		 </javac>
+        <jar jarfile="${dist}/game-common-${version}.jar" basedir="${build-common}">
+            <include name="**/*"/>
+        </jar>
+    </target>
+   -->
+	
+    <target name="make-server" unless="gamserver.uptodate">
+        <javac destdir="${build}" debug="true" fork="true" memorymaximumsize="500M">
+            <src path="${src}"/>
+			<src path="${resource}"/>
+            <classpath refid="classpath"/>
+        </javac> 
+	    <!--copy todir="${build}">
+			<fileset dir="${resource}"/>
+		</copy-->
+    	<copy file="${resource}/filterword_chat.txt" tofile="${build}/filterword_chat.txt"/>
+    	<copy file="${resource}/filterword_name.txt" tofile="${build}/filterword_name.txt"/>
+    	<copy file="${resource}/filterword_white_chat.txt" tofile="${build}/filterword_white_chat.txt"/>
+    	    	
+    	<copy todir="${build}">
+			<fileset dir="${src}">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+        <jar jarfile="${dist}/game-server-${version}.jar" basedir="${build}">
+            <include name="**/*"/>	 
+        </jar>
+    	
+    	<copy todir="${dist}">
+    		<fileset dir="lib/">
+    			<include name="server-core-1.0.0.jar"/>
+    			<include name="luna-1.0.jar"/>
+    			<include name="game-common.jar"/>
+    			<include name="game-server-service.jar"/>
+    		</fileset>
+    	</copy>
+    </target>
+ 
+    <target name="endClean">
+        <delete dir="${build}"/>
+		<!-- <delete dir="${build-common}"/ -->
+    </target>
+</project>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ServerTaskBean">
+	<typeAlias alias="serverTaskBean" type="com.doteyplay.game.domain.gamebean.ServerTaskBean" />
+
+	<insert id="insertServerTaskBean" parameterClass="serverTaskBean">
+		INSERT INTO
+		t_server_task
+		(
+			id,nextUpdateTime
+		)
+		VALUES
+		(
+			#id#,#nextUpdateTime# 
+		)
+	</insert>
+
+	<select id="selectServerTaskBean" resultClass="serverTaskBean"
+		parameterClass="int">
+		SELECT
+		id,
+		nextUpdateTime 
+		FROM t_server_task
+		WHERE id =
+		#value#
+	</select>
+	
+
+	<update id="updateServerTaskBean" parameterClass="serverTaskBean">
+		update 
+		t_server_task 
+		set 
+		nextUpdateTime = #nextUpdateTime# 
+		WHERE id =
+		#id#
+	</update>
+
+</sqlMap>

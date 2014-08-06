@@ -1,0 +1,33 @@
+//
+//  HomeScene.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-12.
+//
+//
+
+#ifndef __fancyHeart__HomeScene__
+#define __fancyHeart__HomeScene__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "Manager.h"
+#include "ui/CocosGUI.h"
+#include "cocostudio/CocoStudio.h"
+#include "FightScene.h"
+USING_NS_CC;
+using namespace ui;
+using namespace cocostudio;
+
+class HomeScene:public Layout{
+public:
+	HomeScene();
+	~HomeScene();
+	static Scene* createScene();
+	virtual bool init();
+	CREATE_FUNC(HomeScene);
+
+private:
+    void initNetEvent();
+    void touchEvent(Ref *pSender, TouchEventType type);};
+#endif /* defined(__fancyHeart__HomeScene__) */

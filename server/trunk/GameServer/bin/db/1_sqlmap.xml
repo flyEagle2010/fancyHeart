@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SQLMAP>
+	<DBZONE ID="0" DBCONFIG="db/1_dbsource.xml" DATASOURCE="dbsource1" SQLMAP="db/sqlMapTemplate.xml"/>
+	<MAPPER PACKAGE="com.doteyplay.game.persistence.serverdata"/>
+	
+	
+</SQLMAP>	
+ 

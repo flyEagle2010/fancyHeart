@@ -1,0 +1,235 @@
+package com.doteyplay.game.config.template;
+
+import java.lang.reflect.Field;
+
+import com.doteyplay.game.util.excel.ExcelCellBinding;
+import com.doteyplay.game.util.excel.ExcelRowBinding;
+import com.doteyplay.game.util.excel.TemplateConfigException;
+import com.doteyplay.game.util.excel.TemplateObject;
+
+@ExcelRowBinding
+public class SpriteDataTemplate extends TemplateObject
+{
+	@ExcelCellBinding
+	protected int nameId;
+
+	@ExcelCellBinding
+	protected int descId;
+
+	@ExcelCellBinding
+	protected int wordId;
+
+	@ExcelCellBinding
+	protected int attackTypeValue;
+
+	@ExcelCellBinding
+	protected int positionTypeValue;
+
+	@ExcelCellBinding
+	protected String avatarId;
+
+	@ExcelCellBinding
+	protected String cardId;
+
+	@ExcelCellBinding
+	protected String headId;
+
+	@ExcelCellBinding
+	protected String halfBodyId;
+
+	@ExcelCellBinding
+	protected int commonAtkId;
+
+	@ExcelCellBinding
+	protected int skill1;
+
+	@ExcelCellBinding
+	protected int skill2;
+
+	@ExcelCellBinding
+	protected int skill3;
+
+	@ExcelCellBinding
+	protected int skill4;
+
+	@ExcelCellBinding
+	protected int wakeSkill1;
+
+	@ExcelCellBinding
+	protected int wakeSkill2;
+
+	public int getNameId()
+	{
+		return nameId;
+	}
+
+	public void setNameId(int nameId)
+	{
+		this.nameId = nameId;
+	}
+
+	public int getDescId()
+	{
+		return descId;
+	}
+
+	public void setDescId(int descId)
+	{
+		this.descId = descId;
+	}
+
+	public int getWordId()
+	{
+		return wordId;
+	}
+
+	public void setWordId(int wordId)
+	{
+		this.wordId = wordId;
+	}
+
+	public int getAttackTypeValue()
+	{
+		return attackTypeValue;
+	}
+
+	public void setAttackTypeValue(int attackTypeValue)
+	{
+		this.attackTypeValue = attackTypeValue;
+	}
+
+	public int getPositionTypeValue()
+	{
+		return positionTypeValue;
+	}
+
+	public void setPositionTypeValue(int positionTypeValue)
+	{
+		this.positionTypeValue = positionTypeValue;
+	}
+
+	public String getAvatarId()
+	{
+		return avatarId;
+	}
+
+	public void setAvatarId(String avatarId)
+	{
+		this.avatarId = avatarId;
+	}
+
+	public String getCardId()
+	{
+		return cardId;
+	}
+
+	public void setCardId(String cardId)
+	{
+		this.cardId = cardId;
+	}
+
+	public String getHeadId()
+	{
+		return headId;
+	}
+
+	public void setHeadId(String headId)
+	{
+		this.headId = headId;
+	}
+
+	public String getHalfBodyId()
+	{
+		return halfBodyId;
+	}
+
+	public void setHalfBodyId(String halfBodyId)
+	{
+		this.halfBodyId = halfBodyId;
+	}
+
+	public int getCommonAtkId()
+	{
+		return commonAtkId;
+	}
+
+	public void setCommonAtkId(int commonAtkId)
+	{
+		this.commonAtkId = commonAtkId;
+	}
+
+	public int getSkill1()
+	{
+		return skill1;
+	}
+
+	public void setSkill1(int skill1)
+	{
+		this.skill1 = skill1;
+	}
+
+	public int getSkill2()
+	{
+		return skill2;
+	}
+
+	public void setSkill2(int skill2)
+	{
+		this.skill2 = skill2;
+	}
+
+	public int getSkill3()
+	{
+		return skill3;
+	}
+
+	public void setSkill3(int skill3)
+	{
+		this.skill3 = skill3;
+	}
+
+	public int getSkill4()
+	{
+		return skill4;
+	}
+
+	public void setSkill4(int skill4)
+	{
+		this.skill4 = skill4;
+	}
+
+	public int getWakeSkill1()
+	{
+		return wakeSkill1;
+	}
+
+	public void setWakeSkill1(int wakeSkill1)
+	{
+		this.wakeSkill1 = wakeSkill1;
+	}
+
+	public int getWakeSkill2()
+	{
+		return wakeSkill2;
+	}
+
+	public void setWakeSkill2(int wakeSkill2)
+	{
+		this.wakeSkill2 = wakeSkill2;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "SpriteDataTemplate [nameId=" + nameId + ", descId=" + descId
+				+ ", wordId=" + wordId + ", attackTypeValue=" + attackTypeValue
+				+ ", positionTypeValue=" + positionTypeValue + ", avatarId="
+				+ avatarId + ", cardId=" + cardId + ", headId=" + headId
+				+ ", halfBodyId=" + halfBodyId + ", commonAtkId=" + commonAtkId
+				+ ", skill1=" + skill1 + ", skill2=" + skill2 + ", skill3="
+				+ skill3 + ", skill4=" + skill4 + ", wakeSkill1=" + wakeSkill1
+				+ ", wakeSkill2=" + wakeSkill2 + "]";
+	}
+
+	
+}

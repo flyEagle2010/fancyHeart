@@ -1,0 +1,40 @@
+package com.doteyplay.net.message;
+
+public interface IMessageActionHelper
+{
+
+	/**
+	 * @return the resolver
+	 */
+	public MessageActionParameterResolver<?> getResolver();
+
+	/**
+	 * @return the action
+	 */
+	public IMessageAction<?, ?> getAction();
+
+	/**
+	 * 关闭
+	 */
+	public void close();
+	
+	/**
+	 * 开放
+	 */
+	public void open();
+	
+	/**
+	 * 是否关闭
+	 */
+	public boolean isClosed();
+	
+	/**
+	 * 是否绑定开关(不能外部控制)
+	 */
+	public boolean isBinded();
+	
+	/**
+	 * 设定绑定状态
+	 */
+	public void setBinded(boolean binded);
+}

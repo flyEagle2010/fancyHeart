@@ -1,0 +1,23 @@
+//Xgate_reward
+#include "Xgate_reward.h"
+static Xgate_reward* instance;
+
+Xgate_reward* Xgate_reward::record(const char* key){ 
+	if(instance==NULL) instance=new Xgate_reward();
+	if(instance->doc.IsNull()){
+		std::string fullPath=FileUtils::getInstance()->fullPathForFilename("Xgate_reward.json");
+		std::string str=FileUtils::getInstance()->getStringFromFile(fullPath);
+		instance->doc.Parse<0>(str.c_str());
+	if(instance->doc.HasParseError()){
+		log("GetParseError %s",instance->doc.GetParseError());
+	}
+	}
+	instance->item=instance->doc[key];
+	return instance;
+}
+int Xgate_reward::getId(){
+	return item["id"].GetInt();
+}
+std::string Xgate_reward::getName(){
+	return item["name"].GetString();
+}

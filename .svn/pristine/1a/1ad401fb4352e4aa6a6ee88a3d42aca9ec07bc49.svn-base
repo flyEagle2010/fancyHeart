@@ -1,0 +1,16 @@
+package com.doteyplay.net.message;
+
+import org.apache.mina.core.session.IoSession;
+
+
+/**
+ * MessageAction参数解析助手
+ * 
+ * @author Leo Yang (leo8002@sina.com)
+ * 2009-5-8上午12:28:09
+ *
+ */
+public interface MessageActionParameterResolver<T>
+{
+	public T resolveParameter(IoSession session, AbstractMessage message);
+}

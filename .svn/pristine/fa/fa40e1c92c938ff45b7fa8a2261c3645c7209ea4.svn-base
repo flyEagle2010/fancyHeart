@@ -1,0 +1,104 @@
+//
+//  FightMgr.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-15.
+//
+//
+
+#include "FightMgr.h"
+static FightMgr* instance=nullptr;
+
+FightMgr* FightMgr::getInstance(){
+    if(instance==nullptr){
+        instance=new FightMgr();
+    }
+    return instance;
+}
+
+void FightMgr::init(std::vector<int>leftVec,std::vector<int>rightVec)
+{
+    //初始化角色
+    Size winSize=Director::getInstance()->getWinSize();
+    
+    for (int i=0; i<leftVec.size(); i++)
+    {
+        MFighter* mf=MFighter::create(i);
+        this->heros.pushBack(mf);
+        Fighter* view=Fighter::create("HeroAnimation","HeroAnimation0", i);
+
+        view->setPosition(Point(-70*i,winSize.height/2+(i%2?-40:40)));
+        this->view->addChild(view,i);
+        
+        mf->view=view;
+        mf->view->delegate=mf;
+        mf->start();
+    }
+    for(int i=0;i<rightVec.size();i++)
+    {
+        MFighter* mf=MFighter::create(i+5);
+        this->heros.pushBack(mf);
+        Fighter* view=Fighter::create("HeroAnimation", "HeroAnimation0", i+5);
+        view->setPosition(Point(winSize.width+70*i,winSize.height/2+(i%2?-40:40)));
+        this->view->addChild(view,i);
+        mf->view=view;
+        mf->view->delegate=mf;
+        mf->start();
+    }
+
+    Director::getInstance()->getEventDispatcher()->addCustomEventListener(HERO_SKILL_COLDDOWN, [this](EventCustom* event){
+        this->view->skillColdDown((int)event->getUserData());
+    });
+
+}
+
+void FightMgr::init(rapidjson::Value& data)
+{
+    
+}
+
+MFighter* FightMgr::getHero(int pos)
+{
+    for(MFighter* mf : this->heros)
+    {
+        if(pos == mf->pos) return mf;
+    }
+    return nullptr;
+}
+
+Vector<MFighter*> FightMgr::getFoes(int pos,bool isMe)
+{
+    Vector<MFighter*> arr;
+    for(MFighter* mf : heros)
+    {
+        if(!isMe && ((pos<5 && mf->pos>4) || (pos>4 && mf->pos<5))){
+            arr.pushBack(mf);
+        }
+        if(isMe && ((pos<5 && mf->pos<5) || (pos>4 && mf->pos>4))){
+            arr.pushBack(mf);
+        }
+    }
+    return arr;
+}
+
+MFighter* FightMgr::getFirst(int pos)
+{
+    if(pos < 5) return heros.at(0);
+    for(int i=0;i<this->heros.size();i++)
+    {
+        if(heros.at(i)->pos >=5 ){
+            return heros.at(i);
+        }
+    }
+    return nullptr;
+}
+
+void FightMgr::handleResult()
+{
+    
+}
+
+void FightMgr::clear()
+{
+    this->heros.clear();
+}

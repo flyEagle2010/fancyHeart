@@ -1,0 +1,110 @@
+//
+//  HeroData.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-27.
+//
+//
+
+#ifndef __fancyHeart__HeroData__
+#define __fancyHeart__HeroData__
+
+#include <iostream>
+#include <fstream>
+#include "SLData.h"
+#include "BData.h"
+
+class SkillData:public BData {
+    int skillID;
+    int nameID;
+    /*@param 等级总数*/
+	int level;
+	/*@param 描述id*/
+	int descId;
+	/*@param 施法动作效果id*/
+    std::string resSkillActionId="";
+	/*@param 施法特效id*/
+    std::string resSkillEffectId="";
+	/*@param 被攻击效果id*/
+    std::string resBeAttackId="";
+    
+	/*@param 影响范围*/
+    SkillEffectRange effectRange=SkillEffectRange::me;
+	/*@param 伤害类型*/
+	DamageType damageType = DamageType::physic;
+	/*@param 事件触发*/
+    SkillActiveEvent event = SkillActiveEvent::noActive;
+	
+	/*@param 事件参数*/
+    std::string eventParam = "";
+    
+	/*@param 弹道类型*/
+	SkillBulletType bulletType = SkillBulletType::none;
+    
+	/*@param 选择策略*/
+	SkillTargetSelectType selectType = SkillTargetSelectType::common;
+    
+	/*@param 主动类型*/
+	SkillActionType actionType = SkillActionType::initiative;
+	
+	/*@param 引导次数*/
+	int leadCount;
+	
+	/*@param 两次引导之间的差值*/
+	int leadTimeDelta;
+    
+	/*@param 技能消耗法力豆*/
+	int cost;
+	
+	/////////////////////////////////////蓄力相关///////////////////////////////////////////
+	
+	/*@param 蓄力时间*/
+	int storageTime;
+	
+	/*@param 起始加成*/
+	int storageStartRate;
+	
+	/*@param 起始加值*/
+	int storageStartValue;
+	
+	/*@param  结束加成*/
+	int storageEndRate;
+	
+	/*@param  结束加值*/
+	int storageEndValue;
+	/////////////////////////////////////////////////////////////////////////////////////
+	
+	/*@param  等级数据*/
+    std::vector<SLData*> levelList; // = new  ArrayList<SkillLevelGameData>();
+
+public:
+    static SkillData* getInstance(Value v);
+    virtual void load(Value v);
+    int getID();
+    std::string getName();
+    int getLevel();
+    std::string getDes();
+    std::string getResSkillAction();
+    std::string getResSkillEffect();
+    std::string getResSkillAttacked();
+    SkillEffectRange getEffectRange();
+    DamageType getDamageType();
+    SkillActiveEvent getActiveEvent();
+    SkillBulletType getBulletType();
+    SkillTargetSelectType getTargetSelectType();
+    SkillActionType getActionType();
+    std::string getEventParam();
+    int getLeadcount();
+    int getLeadTimeDelt();
+    int getCost();
+    int getStoragetime();
+    int getStorageStartRate();
+    int getStorageStartValue();
+    int getStorageEndRate();
+    int getStorageEndValue();
+    
+    SLData* getLvData();
+   
+};
+
+#endif /* defined(__fancyHeart__HeroData__) */

@@ -1,0 +1,53 @@
+//
+//  Manager.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-5-4.
+//
+//
+
+#ifndef __fancyHeart__Manager__
+#define __fancyHeart__Manager__
+
+#include <iostream>
+#include "cocos2d.h"
+#include "google/protobuf/message.h"
+#include "net/Socket.h"
+#include "DeviceInfo.h"
+#include "MsgID.h"
+#include "BaseUI.h"
+#include "GConfig.h"
+USING_NS_CC;
+using namespace google::protobuf;
+
+#define EVENT_RUN "event_run"
+#define EVENT_HERO_EVENTER "event_hero_enter"
+
+#define LOADING_LAY 10
+#define MSG_LAY 6
+#define GUIDE_LAY 5
+
+
+class Manager{
+    
+public:
+    Node* scene;
+    Socket* socket;
+public:
+    static Manager* getInstance();
+    void switchScence(Scene* scene);
+    void setRoleData(NetMsg* msg);
+    PRole Role();
+    void upRole(NetMsg* msg);
+    void upItem(NetMsg* msg);
+    google::protobuf::RepeatedPtrField< ::PNpc > npcList();
+    PNpc getNpc(long npcId);
+    google::protobuf::RepeatedPtrField< ::PItem > itemlist();
+    PGateResp Gate();
+    void showMsg(const char* msg);
+    std::string getLang(string arg,...);
+private:
+    LoginResp* roleData=nullptr;
+};
+
+#endif /* defined(__fancyHeart__Manager__) */

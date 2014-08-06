@@ -1,0 +1,27 @@
+//
+//  Utils.h
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-3.
+//
+//
+
+#ifndef __fancyHeart__Utils__
+#define __fancyHeart__Utils__
+#include "cocos2d.h"
+#include <iostream>
+#include <sys/time.h>
+using namespace cocos2d;
+class Utils {
+    
+    
+public:
+    
+    static float random01();
+    static long getTime();
+    void static BezierMove(Node* sprite,Vec2 startPoint,Vec2 endPoint,float duration);
+    void static BezierRotate(Node* sprite,Vec2 startPoint,Vec2 endPoint,float duration,float starAngle=0);
+    static double distance(Vec2 sp,Vec2 ep);
+    static float angle(const Vec2 sp,const Vec2 ep);
+};
+#endif /* defined(__fancyHeart__Utils__) */
