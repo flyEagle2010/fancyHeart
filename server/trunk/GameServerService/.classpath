@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_38"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/GameCommon"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/GameServerCore"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/luna"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/mina"/>
 	<classpathentry kind="lib" path="/GameServer/lib/antlr.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/apache-httpcomponents-httpclient.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/classOverride.jar"/>
@@ -17,6 +17,7 @@
 	<classpathentry kind="lib" path="/GameServer/lib/commons-pool-1.4.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/game-common.jar"/>
+	<classpathentry kind="lib" path="/GameServer/lib/game-server-service.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/gson-2.0.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/httpcore.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/ibatis-2.3.4.726.jar"/>
@@ -27,7 +28,7 @@
 	<classpathentry kind="lib" path="/GameServer/lib/jsoup-1.6.0.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/jxl.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/log4j-1.2.14.jar"/>
-	<classpathentry kind="lib" path="/GameServer/lib/mina-core-2.0.0-M5.jar" sourcepath="/GameServerCore/C:/Users/pchenhailong/Desktop/apache-mina-2.0.4"/>
+	<classpathentry kind="lib" path="/GameServer/lib/mina-core-2.0.0-M5.jar" sourcepath="C:/Users/pchenhailong/Desktop/apache-mina-2.0.4"/>
 	<classpathentry kind="lib" path="/GameServer/lib/mysql-connector-java-5.1.6-bin.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/poi-3.6-20091214.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/poi-ooxml-3.6-20091214.jar"/>
@@ -40,6 +41,5 @@
 	<classpathentry kind="lib" path="/GameServer/lib/slf4j-api-1.5.0.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/slf4j-simple-1.5.0.jar"/>
 	<classpathentry kind="lib" path="/GameServer/lib/tomcat-naming-common.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

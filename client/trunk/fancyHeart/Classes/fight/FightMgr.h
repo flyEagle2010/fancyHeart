@@ -37,11 +37,13 @@ using namespace cocos2d;
 class MFighter;
 class FightScene;
 class FData;
+struct BData;
+
 class FightMgr:public Ref{
 private:
     void initHero(std::vector<long> heros);
     void initSkill();
-    static bool sortGrid(int f1,int f2);
+    static bool sortGrid(BData f1,BData f2);
     std::vector<int> groups;
     
     int gateID;

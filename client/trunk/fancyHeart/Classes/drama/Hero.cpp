@@ -58,6 +58,25 @@ void Hero::run()
 {
 }
 
+void Hero::playEffect(int part,string effectName,int times)
+{
+    int heroZOrder=this->armature->getLocalZOrder();
+    int clipZOrder=part==2?heroZOrder-1:heroZOrder+1;
+    Clip* clip=Clip::create("effect/"+effectName+".plist");
+    this->addChild(clip,clipZOrder);
+    Vec2 p;
+    if (part==0) {
+        p=Vec2(0,this->armature->getContentSize().height+clip->getContentSize().height/2);
+    }else if (part==1){
+        p=Vec2(0,this->armature->getContentSize().height/2);
+    }else if (part==2){
+        p=Vec2(0,0);
+    }
+    clip->setPosition(p);
+    clip->play(times);
+
+}
+
 void Hero::onExit()
 {
     Node::onExit();

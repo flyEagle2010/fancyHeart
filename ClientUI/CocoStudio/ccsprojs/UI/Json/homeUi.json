@@ -9,9 +9,7 @@
   "dataScale": 1,
   "designHeight": 640,
   "designWidth": 1136,
-  "textures": [
-    "UI0.plist"
-  ],
+  "textures": [],
   "texturesPng": [],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -1914,7 +1912,7 @@
       "classname": "Panel",
       "name": "home_bg",
       "ZOrder": 0,
-      "actiontag": 2,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

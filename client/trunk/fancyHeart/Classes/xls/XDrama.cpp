@@ -54,3 +54,27 @@ std::string XDrama::getAction(){
 std::string XDrama::getTalk(){
 	return doc[v.asString().c_str()]["talk"].GetString();
 }
+std::string XDrama::getEffectName(){
+	return doc[v.asString().c_str()]["effectName"].GetString();
+}
+int XDrama::getTimes(){
+	return doc[v.asString().c_str()]["times"].GetInt();
+}
+int XDrama::getIsSkill(){
+	return doc[v.asString().c_str()]["isSkill"].GetInt();
+}
+std::string XDrama::getSkillPos(){
+	return doc[v.asString().c_str()]["skillPos"].GetString();
+}
+int XDrama::getPart(){
+	return doc[v.asString().c_str()]["part"].GetInt();
+}
+std::string XDrama::getSoundName(){
+	return doc[v.asString().c_str()]["soundName"].GetString();
+}
+int XDrama::getIsFadeIn(){
+	return doc[v.asString().c_str()]["isFadeIn"].GetInt();
+}
+std::string XDrama::getTargetName(){
+	return doc[v.asString().c_str()]["targetName"].GetString();
+}

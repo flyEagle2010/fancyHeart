@@ -18,6 +18,7 @@
 #include "XMonster.h"
 using namespace cocos2d;
 class Buff;
+
 struct BData{
     int xid;
     int lv;
@@ -25,6 +26,7 @@ struct BData{
     int star;
     int pos;
 };
+
 class FData:public Ref
 {
 public:

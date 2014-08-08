@@ -47,12 +47,12 @@ void DramaAni::onEnter()
 
 void DramaAni::startPre(int groupID)
 {
-    FightMgr::getInstance()->startBattle();
-    return;
+//    FightMgr::getInstance()->startBattle();
+//    return;
     
     if(this->getParent()==nullptr)FightMgr::getInstance()->view->addChild(this);
     this->setVisible(true);
-    int id=100;
+    int id=101;
     int drameId=id*1000+1;
     do{
         XDrama* dram=XDrama::record(Value(drameId));
@@ -61,55 +61,63 @@ void DramaAni::startPre(int groupID)
         int type=dram->getType();
         if(type==0){//剧情动画结束
             this->runAction(Sequence::create(
-                                             DelayTime::create(dram->getStartTime()/1000),
+                                             DelayTime::create(dram->getStartTime()/1000.0f),
                                              CallFunc::create(CC_CALLBACK_0(DramaAni::startBattle, this)),
                                              NULL));
         }
         else if (type==1) {//角色出现
             Vec2 p=PointFromString(dram->getPos());
+            string str=dram->getPos().c_str();
             auto hero=Hero::create("man animation", "man animation0", p);
             this->heroLayer->addChild(hero);
             hero->setOpacity(0);
             hero->setScaleX(dram->getFaceTo()==0?-1:1);
             hero->setTag(dram->getRoleId());
             hero->runAction(Sequence::create(
-                                             DelayTime::create(dram->getStartTime()/1000),
-                                             FadeIn::create(.5), NULL));
+                                             DelayTime::create(dram->getStartTime()/1000.0f),
+                                             CallFuncN::create(CC_CALLBACK_0(DramaAni::displayDramaId, this,dram->getId())),
+                                             FadeIn::create(.5),
+                                              NULL));
         }else if (type==2){//角色消失
             auto hero=this->heroLayer->getChildByTag(dram->getRoleId());
             hero->runAction(Sequence::create(
-                                             DelayTime::create(dram->getStartTime()/1000),
+                                             DelayTime::create(dram->getStartTime()/1000.0f),
+                                             CallFuncN::create(CC_CALLBACK_0(DramaAni::displayDramaId, this,dram->getId())),
                                              FadeOut::create(.5),
-                                             CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, hero)), NULL));
+                                             CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, hero)),
+                                             NULL));
         }else if (type==3){//角色移动
             Size winSize=Director::getInstance()->getWinSize();
             auto hero=this->heroLayer->getChildByTag(dram->getRoleId());
-            Vec2 p=PointFromString(dram->getTargetPos());
-            Vec2 target=Vec2((p.x)*40,winSize.height/2-(p.y-2)*50);
+            Vec2 target=this->getPos(dram->getTargetPos());
             Vec2 startP=hero->getPosition();
             Vec2 subP=target-startP;
             float distance=sqrt((subP.x*subP.x+subP.y*subP.y));
             float t=5*(distance/960);
             Spawn* sp=Spawn::create(MoveTo::create(t, target),CallFuncN::create(CC_CALLBACK_1(DramaAni::displayAction, this,"walk",1)),NULL);
             hero->runAction(Sequence::create(
-                                             DelayTime::create(dram->getStartTime()/1000),
+                                             DelayTime::create(dram->getStartTime()/1000.0f),
+                                             CallFuncN::create(CC_CALLBACK_0(DramaAni::displayDramaId, this,dram->getId())),
                                              sp,
                                              CallFuncN::create(CC_CALLBACK_1(DramaAni::displayAction, this,"idle",1)),NULL));
         }else if (type==4){//角色动作播放 包括转脸
             auto hero=this->heroLayer->getChildByTag(dram->getRoleId());
             hero->runAction(Sequence::create(
-                                             DelayTime::create(dram->getStartTime()/1000),
+                                             DelayTime::create(dram->getStartTime()/1000.0f),
+                                             CallFuncN::create(CC_CALLBACK_0(DramaAni::displayDramaId, this,dram->getId())),
+                                             CallFuncN::create(CC_CALLBACK_0(Hero::setScaleX, hero,dram->getFaceTo()==0?1:-1)),
                                              CallFuncN::create(CC_CALLBACK_1(DramaAni::displayAction,this,dram->getAction(),0)), NULL));
         }else if (type==5){//角色对白播放
-            this->talkPanel->setScaleX(dram->getDirection()==0?-1:1);
-            txtTalk->setString(dram->getTalk());
-            this->talkPanel->runAction(Sequence::create(DelayTime::create(dram->getStartTime()/1000),
-                                                  CallFuncN::create(CC_CALLBACK_1(DramaAni::displayTalk,this,true)),NULL));
+            this->talkPanel->runAction(Sequence::create(
+                                                  DelayTime::create(dram->getStartTime()/1000.0f),
+                                                  CallFuncN::create(CC_CALLBACK_0(DramaAni::displayDramaId, this,dram->getId())),
+                                                  CallFuncN::create(CC_CALLBACK_1(DramaAni::displayTalk,this,true,dram->getTalk(),dram->getDirection())),NULL));
             
         }else if (type==6){//特效播放
             this->runAction(Sequence::create(
-                                             DelayTime::create(dram->getStartTime()/1000),
-                                             CallFuncN::create(CC_CALLBACK_0(DramaAni::playEffect, this,1001)),
+                                             DelayTime::create(dram->getStartTime()/1000.0f),
+                                             CallFuncN::create(CC_CALLBACK_0(DramaAni::displayDramaId, this,dram->getId())),
+                                             CallFuncN::create(CC_CALLBACK_0(DramaAni::playEffect, this,dram->getId())),
                                              NULL));
             
         }else if (type==7){//音效播放
@@ -118,21 +126,58 @@ void DramaAni::startPre(int groupID)
     }
     while (1);
 }
-
-void DramaAni::playEffect(int effectId)
+void DramaAni::displayDramaId(int dramaId)
 {
-    Clip* clip=Clip::create("effect/e1001.plist");
-    this->effectLayer->addChild(clip);
-    clip->setPosition(Vec2(400, 300));
-    clip->play(false);
+    static_cast<Text*>(layout->getChildByName("txt_dramId"))->setString(Value(dramaId).asString());
+}
+void DramaAni::playEffect(int dramaId)
+{
+    XDrama* dram=XDrama::record(Value(dramaId));
+    if (dram->getRoleId()==0) {//普通特效
+        Clip* clip=Clip::create("effect/e1001.plist");
+        this->effectLayer->addChild(clip);
+        Vec2 p=this->getPos(dram->getPos());
+        clip->setPosition(p);
+        clip->play(dram->getTimes());
+    }else if (dram->getRoleId()!=0 && dram->getIsSkill()==0){//非弹道
+        auto hero=static_cast<Hero*>(this->heroLayer->getChildByTag(dram->getRoleId()));
+        hero->playEffect(0, "head",2);
+        //hero->playEffect(dram->getPart(), dram->getEffectName());
+    }else if (dram->getRoleId()!=0 && dram->getIsSkill()!=0){//弹道
+        auto hero=static_cast<Hero*>(this->heroLayer->getChildByTag(dram->getRoleId()));
+        Clip* clip=Clip::create("effect/skillEffect.plist");
+        this->effectLayer->addChild(clip);
+        clip->setPosition(hero->getPosition());
+        clip->play(0);
+        Vec2 p=clip->getPosition();
+        Vec2 end=this->getPos("{24,2}");
+        float duration=abs(end.x-p.x)/960;
+        Vec2 mid=Vec2(p.x+abs(end.x-p.x)/2,end.y+100);
+        BezierMove* move=BezierMove::create(duration, end,mid);
+        clip->runAction(Sequence::create(move,CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, clip)), NULL));
+    }
 }
 
-void DramaAni::displayTalk(Node * pSender,bool isDisplay)
+Vec2 DramaAni::getPos(string p)
+{
+    Size winSize=Director::getInstance()->getWinSize();
+    Vec2 pos=PointFromString(p);
+    Vec2 target=Vec2((pos.x)*40,winSize.height/2-(pos.y-2)*50);
+    return target;
+}
+
+void DramaAni::displayTalk(Node * pSender,bool isDisplay,string talk,int direction)
 {
     pSender->setVisible(isDisplay);
     this->isTalk=isDisplay;
     if (isDisplay) {
+        this->talkPanel->setScaleX(direction==1?-1:1);
+        txtTalk->setScaleX(direction==1?-1:1);
+        Size size=Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
+        Size contentSize=this->talkPanel->getContentSize();
+        this->talkPanel->setPosition(direction==1?Vec2(size.width-contentSize.width/2, contentSize.height/2):Vec2(contentSize.width/2, contentSize.height/2));
         Director::getInstance()->stopAnimation();
+        txtTalk->setString(talk);
     }else if(!isDisplay){
         Director::getInstance()->startAnimation();
     }
@@ -146,6 +191,9 @@ void DramaAni::startBattle()
 
 void DramaAni::displayAction(Node * pSender,string action,int loop)
 {
+    if (action=="") {
+        return;
+    }
     static_cast<Hero*>(pSender)->playAction(action,loop);
 }
 
@@ -153,11 +201,6 @@ void DramaAni::startEnd(int groupID)
 {
     //动画结束后调用
     FightMgr::getInstance()->handleResult();
-}
-
-void DramaAni::show(BaseUI* preUI,int effectType)
-{
-    BaseUI::show(preUI,effectType);
 }
 
 void DramaAni::clear(bool isDel)
@@ -194,4 +237,5 @@ void DramaAni::touchButtonEvent(Ref *pSender, TouchEventType type)
 void DramaAni::onExit()
 {
     BaseUI::onExit();
+    this->heroLayer->removeAllChildren();
 }

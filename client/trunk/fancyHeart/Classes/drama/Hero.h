@@ -15,7 +15,7 @@
 #include "ui/CocosGUI.h"
 #include "cocostudio/CocoStudio.h"
 #include "fight.pb.h"
-
+#include "Clip.h"
 USING_NS_CC;
 using namespace ui;
 using namespace cocostudio;
@@ -31,6 +31,7 @@ public:
     void stand();
     void run();
     void playAction(string action,int loop=0);
+    void playEffect(int part,string effectName,int times=0);
 private:
     Armature* armature;
 };

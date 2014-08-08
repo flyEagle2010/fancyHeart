@@ -89,18 +89,21 @@ void FightMgr::startBattle()
 void FightMgr::initHero(std::vector<long> hero)
 {
     //初始化角色100
-    std::vector<int> heros={100,101,101,102,999};
+    std::vector<int> ids={100,101,101,102,999};
+    std::vector<BData> heros;
+    for(int i=0;i<ids.size();i++){
+        heros.push_back(BData{ids.at(i),1,1,1,i});
+    }
     Size winSize=Director::getInstance()->getWinSize();
     sort(heros.begin(),heros.end(), FightMgr::sortGrid);
 
     Vector<FData*> arr;
     for(int i=0;i<heros.size();i++)
     {
-        int xid=heros.at(i);
-        //xid lv rate star pos
-        BData bd={xid,1,1,1,i};
-        if(xid==999 || xid==998){
-            bd={xid,1,9,1,i};
+        BData bd=heros.at(i);
+        if(bd.xid==999 || bd.xid==998){
+//            bd.lv=9;
+            bd.rate=9;
         }
         FData* fd=FData::create(bd);
         int pos = fd->bd.pos;
@@ -120,30 +123,30 @@ void FightMgr::initNpc()
 //    this->groups.erase(groups.begin());
     this->view->resetProgress();
 
-    std::vector<int> npc;
+    std::vector<BData> npc;
     XMonster* xm=XMonster::record(Value(this->groupID));
     
     int mid=xm->getMID1();
-    npc.push_back(mid/10);
+    npc.push_back({mid/10,xm->getMLv1(),mid%10,xm->getMStar1(),5});
     
     mid=xm->getMID2();
     if(mid > 0){
-        npc.push_back(mid/10);
+        npc.push_back({mid/10,xm->getMLv2(),mid%10,xm->getMStar2(),6});
     }
     
     mid=xm->getMID3();
     if(mid > 0){
-       npc.push_back(mid/10);
+        npc.push_back({mid/10,xm->getMLv3(),mid%10,xm->getMStar3(),7});
     }
     
     mid=xm->getMID4();
     if(mid > 0){
-        npc.push_back(mid/10);
+        npc.push_back({mid/10,xm->getMLv4(),mid%10,xm->getMStar4(),8});
     }
     
     mid=xm->getMID5();
     if(mid > 0){
-        npc.push_back(mid/10);
+        npc.push_back({mid/10,xm->getMLv5(),mid%10,xm->getMStar5(),9});
     }
     
     //init modle & view
@@ -152,8 +155,8 @@ void FightMgr::initNpc()
     
     for(int i=0;i<npc.size();i++)
     {
-        BData bd={npc.at(i),xm->getMLv2(),mid%10,xm->getMStar2(),i+5};
-        FData* fd=FData::create(bd);
+//        BData bd={npc.at(i),xm->getMLv1(),mid%10,xm->getMStar1(),i+5};
+        FData* fd=FData::create(npc.at(i));
         int pos = fd->bd.pos;
         MFighter* mf=MFighter::create(fd);
         mf->view=Fview::create("man animation", "man animation0", pos);
@@ -193,10 +196,10 @@ void FightMgr::skillAttack(int skill)
     roleMp-=XSkill::record(Value(-skill))->getMp()*BEAN_NUM;
 }
 
-bool FightMgr::sortGrid(int f1,int f2)
+bool FightMgr::sortGrid(BData f1,BData f2)
 {
-    int dis1=XRole::record(Value(f1))->getLockGrid();
-    int dis2=XRole::record(Value(f2))->getLockGrid();
+    int dis1=XRole::record(Value(f1.xid))->getLockGrid();
+    int dis2=XRole::record(Value(f2.xid))->getLockGrid();
     return dis1-dis2<0;
 }
 

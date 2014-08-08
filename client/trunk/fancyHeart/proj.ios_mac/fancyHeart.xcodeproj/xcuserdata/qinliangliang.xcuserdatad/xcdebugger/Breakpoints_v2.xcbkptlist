@@ -308,11 +308,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/fight/FightMgr.h"
-            timestampString = "428403925.155851"
+            timestampString = "429182569.580928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "class FightMgr"
             landmarkType = "3">
          </BreakpointContent>
@@ -356,11 +356,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/fight/FightMgr.cpp"
-            timestampString = "428985976.267127"
+            timestampString = "429186676.682579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "FightMgr::clear()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1056,11 +1056,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/fight/FightMgr.cpp"
-            timestampString = "428985976.267127"
+            timestampString = "429182569.580928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "FightMgr::initHero(std::vector&lt;long&gt; hero)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2282,11 +2282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/fight/FightMgr.cpp"
-            timestampString = "428985976.267127"
+            timestampString = "429186676.682579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "FightMgr::getRole()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2298,11 +2298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/fight/FightMgr.cpp"
-            timestampString = "428985976.267127"
+            timestampString = "429186676.682579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "FightMgr::getFirst(int pos)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2346,11 +2346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/fight/FightMgr.cpp"
-            timestampString = "428985976.267127"
+            timestampString = "429182569.580928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "FightMgr::initHero(std::vector&lt;long&gt; hero)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3280,11 +3280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/fight/FightMgr.cpp"
-            timestampString = "428985976.267127"
+            timestampString = "429186676.682579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "FightMgr::initNpc()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3296,11 +3296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/fight/FightMgr.cpp"
-            timestampString = "428985976.267127"
+            timestampString = "429186676.682579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "FightMgr::initNpc()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3653,7 +3653,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
             endingLineNumber = "40"
-            landmarkName = "LoginScene::onEnter()"
+            landmarkName = "LoginScene::init(std::string fileName)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3680,11 +3680,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/fight/FightMgr.cpp"
-            timestampString = "428985976.267127"
+            timestampString = "429186676.682579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "FightMgr::handleResult()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3764,9 +3764,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "LoginScene::onEnter()"
-            landmarkType = "5">
+            endingLineNumber = "42">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3797,7 +3795,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "134"
             endingLineNumber = "134"
-            landmarkName = "LoginScene::initGameCallback(std::vector&lt;char&gt; *data)"
+            landmarkName = "LoginScene::webSend(std::string str)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3830,6 +3828,54 @@
             startingLineNumber = "491"
             endingLineNumber = "491"
             landmarkName = "RotateList::touchEvent(cocos2d::Ref *pSender, TouchEventType type)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/login/LoginScene.cpp"
+            timestampString = "429091532.200345"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "LoginScene::touchEvent(Ref *pSender, Widget::TouchEventType type)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/fight/FightMgr.cpp"
+            timestampString = "429174569.19404"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "FightMgr::startBattle()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/fight/FightMgr.cpp"
+            timestampString = "429174570.130683"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "FightMgr::startBattle()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

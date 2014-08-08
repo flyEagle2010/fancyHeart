@@ -31,6 +31,9 @@ bool LoginScene::init(std::string fileName)
     {
         return false;
     }
+    ScrollView* scrollView=static_cast<ui::ScrollView*>(layout->getChildByName("scrollView"));
+    Widget* lgintBtn=scrollView->getChildByName("loginBtn");
+    lgintBtn->setVisible(false);
     Size sSize=Director::getInstance()->getOpenGLView()->getFrameSize();
     Size winsize=Director::getInstance()->getWinSize();
     return true;
@@ -64,6 +67,7 @@ void LoginScene::resetUI()
         newItem->setTag(i);
         newItem->setTitleText(sData["areaList"][i]["name"].GetString());
         newItem->setTitleColor(Color3B(0, 0, 0));
+        newItem->setVisible(true);
         
         scrollView->addChild(newItem);
         

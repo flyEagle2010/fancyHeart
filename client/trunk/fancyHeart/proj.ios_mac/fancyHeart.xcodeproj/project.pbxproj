@@ -55,7 +55,6 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
-		BF1DEF7E198B4363000C7C01 /* publish in Resources */ = {isa = PBXBuildFile; fileRef = BF1DEF7D198B4363000C7C01 /* publish */; };
 		BF2558571985E2F40024AB17 /* loading_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2558561985E2F40024AB17 /* loading_bg.png */; };
 		BF2559321988EA7B0024AB17 /* DramaAni.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF2559301988EA7B0024AB17 /* DramaAni.cpp */; };
 		BF25597A1988FC440024AB17 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2559631988FC440024AB17 /* 1.png */; };
@@ -102,6 +101,8 @@
 		BF82E4941992286B0016E953 /* XDrama.json in Resources */ = {isa = PBXBuildFile; fileRef = BF82E4931992286B0016E953 /* XDrama.json */; };
 		BF82E497199228D10016E953 /* Hero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF82E495199228D10016E953 /* Hero.cpp */; };
 		BF82E49D199229B70016E953 /* Package.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF82E49B199229B70016E953 /* Package.cpp */; };
+		BF82E4A71994DEDE0016E953 /* publish in Resources */ = {isa = PBXBuildFile; fileRef = BF82E4A61994DEDE0016E953 /* publish */; };
+		BF82E4A91994DF2C0016E953 /* effect in Resources */ = {isa = PBXBuildFile; fileRef = BF82E4A81994DF2C0016E953 /* effect */; };
 		BFA71B0419334C7A0065E851 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA71B0319334C7A0065E851 /* Security.framework */; };
 		BFD2AEE5197F93E4001A0F26 /* BaseUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2ADED197F93E4001A0F26 /* BaseUI.cpp */; };
 		BFD2AEE6197F93E4001A0F26 /* BezierMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2ADEF197F93E4001A0F26 /* BezierMove.cpp */; };
@@ -295,7 +296,6 @@
 		BFD2B0C4197F954D001A0F26 /* XNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2B0BE197F954D001A0F26 /* XNode.cpp */; };
 		BFD2B0C6197F954D001A0F26 /* XWord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2B0C2197F954D001A0F26 /* XWord.cpp */; };
 		BFD2B0C9197F9652001A0F26 /* commonResp.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFD2B0C7197F9652001A0F26 /* commonResp.pb.cc */; };
-		BFD2B0CB197F9BEA001A0F26 /* effect in Resources */ = {isa = PBXBuildFile; fileRef = BFD2B0CA197F9BEA001A0F26 /* effect */; };
 		BFD2B0CE197FA55E001A0F26 /* Loading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2B0CC197FA55E001A0F26 /* Loading.cpp */; };
 		BFD2B0DE1980A51C001A0F26 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2B0DC1980A51C001A0F26 /* Manager.cpp */; };
 		BFD2B0E11980A536001A0F26 /* Chat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2B0DF1980A536001A0F26 /* Chat.cpp */; };
@@ -498,7 +498,6 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		BF1DEF7D198B4363000C7C01 /* publish */ = {isa = PBXFileReference; lastKnownFileType = folder; path = publish; sourceTree = "<group>"; };
 		BF2558561985E2F40024AB17 /* loading_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_bg.png; sourceTree = "<group>"; };
 		BF2559301988EA7B0024AB17 /* DramaAni.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DramaAni.cpp; sourceTree = "<group>"; };
 		BF2559311988EA7B0024AB17 /* DramaAni.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DramaAni.h; sourceTree = "<group>"; };
@@ -549,6 +548,8 @@
 		BF82E496199228D10016E953 /* Hero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hero.h; sourceTree = "<group>"; };
 		BF82E49B199229B70016E953 /* Package.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Package.cpp; sourceTree = "<group>"; };
 		BF82E49C199229B70016E953 /* Package.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Package.h; sourceTree = "<group>"; };
+		BF82E4A61994DEDE0016E953 /* publish */ = {isa = PBXFileReference; lastKnownFileType = folder; name = publish; path = ../../../../ClientUI/CocoStudio/assets/publish; sourceTree = "<group>"; };
+		BF82E4A81994DF2C0016E953 /* effect */ = {isa = PBXFileReference; lastKnownFileType = folder; path = effect; sourceTree = "<group>"; };
 		BFA71B0319334C7A0065E851 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		BFD2ADED197F93E4001A0F26 /* BaseUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseUI.cpp; sourceTree = "<group>"; };
 		BFD2ADEE197F93E4001A0F26 /* BaseUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUI.h; sourceTree = "<group>"; };
@@ -848,7 +849,6 @@
 		BFD2B0C3197F954D001A0F26 /* XWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWord.h; sourceTree = "<group>"; };
 		BFD2B0C7197F9652001A0F26 /* commonResp.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = commonResp.pb.cc; sourceTree = "<group>"; };
 		BFD2B0C8197F9652001A0F26 /* commonResp.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commonResp.pb.h; sourceTree = "<group>"; };
-		BFD2B0CA197F9BEA001A0F26 /* effect */ = {isa = PBXFileReference; lastKnownFileType = folder; path = effect; sourceTree = "<group>"; };
 		BFD2B0CC197FA55E001A0F26 /* Loading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Loading.cpp; sourceTree = "<group>"; };
 		BFD2B0CD197FA55E001A0F26 /* Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loading.h; sourceTree = "<group>"; };
 		BFD2B0DB1980A51C001A0F26 /* GConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GConfig.h; sourceTree = "<group>"; };
@@ -1518,11 +1518,11 @@
 		BFD2AF4D197F93F2001A0F26 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BF1DEF7D198B4363000C7C01 /* publish */,
+				BF82E4A81994DF2C0016E953 /* effect */,
+				BF82E4A61994DEDE0016E953 /* publish */,
 				BF25599B1989E42E0024AB17 /* data */,
 				BF2559621988FC440024AB17 /* map */,
 				BF2558551985E2F30024AB17 /* loading */,
-				BFD2B0CA197F9BEA001A0F26 /* effect */,
 				BFD2AF4E197F93F2001A0F26 /* .com.apple.timemachine.supported */,
 				BFD2AF73197F93F2001A0F26 /* bone */,
 				BFD2AF78197F93F2001A0F26 /* CloseNormal.png */,
@@ -1933,6 +1933,7 @@
 				BFD2B0AC197F93F3001A0F26 /* example_MultiTexture.fsh in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				BFD2B0BA197F93F3001A0F26 /* test.plist in Resources */,
+				BF82E4A71994DEDE0016E953 /* publish in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				BFD2B09A197F93F3001A0F26 /* PoisonShader.fsh in Resources */,
 				BF2559BD198A0D160024AB17 /* battle_HP_1.png in Resources */,
@@ -1942,7 +1943,6 @@
 				BFD2B086197F93F3001A0F26 /* TK_atk3_tile.pvr.ccz in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				BFD2B092197F93F3001A0F26 /* GrayScalingShader.fsh in Resources */,
-				BF1DEF7E198B4363000C7C01 /* publish in Resources */,
 				BFD2B0A3197F93F3001A0F26 /* example_edgeDetection.fsh in Resources */,
 				BF2559B11989E42E0024AB17 /* XMonster.json in Resources */,
 				BFD2B099197F93F3001A0F26 /* MirrorShader.vsh in Resources */,
@@ -1955,7 +1955,6 @@
 				BFD2B0B4197F93F3001A0F26 /* shadertoy_FireBall.fsh in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				BFD2B0B8197F93F3001A0F26 /* test.json in Resources */,
-				BFD2B0CB197F9BEA001A0F26 /* effect in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				BFD2B082197F93F3001A0F26 /* SP_atk2_tile.pvr.ccz in Resources */,
@@ -2022,6 +2021,7 @@
 				BF2559AA1989E42E0024AB17 /* roleData.txt in Resources */,
 				BFD2B0EC1980AE78001A0F26 /* fightBg2.png in Resources */,
 				BFD2B07D197F93F3001A0F26 /* POM_atk_tile.pvr.ccz in Resources */,
+				BF82E4A91994DF2C0016E953 /* effect in Resources */,
 				BF25597A1988FC440024AB17 /* 1.png in Resources */,
 				BFD2B078197F93F3001A0F26 /* Med_atk_tile.pvr.ccz in Resources */,
 				BF2559AF1989E42E0024AB17 /* XGate.json in Resources */,
