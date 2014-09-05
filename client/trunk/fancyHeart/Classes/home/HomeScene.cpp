@@ -35,7 +35,7 @@ bool HomeScene::init(std::string fileName,bool isScence)
     Size dSize(1136,640);
     Size size=Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
     float scale=fmin(size.width/dSize.width,size.height/dSize.height);
-
+//    scale=1;
     std::vector<std::string> buildNames={"img_hecheng","img_tiaozhan","img_hero","img_shichang","img_zhaohuan","img_fuben"};
     ComRender *render = static_cast<ComRender*>(layout->getChildByTag(10003)->getComponent("GUIComponent"));
     comLayout=static_cast<Layout*>(render->getNode());
@@ -44,6 +44,15 @@ bool HomeScene::init(std::string fileName,bool isScence)
     auto widget=static_cast<Widget*>(comLayout->getChildByName("home_botom"));
     widget->setPosition(Vec2(size.width/2, 0+widget->getContentSize().height*scale/2));
     widget->setScale(scale);
+    
+    auto btnProp = widget->getChildByName("btn_prop");
+    btnProp->addTouchEventListener(CC_CALLBACK_2(HomeScene::touchButtonEvent, this));
+    
+    auto btnGroup = widget->getChildByName("btn_group");
+    btnGroup->addTouchEventListener(CC_CALLBACK_2(HomeScene::touchButtonEvent, this));
+    
+    auto btn_dower=widget->getChildByName("btn_dower");
+    btn_dower->addTouchEventListener(CC_CALLBACK_2(HomeScene::touchButtonEvent, this));
     
     widget=static_cast<Widget*>(comLayout->getChildByName("home_top"));
     widget->setPosition(Vec2(size.width/2, (size.height-widget->getContentSize().height*scale/2)));
@@ -87,7 +96,7 @@ bool HomeScene::init(std::string fileName,bool isScence)
     
     this->initUi();
     this->chat=Chat::create();
-    //this->addChild(this->chat,CHAT_LAY);
+    this->addChild(this->chat,CHAT_LAY);//
     this->chat->setVisible(false);
     
 //    Label* lable=Label::createWithTTF("名字到底几个字", "Marker Felt.ttf", 25);
@@ -133,9 +142,26 @@ void HomeScene::touchButtonEvent(Ref* pSender,TouchEventType type)
             switch (button->getTag()) {
                 case 10065://聊天按钮
                 {
-                    //this->chat->show();
+                    this->chat->show();//
                     break;
                 }
+                case 10037://下面最右边的按钮
+                {
+                    Bag* bag = Bag::create();
+                    bag->show();
+                    break;
+                }
+                case 10034:
+                {
+                    Formation::create(this)->show();
+                    break;
+                }
+                case 10036:
+                {
+                    Compose::create()->show();
+                    break;
+                }
+                    
                 default:
                     break;
             }
@@ -159,6 +185,7 @@ void HomeScene::touchBuildEvent(cocos2d::Ref *pSender, TouchEventType type)
         case TouchEventType::ENDED:
         {
             switch (sprite->getTag())
+            
             {
                 case 10001: //竞技场
                 {
@@ -184,6 +211,8 @@ void HomeScene::touchBuildEvent(cocos2d::Ref *pSender, TouchEventType type)
                 }
                 case 10004: //英雄编队（卡组）
                 {
+                    RoleList* roleList = RoleList::create();
+                    roleList->show();
                     break;
                 }
                 case 10005: //英雄属性

@@ -15,14 +15,19 @@
 using namespace cocos2d;
 using namespace ui;
 using namespace cocostudio;
-class TestShadeScene:public BaseUI{
+class TestShadeScene:public Node{
 public:
 	static Scene* createScene();
 	CREATE_FUNC(TestShadeScene);
 	virtual void onEnter();
 	virtual void onExit();
 	virtual bool init();
-
+    
+    virtual void visit(Renderer *renderer,const Mat4 &transform,bool transformUpdated) override;
+    void onDraw();
+private:
+    CustomCommand command;
+    
 private:
 
 };

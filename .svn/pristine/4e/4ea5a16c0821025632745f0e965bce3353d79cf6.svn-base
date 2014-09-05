@@ -1,0 +1,295 @@
+//
+//  RoleList.cpp
+//  fancyHeart
+//
+//  Created by doteyplay on 14-8-12.
+//
+//
+
+#include "RoleList.h"
+
+RoleList* RoleList::create()
+{
+    RoleList* roleList=new RoleList();
+    if (roleList && roleList->init("publish/roleList/roleList.ExportJson")) {
+        roleList->autorelease();
+        return roleList;
+    }
+    CC_SAFE_DELETE(roleList);
+    return nullptr;
+}
+
+bool RoleList::init(std::string fileName)
+{
+	if(!BaseUI::init(fileName))
+    {
+        return false;
+    }
+    
+    
+//    XRole* xRole2 = XRole::record(Value(100));
+//    int bb2 = xRole2->getId();
+//    XRoleData* xRoleData1 =  XRoleData::record(Value(1000));
+//    int bb4 = xRoleData1->getHp();
+    
+	//如果需要对cocostudio 设计的ui进行调整
+    Widget*itemPanel = static_cast<Widget*>(layout->getChildByName("item"));
+    this->btnCall = static_cast<Button*>(layout->getChildByName("btnCall"));
+    this->progress = static_cast<Widget*>(layout->getChildByName("progress"));
+    Button* searchBtn = static_cast<Button*>(layout->getChildByName("searchBtn"));
+    for (int i=0; i<6; i++) {
+        Widget* star=static_cast<Widget*>(itemPanel->getChildByName("star"+Value(i+1).asString()));
+        this->stars.push_back(static_cast<Widget*>(star));
+        star->setVisible(false);
+    }
+    
+    Size widgetSize = Director::getInstance()->getWinSize();
+    this->rotateList = RotateList::create();
+    this->rotateList->setSize(Size(widgetSize.width, widgetSize.height));
+    this->rotateList->addEventListener(CC_CALLBACK_3(RoleList::rotateListCallback,this));
+
+    //模版
+    Widget* item=static_cast<Widget*>(layout->getChildByName("item"));
+    item->removeFromParent();
+//    this->rotateList->setItemModel(item,widgetSize.width+widgetSize.width/2,widgetSize,widgetSize.width/5);//传进去单个模版
+    this->rotateList->setItemModel(item,widgetSize.width,widgetSize,widgetSize.width/7);//传进去单个模版
+    this->addChild(this->rotateList);
+    
+    float x = widgetSize.width/2;
+    float y =widgetSize.height-item->getContentSize().height;
+    this->rotateList->setPosition(Vec2(0,y));
+    
+    //滚动条
+    this->slider=static_cast<Slider*>(layout->getChildByName("slider"));
+    this->rotateList->setSlider(this->slider);
+    
+    Button* returnBtn = static_cast<Button*>(layout->getChildByName("returnBtn"));
+    Button* propInfoBtn = static_cast<Button*>(this->progress->getChildByName("propInfoBtn"));
+    returnBtn->addTouchEventListener(CC_CALLBACK_2(RoleList::touchEvent, this));
+    this->btnCall->addTouchEventListener(CC_CALLBACK_2(RoleList::touchEvent, this));
+    searchBtn->setTouchEnabled(true);
+    searchBtn->addTouchEventListener(CC_CALLBACK_2(RoleList::touchEvent, this));
+    propInfoBtn->addTouchEventListener(CC_CALLBACK_2(RoleList::touchEvent, this));
+    
+    
+    //表中所有可召唤的武将
+    LoginResp* loginResp = Manager::getInstance()->getRoleData();
+    XRole*xRole = XRole::record(Value(0));
+    
+    rapidjson::Value& xRoleDoc = xRole->doc;
+//    rapidjson::Value &v = const_cast<rapidjson::Value &>(xRoleDoc);
+    rapidjson::GenericValue<rapidjson::UTF8<> >::MemberIterator it = xRoleDoc.MemberonBegin();
+    for (; it != xRoleDoc.MemberonEnd(); it++ )
+    {
+        log("%s", it->name.GetString());
+    
+        //item：得到表中一条条数据
+//        rapidjson::Value &item = const_cast<rapidjson::Value &>(xRoleDoc[it->name.GetString()]);
+//        rapidjson::GenericValue<rapidjson::UTF8<> >::MemberIterator itemData = item.MemberonBegin();
+        rapidjson::Value& item=it->value;
+        if (item["called"].GetInt() == 1) {
+            //将表中可召唤的角色数据存放listDatas中
+            listDatas.push_back(&item);
+        }else{
+            for (int j =0; j<loginResp->npclist_size(); j++) {
+                if (item["id"].GetInt() == loginResp->npclist(j).spriteid() && item["isRole"].GetInt() != 1) {
+                    //将服务器给的已经召唤但是在表中并不是可召唤的角色放到listDatas中————————————————————这里问下策划，是否有不可召唤的武将在这个列表中（此角色是通过其他途径得到的）
+                    this->listDatas.push_back(&item);
+                    break;
+                }
+            }
+        }
+    }
+    
+    //此处传进去的应该是表中可招募武将的长度
+    this->rotateList->setNum(int(this->listDatas.size()));
+    
+	return true;
+}
+
+void RoleList::onEnter()
+{
+    BaseUI::onEnter();
+}
+
+//设置单个模版的数据显示
+void RoleList::setItemData(Widget*item,rapidjson::Value &itemData,int index)
+{
+    PNpc calldeItem;
+    Text* powerLabel=static_cast<Text*>(item->getChildByName("powerLabel"));
+    Text* levelLabel=static_cast<Text*>(item->getChildByName("levelLabel"));
+    Text* nameLabel=static_cast<Text*>(item->getChildByName("nameLabel"));
+    ImageView*icon = static_cast<ImageView*>(item->getChildByName("icon"));
+    ImageView* roleFrame=static_cast<ImageView*>(item->getChildByName("roleFrame"));
+    
+    //遮罩
+    Mask* mask=static_cast<Mask*>(item->getChildByName("mask"));
+    if (!mask) {
+        mask=Mask::create(item->getSize());
+        mask->setName("mask");
+        item->addChild(mask);
+        mask->setTouchEnabled(true);
+        mask->setEnabled(false);
+    }
+    bool isCalled = false;//此角色是否被召唤
+    LoginResp* loginResp = Manager::getInstance()->getRoleData();
+    for (int j =0; j<loginResp->npclist_size(); j++) {
+        if (itemData["id"].GetInt() == loginResp->npclist(j).spriteid()) {
+            isCalled = true;
+            calldeItem = loginResp->npclist(j);
+        }
+    }
+    if (isCalled == false) {//如果此数据不包含在服务器给的数据中，那么模版显示
+        mask->show();
+        levelLabel->setVisible(false);
+        
+    }else{//如果此数据包含在服务器给的数据中，那么模版不显示
+        mask->hide();
+        levelLabel->setVisible(true);
+        levelLabel->setString(Value(calldeItem.level()).asString());
+    }
+    
+    //人物颜色框
+    std::vector<std::string> colors = {"card_1.png","card_2.png","card_2.png","card_3","card_3.png",
+        "card_3.png","card_4.png","card_4.png","card_4.png","card_5.png"};
+    int qualityNum =isCalled?calldeItem.quality():0;//默认品质为0
+    roleFrame->loadTexture(colors.at(qualityNum));
+    icon->loadTexture("grade_icon_"+Value(itemData["pos"].GetInt()).asString()+".png");
+    nameLabel->setString(Value(itemData["name"].GetString()).asString());
+    
+    //战力的显示(根据策划需求先写null，以后会有公式来算这个值)
+//    powerLabel->setString("Null");
+    for (int i =0; i<6; i++) {
+        this->stars.at(i)->setVisible(!isCalled);
+    }
+}
+
+void RoleList::setBottomData()
+{
+    XRole*xRole = XRole::record(Value(middleItemData["id"].GetInt()));
+    Text* progressLabel = static_cast<Text*>(this->progress->getChildByName("progressLabel"));
+    
+    //进度条
+    LoadingBar* progressBar = static_cast<LoadingBar*>(this->progress->getChildByName("progressBar"));
+    //已有召唤石的数量，到背包中查看,如果为null，说明背包中没有此道具
+    PItem* haveProp = Manager::getInstance()->getPropItem(xRole->getPropId());
+    int haveNum = haveProp == NULL?0:haveProp->itemnum();
+    //需要召唤石的数量
+    int needNum =xRole->getCalledNum();
+    progressLabel->setString(Value(haveNum).asString()+"/"+Value(needNum).asString());
+    //如果已有召唤石数量等于需要召唤石数量，那么进度条消失，召唤石按钮出现
+    if (haveNum >= needNum) {
+        this->btnCall->setVisible(true);
+        this->progress->setVisible(false);
+    }else{
+        this->btnCall->setVisible(false);
+        this->progress->setVisible(true);
+    }
+    if (needNum != 0) {
+        progressBar->setPercent(float(haveNum*100/needNum));
+    }
+}
+
+void RoleList::touchEvent(Ref *pSender, TouchEventType type)
+{
+    Button* btn=static_cast<Button*>(pSender);
+    if(type!=TouchEventType::ENDED){
+        return;
+    }
+    if (btn->getTag() == 12161) {//返回按钮
+        this->clear(true);
+    }else if (btn->getTag() == 12183){//召唤按钮
+        //记录当前点击的召唤的卡牌，成功后将其卡牌上的遮罩去掉
+        this->currentCalledItem = this->middleItem;
+        
+//        //向服务器发送请求
+//        PCallHero pCallHero;
+//        pCallHero.add_heroId(middleItemData["id"].GetInt());
+//        Manager::getInstance()->socket->send(C_CALLHERO, &pCallHero);
+        
+    }else if (btn->getTag() == 13223){//搜索按钮
+        this->showRolePanel();
+        
+    }else if (btn->getTag() == 12547){//召唤石获得途径按钮
+        
+    }
+}
+
+void RoleList::showRolePanel(){
+    Mask* mask=static_cast<Mask*>(this->middleItem->getChildByName("mask"));
+    if (!mask->isVisible()) {
+        LoginResp* loginResp = Manager::getInstance()->getRoleData();
+        for (int j =0; j<loginResp->npclist_size(); j++) {
+            if (middleItemData["id"].GetInt() == int(loginResp->npclist(j).spriteid())) {
+                Role*role = Role::create(loginResp->npclist(j));
+                role->show(this);
+                break;
+            }
+        }
+    }
+}
+
+//数据排序
+void RoleList::setDataOrder()
+{
+    
+}
+
+void RoleList::rotateListCallback(RotateList::EventType type,Widget*item,int index)
+{
+    rapidjson::Value& roleItem = *listDatas.at(index);
+    switch (type)
+    {
+        case RotateList::EventType::SCROLL_MIDDLE:
+        {
+            this->middleItem = item;
+            this->middleItemData = roleItem;//itemData;
+            //如果此时的角色未召唤,并且召唤石足够，那么召唤石进度条变没，出现召唤按钮
+//            setBottomData();
+            break;
+        }
+        case RotateList::EventType::TOUCH_ITEM:
+        {
+            XRole* xRole2 = XRole::record(Value(100));
+            int bb2 = xRole2->getId();
+            XRoleData* xRoleData =  XRoleData::record(Value(1000));
+            int bb3 = xRoleData->getHp();
+            this->showRolePanel();
+            break;
+        }
+        case RotateList::EventType::SET_ITEM_DATA:
+        {
+            this->setItemData(item,roleItem,index);//传入数据
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+void RoleList::initNetEvent(){
+    auto listener = EventListenerCustom::create(NET_MESSAGE, [=](EventCustom* event){
+        NetMsg* msg = static_cast<NetMsg*>(event->getUserData());
+        switch (msg->msgId)
+        {
+            //问问服务器有没有通用返回消息，来判断是否召唤成功
+                
+            case C_ADDORREMOVENPC:
+            {
+                Mask* mask=static_cast<Mask*>(this->currentCalledItem->getChildByName("mask"));
+                if(mask->isVisible()){
+                    mask->hide();
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    });
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void RoleList::onExit()
+{
+    BaseUI::onExit();
+}

@@ -2171,6 +2171,744 @@ public final class ItemProBuf {
     // @@protoc_insertion_point(class_scope:PUpItem)
   }
 
+  public interface PSellGroupOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated int32 itemId = 1;
+    /**
+     * <code>repeated int32 itemId = 1;</code>
+     *
+     * <pre>
+     *卖出道具id
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getItemIdList();
+    /**
+     * <code>repeated int32 itemId = 1;</code>
+     *
+     * <pre>
+     *卖出道具id
+     * </pre>
+     */
+    int getItemIdCount();
+    /**
+     * <code>repeated int32 itemId = 1;</code>
+     *
+     * <pre>
+     *卖出道具id
+     * </pre>
+     */
+    int getItemId(int index);
+
+    // repeated int32 itemSellNum = 2;
+    /**
+     * <code>repeated int32 itemSellNum = 2;</code>
+     *
+     * <pre>
+     *卖出物品数量
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getItemSellNumList();
+    /**
+     * <code>repeated int32 itemSellNum = 2;</code>
+     *
+     * <pre>
+     *卖出物品数量
+     * </pre>
+     */
+    int getItemSellNumCount();
+    /**
+     * <code>repeated int32 itemSellNum = 2;</code>
+     *
+     * <pre>
+     *卖出物品数量
+     * </pre>
+     */
+    int getItemSellNum(int index);
+  }
+  /**
+   * Protobuf type {@code PSellGroup}
+   *
+   * <pre>
+   *请求卖出道具
+   * </pre>
+   */
+  public static final class PSellGroup extends
+      com.google.protobuf.GeneratedMessage
+      implements PSellGroupOrBuilder {
+    // Use PSellGroup.newBuilder() to construct.
+    private PSellGroup(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PSellGroup(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PSellGroup defaultInstance;
+    public static PSellGroup getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PSellGroup getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PSellGroup(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                itemId_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              itemId_.add(input.readInt32());
+              break;
+            }
+            case 10: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
+                itemId_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                itemId_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 16: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                itemSellNum_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              itemSellNum_.add(input.readInt32());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                itemSellNum_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                itemSellNum_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          itemId_ = java.util.Collections.unmodifiableList(itemId_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          itemSellNum_ = java.util.Collections.unmodifiableList(itemSellNum_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PSellGroup_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PSellGroup_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.ItemProBuf.PSellGroup.class, com.doteyplay.game.message.proto.ItemProBuf.PSellGroup.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PSellGroup> PARSER =
+        new com.google.protobuf.AbstractParser<PSellGroup>() {
+      public PSellGroup parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PSellGroup(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PSellGroup> getParserForType() {
+      return PARSER;
+    }
+
+    // repeated int32 itemId = 1;
+    public static final int ITEMID_FIELD_NUMBER = 1;
+    private java.util.List<java.lang.Integer> itemId_;
+    /**
+     * <code>repeated int32 itemId = 1;</code>
+     *
+     * <pre>
+     *卖出道具id
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getItemIdList() {
+      return itemId_;
+    }
+    /**
+     * <code>repeated int32 itemId = 1;</code>
+     *
+     * <pre>
+     *卖出道具id
+     * </pre>
+     */
+    public int getItemIdCount() {
+      return itemId_.size();
+    }
+    /**
+     * <code>repeated int32 itemId = 1;</code>
+     *
+     * <pre>
+     *卖出道具id
+     * </pre>
+     */
+    public int getItemId(int index) {
+      return itemId_.get(index);
+    }
+
+    // repeated int32 itemSellNum = 2;
+    public static final int ITEMSELLNUM_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Integer> itemSellNum_;
+    /**
+     * <code>repeated int32 itemSellNum = 2;</code>
+     *
+     * <pre>
+     *卖出物品数量
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getItemSellNumList() {
+      return itemSellNum_;
+    }
+    /**
+     * <code>repeated int32 itemSellNum = 2;</code>
+     *
+     * <pre>
+     *卖出物品数量
+     * </pre>
+     */
+    public int getItemSellNumCount() {
+      return itemSellNum_.size();
+    }
+    /**
+     * <code>repeated int32 itemSellNum = 2;</code>
+     *
+     * <pre>
+     *卖出物品数量
+     * </pre>
+     */
+    public int getItemSellNum(int index) {
+      return itemSellNum_.get(index);
+    }
+
+    private void initFields() {
+      itemId_ = java.util.Collections.emptyList();
+      itemSellNum_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < itemId_.size(); i++) {
+        output.writeInt32(1, itemId_.get(i));
+      }
+      for (int i = 0; i < itemSellNum_.size(); i++) {
+        output.writeInt32(2, itemSellNum_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < itemId_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(itemId_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getItemIdList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < itemSellNum_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(itemSellNum_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getItemSellNumList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.ItemProBuf.PSellGroup prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PSellGroup}
+     *
+     * <pre>
+     *请求卖出道具
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.ItemProBuf.PSellGroupOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PSellGroup_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PSellGroup_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.ItemProBuf.PSellGroup.class, com.doteyplay.game.message.proto.ItemProBuf.PSellGroup.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.ItemProBuf.PSellGroup.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        itemId_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        itemSellNum_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PSellGroup_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.ItemProBuf.PSellGroup getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.ItemProBuf.PSellGroup.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.ItemProBuf.PSellGroup build() {
+        com.doteyplay.game.message.proto.ItemProBuf.PSellGroup result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.ItemProBuf.PSellGroup buildPartial() {
+        com.doteyplay.game.message.proto.ItemProBuf.PSellGroup result = new com.doteyplay.game.message.proto.ItemProBuf.PSellGroup(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          itemId_ = java.util.Collections.unmodifiableList(itemId_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.itemId_ = itemId_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          itemSellNum_ = java.util.Collections.unmodifiableList(itemSellNum_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.itemSellNum_ = itemSellNum_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.ItemProBuf.PSellGroup) {
+          return mergeFrom((com.doteyplay.game.message.proto.ItemProBuf.PSellGroup)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.ItemProBuf.PSellGroup other) {
+        if (other == com.doteyplay.game.message.proto.ItemProBuf.PSellGroup.getDefaultInstance()) return this;
+        if (!other.itemId_.isEmpty()) {
+          if (itemId_.isEmpty()) {
+            itemId_ = other.itemId_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureItemIdIsMutable();
+            itemId_.addAll(other.itemId_);
+          }
+          onChanged();
+        }
+        if (!other.itemSellNum_.isEmpty()) {
+          if (itemSellNum_.isEmpty()) {
+            itemSellNum_ = other.itemSellNum_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureItemSellNumIsMutable();
+            itemSellNum_.addAll(other.itemSellNum_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.ItemProBuf.PSellGroup parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.ItemProBuf.PSellGroup) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated int32 itemId = 1;
+      private java.util.List<java.lang.Integer> itemId_ = java.util.Collections.emptyList();
+      private void ensureItemIdIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          itemId_ = new java.util.ArrayList<java.lang.Integer>(itemId_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated int32 itemId = 1;</code>
+       *
+       * <pre>
+       *卖出道具id
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getItemIdList() {
+        return java.util.Collections.unmodifiableList(itemId_);
+      }
+      /**
+       * <code>repeated int32 itemId = 1;</code>
+       *
+       * <pre>
+       *卖出道具id
+       * </pre>
+       */
+      public int getItemIdCount() {
+        return itemId_.size();
+      }
+      /**
+       * <code>repeated int32 itemId = 1;</code>
+       *
+       * <pre>
+       *卖出道具id
+       * </pre>
+       */
+      public int getItemId(int index) {
+        return itemId_.get(index);
+      }
+      /**
+       * <code>repeated int32 itemId = 1;</code>
+       *
+       * <pre>
+       *卖出道具id
+       * </pre>
+       */
+      public Builder setItemId(
+          int index, int value) {
+        ensureItemIdIsMutable();
+        itemId_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 itemId = 1;</code>
+       *
+       * <pre>
+       *卖出道具id
+       * </pre>
+       */
+      public Builder addItemId(int value) {
+        ensureItemIdIsMutable();
+        itemId_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 itemId = 1;</code>
+       *
+       * <pre>
+       *卖出道具id
+       * </pre>
+       */
+      public Builder addAllItemId(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureItemIdIsMutable();
+        super.addAll(values, itemId_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 itemId = 1;</code>
+       *
+       * <pre>
+       *卖出道具id
+       * </pre>
+       */
+      public Builder clearItemId() {
+        itemId_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      // repeated int32 itemSellNum = 2;
+      private java.util.List<java.lang.Integer> itemSellNum_ = java.util.Collections.emptyList();
+      private void ensureItemSellNumIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          itemSellNum_ = new java.util.ArrayList<java.lang.Integer>(itemSellNum_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated int32 itemSellNum = 2;</code>
+       *
+       * <pre>
+       *卖出物品数量
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getItemSellNumList() {
+        return java.util.Collections.unmodifiableList(itemSellNum_);
+      }
+      /**
+       * <code>repeated int32 itemSellNum = 2;</code>
+       *
+       * <pre>
+       *卖出物品数量
+       * </pre>
+       */
+      public int getItemSellNumCount() {
+        return itemSellNum_.size();
+      }
+      /**
+       * <code>repeated int32 itemSellNum = 2;</code>
+       *
+       * <pre>
+       *卖出物品数量
+       * </pre>
+       */
+      public int getItemSellNum(int index) {
+        return itemSellNum_.get(index);
+      }
+      /**
+       * <code>repeated int32 itemSellNum = 2;</code>
+       *
+       * <pre>
+       *卖出物品数量
+       * </pre>
+       */
+      public Builder setItemSellNum(
+          int index, int value) {
+        ensureItemSellNumIsMutable();
+        itemSellNum_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 itemSellNum = 2;</code>
+       *
+       * <pre>
+       *卖出物品数量
+       * </pre>
+       */
+      public Builder addItemSellNum(int value) {
+        ensureItemSellNumIsMutable();
+        itemSellNum_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 itemSellNum = 2;</code>
+       *
+       * <pre>
+       *卖出物品数量
+       * </pre>
+       */
+      public Builder addAllItemSellNum(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureItemSellNumIsMutable();
+        super.addAll(values, itemSellNum_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 itemSellNum = 2;</code>
+       *
+       * <pre>
+       *卖出物品数量
+       * </pre>
+       */
+      public Builder clearItemSellNum() {
+        itemSellNum_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PSellGroup)
+    }
+
+    static {
+      defaultInstance = new PSellGroup(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PSellGroup)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_PItem_descriptor;
   private static
@@ -2186,6 +2924,11 @@ public final class ItemProBuf {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_PUpItem_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PSellGroup_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PSellGroup_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2200,8 +2943,9 @@ public final class ItemProBuf {
       "angeLog\022\016\n\006itemId\030\001 \002(\005\022\022\n\nitemAddNum\030\002 " +
       "\002(\005\022\024\n\014itemFinalNum\030\003 \002(\005\022\r\n\005npcId\030\004 \002(\003" +
       "\"/\n\007PUpItem\022$\n\013itemLogList\030\001 \003(\0132\017.PItem" +
-      "ChangeLogB.\n com.doteyplay.game.message." +
-      "protoB\nItemProBuf"
+      "ChangeLog\"1\n\nPSellGroup\022\016\n\006itemId\030\001 \003(\005\022" +
+      "\023\n\013itemSellNum\030\002 \003(\005B.\n com.doteyplay.ga" +
+      "me.message.protoB\nItemProBuf"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2226,6 +2970,12 @@ public final class ItemProBuf {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PUpItem_descriptor,
               new java.lang.String[] { "ItemLogList", });
+          internal_static_PSellGroup_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_PSellGroup_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PSellGroup_descriptor,
+              new java.lang.String[] { "ItemId", "ItemSellNum", });
           return null;
         }
       };

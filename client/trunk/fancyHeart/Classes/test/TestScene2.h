@@ -14,8 +14,9 @@
 #include "Manager.h"
 #include "ui/CocosGUI.h"
 #include "cocostudio/CocoStudio.h"
+#include "RotateList.h"
 USING_NS_CC;
-class TestScene2:public Layer{
+class TestScene2:public BaseUI{
 public:
 	static Scene* createScene();
 	virtual bool init();
@@ -25,5 +26,6 @@ public:
     void listEvent(Ref* pSender, ScrollView::EventType type);
     void selectedItemEvent(Ref *pSender, ListView::EventType type);
 private:
+    RotateList* rotateList;
 };
 #endif /* defined(__fancyHeart__TestScene2__) */

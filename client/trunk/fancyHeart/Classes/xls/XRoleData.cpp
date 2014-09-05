@@ -51,3 +51,21 @@ int XRoleData::getCrh(){
 int XRoleData::getHeal(){
 	return doc[v.asString().c_str()]["heal"].GetInt();
 }
+int XRoleData::getEquipPos1(){
+	return doc[v.asString().c_str()]["equipPos1"].GetInt();
+}
+int XRoleData::getEquipPos2(){
+	return doc[v.asString().c_str()]["equipPos2"].GetInt();
+}
+int XRoleData::getEquipPos3(){
+	return doc[v.asString().c_str()]["equipPos3"].GetInt();
+}
+int XRoleData::getEquipPos4(){
+	return doc[v.asString().c_str()]["equipPos4"].GetInt();
+}
+int XRoleData::getEquipPos5(){
+	return doc[v.asString().c_str()]["equipPos5"].GetInt();
+}
+int XRoleData::getEquipPos6(){
+	return doc[v.asString().c_str()]["equipPos6"].GetInt();
+}

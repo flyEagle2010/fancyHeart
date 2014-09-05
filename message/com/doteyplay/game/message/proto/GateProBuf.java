@@ -343,7 +343,7 @@ public final class GateProBuf {
      * <code>required int32 star = 1;</code>
      *
      * <pre>
-     *通过某一小关的星级，如果是传送点星级为-1	
+     *通过某一小关的星级，如果是传送点星级为-1
      * </pre>
      */
     boolean hasStar();
@@ -351,10 +351,28 @@ public final class GateProBuf {
      * <code>required int32 star = 1;</code>
      *
      * <pre>
-     *通过某一小关的星级，如果是传送点星级为-1	
+     *通过某一小关的星级，如果是传送点星级为-1
      * </pre>
      */
     int getStar();
+
+    // required int32 times = 3;
+    /**
+     * <code>required int32 times = 3;</code>
+     *
+     * <pre>
+     *次数
+     * </pre>
+     */
+    boolean hasTimes();
+    /**
+     * <code>required int32 times = 3;</code>
+     *
+     * <pre>
+     *次数
+     * </pre>
+     */
+    int getTimes();
   }
   /**
    * Protobuf type {@code PNodeItem}
@@ -415,6 +433,11 @@ public final class GateProBuf {
             case 16: {
               bitField0_ |= 0x00000001;
               xID_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              times_ = input.readInt32();
               break;
             }
           }
@@ -488,7 +511,7 @@ public final class GateProBuf {
      * <code>required int32 star = 1;</code>
      *
      * <pre>
-     *通过某一小关的星级，如果是传送点星级为-1	
+     *通过某一小关的星级，如果是传送点星级为-1
      * </pre>
      */
     public boolean hasStar() {
@@ -498,16 +521,41 @@ public final class GateProBuf {
      * <code>required int32 star = 1;</code>
      *
      * <pre>
-     *通过某一小关的星级，如果是传送点星级为-1	
+     *通过某一小关的星级，如果是传送点星级为-1
      * </pre>
      */
     public int getStar() {
       return star_;
     }
 
+    // required int32 times = 3;
+    public static final int TIMES_FIELD_NUMBER = 3;
+    private int times_;
+    /**
+     * <code>required int32 times = 3;</code>
+     *
+     * <pre>
+     *次数
+     * </pre>
+     */
+    public boolean hasTimes() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 times = 3;</code>
+     *
+     * <pre>
+     *次数
+     * </pre>
+     */
+    public int getTimes() {
+      return times_;
+    }
+
     private void initFields() {
       xID_ = 0;
       star_ = 0;
+      times_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -519,6 +567,10 @@ public final class GateProBuf {
         return false;
       }
       if (!hasStar()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTimes()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -534,6 +586,9 @@ public final class GateProBuf {
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(2, xID_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, times_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -551,6 +606,10 @@ public final class GateProBuf {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, xID_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, times_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -672,6 +731,8 @@ public final class GateProBuf {
         bitField0_ = (bitField0_ & ~0x00000001);
         star_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        times_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -708,6 +769,10 @@ public final class GateProBuf {
           to_bitField0_ |= 0x00000002;
         }
         result.star_ = star_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.times_ = times_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -730,6 +795,9 @@ public final class GateProBuf {
         if (other.hasStar()) {
           setStar(other.getStar());
         }
+        if (other.hasTimes()) {
+          setTimes(other.getTimes());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -740,6 +808,10 @@ public final class GateProBuf {
           return false;
         }
         if (!hasStar()) {
+          
+          return false;
+        }
+        if (!hasTimes()) {
           
           return false;
         }
@@ -820,7 +892,7 @@ public final class GateProBuf {
        * <code>required int32 star = 1;</code>
        *
        * <pre>
-       *通过某一小关的星级，如果是传送点星级为-1	
+       *通过某一小关的星级，如果是传送点星级为-1
        * </pre>
        */
       public boolean hasStar() {
@@ -830,7 +902,7 @@ public final class GateProBuf {
        * <code>required int32 star = 1;</code>
        *
        * <pre>
-       *通过某一小关的星级，如果是传送点星级为-1	
+       *通过某一小关的星级，如果是传送点星级为-1
        * </pre>
        */
       public int getStar() {
@@ -840,7 +912,7 @@ public final class GateProBuf {
        * <code>required int32 star = 1;</code>
        *
        * <pre>
-       *通过某一小关的星级，如果是传送点星级为-1	
+       *通过某一小关的星级，如果是传送点星级为-1
        * </pre>
        */
       public Builder setStar(int value) {
@@ -853,12 +925,61 @@ public final class GateProBuf {
        * <code>required int32 star = 1;</code>
        *
        * <pre>
-       *通过某一小关的星级，如果是传送点星级为-1	
+       *通过某一小关的星级，如果是传送点星级为-1
        * </pre>
        */
       public Builder clearStar() {
         bitField0_ = (bitField0_ & ~0x00000002);
         star_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 times = 3;
+      private int times_ ;
+      /**
+       * <code>required int32 times = 3;</code>
+       *
+       * <pre>
+       *次数
+       * </pre>
+       */
+      public boolean hasTimes() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 times = 3;</code>
+       *
+       * <pre>
+       *次数
+       * </pre>
+       */
+      public int getTimes() {
+        return times_;
+      }
+      /**
+       * <code>required int32 times = 3;</code>
+       *
+       * <pre>
+       *次数
+       * </pre>
+       */
+      public Builder setTimes(int value) {
+        bitField0_ |= 0x00000004;
+        times_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 times = 3;</code>
+       *
+       * <pre>
+       *次数
+       * </pre>
+       */
+      public Builder clearTimes() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        times_ = 0;
         onChanged();
         return this;
       }
@@ -882,7 +1003,7 @@ public final class GateProBuf {
      * <code>required bool isLock = 1;</code>
      *
      * <pre>
-     *是否解锁
+     *是否解锁0关闭1解锁
      * </pre>
      */
     boolean hasIsLock();
@@ -890,7 +1011,7 @@ public final class GateProBuf {
      * <code>required bool isLock = 1;</code>
      *
      * <pre>
-     *是否解锁
+     *是否解锁0关闭1解锁
      * </pre>
      */
     boolean getIsLock();
@@ -1077,7 +1198,7 @@ public final class GateProBuf {
      * <code>required bool isLock = 1;</code>
      *
      * <pre>
-     *是否解锁
+     *是否解锁0关闭1解锁
      * </pre>
      */
     public boolean hasIsLock() {
@@ -1087,7 +1208,7 @@ public final class GateProBuf {
      * <code>required bool isLock = 1;</code>
      *
      * <pre>
-     *是否解锁
+     *是否解锁0关闭1解锁
      * </pre>
      */
     public boolean getIsLock() {
@@ -1502,7 +1623,7 @@ public final class GateProBuf {
        * <code>required bool isLock = 1;</code>
        *
        * <pre>
-       *是否解锁
+       *是否解锁0关闭1解锁
        * </pre>
        */
       public boolean hasIsLock() {
@@ -1512,7 +1633,7 @@ public final class GateProBuf {
        * <code>required bool isLock = 1;</code>
        *
        * <pre>
-       *是否解锁
+       *是否解锁0关闭1解锁
        * </pre>
        */
       public boolean getIsLock() {
@@ -1522,7 +1643,7 @@ public final class GateProBuf {
        * <code>required bool isLock = 1;</code>
        *
        * <pre>
-       *是否解锁
+       *是否解锁0关闭1解锁
        * </pre>
        */
       public Builder setIsLock(boolean value) {
@@ -1535,7 +1656,7 @@ public final class GateProBuf {
        * <code>required bool isLock = 1;</code>
        *
        * <pre>
-       *是否解锁
+       *是否解锁0关闭1解锁
        * </pre>
        */
       public Builder clearIsLock() {
@@ -1915,6 +2036,2206 @@ public final class GateProBuf {
     }
 
     // @@protoc_insertion_point(class_scope:PGateItem)
+  }
+
+  public interface PUpdateGatesOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .PGateItem gates = 1;
+    /**
+     * <code>repeated .PGateItem gates = 1;</code>
+     */
+    java.util.List<com.doteyplay.game.message.proto.GateProBuf.PGateItem> 
+        getGatesList();
+    /**
+     * <code>repeated .PGateItem gates = 1;</code>
+     */
+    com.doteyplay.game.message.proto.GateProBuf.PGateItem getGates(int index);
+    /**
+     * <code>repeated .PGateItem gates = 1;</code>
+     */
+    int getGatesCount();
+    /**
+     * <code>repeated .PGateItem gates = 1;</code>
+     */
+    java.util.List<? extends com.doteyplay.game.message.proto.GateProBuf.PGateItemOrBuilder> 
+        getGatesOrBuilderList();
+    /**
+     * <code>repeated .PGateItem gates = 1;</code>
+     */
+    com.doteyplay.game.message.proto.GateProBuf.PGateItemOrBuilder getGatesOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code PUpdateGates}
+   */
+  public static final class PUpdateGates extends
+      com.google.protobuf.GeneratedMessage
+      implements PUpdateGatesOrBuilder {
+    // Use PUpdateGates.newBuilder() to construct.
+    private PUpdateGates(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PUpdateGates(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PUpdateGates defaultInstance;
+    public static PUpdateGates getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PUpdateGates getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PUpdateGates(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                gates_ = new java.util.ArrayList<com.doteyplay.game.message.proto.GateProBuf.PGateItem>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              gates_.add(input.readMessage(com.doteyplay.game.message.proto.GateProBuf.PGateItem.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          gates_ = java.util.Collections.unmodifiableList(gates_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateGates_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateGates_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.GateProBuf.PUpdateGates.class, com.doteyplay.game.message.proto.GateProBuf.PUpdateGates.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PUpdateGates> PARSER =
+        new com.google.protobuf.AbstractParser<PUpdateGates>() {
+      public PUpdateGates parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PUpdateGates(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PUpdateGates> getParserForType() {
+      return PARSER;
+    }
+
+    // repeated .PGateItem gates = 1;
+    public static final int GATES_FIELD_NUMBER = 1;
+    private java.util.List<com.doteyplay.game.message.proto.GateProBuf.PGateItem> gates_;
+    /**
+     * <code>repeated .PGateItem gates = 1;</code>
+     */
+    public java.util.List<com.doteyplay.game.message.proto.GateProBuf.PGateItem> getGatesList() {
+      return gates_;
+    }
+    /**
+     * <code>repeated .PGateItem gates = 1;</code>
+     */
+    public java.util.List<? extends com.doteyplay.game.message.proto.GateProBuf.PGateItemOrBuilder> 
+        getGatesOrBuilderList() {
+      return gates_;
+    }
+    /**
+     * <code>repeated .PGateItem gates = 1;</code>
+     */
+    public int getGatesCount() {
+      return gates_.size();
+    }
+    /**
+     * <code>repeated .PGateItem gates = 1;</code>
+     */
+    public com.doteyplay.game.message.proto.GateProBuf.PGateItem getGates(int index) {
+      return gates_.get(index);
+    }
+    /**
+     * <code>repeated .PGateItem gates = 1;</code>
+     */
+    public com.doteyplay.game.message.proto.GateProBuf.PGateItemOrBuilder getGatesOrBuilder(
+        int index) {
+      return gates_.get(index);
+    }
+
+    private void initFields() {
+      gates_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      for (int i = 0; i < getGatesCount(); i++) {
+        if (!getGates(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < gates_.size(); i++) {
+        output.writeMessage(1, gates_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < gates_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, gates_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.GateProBuf.PUpdateGates prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PUpdateGates}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.GateProBuf.PUpdateGatesOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateGates_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateGates_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.GateProBuf.PUpdateGates.class, com.doteyplay.game.message.proto.GateProBuf.PUpdateGates.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.GateProBuf.PUpdateGates.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getGatesFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (gatesBuilder_ == null) {
+          gates_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          gatesBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateGates_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateGates getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.GateProBuf.PUpdateGates.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateGates build() {
+        com.doteyplay.game.message.proto.GateProBuf.PUpdateGates result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateGates buildPartial() {
+        com.doteyplay.game.message.proto.GateProBuf.PUpdateGates result = new com.doteyplay.game.message.proto.GateProBuf.PUpdateGates(this);
+        int from_bitField0_ = bitField0_;
+        if (gatesBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            gates_ = java.util.Collections.unmodifiableList(gates_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.gates_ = gates_;
+        } else {
+          result.gates_ = gatesBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.GateProBuf.PUpdateGates) {
+          return mergeFrom((com.doteyplay.game.message.proto.GateProBuf.PUpdateGates)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.GateProBuf.PUpdateGates other) {
+        if (other == com.doteyplay.game.message.proto.GateProBuf.PUpdateGates.getDefaultInstance()) return this;
+        if (gatesBuilder_ == null) {
+          if (!other.gates_.isEmpty()) {
+            if (gates_.isEmpty()) {
+              gates_ = other.gates_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureGatesIsMutable();
+              gates_.addAll(other.gates_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.gates_.isEmpty()) {
+            if (gatesBuilder_.isEmpty()) {
+              gatesBuilder_.dispose();
+              gatesBuilder_ = null;
+              gates_ = other.gates_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              gatesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getGatesFieldBuilder() : null;
+            } else {
+              gatesBuilder_.addAllMessages(other.gates_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getGatesCount(); i++) {
+          if (!getGates(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.GateProBuf.PUpdateGates parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.GateProBuf.PUpdateGates) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .PGateItem gates = 1;
+      private java.util.List<com.doteyplay.game.message.proto.GateProBuf.PGateItem> gates_ =
+        java.util.Collections.emptyList();
+      private void ensureGatesIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          gates_ = new java.util.ArrayList<com.doteyplay.game.message.proto.GateProBuf.PGateItem>(gates_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.doteyplay.game.message.proto.GateProBuf.PGateItem, com.doteyplay.game.message.proto.GateProBuf.PGateItem.Builder, com.doteyplay.game.message.proto.GateProBuf.PGateItemOrBuilder> gatesBuilder_;
+
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public java.util.List<com.doteyplay.game.message.proto.GateProBuf.PGateItem> getGatesList() {
+        if (gatesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(gates_);
+        } else {
+          return gatesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public int getGatesCount() {
+        if (gatesBuilder_ == null) {
+          return gates_.size();
+        } else {
+          return gatesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PGateItem getGates(int index) {
+        if (gatesBuilder_ == null) {
+          return gates_.get(index);
+        } else {
+          return gatesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public Builder setGates(
+          int index, com.doteyplay.game.message.proto.GateProBuf.PGateItem value) {
+        if (gatesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGatesIsMutable();
+          gates_.set(index, value);
+          onChanged();
+        } else {
+          gatesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public Builder setGates(
+          int index, com.doteyplay.game.message.proto.GateProBuf.PGateItem.Builder builderForValue) {
+        if (gatesBuilder_ == null) {
+          ensureGatesIsMutable();
+          gates_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          gatesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public Builder addGates(com.doteyplay.game.message.proto.GateProBuf.PGateItem value) {
+        if (gatesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGatesIsMutable();
+          gates_.add(value);
+          onChanged();
+        } else {
+          gatesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public Builder addGates(
+          int index, com.doteyplay.game.message.proto.GateProBuf.PGateItem value) {
+        if (gatesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGatesIsMutable();
+          gates_.add(index, value);
+          onChanged();
+        } else {
+          gatesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public Builder addGates(
+          com.doteyplay.game.message.proto.GateProBuf.PGateItem.Builder builderForValue) {
+        if (gatesBuilder_ == null) {
+          ensureGatesIsMutable();
+          gates_.add(builderForValue.build());
+          onChanged();
+        } else {
+          gatesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public Builder addGates(
+          int index, com.doteyplay.game.message.proto.GateProBuf.PGateItem.Builder builderForValue) {
+        if (gatesBuilder_ == null) {
+          ensureGatesIsMutable();
+          gates_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          gatesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public Builder addAllGates(
+          java.lang.Iterable<? extends com.doteyplay.game.message.proto.GateProBuf.PGateItem> values) {
+        if (gatesBuilder_ == null) {
+          ensureGatesIsMutable();
+          super.addAll(values, gates_);
+          onChanged();
+        } else {
+          gatesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public Builder clearGates() {
+        if (gatesBuilder_ == null) {
+          gates_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          gatesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public Builder removeGates(int index) {
+        if (gatesBuilder_ == null) {
+          ensureGatesIsMutable();
+          gates_.remove(index);
+          onChanged();
+        } else {
+          gatesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PGateItem.Builder getGatesBuilder(
+          int index) {
+        return getGatesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PGateItemOrBuilder getGatesOrBuilder(
+          int index) {
+        if (gatesBuilder_ == null) {
+          return gates_.get(index);  } else {
+          return gatesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public java.util.List<? extends com.doteyplay.game.message.proto.GateProBuf.PGateItemOrBuilder> 
+           getGatesOrBuilderList() {
+        if (gatesBuilder_ != null) {
+          return gatesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(gates_);
+        }
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PGateItem.Builder addGatesBuilder() {
+        return getGatesFieldBuilder().addBuilder(
+            com.doteyplay.game.message.proto.GateProBuf.PGateItem.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PGateItem.Builder addGatesBuilder(
+          int index) {
+        return getGatesFieldBuilder().addBuilder(
+            index, com.doteyplay.game.message.proto.GateProBuf.PGateItem.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PGateItem gates = 1;</code>
+       */
+      public java.util.List<com.doteyplay.game.message.proto.GateProBuf.PGateItem.Builder> 
+           getGatesBuilderList() {
+        return getGatesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.doteyplay.game.message.proto.GateProBuf.PGateItem, com.doteyplay.game.message.proto.GateProBuf.PGateItem.Builder, com.doteyplay.game.message.proto.GateProBuf.PGateItemOrBuilder> 
+          getGatesFieldBuilder() {
+        if (gatesBuilder_ == null) {
+          gatesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.doteyplay.game.message.proto.GateProBuf.PGateItem, com.doteyplay.game.message.proto.GateProBuf.PGateItem.Builder, com.doteyplay.game.message.proto.GateProBuf.PGateItemOrBuilder>(
+                  gates_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          gates_ = null;
+        }
+        return gatesBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PUpdateGates)
+    }
+
+    static {
+      defaultInstance = new PUpdateGates(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PUpdateGates)
+  }
+
+  public interface PUpdateNodeOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required .PNodeItem nodeItem = 1;
+    /**
+     * <code>required .PNodeItem nodeItem = 1;</code>
+     *
+     * <pre>
+     *更新的节点
+     * </pre>
+     */
+    boolean hasNodeItem();
+    /**
+     * <code>required .PNodeItem nodeItem = 1;</code>
+     *
+     * <pre>
+     *更新的节点
+     * </pre>
+     */
+    com.doteyplay.game.message.proto.GateProBuf.PNodeItem getNodeItem();
+    /**
+     * <code>required .PNodeItem nodeItem = 1;</code>
+     *
+     * <pre>
+     *更新的节点
+     * </pre>
+     */
+    com.doteyplay.game.message.proto.GateProBuf.PNodeItemOrBuilder getNodeItemOrBuilder();
+
+    // required int32 type = 2;
+    /**
+     * <code>required int32 type = 2;</code>
+     *
+     * <pre>
+     *0代表删除1代表增加一个节点2代表更新节点
+     * </pre>
+     */
+    boolean hasType();
+    /**
+     * <code>required int32 type = 2;</code>
+     *
+     * <pre>
+     *0代表删除1代表增加一个节点2代表更新节点
+     * </pre>
+     */
+    int getType();
+  }
+  /**
+   * Protobuf type {@code PUpdateNode}
+   */
+  public static final class PUpdateNode extends
+      com.google.protobuf.GeneratedMessage
+      implements PUpdateNodeOrBuilder {
+    // Use PUpdateNode.newBuilder() to construct.
+    private PUpdateNode(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PUpdateNode(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PUpdateNode defaultInstance;
+    public static PUpdateNode getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PUpdateNode getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PUpdateNode(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.doteyplay.game.message.proto.GateProBuf.PNodeItem.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = nodeItem_.toBuilder();
+              }
+              nodeItem_ = input.readMessage(com.doteyplay.game.message.proto.GateProBuf.PNodeItem.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(nodeItem_);
+                nodeItem_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              type_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateNode_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateNode_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.class, com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PUpdateNode> PARSER =
+        new com.google.protobuf.AbstractParser<PUpdateNode>() {
+      public PUpdateNode parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PUpdateNode(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PUpdateNode> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required .PNodeItem nodeItem = 1;
+    public static final int NODEITEM_FIELD_NUMBER = 1;
+    private com.doteyplay.game.message.proto.GateProBuf.PNodeItem nodeItem_;
+    /**
+     * <code>required .PNodeItem nodeItem = 1;</code>
+     *
+     * <pre>
+     *更新的节点
+     * </pre>
+     */
+    public boolean hasNodeItem() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .PNodeItem nodeItem = 1;</code>
+     *
+     * <pre>
+     *更新的节点
+     * </pre>
+     */
+    public com.doteyplay.game.message.proto.GateProBuf.PNodeItem getNodeItem() {
+      return nodeItem_;
+    }
+    /**
+     * <code>required .PNodeItem nodeItem = 1;</code>
+     *
+     * <pre>
+     *更新的节点
+     * </pre>
+     */
+    public com.doteyplay.game.message.proto.GateProBuf.PNodeItemOrBuilder getNodeItemOrBuilder() {
+      return nodeItem_;
+    }
+
+    // required int32 type = 2;
+    public static final int TYPE_FIELD_NUMBER = 2;
+    private int type_;
+    /**
+     * <code>required int32 type = 2;</code>
+     *
+     * <pre>
+     *0代表删除1代表增加一个节点2代表更新节点
+     * </pre>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 type = 2;</code>
+     *
+     * <pre>
+     *0代表删除1代表增加一个节点2代表更新节点
+     * </pre>
+     */
+    public int getType() {
+      return type_;
+    }
+
+    private void initFields() {
+      nodeItem_ = com.doteyplay.game.message.proto.GateProBuf.PNodeItem.getDefaultInstance();
+      type_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasNodeItem()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getNodeItem().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, nodeItem_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, type_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, nodeItem_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, type_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.GateProBuf.PUpdateNode prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PUpdateNode}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.GateProBuf.PUpdateNodeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateNode_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateNode_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.class, com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getNodeItemFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (nodeItemBuilder_ == null) {
+          nodeItem_ = com.doteyplay.game.message.proto.GateProBuf.PNodeItem.getDefaultInstance();
+        } else {
+          nodeItemBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateNode_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNode getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNode build() {
+        com.doteyplay.game.message.proto.GateProBuf.PUpdateNode result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNode buildPartial() {
+        com.doteyplay.game.message.proto.GateProBuf.PUpdateNode result = new com.doteyplay.game.message.proto.GateProBuf.PUpdateNode(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (nodeItemBuilder_ == null) {
+          result.nodeItem_ = nodeItem_;
+        } else {
+          result.nodeItem_ = nodeItemBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.type_ = type_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.GateProBuf.PUpdateNode) {
+          return mergeFrom((com.doteyplay.game.message.proto.GateProBuf.PUpdateNode)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.GateProBuf.PUpdateNode other) {
+        if (other == com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.getDefaultInstance()) return this;
+        if (other.hasNodeItem()) {
+          mergeNodeItem(other.getNodeItem());
+        }
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasNodeItem()) {
+          
+          return false;
+        }
+        if (!hasType()) {
+          
+          return false;
+        }
+        if (!getNodeItem().isInitialized()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.GateProBuf.PUpdateNode parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.GateProBuf.PUpdateNode) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required .PNodeItem nodeItem = 1;
+      private com.doteyplay.game.message.proto.GateProBuf.PNodeItem nodeItem_ = com.doteyplay.game.message.proto.GateProBuf.PNodeItem.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.doteyplay.game.message.proto.GateProBuf.PNodeItem, com.doteyplay.game.message.proto.GateProBuf.PNodeItem.Builder, com.doteyplay.game.message.proto.GateProBuf.PNodeItemOrBuilder> nodeItemBuilder_;
+      /**
+       * <code>required .PNodeItem nodeItem = 1;</code>
+       *
+       * <pre>
+       *更新的节点
+       * </pre>
+       */
+      public boolean hasNodeItem() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .PNodeItem nodeItem = 1;</code>
+       *
+       * <pre>
+       *更新的节点
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PNodeItem getNodeItem() {
+        if (nodeItemBuilder_ == null) {
+          return nodeItem_;
+        } else {
+          return nodeItemBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .PNodeItem nodeItem = 1;</code>
+       *
+       * <pre>
+       *更新的节点
+       * </pre>
+       */
+      public Builder setNodeItem(com.doteyplay.game.message.proto.GateProBuf.PNodeItem value) {
+        if (nodeItemBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          nodeItem_ = value;
+          onChanged();
+        } else {
+          nodeItemBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .PNodeItem nodeItem = 1;</code>
+       *
+       * <pre>
+       *更新的节点
+       * </pre>
+       */
+      public Builder setNodeItem(
+          com.doteyplay.game.message.proto.GateProBuf.PNodeItem.Builder builderForValue) {
+        if (nodeItemBuilder_ == null) {
+          nodeItem_ = builderForValue.build();
+          onChanged();
+        } else {
+          nodeItemBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .PNodeItem nodeItem = 1;</code>
+       *
+       * <pre>
+       *更新的节点
+       * </pre>
+       */
+      public Builder mergeNodeItem(com.doteyplay.game.message.proto.GateProBuf.PNodeItem value) {
+        if (nodeItemBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              nodeItem_ != com.doteyplay.game.message.proto.GateProBuf.PNodeItem.getDefaultInstance()) {
+            nodeItem_ =
+              com.doteyplay.game.message.proto.GateProBuf.PNodeItem.newBuilder(nodeItem_).mergeFrom(value).buildPartial();
+          } else {
+            nodeItem_ = value;
+          }
+          onChanged();
+        } else {
+          nodeItemBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .PNodeItem nodeItem = 1;</code>
+       *
+       * <pre>
+       *更新的节点
+       * </pre>
+       */
+      public Builder clearNodeItem() {
+        if (nodeItemBuilder_ == null) {
+          nodeItem_ = com.doteyplay.game.message.proto.GateProBuf.PNodeItem.getDefaultInstance();
+          onChanged();
+        } else {
+          nodeItemBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .PNodeItem nodeItem = 1;</code>
+       *
+       * <pre>
+       *更新的节点
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PNodeItem.Builder getNodeItemBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getNodeItemFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .PNodeItem nodeItem = 1;</code>
+       *
+       * <pre>
+       *更新的节点
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PNodeItemOrBuilder getNodeItemOrBuilder() {
+        if (nodeItemBuilder_ != null) {
+          return nodeItemBuilder_.getMessageOrBuilder();
+        } else {
+          return nodeItem_;
+        }
+      }
+      /**
+       * <code>required .PNodeItem nodeItem = 1;</code>
+       *
+       * <pre>
+       *更新的节点
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.doteyplay.game.message.proto.GateProBuf.PNodeItem, com.doteyplay.game.message.proto.GateProBuf.PNodeItem.Builder, com.doteyplay.game.message.proto.GateProBuf.PNodeItemOrBuilder> 
+          getNodeItemFieldBuilder() {
+        if (nodeItemBuilder_ == null) {
+          nodeItemBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.doteyplay.game.message.proto.GateProBuf.PNodeItem, com.doteyplay.game.message.proto.GateProBuf.PNodeItem.Builder, com.doteyplay.game.message.proto.GateProBuf.PNodeItemOrBuilder>(
+                  nodeItem_,
+                  getParentForChildren(),
+                  isClean());
+          nodeItem_ = null;
+        }
+        return nodeItemBuilder_;
+      }
+
+      // required int32 type = 2;
+      private int type_ ;
+      /**
+       * <code>required int32 type = 2;</code>
+       *
+       * <pre>
+       *0代表删除1代表增加一个节点2代表更新节点
+       * </pre>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 type = 2;</code>
+       *
+       * <pre>
+       *0代表删除1代表增加一个节点2代表更新节点
+       * </pre>
+       */
+      public int getType() {
+        return type_;
+      }
+      /**
+       * <code>required int32 type = 2;</code>
+       *
+       * <pre>
+       *0代表删除1代表增加一个节点2代表更新节点
+       * </pre>
+       */
+      public Builder setType(int value) {
+        bitField0_ |= 0x00000002;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 type = 2;</code>
+       *
+       * <pre>
+       *0代表删除1代表增加一个节点2代表更新节点
+       * </pre>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        type_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PUpdateNode)
+    }
+
+    static {
+      defaultInstance = new PUpdateNode(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PUpdateNode)
+  }
+
+  public interface PUpdateNodesOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 gateID = 1;
+    /**
+     * <code>required int32 gateID = 1;</code>
+     *
+     * <pre>
+     *副本id
+     * </pre>
+     */
+    boolean hasGateID();
+    /**
+     * <code>required int32 gateID = 1;</code>
+     *
+     * <pre>
+     *副本id
+     * </pre>
+     */
+    int getGateID();
+
+    // repeated .PUpdateNode nodeItems = 2;
+    /**
+     * <code>repeated .PUpdateNode nodeItems = 2;</code>
+     */
+    java.util.List<com.doteyplay.game.message.proto.GateProBuf.PUpdateNode> 
+        getNodeItemsList();
+    /**
+     * <code>repeated .PUpdateNode nodeItems = 2;</code>
+     */
+    com.doteyplay.game.message.proto.GateProBuf.PUpdateNode getNodeItems(int index);
+    /**
+     * <code>repeated .PUpdateNode nodeItems = 2;</code>
+     */
+    int getNodeItemsCount();
+    /**
+     * <code>repeated .PUpdateNode nodeItems = 2;</code>
+     */
+    java.util.List<? extends com.doteyplay.game.message.proto.GateProBuf.PUpdateNodeOrBuilder> 
+        getNodeItemsOrBuilderList();
+    /**
+     * <code>repeated .PUpdateNode nodeItems = 2;</code>
+     */
+    com.doteyplay.game.message.proto.GateProBuf.PUpdateNodeOrBuilder getNodeItemsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code PUpdateNodes}
+   */
+  public static final class PUpdateNodes extends
+      com.google.protobuf.GeneratedMessage
+      implements PUpdateNodesOrBuilder {
+    // Use PUpdateNodes.newBuilder() to construct.
+    private PUpdateNodes(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PUpdateNodes(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PUpdateNodes defaultInstance;
+    public static PUpdateNodes getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PUpdateNodes getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PUpdateNodes(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              gateID_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                nodeItems_ = new java.util.ArrayList<com.doteyplay.game.message.proto.GateProBuf.PUpdateNode>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              nodeItems_.add(input.readMessage(com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          nodeItems_ = java.util.Collections.unmodifiableList(nodeItems_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateNodes_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateNodes_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes.class, com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PUpdateNodes> PARSER =
+        new com.google.protobuf.AbstractParser<PUpdateNodes>() {
+      public PUpdateNodes parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PUpdateNodes(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PUpdateNodes> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 gateID = 1;
+    public static final int GATEID_FIELD_NUMBER = 1;
+    private int gateID_;
+    /**
+     * <code>required int32 gateID = 1;</code>
+     *
+     * <pre>
+     *副本id
+     * </pre>
+     */
+    public boolean hasGateID() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 gateID = 1;</code>
+     *
+     * <pre>
+     *副本id
+     * </pre>
+     */
+    public int getGateID() {
+      return gateID_;
+    }
+
+    // repeated .PUpdateNode nodeItems = 2;
+    public static final int NODEITEMS_FIELD_NUMBER = 2;
+    private java.util.List<com.doteyplay.game.message.proto.GateProBuf.PUpdateNode> nodeItems_;
+    /**
+     * <code>repeated .PUpdateNode nodeItems = 2;</code>
+     */
+    public java.util.List<com.doteyplay.game.message.proto.GateProBuf.PUpdateNode> getNodeItemsList() {
+      return nodeItems_;
+    }
+    /**
+     * <code>repeated .PUpdateNode nodeItems = 2;</code>
+     */
+    public java.util.List<? extends com.doteyplay.game.message.proto.GateProBuf.PUpdateNodeOrBuilder> 
+        getNodeItemsOrBuilderList() {
+      return nodeItems_;
+    }
+    /**
+     * <code>repeated .PUpdateNode nodeItems = 2;</code>
+     */
+    public int getNodeItemsCount() {
+      return nodeItems_.size();
+    }
+    /**
+     * <code>repeated .PUpdateNode nodeItems = 2;</code>
+     */
+    public com.doteyplay.game.message.proto.GateProBuf.PUpdateNode getNodeItems(int index) {
+      return nodeItems_.get(index);
+    }
+    /**
+     * <code>repeated .PUpdateNode nodeItems = 2;</code>
+     */
+    public com.doteyplay.game.message.proto.GateProBuf.PUpdateNodeOrBuilder getNodeItemsOrBuilder(
+        int index) {
+      return nodeItems_.get(index);
+    }
+
+    private void initFields() {
+      gateID_ = 0;
+      nodeItems_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasGateID()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getNodeItemsCount(); i++) {
+        if (!getNodeItems(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, gateID_);
+      }
+      for (int i = 0; i < nodeItems_.size(); i++) {
+        output.writeMessage(2, nodeItems_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, gateID_);
+      }
+      for (int i = 0; i < nodeItems_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, nodeItems_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PUpdateNodes}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.GateProBuf.PUpdateNodesOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateNodes_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateNodes_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes.class, com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getNodeItemsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        gateID_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (nodeItemsBuilder_ == null) {
+          nodeItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          nodeItemsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.GateProBuf.internal_static_PUpdateNodes_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes build() {
+        com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes buildPartial() {
+        com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes result = new com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.gateID_ = gateID_;
+        if (nodeItemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            nodeItems_ = java.util.Collections.unmodifiableList(nodeItems_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.nodeItems_ = nodeItems_;
+        } else {
+          result.nodeItems_ = nodeItemsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes) {
+          return mergeFrom((com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes other) {
+        if (other == com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes.getDefaultInstance()) return this;
+        if (other.hasGateID()) {
+          setGateID(other.getGateID());
+        }
+        if (nodeItemsBuilder_ == null) {
+          if (!other.nodeItems_.isEmpty()) {
+            if (nodeItems_.isEmpty()) {
+              nodeItems_ = other.nodeItems_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureNodeItemsIsMutable();
+              nodeItems_.addAll(other.nodeItems_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.nodeItems_.isEmpty()) {
+            if (nodeItemsBuilder_.isEmpty()) {
+              nodeItemsBuilder_.dispose();
+              nodeItemsBuilder_ = null;
+              nodeItems_ = other.nodeItems_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              nodeItemsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getNodeItemsFieldBuilder() : null;
+            } else {
+              nodeItemsBuilder_.addAllMessages(other.nodeItems_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasGateID()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getNodeItemsCount(); i++) {
+          if (!getNodeItems(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.GateProBuf.PUpdateNodes) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 gateID = 1;
+      private int gateID_ ;
+      /**
+       * <code>required int32 gateID = 1;</code>
+       *
+       * <pre>
+       *副本id
+       * </pre>
+       */
+      public boolean hasGateID() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 gateID = 1;</code>
+       *
+       * <pre>
+       *副本id
+       * </pre>
+       */
+      public int getGateID() {
+        return gateID_;
+      }
+      /**
+       * <code>required int32 gateID = 1;</code>
+       *
+       * <pre>
+       *副本id
+       * </pre>
+       */
+      public Builder setGateID(int value) {
+        bitField0_ |= 0x00000001;
+        gateID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 gateID = 1;</code>
+       *
+       * <pre>
+       *副本id
+       * </pre>
+       */
+      public Builder clearGateID() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        gateID_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated .PUpdateNode nodeItems = 2;
+      private java.util.List<com.doteyplay.game.message.proto.GateProBuf.PUpdateNode> nodeItems_ =
+        java.util.Collections.emptyList();
+      private void ensureNodeItemsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          nodeItems_ = new java.util.ArrayList<com.doteyplay.game.message.proto.GateProBuf.PUpdateNode>(nodeItems_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.doteyplay.game.message.proto.GateProBuf.PUpdateNode, com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder, com.doteyplay.game.message.proto.GateProBuf.PUpdateNodeOrBuilder> nodeItemsBuilder_;
+
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public java.util.List<com.doteyplay.game.message.proto.GateProBuf.PUpdateNode> getNodeItemsList() {
+        if (nodeItemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(nodeItems_);
+        } else {
+          return nodeItemsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public int getNodeItemsCount() {
+        if (nodeItemsBuilder_ == null) {
+          return nodeItems_.size();
+        } else {
+          return nodeItemsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNode getNodeItems(int index) {
+        if (nodeItemsBuilder_ == null) {
+          return nodeItems_.get(index);
+        } else {
+          return nodeItemsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public Builder setNodeItems(
+          int index, com.doteyplay.game.message.proto.GateProBuf.PUpdateNode value) {
+        if (nodeItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNodeItemsIsMutable();
+          nodeItems_.set(index, value);
+          onChanged();
+        } else {
+          nodeItemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public Builder setNodeItems(
+          int index, com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder builderForValue) {
+        if (nodeItemsBuilder_ == null) {
+          ensureNodeItemsIsMutable();
+          nodeItems_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          nodeItemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public Builder addNodeItems(com.doteyplay.game.message.proto.GateProBuf.PUpdateNode value) {
+        if (nodeItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNodeItemsIsMutable();
+          nodeItems_.add(value);
+          onChanged();
+        } else {
+          nodeItemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public Builder addNodeItems(
+          int index, com.doteyplay.game.message.proto.GateProBuf.PUpdateNode value) {
+        if (nodeItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNodeItemsIsMutable();
+          nodeItems_.add(index, value);
+          onChanged();
+        } else {
+          nodeItemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public Builder addNodeItems(
+          com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder builderForValue) {
+        if (nodeItemsBuilder_ == null) {
+          ensureNodeItemsIsMutable();
+          nodeItems_.add(builderForValue.build());
+          onChanged();
+        } else {
+          nodeItemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public Builder addNodeItems(
+          int index, com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder builderForValue) {
+        if (nodeItemsBuilder_ == null) {
+          ensureNodeItemsIsMutable();
+          nodeItems_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          nodeItemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public Builder addAllNodeItems(
+          java.lang.Iterable<? extends com.doteyplay.game.message.proto.GateProBuf.PUpdateNode> values) {
+        if (nodeItemsBuilder_ == null) {
+          ensureNodeItemsIsMutable();
+          super.addAll(values, nodeItems_);
+          onChanged();
+        } else {
+          nodeItemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public Builder clearNodeItems() {
+        if (nodeItemsBuilder_ == null) {
+          nodeItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          nodeItemsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public Builder removeNodeItems(int index) {
+        if (nodeItemsBuilder_ == null) {
+          ensureNodeItemsIsMutable();
+          nodeItems_.remove(index);
+          onChanged();
+        } else {
+          nodeItemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder getNodeItemsBuilder(
+          int index) {
+        return getNodeItemsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNodeOrBuilder getNodeItemsOrBuilder(
+          int index) {
+        if (nodeItemsBuilder_ == null) {
+          return nodeItems_.get(index);  } else {
+          return nodeItemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public java.util.List<? extends com.doteyplay.game.message.proto.GateProBuf.PUpdateNodeOrBuilder> 
+           getNodeItemsOrBuilderList() {
+        if (nodeItemsBuilder_ != null) {
+          return nodeItemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(nodeItems_);
+        }
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder addNodeItemsBuilder() {
+        return getNodeItemsFieldBuilder().addBuilder(
+            com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder addNodeItemsBuilder(
+          int index) {
+        return getNodeItemsFieldBuilder().addBuilder(
+            index, com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PUpdateNode nodeItems = 2;</code>
+       */
+      public java.util.List<com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder> 
+           getNodeItemsBuilderList() {
+        return getNodeItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.doteyplay.game.message.proto.GateProBuf.PUpdateNode, com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder, com.doteyplay.game.message.proto.GateProBuf.PUpdateNodeOrBuilder> 
+          getNodeItemsFieldBuilder() {
+        if (nodeItemsBuilder_ == null) {
+          nodeItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.doteyplay.game.message.proto.GateProBuf.PUpdateNode, com.doteyplay.game.message.proto.GateProBuf.PUpdateNode.Builder, com.doteyplay.game.message.proto.GateProBuf.PUpdateNodeOrBuilder>(
+                  nodeItems_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          nodeItems_ = null;
+        }
+        return nodeItemsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PUpdateNodes)
+    }
+
+    static {
+      defaultInstance = new PUpdateNodes(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PUpdateNodes)
   }
 
   public interface PGateRespOrBuilder
@@ -3755,6 +6076,10 @@ public final class GateProBuf {
   }
   /**
    * Protobuf type {@code PNpcRes}
+   *
+   * <pre>
+   *npc结果对象
+   * </pre>
    */
   public static final class PNpcRes extends
       com.google.protobuf.GeneratedMessage
@@ -4064,6 +6389,10 @@ public final class GateProBuf {
     }
     /**
      * Protobuf type {@code PNpcRes}
+     *
+     * <pre>
+     *npc结果对象
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -4397,6 +6726,10 @@ public final class GateProBuf {
   }
   /**
    * Protobuf type {@code PItemRes}
+   *
+   * <pre>
+   *道具结果对象
+   * </pre>
    */
   public static final class PItemRes extends
       com.google.protobuf.GeneratedMessage
@@ -4671,6 +7004,10 @@ public final class GateProBuf {
     }
     /**
      * Protobuf type {@code PItemRes}
+     *
+     * <pre>
+     *道具结果对象
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -4972,6 +7309,10 @@ public final class GateProBuf {
   }
   /**
    * Protobuf type {@code PResultReq}
+   *
+   * <pre>
+   *请求战斗结果
+   * </pre>
    */
   public static final class PResultReq extends
       com.google.protobuf.GeneratedMessage
@@ -5287,6 +7628,10 @@ public final class GateProBuf {
     }
     /**
      * Protobuf type {@code PResultReq}
+     *
+     * <pre>
+     *请求战斗结果
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -5742,6 +8087,10 @@ public final class GateProBuf {
   }
   /**
    * Protobuf type {@code PResultResp}
+   *
+   * <pre>
+   *战斗结果返回
+   * </pre>
    */
   public static final class PResultResp extends
       com.google.protobuf.GeneratedMessage
@@ -6244,6 +8593,10 @@ public final class GateProBuf {
     }
     /**
      * Protobuf type {@code PResultResp}
+     *
+     * <pre>
+     *战斗结果返回
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -7298,6 +9651,21 @@ public final class GateProBuf {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_PGateItem_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PUpdateGates_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PUpdateGates_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PUpdateNode_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PUpdateNode_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PUpdateNodes_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PUpdateNodes_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_PGateResp_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -7341,21 +9709,26 @@ public final class GateProBuf {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\ngate.proto\"\n\n\010PGateReq\"&\n\tPNodeItem\022\013\n" +
-      "\003xID\030\002 \002(\005\022\014\n\004star\030\001 \002(\005\"F\n\tPGateItem\022\016\n" +
-      "\006isLock\030\001 \002(\010\022\016\n\006gateID\030\002 \002(\005\022\031\n\005items\030\003" +
-      " \003(\0132\n.PNodeItem\"&\n\tPGateResp\022\031\n\005gates\030\001" +
-      " \003(\0132\n.PGateItem\"8\n\010PNodeReq\022\016\n\006gateId\030\001" +
-      " \002(\005\022\013\n\003xId\030\002 \002(\005\022\017\n\007groupId\030\003 \002(\005\"\013\n\tPN" +
-      "odeResp\"6\n\007PNpcRes\022\013\n\003xId\030\001 \002(\003\022\016\n\006addLv" +
-      "l\030\002 \002(\005\022\016\n\006addExp\030\003 \002(\005\"+\n\010PItemRes\022\016\n\006i" +
-      "temId\030\001 \002(\005\022\017\n\007itemNum\030\002 \002(\005\"7\n\nPResultR" +
-      "eq\022\016\n\006gateId\030\001 \002(\005\022\013\n\003xId\030\002 \002(\005\022\014\n\004star\030",
-      "\003 \002(\005\"\177\n\013PResultResp\022\014\n\004star\030\001 \002(\005\022\020\n\010gr" +
-      "oupLvl\030\002 \002(\005\022\020\n\010groupExp\030\003 \002(\005\022\014\n\004coin\030\004" +
-      " \002(\005\022\026\n\004npcs\030\005 \003(\0132\010.PNpcRes\022\030\n\005items\030\006 " +
-      "\003(\0132\t.PItemResB.\n com.doteyplay.game.mes" +
-      "sage.protoB\nGateProBuf"
+      "\n\ngate.proto\"\n\n\010PGateReq\"5\n\tPNodeItem\022\013\n" +
+      "\003xID\030\002 \002(\005\022\014\n\004star\030\001 \002(\005\022\r\n\005times\030\003 \002(\005\"" +
+      "F\n\tPGateItem\022\016\n\006isLock\030\001 \002(\010\022\016\n\006gateID\030\002" +
+      " \002(\005\022\031\n\005items\030\003 \003(\0132\n.PNodeItem\")\n\014PUpda" +
+      "teGates\022\031\n\005gates\030\001 \003(\0132\n.PGateItem\"9\n\013PU" +
+      "pdateNode\022\034\n\010nodeItem\030\001 \002(\0132\n.PNodeItem\022" +
+      "\014\n\004type\030\002 \002(\005\"?\n\014PUpdateNodes\022\016\n\006gateID\030" +
+      "\001 \002(\005\022\037\n\tnodeItems\030\002 \003(\0132\014.PUpdateNode\"&" +
+      "\n\tPGateResp\022\031\n\005gates\030\001 \003(\0132\n.PGateItem\"8" +
+      "\n\010PNodeReq\022\016\n\006gateId\030\001 \002(\005\022\013\n\003xId\030\002 \002(\005\022",
+      "\017\n\007groupId\030\003 \002(\005\"\013\n\tPNodeResp\"6\n\007PNpcRes" +
+      "\022\013\n\003xId\030\001 \002(\003\022\016\n\006addLvl\030\002 \002(\005\022\016\n\006addExp\030" +
+      "\003 \002(\005\"+\n\010PItemRes\022\016\n\006itemId\030\001 \002(\005\022\017\n\007ite" +
+      "mNum\030\002 \002(\005\"7\n\nPResultReq\022\016\n\006gateId\030\001 \002(\005" +
+      "\022\013\n\003xId\030\002 \002(\005\022\014\n\004star\030\003 \002(\005\"\177\n\013PResultRe" +
+      "sp\022\014\n\004star\030\001 \002(\005\022\020\n\010groupLvl\030\002 \002(\005\022\020\n\010gr" +
+      "oupExp\030\003 \002(\005\022\014\n\004coin\030\004 \002(\005\022\026\n\004npcs\030\005 \003(\013" +
+      "2\010.PNpcRes\022\030\n\005items\030\006 \003(\0132\t.PItemResB.\n " +
+      "com.doteyplay.game.message.protoB\nGatePr" +
+      "oBuf"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7373,51 +9746,69 @@ public final class GateProBuf {
           internal_static_PNodeItem_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PNodeItem_descriptor,
-              new java.lang.String[] { "XID", "Star", });
+              new java.lang.String[] { "XID", "Star", "Times", });
           internal_static_PGateItem_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_PGateItem_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PGateItem_descriptor,
               new java.lang.String[] { "IsLock", "GateID", "Items", });
-          internal_static_PGateResp_descriptor =
+          internal_static_PUpdateGates_descriptor =
             getDescriptor().getMessageTypes().get(3);
+          internal_static_PUpdateGates_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PUpdateGates_descriptor,
+              new java.lang.String[] { "Gates", });
+          internal_static_PUpdateNode_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_PUpdateNode_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PUpdateNode_descriptor,
+              new java.lang.String[] { "NodeItem", "Type", });
+          internal_static_PUpdateNodes_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_PUpdateNodes_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PUpdateNodes_descriptor,
+              new java.lang.String[] { "GateID", "NodeItems", });
+          internal_static_PGateResp_descriptor =
+            getDescriptor().getMessageTypes().get(6);
           internal_static_PGateResp_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PGateResp_descriptor,
               new java.lang.String[] { "Gates", });
           internal_static_PNodeReq_descriptor =
-            getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(7);
           internal_static_PNodeReq_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PNodeReq_descriptor,
               new java.lang.String[] { "GateId", "XId", "GroupId", });
           internal_static_PNodeResp_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(8);
           internal_static_PNodeResp_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PNodeResp_descriptor,
               new java.lang.String[] { });
           internal_static_PNpcRes_descriptor =
-            getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_PNpcRes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PNpcRes_descriptor,
               new java.lang.String[] { "XId", "AddLvl", "AddExp", });
           internal_static_PItemRes_descriptor =
-            getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_PItemRes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PItemRes_descriptor,
               new java.lang.String[] { "ItemId", "ItemNum", });
           internal_static_PResultReq_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(11);
           internal_static_PResultReq_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PResultReq_descriptor,
               new java.lang.String[] { "GateId", "XId", "Star", });
           internal_static_PResultResp_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_PResultResp_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PResultResp_descriptor,

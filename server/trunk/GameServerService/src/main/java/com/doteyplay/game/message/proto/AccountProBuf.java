@@ -1415,24 +1415,44 @@ public final class AccountProBuf {
     // repeated .PItem itemList = 3;
     /**
      * <code>repeated .PItem itemList = 3;</code>
+     *
+     * <pre>
+     *物品
+     * </pre>
      */
     java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> 
         getItemListList();
     /**
      * <code>repeated .PItem itemList = 3;</code>
+     *
+     * <pre>
+     *物品
+     * </pre>
      */
     com.doteyplay.game.message.proto.ItemProBuf.PItem getItemList(int index);
     /**
      * <code>repeated .PItem itemList = 3;</code>
+     *
+     * <pre>
+     *物品
+     * </pre>
      */
     int getItemListCount();
     /**
      * <code>repeated .PItem itemList = 3;</code>
+     *
+     * <pre>
+     *物品
+     * </pre>
      */
     java.util.List<? extends com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
         getItemListOrBuilderList();
     /**
      * <code>repeated .PItem itemList = 3;</code>
+     *
+     * <pre>
+     *物品
+     * </pre>
      */
     com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder getItemListOrBuilder(
         int index);
@@ -1719,12 +1739,20 @@ public final class AccountProBuf {
     private java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> itemList_;
     /**
      * <code>repeated .PItem itemList = 3;</code>
+     *
+     * <pre>
+     *物品
+     * </pre>
      */
     public java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> getItemListList() {
       return itemList_;
     }
     /**
      * <code>repeated .PItem itemList = 3;</code>
+     *
+     * <pre>
+     *物品
+     * </pre>
      */
     public java.util.List<? extends com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
         getItemListOrBuilderList() {
@@ -1732,18 +1760,30 @@ public final class AccountProBuf {
     }
     /**
      * <code>repeated .PItem itemList = 3;</code>
+     *
+     * <pre>
+     *物品
+     * </pre>
      */
     public int getItemListCount() {
       return itemList_.size();
     }
     /**
      * <code>repeated .PItem itemList = 3;</code>
+     *
+     * <pre>
+     *物品
+     * </pre>
      */
     public com.doteyplay.game.message.proto.ItemProBuf.PItem getItemList(int index) {
       return itemList_.get(index);
     }
     /**
      * <code>repeated .PItem itemList = 3;</code>
+     *
+     * <pre>
+     *物品
+     * </pre>
      */
     public com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder getItemListOrBuilder(
         int index) {
@@ -2526,6 +2566,10 @@ public final class AccountProBuf {
 
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> getItemListList() {
         if (itemListBuilder_ == null) {
@@ -2536,6 +2580,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public int getItemListCount() {
         if (itemListBuilder_ == null) {
@@ -2546,6 +2594,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public com.doteyplay.game.message.proto.ItemProBuf.PItem getItemList(int index) {
         if (itemListBuilder_ == null) {
@@ -2556,6 +2608,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public Builder setItemList(
           int index, com.doteyplay.game.message.proto.ItemProBuf.PItem value) {
@@ -2573,6 +2629,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public Builder setItemList(
           int index, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder builderForValue) {
@@ -2587,6 +2647,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public Builder addItemList(com.doteyplay.game.message.proto.ItemProBuf.PItem value) {
         if (itemListBuilder_ == null) {
@@ -2603,6 +2667,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public Builder addItemList(
           int index, com.doteyplay.game.message.proto.ItemProBuf.PItem value) {
@@ -2620,6 +2688,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public Builder addItemList(
           com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder builderForValue) {
@@ -2634,6 +2706,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public Builder addItemList(
           int index, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder builderForValue) {
@@ -2648,6 +2724,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public Builder addAllItemList(
           java.lang.Iterable<? extends com.doteyplay.game.message.proto.ItemProBuf.PItem> values) {
@@ -2662,6 +2742,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public Builder clearItemList() {
         if (itemListBuilder_ == null) {
@@ -2675,6 +2759,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public Builder removeItemList(int index) {
         if (itemListBuilder_ == null) {
@@ -2688,6 +2776,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder getItemListBuilder(
           int index) {
@@ -2695,6 +2787,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder getItemListOrBuilder(
           int index) {
@@ -2705,6 +2801,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public java.util.List<? extends com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
            getItemListOrBuilderList() {
@@ -2716,6 +2816,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder addItemListBuilder() {
         return getItemListFieldBuilder().addBuilder(
@@ -2723,6 +2827,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder addItemListBuilder(
           int index) {
@@ -2731,6 +2839,10 @@ public final class AccountProBuf {
       }
       /**
        * <code>repeated .PItem itemList = 3;</code>
+       *
+       * <pre>
+       *物品
+       * </pre>
        */
       public java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder> 
            getItemListBuilderList() {
@@ -3429,6 +3541,804 @@ public final class AccountProBuf {
     }
 
     // @@protoc_insertion_point(class_scope:LoginResp)
+  }
+
+  public interface PSaveGroupsOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .PGroup groups = 6;
+    /**
+     * <code>repeated .PGroup groups = 6;</code>
+     *
+     * <pre>
+     *组数组	
+     * </pre>
+     */
+    java.util.List<com.doteyplay.game.message.proto.AccountProBuf.PGroup> 
+        getGroupsList();
+    /**
+     * <code>repeated .PGroup groups = 6;</code>
+     *
+     * <pre>
+     *组数组	
+     * </pre>
+     */
+    com.doteyplay.game.message.proto.AccountProBuf.PGroup getGroups(int index);
+    /**
+     * <code>repeated .PGroup groups = 6;</code>
+     *
+     * <pre>
+     *组数组	
+     * </pre>
+     */
+    int getGroupsCount();
+    /**
+     * <code>repeated .PGroup groups = 6;</code>
+     *
+     * <pre>
+     *组数组	
+     * </pre>
+     */
+    java.util.List<? extends com.doteyplay.game.message.proto.AccountProBuf.PGroupOrBuilder> 
+        getGroupsOrBuilderList();
+    /**
+     * <code>repeated .PGroup groups = 6;</code>
+     *
+     * <pre>
+     *组数组	
+     * </pre>
+     */
+    com.doteyplay.game.message.proto.AccountProBuf.PGroupOrBuilder getGroupsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code PSaveGroups}
+   */
+  public static final class PSaveGroups extends
+      com.google.protobuf.GeneratedMessage
+      implements PSaveGroupsOrBuilder {
+    // Use PSaveGroups.newBuilder() to construct.
+    private PSaveGroups(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PSaveGroups(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PSaveGroups defaultInstance;
+    public static PSaveGroups getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PSaveGroups getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PSaveGroups(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                groups_ = new java.util.ArrayList<com.doteyplay.game.message.proto.AccountProBuf.PGroup>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              groups_.add(input.readMessage(com.doteyplay.game.message.proto.AccountProBuf.PGroup.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          groups_ = java.util.Collections.unmodifiableList(groups_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.AccountProBuf.internal_static_PSaveGroups_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.AccountProBuf.internal_static_PSaveGroups_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups.class, com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PSaveGroups> PARSER =
+        new com.google.protobuf.AbstractParser<PSaveGroups>() {
+      public PSaveGroups parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PSaveGroups(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PSaveGroups> getParserForType() {
+      return PARSER;
+    }
+
+    // repeated .PGroup groups = 6;
+    public static final int GROUPS_FIELD_NUMBER = 6;
+    private java.util.List<com.doteyplay.game.message.proto.AccountProBuf.PGroup> groups_;
+    /**
+     * <code>repeated .PGroup groups = 6;</code>
+     *
+     * <pre>
+     *组数组	
+     * </pre>
+     */
+    public java.util.List<com.doteyplay.game.message.proto.AccountProBuf.PGroup> getGroupsList() {
+      return groups_;
+    }
+    /**
+     * <code>repeated .PGroup groups = 6;</code>
+     *
+     * <pre>
+     *组数组	
+     * </pre>
+     */
+    public java.util.List<? extends com.doteyplay.game.message.proto.AccountProBuf.PGroupOrBuilder> 
+        getGroupsOrBuilderList() {
+      return groups_;
+    }
+    /**
+     * <code>repeated .PGroup groups = 6;</code>
+     *
+     * <pre>
+     *组数组	
+     * </pre>
+     */
+    public int getGroupsCount() {
+      return groups_.size();
+    }
+    /**
+     * <code>repeated .PGroup groups = 6;</code>
+     *
+     * <pre>
+     *组数组	
+     * </pre>
+     */
+    public com.doteyplay.game.message.proto.AccountProBuf.PGroup getGroups(int index) {
+      return groups_.get(index);
+    }
+    /**
+     * <code>repeated .PGroup groups = 6;</code>
+     *
+     * <pre>
+     *组数组	
+     * </pre>
+     */
+    public com.doteyplay.game.message.proto.AccountProBuf.PGroupOrBuilder getGroupsOrBuilder(
+        int index) {
+      return groups_.get(index);
+    }
+
+    private void initFields() {
+      groups_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      for (int i = 0; i < getGroupsCount(); i++) {
+        if (!getGroups(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < groups_.size(); i++) {
+        output.writeMessage(6, groups_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < groups_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, groups_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PSaveGroups}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.AccountProBuf.PSaveGroupsOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.AccountProBuf.internal_static_PSaveGroups_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.AccountProBuf.internal_static_PSaveGroups_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups.class, com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getGroupsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (groupsBuilder_ == null) {
+          groups_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          groupsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.AccountProBuf.internal_static_PSaveGroups_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups build() {
+        com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups buildPartial() {
+        com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups result = new com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups(this);
+        int from_bitField0_ = bitField0_;
+        if (groupsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            groups_ = java.util.Collections.unmodifiableList(groups_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.groups_ = groups_;
+        } else {
+          result.groups_ = groupsBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups) {
+          return mergeFrom((com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups other) {
+        if (other == com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups.getDefaultInstance()) return this;
+        if (groupsBuilder_ == null) {
+          if (!other.groups_.isEmpty()) {
+            if (groups_.isEmpty()) {
+              groups_ = other.groups_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureGroupsIsMutable();
+              groups_.addAll(other.groups_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.groups_.isEmpty()) {
+            if (groupsBuilder_.isEmpty()) {
+              groupsBuilder_.dispose();
+              groupsBuilder_ = null;
+              groups_ = other.groups_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              groupsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getGroupsFieldBuilder() : null;
+            } else {
+              groupsBuilder_.addAllMessages(other.groups_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getGroupsCount(); i++) {
+          if (!getGroups(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.AccountProBuf.PSaveGroups) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .PGroup groups = 6;
+      private java.util.List<com.doteyplay.game.message.proto.AccountProBuf.PGroup> groups_ =
+        java.util.Collections.emptyList();
+      private void ensureGroupsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          groups_ = new java.util.ArrayList<com.doteyplay.game.message.proto.AccountProBuf.PGroup>(groups_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.doteyplay.game.message.proto.AccountProBuf.PGroup, com.doteyplay.game.message.proto.AccountProBuf.PGroup.Builder, com.doteyplay.game.message.proto.AccountProBuf.PGroupOrBuilder> groupsBuilder_;
+
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public java.util.List<com.doteyplay.game.message.proto.AccountProBuf.PGroup> getGroupsList() {
+        if (groupsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(groups_);
+        } else {
+          return groupsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public int getGroupsCount() {
+        if (groupsBuilder_ == null) {
+          return groups_.size();
+        } else {
+          return groupsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.AccountProBuf.PGroup getGroups(int index) {
+        if (groupsBuilder_ == null) {
+          return groups_.get(index);
+        } else {
+          return groupsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public Builder setGroups(
+          int index, com.doteyplay.game.message.proto.AccountProBuf.PGroup value) {
+        if (groupsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGroupsIsMutable();
+          groups_.set(index, value);
+          onChanged();
+        } else {
+          groupsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public Builder setGroups(
+          int index, com.doteyplay.game.message.proto.AccountProBuf.PGroup.Builder builderForValue) {
+        if (groupsBuilder_ == null) {
+          ensureGroupsIsMutable();
+          groups_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          groupsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public Builder addGroups(com.doteyplay.game.message.proto.AccountProBuf.PGroup value) {
+        if (groupsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGroupsIsMutable();
+          groups_.add(value);
+          onChanged();
+        } else {
+          groupsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public Builder addGroups(
+          int index, com.doteyplay.game.message.proto.AccountProBuf.PGroup value) {
+        if (groupsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGroupsIsMutable();
+          groups_.add(index, value);
+          onChanged();
+        } else {
+          groupsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public Builder addGroups(
+          com.doteyplay.game.message.proto.AccountProBuf.PGroup.Builder builderForValue) {
+        if (groupsBuilder_ == null) {
+          ensureGroupsIsMutable();
+          groups_.add(builderForValue.build());
+          onChanged();
+        } else {
+          groupsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public Builder addGroups(
+          int index, com.doteyplay.game.message.proto.AccountProBuf.PGroup.Builder builderForValue) {
+        if (groupsBuilder_ == null) {
+          ensureGroupsIsMutable();
+          groups_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          groupsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public Builder addAllGroups(
+          java.lang.Iterable<? extends com.doteyplay.game.message.proto.AccountProBuf.PGroup> values) {
+        if (groupsBuilder_ == null) {
+          ensureGroupsIsMutable();
+          super.addAll(values, groups_);
+          onChanged();
+        } else {
+          groupsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public Builder clearGroups() {
+        if (groupsBuilder_ == null) {
+          groups_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          groupsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public Builder removeGroups(int index) {
+        if (groupsBuilder_ == null) {
+          ensureGroupsIsMutable();
+          groups_.remove(index);
+          onChanged();
+        } else {
+          groupsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.AccountProBuf.PGroup.Builder getGroupsBuilder(
+          int index) {
+        return getGroupsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.AccountProBuf.PGroupOrBuilder getGroupsOrBuilder(
+          int index) {
+        if (groupsBuilder_ == null) {
+          return groups_.get(index);  } else {
+          return groupsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public java.util.List<? extends com.doteyplay.game.message.proto.AccountProBuf.PGroupOrBuilder> 
+           getGroupsOrBuilderList() {
+        if (groupsBuilder_ != null) {
+          return groupsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(groups_);
+        }
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.AccountProBuf.PGroup.Builder addGroupsBuilder() {
+        return getGroupsFieldBuilder().addBuilder(
+            com.doteyplay.game.message.proto.AccountProBuf.PGroup.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.AccountProBuf.PGroup.Builder addGroupsBuilder(
+          int index) {
+        return getGroupsFieldBuilder().addBuilder(
+            index, com.doteyplay.game.message.proto.AccountProBuf.PGroup.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PGroup groups = 6;</code>
+       *
+       * <pre>
+       *组数组	
+       * </pre>
+       */
+      public java.util.List<com.doteyplay.game.message.proto.AccountProBuf.PGroup.Builder> 
+           getGroupsBuilderList() {
+        return getGroupsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.doteyplay.game.message.proto.AccountProBuf.PGroup, com.doteyplay.game.message.proto.AccountProBuf.PGroup.Builder, com.doteyplay.game.message.proto.AccountProBuf.PGroupOrBuilder> 
+          getGroupsFieldBuilder() {
+        if (groupsBuilder_ == null) {
+          groupsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.doteyplay.game.message.proto.AccountProBuf.PGroup, com.doteyplay.game.message.proto.AccountProBuf.PGroup.Builder, com.doteyplay.game.message.proto.AccountProBuf.PGroupOrBuilder>(
+                  groups_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          groups_ = null;
+        }
+        return groupsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PSaveGroups)
+    }
+
+    static {
+      defaultInstance = new PSaveGroups(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PSaveGroups)
   }
 
   public interface PRoleOrBuilder
@@ -5953,6 +6863,11 @@ public final class AccountProBuf {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_LoginResp_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PSaveGroups_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PSaveGroups_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_PRole_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -5978,9 +6893,10 @@ public final class AccountProBuf {
       "Resp\022\016\n\006result\030\001 \002(\005\022\024\n\004role\030\002 \001(\0132\006.PRo" +
       "le\022\030\n\010itemList\030\003 \003(\0132\006.PItem\022\026\n\007npcList\030" +
       "\004 \003(\0132\005.PNpc\022\030\n\004gate\030\005 \001(\0132\n.PGateResp\022\027" +
+      "\n\006groups\030\006 \003(\0132\007.PGroup\"&\n\013PSaveGroups\022\027" +
       "\n\006groups\030\006 \003(\0132\007.PGroup\"\222\001\n\005PRole\022\016\n\006rol" +
-      "eId\030\001 \002(\003\022\020\n\010roleName\030\002 \002(\t\022\r\n\005level\030\003 \002" +
-      "(\005\022\016\n\006vipLvl\030\004 \002(\005\022\014\n\004coin\030\005 \002(\005\022\013\n\003rmb\030",
+      "eId\030\001 \002(\003\022\020\n\010roleName\030\002 \002(\t\022\r\n\005level\030\003 \002",
+      "(\005\022\016\n\006vipLvl\030\004 \002(\005\022\014\n\004coin\030\005 \002(\005\022\013\n\003rmb\030" +
       "\006 \002(\005\022\017\n\007stamina\030\007 \002(\005\022\013\n\003exp\030\010 \002(\005\022\017\n\007g" +
       "roupId\030\t \002(\005\"h\n\007PUpRole\022\021\n\tfieldType\030\001 \002" +
       "(\005\022\020\n\010addValue\030\002 \002(\005\022\022\n\nfinalValue\030\003 \002(\005" +
@@ -6011,14 +6927,20 @@ public final class AccountProBuf {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LoginResp_descriptor,
               new java.lang.String[] { "Result", "Role", "ItemList", "NpcList", "Gate", "Groups", });
-          internal_static_PRole_descriptor =
+          internal_static_PSaveGroups_descriptor =
             getDescriptor().getMessageTypes().get(3);
+          internal_static_PSaveGroups_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PSaveGroups_descriptor,
+              new java.lang.String[] { "Groups", });
+          internal_static_PRole_descriptor =
+            getDescriptor().getMessageTypes().get(4);
           internal_static_PRole_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PRole_descriptor,
               new java.lang.String[] { "RoleId", "RoleName", "Level", "VipLvl", "Coin", "Rmb", "Stamina", "Exp", "GroupId", });
           internal_static_PUpRole_descriptor =
-            getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(5);
           internal_static_PUpRole_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PUpRole_descriptor,

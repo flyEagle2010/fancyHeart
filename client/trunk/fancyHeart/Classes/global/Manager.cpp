@@ -20,7 +20,7 @@ Manager* Manager::getInstance(){
 void Manager::switchScence(Scene* scene)
 {
     if (this->scene) {
-        this->scene->removeAllChildren();
+        //this->scene->removeAllChildren();
         Director::getInstance()->replaceScene(scene);
     }else{
 //        this->scene->removeAllChildren();
@@ -43,6 +43,7 @@ void Manager::setRoleData(NetMsg* msg)
     if(this->roleData) delete this->roleData;
     this->roleData=new LoginResp();
     this->roleData->ParseFromArray(msg->bytes, msg->len);
+    log("id:%lld",roleData->role().roleid());
 //    // write /
 //    string path="/Users/zhai/Documents/roleData.txt";
 //    int fd = open(path.c_str(), O_CREAT|O_TRUNC|O_RDWR,0644);
@@ -149,20 +150,57 @@ void Manager::updateItems(NetMsg* msg)
     }
 }
 
+void Manager::addOrRemoveNpc(NetMsg* msg)
+
+{
+    
+    PAddOrRemoveNpc pnc;
+    
+    pnc.ParseFromArray(msg->bytes, msg->len);
+    
+    //true添加false删除
+    
+    if (pnc.addorremove()==true) {
+        
+        this->roleData->mutable_npclist()->MergeFrom(pnc.npcs());
+        
+    }else if (pnc.addorremove()==false){
+        
+        for (int i=0; i<this->roleData->npclist_size(); i++) {
+            
+            int64 npcId=this->roleData->npclist(i).npcid();
+            
+            for (int j=0; j<pnc.npcs_size(); j++) {
+                
+                if (npcId==pnc.npcs(j).npcid()) {
+                    
+                    this->roleData->mutable_npclist()->DeleteSubrange(i, 1);
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
 void Manager::updateItem(RepeatedPtrField< ::PItemChangeLog >::iterator it,RepeatedPtrField< ::PItem > *items)
 {
     bool isFound=false;
     for (int i=0;i<items->size();i++)
     {
-        PItem item=items->Get(i);
-        if (item.itemid()==it->itemid()) {
+        PItem* item=items->Mutable(i);
+        
+        if (item->itemid()==it->itemid()) {
             if (it->itemfinalnum()==0)//为0要从背包删除此物品
             {
                 items->DeleteSubrange(i, 1);
             }
             else if(it->itemfinalnum()!=0)//不为0更新
             {
-                item.set_itemnum(it->itemfinalnum());
+                item->set_itemnum(it->itemfinalnum());
             }
             isFound=true;
             break;
@@ -179,18 +217,30 @@ void Manager::updateItem(RepeatedPtrField< ::PItemChangeLog >::iterator it,Repea
 
 }
 
-PNpc* Manager::getNpc(long npcId)
+PNpc* Manager::getNpc(int64 npcId)
 {
     for (int i=0;i<this->roleData->npclist_size();i++)
     {
         PNpc* pnpc=this->roleData->mutable_npclist(i);
-        if (pnpc->roleid()==npcId) {
+        if (pnpc->npcid()==npcId) {
             return pnpc;
             break;
         }
     }
     return nullptr;
     
+}
+
+PItem*Manager::getPropItem(int itemId)
+{
+    PItem*item;
+    for (int i=0; i<this->roleData->itemlist().size(); i++) {
+        item = this->roleData->mutable_itemlist(i);
+        if (item->itemid() == itemId) {
+            return item;
+        }
+    }
+    return nullptr;
 }
 
 PGateItem* Manager::getGateItem(int gateId)
@@ -206,6 +256,18 @@ PGateItem* Manager::getGateItem(int gateId)
     return nullptr;
 }
 
+PNodeItem* Manager::getNodeItem(int gateId,int nodeId)
+{
+    PGateItem* gateItem=Manager::getInstance()->getGateItem(gateId);
+    for (int i=0; i<gateItem->items_size(); i++) {
+        PNodeItem* nodeItem= gateItem->mutable_items(i);
+        if (nodeItem->xid()==nodeId) {
+            return nodeItem;
+        }
+    }
+    return nullptr;
+}
+
 void Manager::updateGates(NetMsg* msg)//更新关卡
 {
     PUpdateGates pUpdateGates;
@@ -216,6 +278,7 @@ void Manager::updateGates(NetMsg* msg)//更新关卡
         for (int j=0; j<this->roleData->gate().gates_size(); j++) {
             if (this->roleData->gate().gates(j).gateid()==pGateItem->gateid()) {
                 this->roleData->mutable_gate()->mutable_gates(j)->set_islock(pGateItem->islock());
+                isFound=true;
                 break;
             }
         }
@@ -257,6 +320,8 @@ void Manager::updateNodes(NetMsg* msg)//更新节点
     }
     
 }
+
+
 
 void Manager::showMsg(const string msg)
 {

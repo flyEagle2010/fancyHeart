@@ -74,72 +74,9 @@ public final class NpcProBuf {
      */
     int getLevel();
 
-    // repeated .PItem equipList = 4;
+    // repeated int32 skillIdList = 4;
     /**
-     * <code>repeated .PItem equipList = 4;</code>
-     *
-     * <pre>
-     *装备列表
-     * </pre>
-     */
-    java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> 
-        getEquipListList();
-    /**
-     * <code>repeated .PItem equipList = 4;</code>
-     *
-     * <pre>
-     *装备列表
-     * </pre>
-     */
-    com.doteyplay.game.message.proto.ItemProBuf.PItem getEquipList(int index);
-    /**
-     * <code>repeated .PItem equipList = 4;</code>
-     *
-     * <pre>
-     *装备列表
-     * </pre>
-     */
-    int getEquipListCount();
-    /**
-     * <code>repeated .PItem equipList = 4;</code>
-     *
-     * <pre>
-     *装备列表
-     * </pre>
-     */
-    java.util.List<? extends com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
-        getEquipListOrBuilderList();
-    /**
-     * <code>repeated .PItem equipList = 4;</code>
-     *
-     * <pre>
-     *装备列表
-     * </pre>
-     */
-    com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder getEquipListOrBuilder(
-        int index);
-
-    // required bool selected = 5;
-    /**
-     * <code>required bool selected = 5;</code>
-     *
-     * <pre>
-     *是否被选择
-     * </pre>
-     */
-    boolean hasSelected();
-    /**
-     * <code>required bool selected = 5;</code>
-     *
-     * <pre>
-     *是否被选择
-     * </pre>
-     */
-    boolean getSelected();
-
-    // repeated int32 skillIdList = 6;
-    /**
-     * <code>repeated int32 skillIdList = 6;</code>
+     * <code>repeated int32 skillIdList = 4;</code>
      *
      * <pre>
      *技能列表
@@ -147,7 +84,7 @@ public final class NpcProBuf {
      */
     java.util.List<java.lang.Integer> getSkillIdListList();
     /**
-     * <code>repeated int32 skillIdList = 6;</code>
+     * <code>repeated int32 skillIdList = 4;</code>
      *
      * <pre>
      *技能列表
@@ -155,7 +92,7 @@ public final class NpcProBuf {
      */
     int getSkillIdListCount();
     /**
-     * <code>repeated int32 skillIdList = 6;</code>
+     * <code>repeated int32 skillIdList = 4;</code>
      *
      * <pre>
      *技能列表
@@ -163,9 +100,9 @@ public final class NpcProBuf {
      */
     int getSkillIdList(int index);
 
-    // required int32 quality = 7;
+    // required int32 quality = 5;
     /**
-     * <code>required int32 quality = 7;</code>
+     * <code>required int32 quality = 5;</code>
      *
      * <pre>
      *品质
@@ -173,7 +110,7 @@ public final class NpcProBuf {
      */
     boolean hasQuality();
     /**
-     * <code>required int32 quality = 7;</code>
+     * <code>required int32 quality = 5;</code>
      *
      * <pre>
      *品质
@@ -181,9 +118,9 @@ public final class NpcProBuf {
      */
     int getQuality();
 
-    // required int32 star = 8;
+    // required int32 star = 6;
     /**
-     * <code>required int32 star = 8;</code>
+     * <code>required int32 star = 6;</code>
      *
      * <pre>
      *星级
@@ -191,7 +128,7 @@ public final class NpcProBuf {
      */
     boolean hasStar();
     /**
-     * <code>required int32 star = 8;</code>
+     * <code>required int32 star = 6;</code>
      *
      * <pre>
      *星级
@@ -199,9 +136,9 @@ public final class NpcProBuf {
      */
     int getStar();
 
-    // required int64 npcId = 9;
+    // required int64 npcId = 7;
     /**
-     * <code>required int64 npcId = 9;</code>
+     * <code>required int64 npcId = 7;</code>
      *
      * <pre>
      *id
@@ -209,7 +146,7 @@ public final class NpcProBuf {
      */
     boolean hasNpcId();
     /**
-     * <code>required int64 npcId = 9;</code>
+     * <code>required int64 npcId = 7;</code>
      *
      * <pre>
      *id
@@ -217,9 +154,9 @@ public final class NpcProBuf {
      */
     long getNpcId();
 
-    // required int32 spriteId = 10;
+    // required int32 spriteId = 8;
     /**
-     * <code>required int32 spriteId = 10;</code>
+     * <code>required int32 spriteId = 8;</code>
      *
      * <pre>
      *原型精灵id
@@ -227,7 +164,7 @@ public final class NpcProBuf {
      */
     boolean hasSpriteId();
     /**
-     * <code>required int32 spriteId = 10;</code>
+     * <code>required int32 spriteId = 8;</code>
      *
      * <pre>
      *原型精灵id
@@ -235,9 +172,9 @@ public final class NpcProBuf {
      */
     int getSpriteId();
 
-    // required int32 exp = 11;
+    // required int32 exp = 9;
     /**
-     * <code>required int32 exp = 11;</code>
+     * <code>required int32 exp = 9;</code>
      *
      * <pre>
      *经验
@@ -245,7 +182,7 @@ public final class NpcProBuf {
      */
     boolean hasExp();
     /**
-     * <code>required int32 exp = 11;</code>
+     * <code>required int32 exp = 9;</code>
      *
      * <pre>
      *经验
@@ -319,33 +256,20 @@ public final class NpcProBuf {
               level_ = input.readInt32();
               break;
             }
-            case 34: {
+            case 32: {
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                equipList_ = new java.util.ArrayList<com.doteyplay.game.message.proto.ItemProBuf.PItem>();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              equipList_.add(input.readMessage(com.doteyplay.game.message.proto.ItemProBuf.PItem.PARSER, extensionRegistry));
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000008;
-              selected_ = input.readBool();
-              break;
-            }
-            case 48: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
                 skillIdList_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000008;
               }
               skillIdList_.add(input.readInt32());
               break;
             }
-            case 50: {
+            case 34: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
                 skillIdList_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000008;
               }
               while (input.getBytesUntilLimit() > 0) {
                 skillIdList_.add(input.readInt32());
@@ -353,28 +277,28 @@ public final class NpcProBuf {
               input.popLimit(limit);
               break;
             }
-            case 56: {
-              bitField0_ |= 0x00000010;
+            case 40: {
+              bitField0_ |= 0x00000008;
               quality_ = input.readInt32();
               break;
             }
-            case 64: {
-              bitField0_ |= 0x00000020;
+            case 48: {
+              bitField0_ |= 0x00000010;
               star_ = input.readInt32();
               break;
             }
-            case 72: {
-              bitField0_ |= 0x00000040;
+            case 56: {
+              bitField0_ |= 0x00000020;
               npcId_ = input.readInt64();
               break;
             }
-            case 80: {
-              bitField0_ |= 0x00000080;
+            case 64: {
+              bitField0_ |= 0x00000040;
               spriteId_ = input.readInt32();
               break;
             }
-            case 88: {
-              bitField0_ |= 0x00000100;
+            case 72: {
+              bitField0_ |= 0x00000080;
               exp_ = input.readInt32();
               break;
             }
@@ -387,9 +311,6 @@ public final class NpcProBuf {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          equipList_ = java.util.Collections.unmodifiableList(equipList_);
-        }
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           skillIdList_ = java.util.Collections.unmodifiableList(skillIdList_);
         }
         this.unknownFields = unknownFields.build();
@@ -527,91 +448,11 @@ public final class NpcProBuf {
       return level_;
     }
 
-    // repeated .PItem equipList = 4;
-    public static final int EQUIPLIST_FIELD_NUMBER = 4;
-    private java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> equipList_;
-    /**
-     * <code>repeated .PItem equipList = 4;</code>
-     *
-     * <pre>
-     *装备列表
-     * </pre>
-     */
-    public java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> getEquipListList() {
-      return equipList_;
-    }
-    /**
-     * <code>repeated .PItem equipList = 4;</code>
-     *
-     * <pre>
-     *装备列表
-     * </pre>
-     */
-    public java.util.List<? extends com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
-        getEquipListOrBuilderList() {
-      return equipList_;
-    }
-    /**
-     * <code>repeated .PItem equipList = 4;</code>
-     *
-     * <pre>
-     *装备列表
-     * </pre>
-     */
-    public int getEquipListCount() {
-      return equipList_.size();
-    }
-    /**
-     * <code>repeated .PItem equipList = 4;</code>
-     *
-     * <pre>
-     *装备列表
-     * </pre>
-     */
-    public com.doteyplay.game.message.proto.ItemProBuf.PItem getEquipList(int index) {
-      return equipList_.get(index);
-    }
-    /**
-     * <code>repeated .PItem equipList = 4;</code>
-     *
-     * <pre>
-     *装备列表
-     * </pre>
-     */
-    public com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder getEquipListOrBuilder(
-        int index) {
-      return equipList_.get(index);
-    }
-
-    // required bool selected = 5;
-    public static final int SELECTED_FIELD_NUMBER = 5;
-    private boolean selected_;
-    /**
-     * <code>required bool selected = 5;</code>
-     *
-     * <pre>
-     *是否被选择
-     * </pre>
-     */
-    public boolean hasSelected() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required bool selected = 5;</code>
-     *
-     * <pre>
-     *是否被选择
-     * </pre>
-     */
-    public boolean getSelected() {
-      return selected_;
-    }
-
-    // repeated int32 skillIdList = 6;
-    public static final int SKILLIDLIST_FIELD_NUMBER = 6;
+    // repeated int32 skillIdList = 4;
+    public static final int SKILLIDLIST_FIELD_NUMBER = 4;
     private java.util.List<java.lang.Integer> skillIdList_;
     /**
-     * <code>repeated int32 skillIdList = 6;</code>
+     * <code>repeated int32 skillIdList = 4;</code>
      *
      * <pre>
      *技能列表
@@ -622,7 +463,7 @@ public final class NpcProBuf {
       return skillIdList_;
     }
     /**
-     * <code>repeated int32 skillIdList = 6;</code>
+     * <code>repeated int32 skillIdList = 4;</code>
      *
      * <pre>
      *技能列表
@@ -632,7 +473,7 @@ public final class NpcProBuf {
       return skillIdList_.size();
     }
     /**
-     * <code>repeated int32 skillIdList = 6;</code>
+     * <code>repeated int32 skillIdList = 4;</code>
      *
      * <pre>
      *技能列表
@@ -642,21 +483,21 @@ public final class NpcProBuf {
       return skillIdList_.get(index);
     }
 
-    // required int32 quality = 7;
-    public static final int QUALITY_FIELD_NUMBER = 7;
+    // required int32 quality = 5;
+    public static final int QUALITY_FIELD_NUMBER = 5;
     private int quality_;
     /**
-     * <code>required int32 quality = 7;</code>
+     * <code>required int32 quality = 5;</code>
      *
      * <pre>
      *品质
      * </pre>
      */
     public boolean hasQuality() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required int32 quality = 7;</code>
+     * <code>required int32 quality = 5;</code>
      *
      * <pre>
      *品质
@@ -666,21 +507,21 @@ public final class NpcProBuf {
       return quality_;
     }
 
-    // required int32 star = 8;
-    public static final int STAR_FIELD_NUMBER = 8;
+    // required int32 star = 6;
+    public static final int STAR_FIELD_NUMBER = 6;
     private int star_;
     /**
-     * <code>required int32 star = 8;</code>
+     * <code>required int32 star = 6;</code>
      *
      * <pre>
      *星级
      * </pre>
      */
     public boolean hasStar() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required int32 star = 8;</code>
+     * <code>required int32 star = 6;</code>
      *
      * <pre>
      *星级
@@ -690,21 +531,21 @@ public final class NpcProBuf {
       return star_;
     }
 
-    // required int64 npcId = 9;
-    public static final int NPCID_FIELD_NUMBER = 9;
+    // required int64 npcId = 7;
+    public static final int NPCID_FIELD_NUMBER = 7;
     private long npcId_;
     /**
-     * <code>required int64 npcId = 9;</code>
+     * <code>required int64 npcId = 7;</code>
      *
      * <pre>
      *id
      * </pre>
      */
     public boolean hasNpcId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required int64 npcId = 9;</code>
+     * <code>required int64 npcId = 7;</code>
      *
      * <pre>
      *id
@@ -714,21 +555,21 @@ public final class NpcProBuf {
       return npcId_;
     }
 
-    // required int32 spriteId = 10;
-    public static final int SPRITEID_FIELD_NUMBER = 10;
+    // required int32 spriteId = 8;
+    public static final int SPRITEID_FIELD_NUMBER = 8;
     private int spriteId_;
     /**
-     * <code>required int32 spriteId = 10;</code>
+     * <code>required int32 spriteId = 8;</code>
      *
      * <pre>
      *原型精灵id
      * </pre>
      */
     public boolean hasSpriteId() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>required int32 spriteId = 10;</code>
+     * <code>required int32 spriteId = 8;</code>
      *
      * <pre>
      *原型精灵id
@@ -738,21 +579,21 @@ public final class NpcProBuf {
       return spriteId_;
     }
 
-    // required int32 exp = 11;
-    public static final int EXP_FIELD_NUMBER = 11;
+    // required int32 exp = 9;
+    public static final int EXP_FIELD_NUMBER = 9;
     private int exp_;
     /**
-     * <code>required int32 exp = 11;</code>
+     * <code>required int32 exp = 9;</code>
      *
      * <pre>
      *经验
      * </pre>
      */
     public boolean hasExp() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>required int32 exp = 11;</code>
+     * <code>required int32 exp = 9;</code>
      *
      * <pre>
      *经验
@@ -766,8 +607,6 @@ public final class NpcProBuf {
       roleId_ = 0L;
       npcName_ = "";
       level_ = 0;
-      equipList_ = java.util.Collections.emptyList();
-      selected_ = false;
       skillIdList_ = java.util.Collections.emptyList();
       quality_ = 0;
       star_ = 0;
@@ -792,10 +631,6 @@ public final class NpcProBuf {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasSelected()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasQuality()) {
         memoizedIsInitialized = 0;
         return false;
@@ -816,12 +651,6 @@ public final class NpcProBuf {
         memoizedIsInitialized = 0;
         return false;
       }
-      for (int i = 0; i < getEquipListCount(); i++) {
-        if (!getEquipList(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -838,29 +667,23 @@ public final class NpcProBuf {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, level_);
       }
-      for (int i = 0; i < equipList_.size(); i++) {
-        output.writeMessage(4, equipList_.get(i));
+      for (int i = 0; i < skillIdList_.size(); i++) {
+        output.writeInt32(4, skillIdList_.get(i));
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBool(5, selected_);
-      }
-      for (int i = 0; i < skillIdList_.size(); i++) {
-        output.writeInt32(6, skillIdList_.get(i));
+        output.writeInt32(5, quality_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(7, quality_);
+        output.writeInt32(6, star_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(8, star_);
+        output.writeInt64(7, npcId_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt64(9, npcId_);
+        output.writeInt32(8, spriteId_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(10, spriteId_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeInt32(11, exp_);
+        output.writeInt32(9, exp_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -883,14 +706,6 @@ public final class NpcProBuf {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, level_);
       }
-      for (int i = 0; i < equipList_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, equipList_.get(i));
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, selected_);
-      }
       {
         int dataSize = 0;
         for (int i = 0; i < skillIdList_.size(); i++) {
@@ -900,25 +715,25 @@ public final class NpcProBuf {
         size += dataSize;
         size += 1 * getSkillIdListList().size();
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, quality_);
+      }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, quality_);
+          .computeInt32Size(6, star_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, star_);
+          .computeInt64Size(7, npcId_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(9, npcId_);
+          .computeInt32Size(8, spriteId_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, spriteId_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, exp_);
+          .computeInt32Size(9, exp_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1028,7 +843,6 @@ public final class NpcProBuf {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getEquipListFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1043,26 +857,18 @@ public final class NpcProBuf {
         bitField0_ = (bitField0_ & ~0x00000002);
         level_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (equipListBuilder_ == null) {
-          equipList_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        } else {
-          equipListBuilder_.clear();
-        }
-        selected_ = false;
-        bitField0_ = (bitField0_ & ~0x00000010);
         skillIdList_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000008);
         quality_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000010);
         star_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000020);
         npcId_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         spriteId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000080);
         exp_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -1103,42 +909,29 @@ public final class NpcProBuf {
           to_bitField0_ |= 0x00000004;
         }
         result.level_ = level_;
-        if (equipListBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            equipList_ = java.util.Collections.unmodifiableList(equipList_);
-            bitField0_ = (bitField0_ & ~0x00000008);
-          }
-          result.equipList_ = equipList_;
-        } else {
-          result.equipList_ = equipListBuilder_.build();
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          skillIdList_ = java.util.Collections.unmodifiableList(skillIdList_);
+          bitField0_ = (bitField0_ & ~0x00000008);
         }
+        result.skillIdList_ = skillIdList_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.selected_ = selected_;
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          skillIdList_ = java.util.Collections.unmodifiableList(skillIdList_);
-          bitField0_ = (bitField0_ & ~0x00000020);
-        }
-        result.skillIdList_ = skillIdList_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+        result.quality_ = quality_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.quality_ = quality_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        result.star_ = star_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.star_ = star_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+        result.npcId_ = npcId_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.npcId_ = npcId_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000080;
-        }
         result.spriteId_ = spriteId_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000100;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
         }
         result.exp_ = exp_;
         result.bitField0_ = to_bitField0_;
@@ -1168,39 +961,10 @@ public final class NpcProBuf {
         if (other.hasLevel()) {
           setLevel(other.getLevel());
         }
-        if (equipListBuilder_ == null) {
-          if (!other.equipList_.isEmpty()) {
-            if (equipList_.isEmpty()) {
-              equipList_ = other.equipList_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-            } else {
-              ensureEquipListIsMutable();
-              equipList_.addAll(other.equipList_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.equipList_.isEmpty()) {
-            if (equipListBuilder_.isEmpty()) {
-              equipListBuilder_.dispose();
-              equipListBuilder_ = null;
-              equipList_ = other.equipList_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-              equipListBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getEquipListFieldBuilder() : null;
-            } else {
-              equipListBuilder_.addAllMessages(other.equipList_);
-            }
-          }
-        }
-        if (other.hasSelected()) {
-          setSelected(other.getSelected());
-        }
         if (!other.skillIdList_.isEmpty()) {
           if (skillIdList_.isEmpty()) {
             skillIdList_ = other.skillIdList_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000008);
           } else {
             ensureSkillIdListIsMutable();
             skillIdList_.addAll(other.skillIdList_);
@@ -1239,10 +1003,6 @@ public final class NpcProBuf {
           
           return false;
         }
-        if (!hasSelected()) {
-          
-          return false;
-        }
         if (!hasQuality()) {
           
           return false;
@@ -1262,12 +1022,6 @@ public final class NpcProBuf {
         if (!hasExp()) {
           
           return false;
-        }
-        for (int i = 0; i < getEquipListCount(); i++) {
-          if (!getEquipList(i).isInitialized()) {
-            
-            return false;
-          }
         }
         return true;
       }
@@ -1487,377 +1241,16 @@ public final class NpcProBuf {
         return this;
       }
 
-      // repeated .PItem equipList = 4;
-      private java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> equipList_ =
-        java.util.Collections.emptyList();
-      private void ensureEquipListIsMutable() {
+      // repeated int32 skillIdList = 4;
+      private java.util.List<java.lang.Integer> skillIdList_ = java.util.Collections.emptyList();
+      private void ensureSkillIdListIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          equipList_ = new java.util.ArrayList<com.doteyplay.game.message.proto.ItemProBuf.PItem>(equipList_);
+          skillIdList_ = new java.util.ArrayList<java.lang.Integer>(skillIdList_);
           bitField0_ |= 0x00000008;
          }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.doteyplay.game.message.proto.ItemProBuf.PItem, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder, com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> equipListBuilder_;
-
       /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> getEquipListList() {
-        if (equipListBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(equipList_);
-        } else {
-          return equipListBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public int getEquipListCount() {
-        if (equipListBuilder_ == null) {
-          return equipList_.size();
-        } else {
-          return equipListBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public com.doteyplay.game.message.proto.ItemProBuf.PItem getEquipList(int index) {
-        if (equipListBuilder_ == null) {
-          return equipList_.get(index);
-        } else {
-          return equipListBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public Builder setEquipList(
-          int index, com.doteyplay.game.message.proto.ItemProBuf.PItem value) {
-        if (equipListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureEquipListIsMutable();
-          equipList_.set(index, value);
-          onChanged();
-        } else {
-          equipListBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public Builder setEquipList(
-          int index, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder builderForValue) {
-        if (equipListBuilder_ == null) {
-          ensureEquipListIsMutable();
-          equipList_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          equipListBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public Builder addEquipList(com.doteyplay.game.message.proto.ItemProBuf.PItem value) {
-        if (equipListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureEquipListIsMutable();
-          equipList_.add(value);
-          onChanged();
-        } else {
-          equipListBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public Builder addEquipList(
-          int index, com.doteyplay.game.message.proto.ItemProBuf.PItem value) {
-        if (equipListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureEquipListIsMutable();
-          equipList_.add(index, value);
-          onChanged();
-        } else {
-          equipListBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public Builder addEquipList(
-          com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder builderForValue) {
-        if (equipListBuilder_ == null) {
-          ensureEquipListIsMutable();
-          equipList_.add(builderForValue.build());
-          onChanged();
-        } else {
-          equipListBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public Builder addEquipList(
-          int index, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder builderForValue) {
-        if (equipListBuilder_ == null) {
-          ensureEquipListIsMutable();
-          equipList_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          equipListBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public Builder addAllEquipList(
-          java.lang.Iterable<? extends com.doteyplay.game.message.proto.ItemProBuf.PItem> values) {
-        if (equipListBuilder_ == null) {
-          ensureEquipListIsMutable();
-          super.addAll(values, equipList_);
-          onChanged();
-        } else {
-          equipListBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public Builder clearEquipList() {
-        if (equipListBuilder_ == null) {
-          equipList_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-          onChanged();
-        } else {
-          equipListBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public Builder removeEquipList(int index) {
-        if (equipListBuilder_ == null) {
-          ensureEquipListIsMutable();
-          equipList_.remove(index);
-          onChanged();
-        } else {
-          equipListBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder getEquipListBuilder(
-          int index) {
-        return getEquipListFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder getEquipListOrBuilder(
-          int index) {
-        if (equipListBuilder_ == null) {
-          return equipList_.get(index);  } else {
-          return equipListBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public java.util.List<? extends com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
-           getEquipListOrBuilderList() {
-        if (equipListBuilder_ != null) {
-          return equipListBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(equipList_);
-        }
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder addEquipListBuilder() {
-        return getEquipListFieldBuilder().addBuilder(
-            com.doteyplay.game.message.proto.ItemProBuf.PItem.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder addEquipListBuilder(
-          int index) {
-        return getEquipListFieldBuilder().addBuilder(
-            index, com.doteyplay.game.message.proto.ItemProBuf.PItem.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .PItem equipList = 4;</code>
-       *
-       * <pre>
-       *装备列表
-       * </pre>
-       */
-      public java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder> 
-           getEquipListBuilderList() {
-        return getEquipListFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.doteyplay.game.message.proto.ItemProBuf.PItem, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder, com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
-          getEquipListFieldBuilder() {
-        if (equipListBuilder_ == null) {
-          equipListBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.doteyplay.game.message.proto.ItemProBuf.PItem, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder, com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder>(
-                  equipList_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
-                  getParentForChildren(),
-                  isClean());
-          equipList_ = null;
-        }
-        return equipListBuilder_;
-      }
-
-      // required bool selected = 5;
-      private boolean selected_ ;
-      /**
-       * <code>required bool selected = 5;</code>
-       *
-       * <pre>
-       *是否被选择
-       * </pre>
-       */
-      public boolean hasSelected() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>required bool selected = 5;</code>
-       *
-       * <pre>
-       *是否被选择
-       * </pre>
-       */
-      public boolean getSelected() {
-        return selected_;
-      }
-      /**
-       * <code>required bool selected = 5;</code>
-       *
-       * <pre>
-       *是否被选择
-       * </pre>
-       */
-      public Builder setSelected(boolean value) {
-        bitField0_ |= 0x00000010;
-        selected_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required bool selected = 5;</code>
-       *
-       * <pre>
-       *是否被选择
-       * </pre>
-       */
-      public Builder clearSelected() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        selected_ = false;
-        onChanged();
-        return this;
-      }
-
-      // repeated int32 skillIdList = 6;
-      private java.util.List<java.lang.Integer> skillIdList_ = java.util.Collections.emptyList();
-      private void ensureSkillIdListIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          skillIdList_ = new java.util.ArrayList<java.lang.Integer>(skillIdList_);
-          bitField0_ |= 0x00000020;
-         }
-      }
-      /**
-       * <code>repeated int32 skillIdList = 6;</code>
+       * <code>repeated int32 skillIdList = 4;</code>
        *
        * <pre>
        *技能列表
@@ -1868,7 +1261,7 @@ public final class NpcProBuf {
         return java.util.Collections.unmodifiableList(skillIdList_);
       }
       /**
-       * <code>repeated int32 skillIdList = 6;</code>
+       * <code>repeated int32 skillIdList = 4;</code>
        *
        * <pre>
        *技能列表
@@ -1878,7 +1271,7 @@ public final class NpcProBuf {
         return skillIdList_.size();
       }
       /**
-       * <code>repeated int32 skillIdList = 6;</code>
+       * <code>repeated int32 skillIdList = 4;</code>
        *
        * <pre>
        *技能列表
@@ -1888,7 +1281,7 @@ public final class NpcProBuf {
         return skillIdList_.get(index);
       }
       /**
-       * <code>repeated int32 skillIdList = 6;</code>
+       * <code>repeated int32 skillIdList = 4;</code>
        *
        * <pre>
        *技能列表
@@ -1902,7 +1295,7 @@ public final class NpcProBuf {
         return this;
       }
       /**
-       * <code>repeated int32 skillIdList = 6;</code>
+       * <code>repeated int32 skillIdList = 4;</code>
        *
        * <pre>
        *技能列表
@@ -1915,7 +1308,7 @@ public final class NpcProBuf {
         return this;
       }
       /**
-       * <code>repeated int32 skillIdList = 6;</code>
+       * <code>repeated int32 skillIdList = 4;</code>
        *
        * <pre>
        *技能列表
@@ -1929,7 +1322,7 @@ public final class NpcProBuf {
         return this;
       }
       /**
-       * <code>repeated int32 skillIdList = 6;</code>
+       * <code>repeated int32 skillIdList = 4;</code>
        *
        * <pre>
        *技能列表
@@ -1937,25 +1330,25 @@ public final class NpcProBuf {
        */
       public Builder clearSkillIdList() {
         skillIdList_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
 
-      // required int32 quality = 7;
+      // required int32 quality = 5;
       private int quality_ ;
       /**
-       * <code>required int32 quality = 7;</code>
+       * <code>required int32 quality = 5;</code>
        *
        * <pre>
        *品质
        * </pre>
        */
       public boolean hasQuality() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required int32 quality = 7;</code>
+       * <code>required int32 quality = 5;</code>
        *
        * <pre>
        *品质
@@ -1965,46 +1358,46 @@ public final class NpcProBuf {
         return quality_;
       }
       /**
-       * <code>required int32 quality = 7;</code>
+       * <code>required int32 quality = 5;</code>
        *
        * <pre>
        *品质
        * </pre>
        */
       public Builder setQuality(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000010;
         quality_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 quality = 7;</code>
+       * <code>required int32 quality = 5;</code>
        *
        * <pre>
        *品质
        * </pre>
        */
       public Builder clearQuality() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000010);
         quality_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 star = 8;
+      // required int32 star = 6;
       private int star_ ;
       /**
-       * <code>required int32 star = 8;</code>
+       * <code>required int32 star = 6;</code>
        *
        * <pre>
        *星级
        * </pre>
        */
       public boolean hasStar() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required int32 star = 8;</code>
+       * <code>required int32 star = 6;</code>
        *
        * <pre>
        *星级
@@ -2014,46 +1407,46 @@ public final class NpcProBuf {
         return star_;
       }
       /**
-       * <code>required int32 star = 8;</code>
+       * <code>required int32 star = 6;</code>
        *
        * <pre>
        *星级
        * </pre>
        */
       public Builder setStar(int value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000020;
         star_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 star = 8;</code>
+       * <code>required int32 star = 6;</code>
        *
        * <pre>
        *星级
        * </pre>
        */
       public Builder clearStar() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000020);
         star_ = 0;
         onChanged();
         return this;
       }
 
-      // required int64 npcId = 9;
+      // required int64 npcId = 7;
       private long npcId_ ;
       /**
-       * <code>required int64 npcId = 9;</code>
+       * <code>required int64 npcId = 7;</code>
        *
        * <pre>
        *id
        * </pre>
        */
       public boolean hasNpcId() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>required int64 npcId = 9;</code>
+       * <code>required int64 npcId = 7;</code>
        *
        * <pre>
        *id
@@ -2063,46 +1456,46 @@ public final class NpcProBuf {
         return npcId_;
       }
       /**
-       * <code>required int64 npcId = 9;</code>
+       * <code>required int64 npcId = 7;</code>
        *
        * <pre>
        *id
        * </pre>
        */
       public Builder setNpcId(long value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000040;
         npcId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int64 npcId = 9;</code>
+       * <code>required int64 npcId = 7;</code>
        *
        * <pre>
        *id
        * </pre>
        */
       public Builder clearNpcId() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         npcId_ = 0L;
         onChanged();
         return this;
       }
 
-      // required int32 spriteId = 10;
+      // required int32 spriteId = 8;
       private int spriteId_ ;
       /**
-       * <code>required int32 spriteId = 10;</code>
+       * <code>required int32 spriteId = 8;</code>
        *
        * <pre>
        *原型精灵id
        * </pre>
        */
       public boolean hasSpriteId() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>required int32 spriteId = 10;</code>
+       * <code>required int32 spriteId = 8;</code>
        *
        * <pre>
        *原型精灵id
@@ -2112,46 +1505,46 @@ public final class NpcProBuf {
         return spriteId_;
       }
       /**
-       * <code>required int32 spriteId = 10;</code>
+       * <code>required int32 spriteId = 8;</code>
        *
        * <pre>
        *原型精灵id
        * </pre>
        */
       public Builder setSpriteId(int value) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000080;
         spriteId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 spriteId = 10;</code>
+       * <code>required int32 spriteId = 8;</code>
        *
        * <pre>
        *原型精灵id
        * </pre>
        */
       public Builder clearSpriteId() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000080);
         spriteId_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 exp = 11;
+      // required int32 exp = 9;
       private int exp_ ;
       /**
-       * <code>required int32 exp = 11;</code>
+       * <code>required int32 exp = 9;</code>
        *
        * <pre>
        *经验
        * </pre>
        */
       public boolean hasExp() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>required int32 exp = 11;</code>
+       * <code>required int32 exp = 9;</code>
        *
        * <pre>
        *经验
@@ -2161,27 +1554,27 @@ public final class NpcProBuf {
         return exp_;
       }
       /**
-       * <code>required int32 exp = 11;</code>
+       * <code>required int32 exp = 9;</code>
        *
        * <pre>
        *经验
        * </pre>
        */
       public Builder setExp(int value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000100;
         exp_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 exp = 11;</code>
+       * <code>required int32 exp = 9;</code>
        *
        * <pre>
        *经验
        * </pre>
        */
       public Builder clearExp() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000100);
         exp_ = 0;
         onChanged();
         return this;
@@ -2198,11 +1591,826 @@ public final class NpcProBuf {
     // @@protoc_insertion_point(class_scope:PNpc)
   }
 
+  public interface PAddOrRemoveNpcOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .PNpc npcs = 1;
+    /**
+     * <code>repeated .PNpc npcs = 1;</code>
+     */
+    java.util.List<com.doteyplay.game.message.proto.NpcProBuf.PNpc> 
+        getNpcsList();
+    /**
+     * <code>repeated .PNpc npcs = 1;</code>
+     */
+    com.doteyplay.game.message.proto.NpcProBuf.PNpc getNpcs(int index);
+    /**
+     * <code>repeated .PNpc npcs = 1;</code>
+     */
+    int getNpcsCount();
+    /**
+     * <code>repeated .PNpc npcs = 1;</code>
+     */
+    java.util.List<? extends com.doteyplay.game.message.proto.NpcProBuf.PNpcOrBuilder> 
+        getNpcsOrBuilderList();
+    /**
+     * <code>repeated .PNpc npcs = 1;</code>
+     */
+    com.doteyplay.game.message.proto.NpcProBuf.PNpcOrBuilder getNpcsOrBuilder(
+        int index);
+
+    // required bool addOrRemove = 2;
+    /**
+     * <code>required bool addOrRemove = 2;</code>
+     *
+     * <pre>
+     *true为添加，false为删除
+     * </pre>
+     */
+    boolean hasAddOrRemove();
+    /**
+     * <code>required bool addOrRemove = 2;</code>
+     *
+     * <pre>
+     *true为添加，false为删除
+     * </pre>
+     */
+    boolean getAddOrRemove();
+  }
+  /**
+   * Protobuf type {@code PAddOrRemoveNpc}
+   */
+  public static final class PAddOrRemoveNpc extends
+      com.google.protobuf.GeneratedMessage
+      implements PAddOrRemoveNpcOrBuilder {
+    // Use PAddOrRemoveNpc.newBuilder() to construct.
+    private PAddOrRemoveNpc(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PAddOrRemoveNpc(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PAddOrRemoveNpc defaultInstance;
+    public static PAddOrRemoveNpc getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PAddOrRemoveNpc getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PAddOrRemoveNpc(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                npcs_ = new java.util.ArrayList<com.doteyplay.game.message.proto.NpcProBuf.PNpc>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              npcs_.add(input.readMessage(com.doteyplay.game.message.proto.NpcProBuf.PNpc.PARSER, extensionRegistry));
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000001;
+              addOrRemove_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          npcs_ = java.util.Collections.unmodifiableList(npcs_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.NpcProBuf.internal_static_PAddOrRemoveNpc_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.NpcProBuf.internal_static_PAddOrRemoveNpc_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc.class, com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PAddOrRemoveNpc> PARSER =
+        new com.google.protobuf.AbstractParser<PAddOrRemoveNpc>() {
+      public PAddOrRemoveNpc parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PAddOrRemoveNpc(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PAddOrRemoveNpc> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // repeated .PNpc npcs = 1;
+    public static final int NPCS_FIELD_NUMBER = 1;
+    private java.util.List<com.doteyplay.game.message.proto.NpcProBuf.PNpc> npcs_;
+    /**
+     * <code>repeated .PNpc npcs = 1;</code>
+     */
+    public java.util.List<com.doteyplay.game.message.proto.NpcProBuf.PNpc> getNpcsList() {
+      return npcs_;
+    }
+    /**
+     * <code>repeated .PNpc npcs = 1;</code>
+     */
+    public java.util.List<? extends com.doteyplay.game.message.proto.NpcProBuf.PNpcOrBuilder> 
+        getNpcsOrBuilderList() {
+      return npcs_;
+    }
+    /**
+     * <code>repeated .PNpc npcs = 1;</code>
+     */
+    public int getNpcsCount() {
+      return npcs_.size();
+    }
+    /**
+     * <code>repeated .PNpc npcs = 1;</code>
+     */
+    public com.doteyplay.game.message.proto.NpcProBuf.PNpc getNpcs(int index) {
+      return npcs_.get(index);
+    }
+    /**
+     * <code>repeated .PNpc npcs = 1;</code>
+     */
+    public com.doteyplay.game.message.proto.NpcProBuf.PNpcOrBuilder getNpcsOrBuilder(
+        int index) {
+      return npcs_.get(index);
+    }
+
+    // required bool addOrRemove = 2;
+    public static final int ADDORREMOVE_FIELD_NUMBER = 2;
+    private boolean addOrRemove_;
+    /**
+     * <code>required bool addOrRemove = 2;</code>
+     *
+     * <pre>
+     *true为添加，false为删除
+     * </pre>
+     */
+    public boolean hasAddOrRemove() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required bool addOrRemove = 2;</code>
+     *
+     * <pre>
+     *true为添加，false为删除
+     * </pre>
+     */
+    public boolean getAddOrRemove() {
+      return addOrRemove_;
+    }
+
+    private void initFields() {
+      npcs_ = java.util.Collections.emptyList();
+      addOrRemove_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasAddOrRemove()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getNpcsCount(); i++) {
+        if (!getNpcs(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < npcs_.size(); i++) {
+        output.writeMessage(1, npcs_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBool(2, addOrRemove_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < npcs_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, npcs_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, addOrRemove_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PAddOrRemoveNpc}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpcOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.NpcProBuf.internal_static_PAddOrRemoveNpc_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.NpcProBuf.internal_static_PAddOrRemoveNpc_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc.class, com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getNpcsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (npcsBuilder_ == null) {
+          npcs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          npcsBuilder_.clear();
+        }
+        addOrRemove_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.NpcProBuf.internal_static_PAddOrRemoveNpc_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc build() {
+        com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc buildPartial() {
+        com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc result = new com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (npcsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            npcs_ = java.util.Collections.unmodifiableList(npcs_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.npcs_ = npcs_;
+        } else {
+          result.npcs_ = npcsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.addOrRemove_ = addOrRemove_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc) {
+          return mergeFrom((com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc other) {
+        if (other == com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc.getDefaultInstance()) return this;
+        if (npcsBuilder_ == null) {
+          if (!other.npcs_.isEmpty()) {
+            if (npcs_.isEmpty()) {
+              npcs_ = other.npcs_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureNpcsIsMutable();
+              npcs_.addAll(other.npcs_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.npcs_.isEmpty()) {
+            if (npcsBuilder_.isEmpty()) {
+              npcsBuilder_.dispose();
+              npcsBuilder_ = null;
+              npcs_ = other.npcs_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              npcsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getNpcsFieldBuilder() : null;
+            } else {
+              npcsBuilder_.addAllMessages(other.npcs_);
+            }
+          }
+        }
+        if (other.hasAddOrRemove()) {
+          setAddOrRemove(other.getAddOrRemove());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasAddOrRemove()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getNpcsCount(); i++) {
+          if (!getNpcs(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.NpcProBuf.PAddOrRemoveNpc) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .PNpc npcs = 1;
+      private java.util.List<com.doteyplay.game.message.proto.NpcProBuf.PNpc> npcs_ =
+        java.util.Collections.emptyList();
+      private void ensureNpcsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          npcs_ = new java.util.ArrayList<com.doteyplay.game.message.proto.NpcProBuf.PNpc>(npcs_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.doteyplay.game.message.proto.NpcProBuf.PNpc, com.doteyplay.game.message.proto.NpcProBuf.PNpc.Builder, com.doteyplay.game.message.proto.NpcProBuf.PNpcOrBuilder> npcsBuilder_;
+
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public java.util.List<com.doteyplay.game.message.proto.NpcProBuf.PNpc> getNpcsList() {
+        if (npcsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(npcs_);
+        } else {
+          return npcsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public int getNpcsCount() {
+        if (npcsBuilder_ == null) {
+          return npcs_.size();
+        } else {
+          return npcsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public com.doteyplay.game.message.proto.NpcProBuf.PNpc getNpcs(int index) {
+        if (npcsBuilder_ == null) {
+          return npcs_.get(index);
+        } else {
+          return npcsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public Builder setNpcs(
+          int index, com.doteyplay.game.message.proto.NpcProBuf.PNpc value) {
+        if (npcsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNpcsIsMutable();
+          npcs_.set(index, value);
+          onChanged();
+        } else {
+          npcsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public Builder setNpcs(
+          int index, com.doteyplay.game.message.proto.NpcProBuf.PNpc.Builder builderForValue) {
+        if (npcsBuilder_ == null) {
+          ensureNpcsIsMutable();
+          npcs_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          npcsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public Builder addNpcs(com.doteyplay.game.message.proto.NpcProBuf.PNpc value) {
+        if (npcsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNpcsIsMutable();
+          npcs_.add(value);
+          onChanged();
+        } else {
+          npcsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public Builder addNpcs(
+          int index, com.doteyplay.game.message.proto.NpcProBuf.PNpc value) {
+        if (npcsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNpcsIsMutable();
+          npcs_.add(index, value);
+          onChanged();
+        } else {
+          npcsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public Builder addNpcs(
+          com.doteyplay.game.message.proto.NpcProBuf.PNpc.Builder builderForValue) {
+        if (npcsBuilder_ == null) {
+          ensureNpcsIsMutable();
+          npcs_.add(builderForValue.build());
+          onChanged();
+        } else {
+          npcsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public Builder addNpcs(
+          int index, com.doteyplay.game.message.proto.NpcProBuf.PNpc.Builder builderForValue) {
+        if (npcsBuilder_ == null) {
+          ensureNpcsIsMutable();
+          npcs_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          npcsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public Builder addAllNpcs(
+          java.lang.Iterable<? extends com.doteyplay.game.message.proto.NpcProBuf.PNpc> values) {
+        if (npcsBuilder_ == null) {
+          ensureNpcsIsMutable();
+          super.addAll(values, npcs_);
+          onChanged();
+        } else {
+          npcsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public Builder clearNpcs() {
+        if (npcsBuilder_ == null) {
+          npcs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          npcsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public Builder removeNpcs(int index) {
+        if (npcsBuilder_ == null) {
+          ensureNpcsIsMutable();
+          npcs_.remove(index);
+          onChanged();
+        } else {
+          npcsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public com.doteyplay.game.message.proto.NpcProBuf.PNpc.Builder getNpcsBuilder(
+          int index) {
+        return getNpcsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public com.doteyplay.game.message.proto.NpcProBuf.PNpcOrBuilder getNpcsOrBuilder(
+          int index) {
+        if (npcsBuilder_ == null) {
+          return npcs_.get(index);  } else {
+          return npcsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public java.util.List<? extends com.doteyplay.game.message.proto.NpcProBuf.PNpcOrBuilder> 
+           getNpcsOrBuilderList() {
+        if (npcsBuilder_ != null) {
+          return npcsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(npcs_);
+        }
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public com.doteyplay.game.message.proto.NpcProBuf.PNpc.Builder addNpcsBuilder() {
+        return getNpcsFieldBuilder().addBuilder(
+            com.doteyplay.game.message.proto.NpcProBuf.PNpc.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public com.doteyplay.game.message.proto.NpcProBuf.PNpc.Builder addNpcsBuilder(
+          int index) {
+        return getNpcsFieldBuilder().addBuilder(
+            index, com.doteyplay.game.message.proto.NpcProBuf.PNpc.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PNpc npcs = 1;</code>
+       */
+      public java.util.List<com.doteyplay.game.message.proto.NpcProBuf.PNpc.Builder> 
+           getNpcsBuilderList() {
+        return getNpcsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.doteyplay.game.message.proto.NpcProBuf.PNpc, com.doteyplay.game.message.proto.NpcProBuf.PNpc.Builder, com.doteyplay.game.message.proto.NpcProBuf.PNpcOrBuilder> 
+          getNpcsFieldBuilder() {
+        if (npcsBuilder_ == null) {
+          npcsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.doteyplay.game.message.proto.NpcProBuf.PNpc, com.doteyplay.game.message.proto.NpcProBuf.PNpc.Builder, com.doteyplay.game.message.proto.NpcProBuf.PNpcOrBuilder>(
+                  npcs_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          npcs_ = null;
+        }
+        return npcsBuilder_;
+      }
+
+      // required bool addOrRemove = 2;
+      private boolean addOrRemove_ ;
+      /**
+       * <code>required bool addOrRemove = 2;</code>
+       *
+       * <pre>
+       *true为添加，false为删除
+       * </pre>
+       */
+      public boolean hasAddOrRemove() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bool addOrRemove = 2;</code>
+       *
+       * <pre>
+       *true为添加，false为删除
+       * </pre>
+       */
+      public boolean getAddOrRemove() {
+        return addOrRemove_;
+      }
+      /**
+       * <code>required bool addOrRemove = 2;</code>
+       *
+       * <pre>
+       *true为添加，false为删除
+       * </pre>
+       */
+      public Builder setAddOrRemove(boolean value) {
+        bitField0_ |= 0x00000002;
+        addOrRemove_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bool addOrRemove = 2;</code>
+       *
+       * <pre>
+       *true为添加，false为删除
+       * </pre>
+       */
+      public Builder clearAddOrRemove() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        addOrRemove_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PAddOrRemoveNpc)
+    }
+
+    static {
+      defaultInstance = new PAddOrRemoveNpc(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PAddOrRemoveNpc)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_PNpc_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_PNpc_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PAddOrRemoveNpc_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PAddOrRemoveNpc_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2212,13 +2420,14 @@ public final class NpcProBuf {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tnpc.proto\032\nitem.proto\"\305\001\n\004PNpc\022\016\n\006role" +
+      "\n\tnpc.proto\032\nitem.proto\"\230\001\n\004PNpc\022\016\n\006role" +
       "Id\030\001 \002(\003\022\017\n\007npcName\030\002 \002(\t\022\r\n\005level\030\003 \002(\005" +
-      "\022\031\n\tequipList\030\004 \003(\0132\006.PItem\022\020\n\010selected\030" +
-      "\005 \002(\010\022\023\n\013skillIdList\030\006 \003(\005\022\017\n\007quality\030\007 " +
-      "\002(\005\022\014\n\004star\030\010 \002(\005\022\r\n\005npcId\030\t \002(\003\022\020\n\010spri" +
-      "teId\030\n \002(\005\022\013\n\003exp\030\013 \002(\005B-\n com.doteyplay" +
-      ".game.message.protoB\tNpcProBuf"
+      "\022\023\n\013skillIdList\030\004 \003(\005\022\017\n\007quality\030\005 \002(\005\022\014" +
+      "\n\004star\030\006 \002(\005\022\r\n\005npcId\030\007 \002(\003\022\020\n\010spriteId\030" +
+      "\010 \002(\005\022\013\n\003exp\030\t \002(\005\";\n\017PAddOrRemoveNpc\022\023\n" +
+      "\004npcs\030\001 \003(\0132\005.PNpc\022\023\n\013addOrRemove\030\002 \002(\010B" +
+      "-\n com.doteyplay.game.message.protoB\tNpc" +
+      "ProBuf"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2230,7 +2439,13 @@ public final class NpcProBuf {
           internal_static_PNpc_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PNpc_descriptor,
-              new java.lang.String[] { "RoleId", "NpcName", "Level", "EquipList", "Selected", "SkillIdList", "Quality", "Star", "NpcId", "SpriteId", "Exp", });
+              new java.lang.String[] { "RoleId", "NpcName", "Level", "SkillIdList", "Quality", "Star", "NpcId", "SpriteId", "Exp", });
+          internal_static_PAddOrRemoveNpc_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_PAddOrRemoveNpc_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PAddOrRemoveNpc_descriptor,
+              new java.lang.String[] { "Npcs", "AddOrRemove", });
           return null;
         }
       };

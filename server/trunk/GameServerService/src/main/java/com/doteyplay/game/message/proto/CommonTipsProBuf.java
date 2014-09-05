@@ -16,14 +16,16 @@ public final class CommonTipsProBuf {
      * <code>optional int32 state = 1;</code>
      *
      * <pre>
-     *閻樿埖锟�     * </pre>
+     *状态
+     * </pre>
      */
     boolean hasState();
     /**
      * <code>optional int32 state = 1;</code>
      *
      * <pre>
-     *閻樿埖锟�     * </pre>
+     *状态
+     * </pre>
      */
     int getState();
 
@@ -32,14 +34,16 @@ public final class CommonTipsProBuf {
      * <code>optional int32 msgId = 2;</code>
      *
      * <pre>
-     *濞戝牊浼�     * </pre>
+     *消息
+     * </pre>
      */
     boolean hasMsgId();
     /**
      * <code>optional int32 msgId = 2;</code>
      *
      * <pre>
-     *濞戝牊浼�     * </pre>
+     *消息
+     * </pre>
      */
     int getMsgId();
 
@@ -48,7 +52,8 @@ public final class CommonTipsProBuf {
      * <code>repeated string param = 3;</code>
      *
      * <pre>
-     *閸欏倹鏆�     * </pre>
+     *参数
+     * </pre>
      */
     java.util.List<java.lang.String>
     getParamList();
@@ -56,21 +61,24 @@ public final class CommonTipsProBuf {
      * <code>repeated string param = 3;</code>
      *
      * <pre>
-     *閸欏倹鏆�     * </pre>
+     *参数
+     * </pre>
      */
     int getParamCount();
     /**
      * <code>repeated string param = 3;</code>
      *
      * <pre>
-     *閸欏倹鏆�     * </pre>
+     *参数
+     * </pre>
      */
     java.lang.String getParam(int index);
     /**
      * <code>repeated string param = 3;</code>
      *
      * <pre>
-     *閸欏倹鏆�     * </pre>
+     *参数
+     * </pre>
      */
     com.google.protobuf.ByteString
         getParamBytes(int index);
@@ -194,7 +202,8 @@ public final class CommonTipsProBuf {
      * <code>optional int32 state = 1;</code>
      *
      * <pre>
-     *閻樿埖锟�     * </pre>
+     *状态
+     * </pre>
      */
     public boolean hasState() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -203,7 +212,8 @@ public final class CommonTipsProBuf {
      * <code>optional int32 state = 1;</code>
      *
      * <pre>
-     *閻樿埖锟�     * </pre>
+     *状态
+     * </pre>
      */
     public int getState() {
       return state_;
@@ -216,7 +226,8 @@ public final class CommonTipsProBuf {
      * <code>optional int32 msgId = 2;</code>
      *
      * <pre>
-     *濞戝牊浼�     * </pre>
+     *消息
+     * </pre>
      */
     public boolean hasMsgId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
@@ -225,7 +236,8 @@ public final class CommonTipsProBuf {
      * <code>optional int32 msgId = 2;</code>
      *
      * <pre>
-     *濞戝牊浼�     * </pre>
+     *消息
+     * </pre>
      */
     public int getMsgId() {
       return msgId_;
@@ -238,7 +250,8 @@ public final class CommonTipsProBuf {
      * <code>repeated string param = 3;</code>
      *
      * <pre>
-     *閸欏倹鏆�     * </pre>
+     *参数
+     * </pre>
      */
     public java.util.List<java.lang.String>
         getParamList() {
@@ -248,7 +261,8 @@ public final class CommonTipsProBuf {
      * <code>repeated string param = 3;</code>
      *
      * <pre>
-     *閸欏倹鏆�     * </pre>
+     *参数
+     * </pre>
      */
     public int getParamCount() {
       return param_.size();
@@ -257,7 +271,8 @@ public final class CommonTipsProBuf {
      * <code>repeated string param = 3;</code>
      *
      * <pre>
-     *閸欏倹鏆�     * </pre>
+     *参数
+     * </pre>
      */
     public java.lang.String getParam(int index) {
       return param_.get(index);
@@ -266,7 +281,8 @@ public final class CommonTipsProBuf {
      * <code>repeated string param = 3;</code>
      *
      * <pre>
-     *閸欏倹鏆�     * </pre>
+     *参数
+     * </pre>
      */
     public com.google.protobuf.ByteString
         getParamBytes(int index) {
@@ -550,18 +566,46 @@ public final class CommonTipsProBuf {
 
       // optional int32 state = 1;
       private int state_ ;
+      /**
+       * <code>optional int32 state = 1;</code>
+       *
+       * <pre>
+       *状态
+       * </pre>
+       */
       public boolean hasState() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional int32 state = 1;</code>
+       *
+       * <pre>
+       *状态
+       * </pre>
+       */
       public int getState() {
         return state_;
       }
+      /**
+       * <code>optional int32 state = 1;</code>
+       *
+       * <pre>
+       *状态
+       * </pre>
+       */
       public Builder setState(int value) {
         bitField0_ |= 0x00000001;
         state_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 state = 1;</code>
+       *
+       * <pre>
+       *状态
+       * </pre>
+       */
       public Builder clearState() {
         bitField0_ = (bitField0_ & ~0x00000001);
         state_ = 0;
@@ -571,18 +615,46 @@ public final class CommonTipsProBuf {
 
       // optional int32 msgId = 2;
       private int msgId_ ;
+      /**
+       * <code>optional int32 msgId = 2;</code>
+       *
+       * <pre>
+       *消息
+       * </pre>
+       */
       public boolean hasMsgId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional int32 msgId = 2;</code>
+       *
+       * <pre>
+       *消息
+       * </pre>
+       */
       public int getMsgId() {
         return msgId_;
       }
+      /**
+       * <code>optional int32 msgId = 2;</code>
+       *
+       * <pre>
+       *消息
+       * </pre>
+       */
       public Builder setMsgId(int value) {
         bitField0_ |= 0x00000002;
         msgId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 msgId = 2;</code>
+       *
+       * <pre>
+       *消息
+       * </pre>
+       */
       public Builder clearMsgId() {
         bitField0_ = (bitField0_ & ~0x00000002);
         msgId_ = 0;
@@ -598,10 +670,24 @@ public final class CommonTipsProBuf {
           bitField0_ |= 0x00000004;
          }
       }
+      /**
+       * <code>repeated string param = 3;</code>
+       *
+       * <pre>
+       *参数
+       * </pre>
+       */
       public java.util.List<java.lang.String>
           getParamList() {
         return java.util.Collections.unmodifiableList(param_);
       }
+      /**
+       * <code>repeated string param = 3;</code>
+       *
+       * <pre>
+       *参数
+       * </pre>
+       */
       public int getParamCount() {
         return param_.size();
       }
@@ -609,7 +695,8 @@ public final class CommonTipsProBuf {
        * <code>repeated string param = 3;</code>
        *
        * <pre>
-       *閸欏倹鏆�       * </pre>
+       *参数
+       * </pre>
        */
       public java.lang.String getParam(int index) {
         return param_.get(index);
@@ -618,7 +705,8 @@ public final class CommonTipsProBuf {
        * <code>repeated string param = 3;</code>
        *
        * <pre>
-       *閸欏倹鏆�       * </pre>
+       *参数
+       * </pre>
        */
       public com.google.protobuf.ByteString
           getParamBytes(int index) {
@@ -628,7 +716,8 @@ public final class CommonTipsProBuf {
        * <code>repeated string param = 3;</code>
        *
        * <pre>
-       *閸欏倹鏆�       * </pre>
+       *参数
+       * </pre>
        */
       public Builder setParam(
           int index, java.lang.String value) {
@@ -644,7 +733,8 @@ public final class CommonTipsProBuf {
        * <code>repeated string param = 3;</code>
        *
        * <pre>
-       *閸欏倹鏆�       * </pre>
+       *参数
+       * </pre>
        */
       public Builder addParam(
           java.lang.String value) {
@@ -660,7 +750,8 @@ public final class CommonTipsProBuf {
        * <code>repeated string param = 3;</code>
        *
        * <pre>
-       *閸欏倹鏆�       * </pre>
+       *参数
+       * </pre>
        */
       public Builder addAllParam(
           java.lang.Iterable<java.lang.String> values) {
@@ -673,7 +764,8 @@ public final class CommonTipsProBuf {
        * <code>repeated string param = 3;</code>
        *
        * <pre>
-       *閸欏倹鏆�       * </pre>
+       *参数
+       * </pre>
        */
       public Builder clearParam() {
         param_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -685,7 +777,8 @@ public final class CommonTipsProBuf {
        * <code>repeated string param = 3;</code>
        *
        * <pre>
-       *閸欏倹鏆�       * </pre>
+       *参数
+       * </pre>
        */
       public Builder addParamBytes(
           com.google.protobuf.ByteString value) {

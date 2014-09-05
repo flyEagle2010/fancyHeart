@@ -19,8 +19,8 @@ public final class MessageProBuf {
     java.lang.String[] descriptorData = {
       "\n\rmessage.proto\032\raccount.proto\032\014common.p" +
       "roto\032\ngate.proto\032\nitem.proto\032\tnpc.proto\032" +
-      "\nchat.protoB1\n com.doteyplay.game.messag" +
-      "e.protoB\rMessageProBuf"
+      "\nchat.proto\032\020commonResp.protoB1\n com.dot" +
+      "eyplay.game.message.protoB\rMessageProBuf"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -39,6 +39,7 @@ public final class MessageProBuf {
           com.doteyplay.game.message.proto.ItemProBuf.getDescriptor(),
           com.doteyplay.game.message.proto.NpcProBuf.getDescriptor(),
           com.doteyplay.game.message.proto.ChatProBuf.getDescriptor(),
+          com.doteyplay.game.message.proto.CommonRespProBuf.getDescriptor(),
         }, assigner);
   }
 

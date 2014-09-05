@@ -7,43 +7,48 @@
 //
 
 #include "TestScene2.h"
-
+#include "Clip.h"
 Scene* TestScene2::createScene(){
 	auto scene = Scene::create();
+    scene->addChild(TestScene2::create());
 	return scene;
 }
 
 bool TestScene2::init(){
-	if(!Layer::init()){
+	if(!BaseUI::init("publish/gate/gate.ExportJson")){
 		return false;
 	}
 	//init ui
+    auto winSize = Director::getInstance()->getWinSize();
+    
     /*
-     ui::ScrollView* scrollView = ui::ScrollView::create();
-     scrollView->setSize(Size(280.0f, 150.0f));
-     Size backgroundSize = background->getContentSize();
-     scrollView->setPosition(Vec2((widgetSize.width - backgroundSize.width) / 2.0f +
-     (backgroundSize.width - scrollView->getSize().width) / 2.0f,
-     (widgetSize.height - backgroundSize.height) / 2.0f +
-     (backgroundSize.height - scrollView->getSize().height) / 2.0f));
-     _uiLayer->addChild(scrollView);
-     
-     ImageView* imageView = ImageView::create("cocosui/ccicon.png");
-     
-     float innerWidth = scrollView->getSize().width;
-     float innerHeight = scrollView->getSize().height + imageView->getSize().height;
-     
-     scrollView->setInnerContainerSize(Size(innerWidth, innerHeight));
+    Clip* clip=Clip::create("effect/battle_Flashing box.plist", "battle_Flashing box");
+    this->addChild(clip);
+    clip->setPosition(Vec2(520,320));
+    clip->setScale(2, 2);
+    
+    return true;
     */
     
-    ScrollView* view=ScrollView::create();
-    view->setDirection(ScrollView::Direction::HORIZONTAL);
-    view->setTouchEnabled(true);
-    view->setBounceEnabled(false);
-    view->setSize(Size(960,640));
-    view->setPosition(Vec2(480,320));
-    view->setInnerContainerSize(Size(300,200));
-    view->addEventListener(CC_CALLBACK_2(TestScene2::listEvent, this));
+    this->rotateList = RotateList::create();
+//    this->rotateList->setSize(Size(widgetSize.width, widgetSize.height));
+//    this->rotateList->addEventListener(CC_CALLBACK_2(Gate::rotateListCallback,this));
+    
+    //模版
+    auto item=layout->getChildByName("item");
+    item->removeFromParent();
+    this->rotateList->setItemModel(item,winSize.width,Size(winSize.width,item->getContentSize().height),winSize.width/7);
+    this->addChild(this->rotateList);
+    this->rotateList->setPosition(Vec2(0,200));
+    
+    //滚动条
+    auto bottom=static_cast<Widget*>(layout->getChildByName("bottom"));
+    Slider* slider=static_cast<Slider*>(bottom->getChildByName("slider"));
+    this->rotateList->setSlider(slider);
+
+    this->rotateList->setNum(6);
+
+
     
 	return true;
 }

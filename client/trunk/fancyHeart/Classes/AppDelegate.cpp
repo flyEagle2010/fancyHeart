@@ -1,7 +1,8 @@
 #include "AppDelegate.h"
 #include "LoginScene.h"
-#include "TestScene.h"
+#include "TestScene2.h"
 #include "Update.h"
+#include "TestShadeScene.h"
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
@@ -25,15 +26,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
-    director->setAnimationInterval(1.0 / 60);
+    director->setAnimationInterval(1.0 / 40);
     
     Size size=glview->getFrameSize();
-//    if(((int)size.width%1024==0) && ((int)size.height%768==0)){
-//        glview->setDesignResolutionSize(1136.0, 640.0, ResolutionPolicy::FIXED_WIDTH);
-//    }
-//    else{
+    Size designSize(1136,640);
+//    float scaleX=size.width/designSize.width;
+    float scaleY=size.height/designSize.height;
+//    glview->setDesignResolutionSize(size.width/scaleY,designSize.height,ResolutionPolicy::SHOW_ALL);
+    
+
     glview->setDesignResolutionSize(1136, 640, ResolutionPolicy::FIXED_HEIGHT);
-//    }
     
 //    glview->setDesignResolutionSize(1136.0, 640.0, ResolutionPolicy::FIXED_WIDTH);
     std::vector<std::string>searchPath=FileUtils::getInstance()->getSearchPaths();
@@ -74,10 +76,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
     // create a scene. it's an autorelease object
-    auto scene = LoginScene::createScene();
-    //auto scene = TestScene::createScene();
+//    auto scene = LoginScene::createScene();
 //   auto scene = Update::createScene();
 
+        auto scene = TestScene2::createScene();
+//    auto scene=TestShadeScene::createScene();
+    
     // run
 //    director->runWithScene(scene);
 //
