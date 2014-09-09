@@ -46,7 +46,7 @@ bool TestScene2::init(){
     Slider* slider=static_cast<Slider*>(bottom->getChildByName("slider"));
     this->rotateList->setSlider(slider);
 
-    this->rotateList->setNum(6);
+    this->rotateList->setNum(140);
 
 
     

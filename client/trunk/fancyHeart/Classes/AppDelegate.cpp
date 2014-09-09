@@ -26,7 +26,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
-    director->setAnimationInterval(1.0 / 40);
+    director->setAnimationInterval(1.0 / 60);
     
     Size size=glview->getFrameSize();
     Size designSize(1136,640);
@@ -76,10 +76,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
     // create a scene. it's an autorelease object
-//    auto scene = LoginScene::createScene();
+//    auto scene = TestScene2::createScene();
+
+    auto scene = LoginScene::createScene();
 //   auto scene = Update::createScene();
 
-        auto scene = TestScene2::createScene();
 //    auto scene=TestShadeScene::createScene();
     
     // run

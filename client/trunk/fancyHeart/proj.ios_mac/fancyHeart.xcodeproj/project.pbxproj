@@ -145,6 +145,13 @@
 		BFB5AE2819A1A768005F3E32 /* zhu.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = BFB5AE2219A1A768005F3E32 /* zhu.ExportJson */; };
 		BFB5AE2919A1A768005F3E32 /* zhu0.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFB5AE2319A1A768005F3E32 /* zhu0.plist */; };
 		BFB5AE2A19A1A768005F3E32 /* zhu0.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB5AE2419A1A768005F3E32 /* zhu0.png */; };
+		BFB61D9F19BEF86000DF56F2 /* Damascene.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB61D9819BEF86000DF56F2 /* Damascene.png */; };
+		BFB61DA019BEF86000DF56F2 /* hero_circle_1.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB61D9919BEF86000DF56F2 /* hero_circle_1.png */; };
+		BFB61DA119BEF86000DF56F2 /* hero_circle_2.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB61D9A19BEF86000DF56F2 /* hero_circle_2.png */; };
+		BFB61DA219BEF86000DF56F2 /* hero_circle_3.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB61D9B19BEF86000DF56F2 /* hero_circle_3.png */; };
+		BFB61DA319BEF86000DF56F2 /* hero_circle_4.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB61D9C19BEF86000DF56F2 /* hero_circle_4.png */; };
+		BFB61DA419BEF86000DF56F2 /* hero_circle_5.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB61D9D19BEF86000DF56F2 /* hero_circle_5.png */; };
+		BFB61DA519BEF86000DF56F2 /* prop.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB61D9E19BEF86000DF56F2 /* prop.png */; };
 		BFB9733C19985DFD00C3EB07 /* publish in Resources */ = {isa = PBXBuildFile; fileRef = BFB9733B19985DFD00C3EB07 /* publish */; };
 		BFBF172619A1DFA1002FD443 /* NewAnimation.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = BFBF172319A1DFA1002FD443 /* NewAnimation.ExportJson */; };
 		BFBF172719A1DFA1002FD443 /* NewAnimation0.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFBF172419A1DFA1002FD443 /* NewAnimation0.plist */; };
@@ -624,6 +631,13 @@
 		BFB5AE2219A1A768005F3E32 /* zhu.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zhu.ExportJson; sourceTree = "<group>"; };
 		BFB5AE2319A1A768005F3E32 /* zhu0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zhu0.plist; sourceTree = "<group>"; };
 		BFB5AE2419A1A768005F3E32 /* zhu0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhu0.png; sourceTree = "<group>"; };
+		BFB61D9819BEF86000DF56F2 /* Damascene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Damascene.png; sourceTree = "<group>"; };
+		BFB61D9919BEF86000DF56F2 /* hero_circle_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero_circle_1.png; sourceTree = "<group>"; };
+		BFB61D9A19BEF86000DF56F2 /* hero_circle_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero_circle_2.png; sourceTree = "<group>"; };
+		BFB61D9B19BEF86000DF56F2 /* hero_circle_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero_circle_3.png; sourceTree = "<group>"; };
+		BFB61D9C19BEF86000DF56F2 /* hero_circle_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero_circle_4.png; sourceTree = "<group>"; };
+		BFB61D9D19BEF86000DF56F2 /* hero_circle_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero_circle_5.png; sourceTree = "<group>"; };
+		BFB61D9E19BEF86000DF56F2 /* prop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prop.png; sourceTree = "<group>"; };
 		BFB9733B19985DFD00C3EB07 /* publish */ = {isa = PBXFileReference; lastKnownFileType = folder; name = publish; path = ../../../../ClientUI/CocoStudio/assets/publish; sourceTree = "<group>"; };
 		BFBF172319A1DFA1002FD443 /* NewAnimation.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NewAnimation.ExportJson; sourceTree = "<group>"; };
 		BFBF172419A1DFA1002FD443 /* NewAnimation0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NewAnimation0.plist; sourceTree = "<group>"; };
@@ -1200,6 +1214,13 @@
 		BF73A1DF19AAE9C3003AFFAD /* common */ = {
 			isa = PBXGroup;
 			children = (
+				BFB61D9819BEF86000DF56F2 /* Damascene.png */,
+				BFB61D9919BEF86000DF56F2 /* hero_circle_1.png */,
+				BFB61D9A19BEF86000DF56F2 /* hero_circle_2.png */,
+				BFB61D9B19BEF86000DF56F2 /* hero_circle_3.png */,
+				BFB61D9C19BEF86000DF56F2 /* hero_circle_4.png */,
+				BFB61D9D19BEF86000DF56F2 /* hero_circle_5.png */,
+				BFB61D9E19BEF86000DF56F2 /* prop.png */,
 				BF73A1F519B015E3003AFFAD /* addition_1.png */,
 				BF73A1F619B015E3003AFFAD /* addition_2.png */,
 				BF73A1F719B015E3003AFFAD /* equipStatus_1.png */,
@@ -2043,6 +2064,7 @@
 				BFD2B067197F93F3001A0F26 /* boat.pvr.ccz in Resources */,
 				BFD2B085197F93F3001A0F26 /* TK_atk2_tile.pvr.ccz in Resources */,
 				BFD2B05B197F93F3001A0F26 /* HelloWorld.png in Resources */,
+				BFB61DA419BEF86000DF56F2 /* hero_circle_5.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				BF73A1CD19A4535A003AFFAD /* myFragmentShader.frag in Resources */,
 				BFD2B071197F93F3001A0F26 /* GlaiveThrower_atk_tile.pvr.ccz in Resources */,
@@ -2081,7 +2103,9 @@
 				BFD2B06B197F93F3001A0F26 /* DOT.pvr.ccz in Resources */,
 				BF25598C1988FC440024AB17 /* 5.png in Resources */,
 				BFD2B075197F93F3001A0F26 /* Lina_atk_tile.pvr.ccz in Resources */,
+				BFB61DA219BEF86000DF56F2 /* hero_circle_3.png in Resources */,
 				BFD2B047197F93F3001A0F26 /* arrow.png in Resources */,
+				BFB61DA119BEF86000DF56F2 /* hero_circle_2.png in Resources */,
 				BFD2B076197F93F3001A0F26 /* Lion_atk_tile.pvr.ccz in Resources */,
 				BF2559AC1989E42E0024AB17 /* XBuff.json in Resources */,
 				BF2559BE198A0D160024AB17 /* battle_HP_2.png in Resources */,
@@ -2123,9 +2147,12 @@
 				BF25597C1988FC440024AB17 /* 100.tmx in Resources */,
 				BFD2B0B9197F93F3001A0F26 /* testBg.png in Resources */,
 				BF25597B1988FC440024AB17 /* 100.json in Resources */,
+				BFB61D9F19BEF86000DF56F2 /* Damascene.png in Resources */,
+				BFB61DA319BEF86000DF56F2 /* hero_circle_4.png in Resources */,
 				BF73A1E819AAE9C3003AFFAD /* card_4.png in Resources */,
 				BFD2B08B197F93F3001A0F26 /* round.png in Resources */,
 				BF73A1B319A2F2A3003AFFAD /* man2.ExportJson in Resources */,
+				BFB61DA019BEF86000DF56F2 /* hero_circle_1.png in Resources */,
 				BFD2B07B197F93F3001A0F26 /* NEC_atk_tile.pvr.ccz in Resources */,
 				BFD2B097197F93F3001A0F26 /* InvisibleShader.vsh in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
@@ -2157,6 +2184,7 @@
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				BF73A20A19B015E3003AFFAD /* grade_icon_2.png in Resources */,
 				BF25597E1988FC440024AB17 /* 101.tmx in Resources */,
+				BFB61DA519BEF86000DF56F2 /* prop.png in Resources */,
 				BFD2B094197F93F3001A0F26 /* IceShader.fsh in Resources */,
 				BFD2B052197F93F3001A0F26 /* font_number_0.png in Resources */,
 				BF2559B01989E42E0024AB17 /* XItem.json in Resources */,

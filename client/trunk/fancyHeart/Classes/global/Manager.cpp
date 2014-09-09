@@ -123,6 +123,11 @@ void Manager::updateRole(NetMsg* msg)
                     pNpc->set_quality(role.finalvalue());
                     break;
                 }
+                case RoleFields::STAR:
+                {
+                    pNpc->set_star(role.finalvalue());
+                    break;
+                }
                 default:
                     break;
             }
@@ -193,7 +198,7 @@ void Manager::updateItem(RepeatedPtrField< ::PItemChangeLog >::iterator it,Repea
     {
         PItem* item=items->Mutable(i);
         
-        if (item->itemid()==it->itemid()) {
+        if (item->itemid()==it->itemid() && it->posid() == item->posid()) {
             if (it->itemfinalnum()==0)//为0要从背包删除此物品
             {
                 items->DeleteSubrange(i, 1);
@@ -212,6 +217,7 @@ void Manager::updateItem(RepeatedPtrField< ::PItemChangeLog >::iterator it,Repea
         item->set_itemnum(it->itemfinalnum());
         item->set_itemid(it->itemid());
         item->set_npcid(it->npcid());
+        item->set_posid(it->posid());
         items->AddAllocated(item);
     }
 
