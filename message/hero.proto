@@ -1,0 +1,25 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "HeroProBuf";
+
+message PAscend{//角色升阶
+   required int64 heroId=1;//角色id
+}
+
+message PEvolve{//角色进化
+   required int64 heroId=1;//角色id
+}
+
+message PMutation{//角色变异
+   required int64 heroId=1;//角色id
+}
+
+message PCallHero{//召唤角色
+	required int32 heroId=1;//角色id
+}
+
+message PGoldQualityUpgrade // 变异
+{
+	required int32 result=1;//是否成功结果
+	optional int32 changeFlag=2;//变异结果标示 0升到金色品质 1获得随机技能 2随机技能升级
+	optional int32 skillId=3;//技能id参数
+}

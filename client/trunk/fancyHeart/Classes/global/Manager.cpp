@@ -326,8 +326,25 @@ void Manager::updateNodes(NetMsg* msg)//更新节点
     }
     
 }
-
-
+//
+void Manager::updateNpcSkills(int npcid,int skillId)
+{
+    PNpc* pNpc=this->getNpc(npcid);
+    bool isNewSkill = true;
+    //技能升级，替换原有技能的id
+    for (int i =0; i<pNpc->skillidlist_size(); i++) {
+        if (int(skillId/100) == int(pNpc->skillidlist(i)/100)) {
+            //替换这个技能的id
+            pNpc->set_skillidlist(i, skillId);
+            isNewSkill = false;
+            break;
+        }
+    }
+    //新添技能
+    if (isNewSkill) {
+        pNpc->add_skillidlist(skillId);
+    }
+}
 
 void Manager::showMsg(const string msg)
 {

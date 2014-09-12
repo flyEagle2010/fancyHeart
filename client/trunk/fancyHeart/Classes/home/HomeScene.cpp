@@ -245,8 +245,8 @@ void HomeScene::touchBuildEvent(cocos2d::Ref *pSender, TouchEventType type)
                 }
                 case 10004: //英雄编队（卡组）
                 {
-//                    RoleList* roleList = RoleList::create();
-//                    roleList->show();
+                    RoleAllList*roleAllList = RoleAllList::create();
+                    roleAllList->show();
                     break;
                 }
                 case 10005: //英雄属性

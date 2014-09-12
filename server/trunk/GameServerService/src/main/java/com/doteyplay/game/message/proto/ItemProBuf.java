@@ -64,6 +64,24 @@ public final class ItemProBuf {
      * </pre>
      */
     long getNpcId();
+
+    // optional int32 posId = 4;
+    /**
+     * <code>optional int32 posId = 4;</code>
+     *
+     * <pre>
+     *装备位置id
+     * </pre>
+     */
+    boolean hasPosId();
+    /**
+     * <code>optional int32 posId = 4;</code>
+     *
+     * <pre>
+     *装备位置id
+     * </pre>
+     */
+    int getPosId();
   }
   /**
    * Protobuf type {@code PItem}
@@ -129,6 +147,11 @@ public final class ItemProBuf {
             case 24: {
               bitField0_ |= 0x00000004;
               npcId_ = input.readInt64();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              posId_ = input.readInt32();
               break;
             }
           }
@@ -243,10 +266,35 @@ public final class ItemProBuf {
       return npcId_;
     }
 
+    // optional int32 posId = 4;
+    public static final int POSID_FIELD_NUMBER = 4;
+    private int posId_;
+    /**
+     * <code>optional int32 posId = 4;</code>
+     *
+     * <pre>
+     *装备位置id
+     * </pre>
+     */
+    public boolean hasPosId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 posId = 4;</code>
+     *
+     * <pre>
+     *装备位置id
+     * </pre>
+     */
+    public int getPosId() {
+      return posId_;
+    }
+
     private void initFields() {
       itemId_ = 0;
       itemNum_ = 0;
       npcId_ = 0L;
+      posId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -281,6 +329,9 @@ public final class ItemProBuf {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, npcId_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, posId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -301,6 +352,10 @@ public final class ItemProBuf {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, npcId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, posId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -424,6 +479,8 @@ public final class ItemProBuf {
         bitField0_ = (bitField0_ & ~0x00000002);
         npcId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
+        posId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -464,6 +521,10 @@ public final class ItemProBuf {
           to_bitField0_ |= 0x00000004;
         }
         result.npcId_ = npcId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.posId_ = posId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -488,6 +549,9 @@ public final class ItemProBuf {
         }
         if (other.hasNpcId()) {
           setNpcId(other.getNpcId());
+        }
+        if (other.hasPosId()) {
+          setPosId(other.getPosId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -675,6 +739,55 @@ public final class ItemProBuf {
         return this;
       }
 
+      // optional int32 posId = 4;
+      private int posId_ ;
+      /**
+       * <code>optional int32 posId = 4;</code>
+       *
+       * <pre>
+       *装备位置id
+       * </pre>
+       */
+      public boolean hasPosId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 posId = 4;</code>
+       *
+       * <pre>
+       *装备位置id
+       * </pre>
+       */
+      public int getPosId() {
+        return posId_;
+      }
+      /**
+       * <code>optional int32 posId = 4;</code>
+       *
+       * <pre>
+       *装备位置id
+       * </pre>
+       */
+      public Builder setPosId(int value) {
+        bitField0_ |= 0x00000008;
+        posId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 posId = 4;</code>
+       *
+       * <pre>
+       *装备位置id
+       * </pre>
+       */
+      public Builder clearPosId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        posId_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:PItem)
     }
 
@@ -760,6 +873,24 @@ public final class ItemProBuf {
      * </pre>
      */
     long getNpcId();
+
+    // optional int32 posId = 5;
+    /**
+     * <code>optional int32 posId = 5;</code>
+     *
+     * <pre>
+     *装备的位置
+     * </pre>
+     */
+    boolean hasPosId();
+    /**
+     * <code>optional int32 posId = 5;</code>
+     *
+     * <pre>
+     *装备的位置
+     * </pre>
+     */
+    int getPosId();
   }
   /**
    * Protobuf type {@code PItemChangeLog}
@@ -830,6 +961,11 @@ public final class ItemProBuf {
             case 32: {
               bitField0_ |= 0x00000008;
               npcId_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              posId_ = input.readInt32();
               break;
             }
           }
@@ -968,11 +1104,36 @@ public final class ItemProBuf {
       return npcId_;
     }
 
+    // optional int32 posId = 5;
+    public static final int POSID_FIELD_NUMBER = 5;
+    private int posId_;
+    /**
+     * <code>optional int32 posId = 5;</code>
+     *
+     * <pre>
+     *装备的位置
+     * </pre>
+     */
+    public boolean hasPosId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 posId = 5;</code>
+     *
+     * <pre>
+     *装备的位置
+     * </pre>
+     */
+    public int getPosId() {
+      return posId_;
+    }
+
     private void initFields() {
       itemId_ = 0;
       itemAddNum_ = 0;
       itemFinalNum_ = 0;
       npcId_ = 0L;
+      posId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1014,6 +1175,9 @@ public final class ItemProBuf {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(4, npcId_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, posId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1038,6 +1202,10 @@ public final class ItemProBuf {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, npcId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, posId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1163,6 +1331,8 @@ public final class ItemProBuf {
         bitField0_ = (bitField0_ & ~0x00000004);
         npcId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
+        posId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -1207,6 +1377,10 @@ public final class ItemProBuf {
           to_bitField0_ |= 0x00000008;
         }
         result.npcId_ = npcId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.posId_ = posId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1234,6 +1408,9 @@ public final class ItemProBuf {
         }
         if (other.hasNpcId()) {
           setNpcId(other.getNpcId());
+        }
+        if (other.hasPosId()) {
+          setPosId(other.getPosId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1470,6 +1647,55 @@ public final class ItemProBuf {
       public Builder clearNpcId() {
         bitField0_ = (bitField0_ & ~0x00000008);
         npcId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 posId = 5;
+      private int posId_ ;
+      /**
+       * <code>optional int32 posId = 5;</code>
+       *
+       * <pre>
+       *装备的位置
+       * </pre>
+       */
+      public boolean hasPosId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 posId = 5;</code>
+       *
+       * <pre>
+       *装备的位置
+       * </pre>
+       */
+      public int getPosId() {
+        return posId_;
+      }
+      /**
+       * <code>optional int32 posId = 5;</code>
+       *
+       * <pre>
+       *装备的位置
+       * </pre>
+       */
+      public Builder setPosId(int value) {
+        bitField0_ |= 0x00000010;
+        posId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 posId = 5;</code>
+       *
+       * <pre>
+       *装备的位置
+       * </pre>
+       */
+      public Builder clearPosId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        posId_ = 0;
         onChanged();
         return this;
       }
@@ -2909,6 +3135,1064 @@ public final class ItemProBuf {
     // @@protoc_insertion_point(class_scope:PSellGroup)
   }
 
+  public interface PComposeItemOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 itemId = 1;
+    /**
+     * <code>required int32 itemId = 1;</code>
+     */
+    boolean hasItemId();
+    /**
+     * <code>required int32 itemId = 1;</code>
+     */
+    int getItemId();
+
+    // required int32 itemNum = 2;
+    /**
+     * <code>required int32 itemNum = 2;</code>
+     */
+    boolean hasItemNum();
+    /**
+     * <code>required int32 itemNum = 2;</code>
+     */
+    int getItemNum();
+  }
+  /**
+   * Protobuf type {@code PComposeItem}
+   */
+  public static final class PComposeItem extends
+      com.google.protobuf.GeneratedMessage
+      implements PComposeItemOrBuilder {
+    // Use PComposeItem.newBuilder() to construct.
+    private PComposeItem(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PComposeItem(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PComposeItem defaultInstance;
+    public static PComposeItem getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PComposeItem getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PComposeItem(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              itemId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              itemNum_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PComposeItem_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PComposeItem_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.ItemProBuf.PComposeItem.class, com.doteyplay.game.message.proto.ItemProBuf.PComposeItem.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PComposeItem> PARSER =
+        new com.google.protobuf.AbstractParser<PComposeItem>() {
+      public PComposeItem parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PComposeItem(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PComposeItem> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 itemId = 1;
+    public static final int ITEMID_FIELD_NUMBER = 1;
+    private int itemId_;
+    /**
+     * <code>required int32 itemId = 1;</code>
+     */
+    public boolean hasItemId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 itemId = 1;</code>
+     */
+    public int getItemId() {
+      return itemId_;
+    }
+
+    // required int32 itemNum = 2;
+    public static final int ITEMNUM_FIELD_NUMBER = 2;
+    private int itemNum_;
+    /**
+     * <code>required int32 itemNum = 2;</code>
+     */
+    public boolean hasItemNum() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 itemNum = 2;</code>
+     */
+    public int getItemNum() {
+      return itemNum_;
+    }
+
+    private void initFields() {
+      itemId_ = 0;
+      itemNum_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasItemId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasItemNum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, itemId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, itemNum_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, itemId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, itemNum_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.ItemProBuf.PComposeItem prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PComposeItem}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.ItemProBuf.PComposeItemOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PComposeItem_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PComposeItem_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.ItemProBuf.PComposeItem.class, com.doteyplay.game.message.proto.ItemProBuf.PComposeItem.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.ItemProBuf.PComposeItem.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        itemId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        itemNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PComposeItem_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.ItemProBuf.PComposeItem getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.ItemProBuf.PComposeItem.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.ItemProBuf.PComposeItem build() {
+        com.doteyplay.game.message.proto.ItemProBuf.PComposeItem result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.ItemProBuf.PComposeItem buildPartial() {
+        com.doteyplay.game.message.proto.ItemProBuf.PComposeItem result = new com.doteyplay.game.message.proto.ItemProBuf.PComposeItem(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.itemId_ = itemId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.itemNum_ = itemNum_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.ItemProBuf.PComposeItem) {
+          return mergeFrom((com.doteyplay.game.message.proto.ItemProBuf.PComposeItem)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.ItemProBuf.PComposeItem other) {
+        if (other == com.doteyplay.game.message.proto.ItemProBuf.PComposeItem.getDefaultInstance()) return this;
+        if (other.hasItemId()) {
+          setItemId(other.getItemId());
+        }
+        if (other.hasItemNum()) {
+          setItemNum(other.getItemNum());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasItemId()) {
+          
+          return false;
+        }
+        if (!hasItemNum()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.ItemProBuf.PComposeItem parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.ItemProBuf.PComposeItem) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 itemId = 1;
+      private int itemId_ ;
+      /**
+       * <code>required int32 itemId = 1;</code>
+       */
+      public boolean hasItemId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 itemId = 1;</code>
+       */
+      public int getItemId() {
+        return itemId_;
+      }
+      /**
+       * <code>required int32 itemId = 1;</code>
+       */
+      public Builder setItemId(int value) {
+        bitField0_ |= 0x00000001;
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 itemId = 1;</code>
+       */
+      public Builder clearItemId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        itemId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 itemNum = 2;
+      private int itemNum_ ;
+      /**
+       * <code>required int32 itemNum = 2;</code>
+       */
+      public boolean hasItemNum() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 itemNum = 2;</code>
+       */
+      public int getItemNum() {
+        return itemNum_;
+      }
+      /**
+       * <code>required int32 itemNum = 2;</code>
+       */
+      public Builder setItemNum(int value) {
+        bitField0_ |= 0x00000002;
+        itemNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 itemNum = 2;</code>
+       */
+      public Builder clearItemNum() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        itemNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PComposeItem)
+    }
+
+    static {
+      defaultInstance = new PComposeItem(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PComposeItem)
+  }
+
+  public interface PWearEquipOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int64 heroId = 1;
+    /**
+     * <code>required int64 heroId = 1;</code>
+     *
+     * <pre>
+     *角色id
+     * </pre>
+     */
+    boolean hasHeroId();
+    /**
+     * <code>required int64 heroId = 1;</code>
+     *
+     * <pre>
+     *角色id
+     * </pre>
+     */
+    long getHeroId();
+
+    // required int32 posId = 2;
+    /**
+     * <code>required int32 posId = 2;</code>
+     *
+     * <pre>
+     *装备位置
+     * </pre>
+     */
+    boolean hasPosId();
+    /**
+     * <code>required int32 posId = 2;</code>
+     *
+     * <pre>
+     *装备位置
+     * </pre>
+     */
+    int getPosId();
+  }
+  /**
+   * Protobuf type {@code PWearEquip}
+   *
+   * <pre>
+   *角色穿装备
+   * </pre>
+   */
+  public static final class PWearEquip extends
+      com.google.protobuf.GeneratedMessage
+      implements PWearEquipOrBuilder {
+    // Use PWearEquip.newBuilder() to construct.
+    private PWearEquip(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PWearEquip(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PWearEquip defaultInstance;
+    public static PWearEquip getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PWearEquip getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PWearEquip(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              heroId_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              posId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PWearEquip_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PWearEquip_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.ItemProBuf.PWearEquip.class, com.doteyplay.game.message.proto.ItemProBuf.PWearEquip.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PWearEquip> PARSER =
+        new com.google.protobuf.AbstractParser<PWearEquip>() {
+      public PWearEquip parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PWearEquip(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PWearEquip> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int64 heroId = 1;
+    public static final int HEROID_FIELD_NUMBER = 1;
+    private long heroId_;
+    /**
+     * <code>required int64 heroId = 1;</code>
+     *
+     * <pre>
+     *角色id
+     * </pre>
+     */
+    public boolean hasHeroId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 heroId = 1;</code>
+     *
+     * <pre>
+     *角色id
+     * </pre>
+     */
+    public long getHeroId() {
+      return heroId_;
+    }
+
+    // required int32 posId = 2;
+    public static final int POSID_FIELD_NUMBER = 2;
+    private int posId_;
+    /**
+     * <code>required int32 posId = 2;</code>
+     *
+     * <pre>
+     *装备位置
+     * </pre>
+     */
+    public boolean hasPosId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 posId = 2;</code>
+     *
+     * <pre>
+     *装备位置
+     * </pre>
+     */
+    public int getPosId() {
+      return posId_;
+    }
+
+    private void initFields() {
+      heroId_ = 0L;
+      posId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasHeroId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPosId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, heroId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, posId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, heroId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, posId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.ItemProBuf.PWearEquip prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PWearEquip}
+     *
+     * <pre>
+     *角色穿装备
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.ItemProBuf.PWearEquipOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PWearEquip_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PWearEquip_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.ItemProBuf.PWearEquip.class, com.doteyplay.game.message.proto.ItemProBuf.PWearEquip.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.ItemProBuf.PWearEquip.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        heroId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        posId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.ItemProBuf.internal_static_PWearEquip_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.ItemProBuf.PWearEquip getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.ItemProBuf.PWearEquip.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.ItemProBuf.PWearEquip build() {
+        com.doteyplay.game.message.proto.ItemProBuf.PWearEquip result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.ItemProBuf.PWearEquip buildPartial() {
+        com.doteyplay.game.message.proto.ItemProBuf.PWearEquip result = new com.doteyplay.game.message.proto.ItemProBuf.PWearEquip(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.heroId_ = heroId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.posId_ = posId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.ItemProBuf.PWearEquip) {
+          return mergeFrom((com.doteyplay.game.message.proto.ItemProBuf.PWearEquip)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.ItemProBuf.PWearEquip other) {
+        if (other == com.doteyplay.game.message.proto.ItemProBuf.PWearEquip.getDefaultInstance()) return this;
+        if (other.hasHeroId()) {
+          setHeroId(other.getHeroId());
+        }
+        if (other.hasPosId()) {
+          setPosId(other.getPosId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHeroId()) {
+          
+          return false;
+        }
+        if (!hasPosId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.ItemProBuf.PWearEquip parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.ItemProBuf.PWearEquip) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int64 heroId = 1;
+      private long heroId_ ;
+      /**
+       * <code>required int64 heroId = 1;</code>
+       *
+       * <pre>
+       *角色id
+       * </pre>
+       */
+      public boolean hasHeroId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int64 heroId = 1;</code>
+       *
+       * <pre>
+       *角色id
+       * </pre>
+       */
+      public long getHeroId() {
+        return heroId_;
+      }
+      /**
+       * <code>required int64 heroId = 1;</code>
+       *
+       * <pre>
+       *角色id
+       * </pre>
+       */
+      public Builder setHeroId(long value) {
+        bitField0_ |= 0x00000001;
+        heroId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int64 heroId = 1;</code>
+       *
+       * <pre>
+       *角色id
+       * </pre>
+       */
+      public Builder clearHeroId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        heroId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required int32 posId = 2;
+      private int posId_ ;
+      /**
+       * <code>required int32 posId = 2;</code>
+       *
+       * <pre>
+       *装备位置
+       * </pre>
+       */
+      public boolean hasPosId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 posId = 2;</code>
+       *
+       * <pre>
+       *装备位置
+       * </pre>
+       */
+      public int getPosId() {
+        return posId_;
+      }
+      /**
+       * <code>required int32 posId = 2;</code>
+       *
+       * <pre>
+       *装备位置
+       * </pre>
+       */
+      public Builder setPosId(int value) {
+        bitField0_ |= 0x00000002;
+        posId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 posId = 2;</code>
+       *
+       * <pre>
+       *装备位置
+       * </pre>
+       */
+      public Builder clearPosId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        posId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PWearEquip)
+    }
+
+    static {
+      defaultInstance = new PWearEquip(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PWearEquip)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_PItem_descriptor;
   private static
@@ -2929,6 +4213,16 @@ public final class ItemProBuf {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_PSellGroup_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PComposeItem_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PComposeItem_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PWearEquip_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PWearEquip_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2938,14 +4232,17 @@ public final class ItemProBuf {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nitem.proto\"7\n\005PItem\022\016\n\006itemId\030\001 \002(\005\022\017\n" +
-      "\007itemNum\030\002 \002(\005\022\r\n\005npcId\030\003 \002(\003\"Y\n\016PItemCh" +
-      "angeLog\022\016\n\006itemId\030\001 \002(\005\022\022\n\nitemAddNum\030\002 " +
-      "\002(\005\022\024\n\014itemFinalNum\030\003 \002(\005\022\r\n\005npcId\030\004 \002(\003" +
-      "\"/\n\007PUpItem\022$\n\013itemLogList\030\001 \003(\0132\017.PItem" +
-      "ChangeLog\"1\n\nPSellGroup\022\016\n\006itemId\030\001 \003(\005\022" +
-      "\023\n\013itemSellNum\030\002 \003(\005B.\n com.doteyplay.ga" +
-      "me.message.protoB\nItemProBuf"
+      "\n\nitem.proto\"F\n\005PItem\022\016\n\006itemId\030\001 \002(\005\022\017\n" +
+      "\007itemNum\030\002 \002(\005\022\r\n\005npcId\030\003 \002(\003\022\r\n\005posId\030\004" +
+      " \001(\005\"h\n\016PItemChangeLog\022\016\n\006itemId\030\001 \002(\005\022\022" +
+      "\n\nitemAddNum\030\002 \002(\005\022\024\n\014itemFinalNum\030\003 \002(\005" +
+      "\022\r\n\005npcId\030\004 \002(\003\022\r\n\005posId\030\005 \001(\005\"/\n\007PUpIte" +
+      "m\022$\n\013itemLogList\030\001 \003(\0132\017.PItemChangeLog\"" +
+      "1\n\nPSellGroup\022\016\n\006itemId\030\001 \003(\005\022\023\n\013itemSel" +
+      "lNum\030\002 \003(\005\"/\n\014PComposeItem\022\016\n\006itemId\030\001 \002" +
+      "(\005\022\017\n\007itemNum\030\002 \002(\005\"+\n\nPWearEquip\022\016\n\006her" +
+      "oId\030\001 \002(\003\022\r\n\005posId\030\002 \002(\005B.\n com.doteypla",
+      "y.game.message.protoB\nItemProBuf"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2957,13 +4254,13 @@ public final class ItemProBuf {
           internal_static_PItem_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PItem_descriptor,
-              new java.lang.String[] { "ItemId", "ItemNum", "NpcId", });
+              new java.lang.String[] { "ItemId", "ItemNum", "NpcId", "PosId", });
           internal_static_PItemChangeLog_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_PItemChangeLog_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PItemChangeLog_descriptor,
-              new java.lang.String[] { "ItemId", "ItemAddNum", "ItemFinalNum", "NpcId", });
+              new java.lang.String[] { "ItemId", "ItemAddNum", "ItemFinalNum", "NpcId", "PosId", });
           internal_static_PUpItem_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_PUpItem_fieldAccessorTable = new
@@ -2976,6 +4273,18 @@ public final class ItemProBuf {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PSellGroup_descriptor,
               new java.lang.String[] { "ItemId", "ItemSellNum", });
+          internal_static_PComposeItem_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_PComposeItem_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PComposeItem_descriptor,
+              new java.lang.String[] { "ItemId", "ItemNum", });
+          internal_static_PWearEquip_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_PWearEquip_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PWearEquip_descriptor,
+              new java.lang.String[] { "HeroId", "PosId", });
           return null;
         }
       };

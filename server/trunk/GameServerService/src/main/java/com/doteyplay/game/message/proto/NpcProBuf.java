@@ -189,6 +189,51 @@ public final class NpcProBuf {
      * </pre>
      */
     int getExp();
+
+    // repeated .PItem equipList = 10;
+    /**
+     * <code>repeated .PItem equipList = 10;</code>
+     *
+     * <pre>
+     *装备列表
+     * </pre>
+     */
+    java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> 
+        getEquipListList();
+    /**
+     * <code>repeated .PItem equipList = 10;</code>
+     *
+     * <pre>
+     *装备列表
+     * </pre>
+     */
+    com.doteyplay.game.message.proto.ItemProBuf.PItem getEquipList(int index);
+    /**
+     * <code>repeated .PItem equipList = 10;</code>
+     *
+     * <pre>
+     *装备列表
+     * </pre>
+     */
+    int getEquipListCount();
+    /**
+     * <code>repeated .PItem equipList = 10;</code>
+     *
+     * <pre>
+     *装备列表
+     * </pre>
+     */
+    java.util.List<? extends com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
+        getEquipListOrBuilderList();
+    /**
+     * <code>repeated .PItem equipList = 10;</code>
+     *
+     * <pre>
+     *装备列表
+     * </pre>
+     */
+    com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder getEquipListOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code PNpc}
@@ -302,6 +347,14 @@ public final class NpcProBuf {
               exp_ = input.readInt32();
               break;
             }
+            case 82: {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                equipList_ = new java.util.ArrayList<com.doteyplay.game.message.proto.ItemProBuf.PItem>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              equipList_.add(input.readMessage(com.doteyplay.game.message.proto.ItemProBuf.PItem.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -312,6 +365,9 @@ public final class NpcProBuf {
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           skillIdList_ = java.util.Collections.unmodifiableList(skillIdList_);
+        }
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+          equipList_ = java.util.Collections.unmodifiableList(equipList_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -603,6 +659,62 @@ public final class NpcProBuf {
       return exp_;
     }
 
+    // repeated .PItem equipList = 10;
+    public static final int EQUIPLIST_FIELD_NUMBER = 10;
+    private java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> equipList_;
+    /**
+     * <code>repeated .PItem equipList = 10;</code>
+     *
+     * <pre>
+     *装备列表
+     * </pre>
+     */
+    public java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> getEquipListList() {
+      return equipList_;
+    }
+    /**
+     * <code>repeated .PItem equipList = 10;</code>
+     *
+     * <pre>
+     *装备列表
+     * </pre>
+     */
+    public java.util.List<? extends com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
+        getEquipListOrBuilderList() {
+      return equipList_;
+    }
+    /**
+     * <code>repeated .PItem equipList = 10;</code>
+     *
+     * <pre>
+     *装备列表
+     * </pre>
+     */
+    public int getEquipListCount() {
+      return equipList_.size();
+    }
+    /**
+     * <code>repeated .PItem equipList = 10;</code>
+     *
+     * <pre>
+     *装备列表
+     * </pre>
+     */
+    public com.doteyplay.game.message.proto.ItemProBuf.PItem getEquipList(int index) {
+      return equipList_.get(index);
+    }
+    /**
+     * <code>repeated .PItem equipList = 10;</code>
+     *
+     * <pre>
+     *装备列表
+     * </pre>
+     */
+    public com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder getEquipListOrBuilder(
+        int index) {
+      return equipList_.get(index);
+    }
+
     private void initFields() {
       roleId_ = 0L;
       npcName_ = "";
@@ -613,6 +725,7 @@ public final class NpcProBuf {
       npcId_ = 0L;
       spriteId_ = 0;
       exp_ = 0;
+      equipList_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -651,6 +764,12 @@ public final class NpcProBuf {
         memoizedIsInitialized = 0;
         return false;
       }
+      for (int i = 0; i < getEquipListCount(); i++) {
+        if (!getEquipList(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -684,6 +803,9 @@ public final class NpcProBuf {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt32(9, exp_);
+      }
+      for (int i = 0; i < equipList_.size(); i++) {
+        output.writeMessage(10, equipList_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -734,6 +856,10 @@ public final class NpcProBuf {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(9, exp_);
+      }
+      for (int i = 0; i < equipList_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, equipList_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -843,6 +969,7 @@ public final class NpcProBuf {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getEquipListFieldBuilder();
         }
       }
       private static Builder create() {
@@ -869,6 +996,12 @@ public final class NpcProBuf {
         bitField0_ = (bitField0_ & ~0x00000080);
         exp_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
+        if (equipListBuilder_ == null) {
+          equipList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+        } else {
+          equipListBuilder_.clear();
+        }
         return this;
       }
 
@@ -934,6 +1067,15 @@ public final class NpcProBuf {
           to_bitField0_ |= 0x00000080;
         }
         result.exp_ = exp_;
+        if (equipListBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+            equipList_ = java.util.Collections.unmodifiableList(equipList_);
+            bitField0_ = (bitField0_ & ~0x00000200);
+          }
+          result.equipList_ = equipList_;
+        } else {
+          result.equipList_ = equipListBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -986,6 +1128,32 @@ public final class NpcProBuf {
         if (other.hasExp()) {
           setExp(other.getExp());
         }
+        if (equipListBuilder_ == null) {
+          if (!other.equipList_.isEmpty()) {
+            if (equipList_.isEmpty()) {
+              equipList_ = other.equipList_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+              ensureEquipListIsMutable();
+              equipList_.addAll(other.equipList_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.equipList_.isEmpty()) {
+            if (equipListBuilder_.isEmpty()) {
+              equipListBuilder_.dispose();
+              equipListBuilder_ = null;
+              equipList_ = other.equipList_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+              equipListBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getEquipListFieldBuilder() : null;
+            } else {
+              equipListBuilder_.addAllMessages(other.equipList_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1022,6 +1190,12 @@ public final class NpcProBuf {
         if (!hasExp()) {
           
           return false;
+        }
+        for (int i = 0; i < getEquipListCount(); i++) {
+          if (!getEquipList(i).isInitialized()) {
+            
+            return false;
+          }
         }
         return true;
       }
@@ -1578,6 +1752,318 @@ public final class NpcProBuf {
         exp_ = 0;
         onChanged();
         return this;
+      }
+
+      // repeated .PItem equipList = 10;
+      private java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> equipList_ =
+        java.util.Collections.emptyList();
+      private void ensureEquipListIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          equipList_ = new java.util.ArrayList<com.doteyplay.game.message.proto.ItemProBuf.PItem>(equipList_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.doteyplay.game.message.proto.ItemProBuf.PItem, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder, com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> equipListBuilder_;
+
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem> getEquipListList() {
+        if (equipListBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(equipList_);
+        } else {
+          return equipListBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public int getEquipListCount() {
+        if (equipListBuilder_ == null) {
+          return equipList_.size();
+        } else {
+          return equipListBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.ItemProBuf.PItem getEquipList(int index) {
+        if (equipListBuilder_ == null) {
+          return equipList_.get(index);
+        } else {
+          return equipListBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public Builder setEquipList(
+          int index, com.doteyplay.game.message.proto.ItemProBuf.PItem value) {
+        if (equipListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureEquipListIsMutable();
+          equipList_.set(index, value);
+          onChanged();
+        } else {
+          equipListBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public Builder setEquipList(
+          int index, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder builderForValue) {
+        if (equipListBuilder_ == null) {
+          ensureEquipListIsMutable();
+          equipList_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          equipListBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public Builder addEquipList(com.doteyplay.game.message.proto.ItemProBuf.PItem value) {
+        if (equipListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureEquipListIsMutable();
+          equipList_.add(value);
+          onChanged();
+        } else {
+          equipListBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public Builder addEquipList(
+          int index, com.doteyplay.game.message.proto.ItemProBuf.PItem value) {
+        if (equipListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureEquipListIsMutable();
+          equipList_.add(index, value);
+          onChanged();
+        } else {
+          equipListBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public Builder addEquipList(
+          com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder builderForValue) {
+        if (equipListBuilder_ == null) {
+          ensureEquipListIsMutable();
+          equipList_.add(builderForValue.build());
+          onChanged();
+        } else {
+          equipListBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public Builder addEquipList(
+          int index, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder builderForValue) {
+        if (equipListBuilder_ == null) {
+          ensureEquipListIsMutable();
+          equipList_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          equipListBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public Builder addAllEquipList(
+          java.lang.Iterable<? extends com.doteyplay.game.message.proto.ItemProBuf.PItem> values) {
+        if (equipListBuilder_ == null) {
+          ensureEquipListIsMutable();
+          super.addAll(values, equipList_);
+          onChanged();
+        } else {
+          equipListBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public Builder clearEquipList() {
+        if (equipListBuilder_ == null) {
+          equipList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+          onChanged();
+        } else {
+          equipListBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public Builder removeEquipList(int index) {
+        if (equipListBuilder_ == null) {
+          ensureEquipListIsMutable();
+          equipList_.remove(index);
+          onChanged();
+        } else {
+          equipListBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder getEquipListBuilder(
+          int index) {
+        return getEquipListFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder getEquipListOrBuilder(
+          int index) {
+        if (equipListBuilder_ == null) {
+          return equipList_.get(index);  } else {
+          return equipListBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public java.util.List<? extends com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
+           getEquipListOrBuilderList() {
+        if (equipListBuilder_ != null) {
+          return equipListBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(equipList_);
+        }
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder addEquipListBuilder() {
+        return getEquipListFieldBuilder().addBuilder(
+            com.doteyplay.game.message.proto.ItemProBuf.PItem.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder addEquipListBuilder(
+          int index) {
+        return getEquipListFieldBuilder().addBuilder(
+            index, com.doteyplay.game.message.proto.ItemProBuf.PItem.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PItem equipList = 10;</code>
+       *
+       * <pre>
+       *装备列表
+       * </pre>
+       */
+      public java.util.List<com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder> 
+           getEquipListBuilderList() {
+        return getEquipListFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.doteyplay.game.message.proto.ItemProBuf.PItem, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder, com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder> 
+          getEquipListFieldBuilder() {
+        if (equipListBuilder_ == null) {
+          equipListBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.doteyplay.game.message.proto.ItemProBuf.PItem, com.doteyplay.game.message.proto.ItemProBuf.PItem.Builder, com.doteyplay.game.message.proto.ItemProBuf.PItemOrBuilder>(
+                  equipList_,
+                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  getParentForChildren(),
+                  isClean());
+          equipList_ = null;
+        }
+        return equipListBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:PNpc)
@@ -2420,14 +2906,14 @@ public final class NpcProBuf {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tnpc.proto\032\nitem.proto\"\230\001\n\004PNpc\022\016\n\006role" +
+      "\n\tnpc.proto\032\nitem.proto\"\263\001\n\004PNpc\022\016\n\006role" +
       "Id\030\001 \002(\003\022\017\n\007npcName\030\002 \002(\t\022\r\n\005level\030\003 \002(\005" +
       "\022\023\n\013skillIdList\030\004 \003(\005\022\017\n\007quality\030\005 \002(\005\022\014" +
       "\n\004star\030\006 \002(\005\022\r\n\005npcId\030\007 \002(\003\022\020\n\010spriteId\030" +
-      "\010 \002(\005\022\013\n\003exp\030\t \002(\005\";\n\017PAddOrRemoveNpc\022\023\n" +
-      "\004npcs\030\001 \003(\0132\005.PNpc\022\023\n\013addOrRemove\030\002 \002(\010B" +
-      "-\n com.doteyplay.game.message.protoB\tNpc" +
-      "ProBuf"
+      "\010 \002(\005\022\013\n\003exp\030\t \002(\005\022\031\n\tequipList\030\n \003(\0132\006." +
+      "PItem\";\n\017PAddOrRemoveNpc\022\023\n\004npcs\030\001 \003(\0132\005" +
+      ".PNpc\022\023\n\013addOrRemove\030\002 \002(\010B-\n com.doteyp" +
+      "lay.game.message.protoB\tNpcProBuf"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2439,7 +2925,7 @@ public final class NpcProBuf {
           internal_static_PNpc_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PNpc_descriptor,
-              new java.lang.String[] { "RoleId", "NpcName", "Level", "SkillIdList", "Quality", "Star", "NpcId", "SpriteId", "Exp", });
+              new java.lang.String[] { "RoleId", "NpcName", "Level", "SkillIdList", "Quality", "Star", "NpcId", "SpriteId", "Exp", "EquipList", });
           internal_static_PAddOrRemoveNpc_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_PAddOrRemoveNpc_fieldAccessorTable = new
