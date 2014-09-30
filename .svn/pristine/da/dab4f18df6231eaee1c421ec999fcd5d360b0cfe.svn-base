@@ -1,0 +1,103 @@
+package com.doteyplay.luna.client.container;
+
+import org.apache.mina.core.service.IoHandlerAdapter;
+import org.apache.mina.core.session.IoSession;
+import org.apache.mina.filter.codec.ProtocolCodecFilter;
+import org.apache.mina.transport.socket.SocketConnector;
+import org.apache.mina.transport.socket.nio.NioSocketConnector;
+
+import com.doteyplay.luna.client.ConnectionInfo;
+import com.doteyplay.luna.common.message.DecoderMessage;
+import com.doteyplay.luna.common.message.EncoderMessage;
+import com.doteyplay.luna.common.protocol.codec.DefaultProtocolCodecFactory;
+
+public class SynchronicConnectionPool extends IoHandlerAdapter
+{
+
+	private ConnectionInfo connectionInfo;
+	private SocketConnector connector;
+	private SynchronicConnection connection;
+
+	public SynchronicConnectionPool(ConnectionInfo coninfo)
+	{
+		connectionInfo = coninfo;
+		connector = new NioSocketConnector();
+		connector.getFilterChain().addLast("codec",
+				new ProtocolCodecFilter(new DefaultProtocolCodecFactory()));
+		connector.getSessionConfig().setReceiveBufferSize(8192);
+		connector.setHandler(this);
+		
+		newBaseConnection();
+	}
+
+	public boolean relocate(ConnectionInfo newInfo)
+	{
+		if (newInfo == null)
+			return false;
+
+		connectionInfo = newInfo;
+		try
+		{
+			newBaseConnection();
+			return true;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	private void newBaseConnection()
+	{
+		SynchronicConnection base = new SynchronicConnection(connectionInfo);
+		base.connector = connector;
+		base.connect();
+		this.connection = base;
+	}
+
+	public DecoderMessage synInvoke(EncoderMessage obj)
+	{
+		try
+		{
+			DecoderMessage returnObj = connection.synInvoke(obj);
+			return returnObj;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void asynInvoke(EncoderMessage obj)
+	{
+		try
+		{
+			connection.asynInvoke(obj);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public void sessionOpened(IoSession session) throws Exception
+	{
+		System.out.println("连接建立！");
+	}
+
+	public void sessionClosed(IoSession session) throws Exception
+	{
+		System.out.println("连接关闭！");
+	}
+
+	public void messageReceived(IoSession session, Object message)
+			throws Exception
+	{
+		connection.release((DecoderMessage) message);
+	}
+
+	public void exceptionCaught(IoSession session, Throwable cause)
+			throws Exception
+	{
+		cause.printStackTrace();
+	}
+}

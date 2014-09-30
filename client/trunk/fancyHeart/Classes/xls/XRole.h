@@ -27,6 +27,7 @@ public:
 	std::string getIcon();
 	std::string getPotrait();
 	int getCommonSkill();
+	int getSkill0();
 	int getSkill1();
 	int getSkill2();
 	int getSkill3();

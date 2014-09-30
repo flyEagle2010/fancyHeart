@@ -13,7 +13,7 @@
     "UI0.plist"
   ],
   "texturesPng": [],
-  "version": "1.4.0.1",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -80,7 +80,7 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/image.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -160,7 +160,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/button.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/button.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -250,7 +250,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/button.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/button.png",
             "plistFile": "",
             "resourceType": 2
           },

@@ -23,7 +23,7 @@ public:
 	virtual void onExit();
 	virtual bool init();
     
-    virtual void visit(Renderer *renderer,const Mat4 &transform,bool transformUpdated) override;
+    virtual void visit(Renderer *renderer,const Mat4 &transform,bool transformUpdated);
     void onDraw();
 private:
     CustomCommand command;

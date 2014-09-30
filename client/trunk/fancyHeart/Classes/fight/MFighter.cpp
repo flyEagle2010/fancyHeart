@@ -7,7 +7,7 @@
 //
 
 #include "MFighter.h"
-#include "FightScene.h"
+#include "BattleScene.h"
 MFighter* MFighter::create(FData* fd)
 {
     MFighter* pRet=new MFighter();
@@ -30,13 +30,19 @@ bool MFighter::init(FData* fd)
     this->initSkill();
     return true;
 }
+
 void MFighter::initSkill()
 {
     //std::vector<int>  allSkills={15201,15301,15401,15501,15601,15701,15801,15901,16001,16101};
     //std::vector<int>  allSkills={15701,15801,15901,16001,16101};
-    XRole* xr=XRole::record(Value(data->bd.xid));
-    this->skills.pushBack(Skill::create(xr->getCommonSkill()));
-    this->skills.pushBack(Skill::create(xr->getSkill1()));
+//    XRole* xr=XRole::record(Value(data->bd.xid));
+//    this->skills.pushBack(Skill::create(xr->getCommonSkill()));
+//    this->skills.pushBack(Skill::create(xr->getSkill1()));
+  
+    for(int skillID : this->data->bd.skills){
+        this->skills.pushBack(Skill::create(skillID));
+    }
+    
 }
 
 void MFighter::start()
@@ -281,10 +287,10 @@ PHit MFighter::hit(MFighter *mf,Skill* skill)
 }
 
 //掉血（加血）
-void MFighter::fallHp(int num)
-{
-    this->data->hp-=num;
-}
+//void MFighter::fallHp(int num)
+//{
+//    this->data->hp-=num;
+//}
 
 void MFighter::clearBuff(Buff* buff)
 {

@@ -10,18 +10,10 @@
   "designHeight": 640,
   "designWidth": 1136,
   "textures": [
-    "formation/star.plist",
-    "formation/frame.plist",
-    "formation/star2.plist",
     "UI0.plist"
   ],
-  "texturesPng": [
-    "star.png",
-    "frame.png",
-    "star2.png",
-    "UI0.png"
-  ],
-  "version": "1.4.0.1",
+  "texturesPng": [],
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -740,7 +732,7 @@
               "capInsetsWidth": 1,
               "capInsetsX": 0,
               "capInsetsY": 0,
-              "clipAble": true,
+              "clipAble": false,
               "colorType": 0,
               "editorClipAble": false,
               "vectorX": 0,
@@ -1350,7 +1342,7 @@
                   "capInsetsY": 0,
                   "fileName": null,
                   "fileNameData": {
-                    "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/image.png",
+                    "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
                     "plistFile": "",
                     "resourceType": 2
                   },
@@ -1958,7 +1950,7 @@
                   "capInsetsY": 0,
                   "fileName": null,
                   "fileNameData": {
-                    "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/image.png",
+                    "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
                     "plistFile": "",
                     "resourceType": 2
                   },
@@ -2566,7 +2558,7 @@
                   "capInsetsY": 0,
                   "fileName": null,
                   "fileNameData": {
-                    "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/image.png",
+                    "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
                     "plistFile": "",
                     "resourceType": 2
                   },
@@ -3174,7 +3166,7 @@
                   "capInsetsY": 0,
                   "fileName": null,
                   "fileNameData": {
-                    "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/image.png",
+                    "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
                     "plistFile": "",
                     "resourceType": 2
                   },
@@ -3782,7 +3774,7 @@
                   "capInsetsY": 0,
                   "fileName": null,
                   "fileNameData": {
-                    "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/image.png",
+                    "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
                     "plistFile": "",
                     "resourceType": 2
                   },
@@ -4012,7 +4004,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 96,
+          "height": 63,
           "ignoreSize": true,
           "layoutParameter": {
             "classname": null,
@@ -4033,8 +4025,8 @@
             "type": 2
           },
           "opacity": 255,
-          "positionPercentX": 0.943662,
-          "positionPercentY": 0.09375,
+          "positionPercentX": 0.9577465,
+          "positionPercentY": 0.119531251,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -4046,9 +4038,9 @@
           "touchAble": true,
           "useMergedTexture": false,
           "visible": true,
-          "width": 96,
-          "x": 1072,
-          "y": 60,
+          "width": 64,
+          "x": 1088,
+          "y": 76,
           "capInsetsHeight": 1,
           "capInsetsWidth": 1,
           "capInsetsX": 0,
@@ -4075,8 +4067,8 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 96,
-          "scale9Width": 96,
+          "scale9Height": 63,
+          "scale9Width": 64,
           "text": "返回",
           "textColorB": 255,
           "textColorG": 255,
@@ -4466,8 +4458,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.335,
-              "sizePercentY": 0.33,
+              "sizePercentX": 0.445,
+              "sizePercentY": 0.445,
               "sizeType": 0,
               "tag": 13086,
               "touchAble": true,
@@ -4556,8 +4548,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.25,
-              "sizePercentY": 0.245,
+              "sizePercentX": 0.34,
+              "sizePercentY": 0.34,
               "sizeType": 0,
               "tag": 13087,
               "touchAble": true,
@@ -4646,8 +4638,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.25,
-              "sizePercentY": 0.245,
+              "sizePercentX": 0.34,
+              "sizePercentY": 0.34,
               "sizeType": 0,
               "tag": 13089,
               "touchAble": true,
@@ -4736,8 +4728,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.25,
-              "sizePercentY": 0.245,
+              "sizePercentX": 0.34,
+              "sizePercentY": 0.34,
               "sizeType": 0,
               "tag": 13091,
               "touchAble": true,

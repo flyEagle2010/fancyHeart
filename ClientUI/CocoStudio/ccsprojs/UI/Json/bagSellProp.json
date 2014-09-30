@@ -10,14 +10,10 @@
   "designHeight": 640,
   "designWidth": 1136,
   "textures": [
-    "UI0.plist",
-    "UI1.plist"
+    "UI0.plist"
   ],
-  "texturesPng": [
-    "UI0.png",
-    "UI1.png"
-  ],
-  "version": "1.4.0.1",
+  "texturesPng": [],
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,

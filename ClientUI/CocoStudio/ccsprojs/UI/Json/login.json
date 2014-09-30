@@ -13,7 +13,7 @@
     "UI0.plist"
   ],
   "texturesPng": [],
-  "version": "1.4.0.1",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -237,7 +237,7 @@
           "capInsetsWidth": 1,
           "capInsetsX": 0,
           "capInsetsY": 0,
-          "clipAble": true,
+          "clipAble": false,
           "colorType": 1,
           "direction": 1,
           "editorClipAble": false,
@@ -306,13 +306,13 @@
               "fontType": 0,
               "normal": null,
               "normalData": {
-                "path": "battle_name/fight_edit_1.png",
+                "path": "login/fight_edit_1.png",
                 "plistFile": "",
                 "resourceType": 0
               },
               "pressed": null,
               "pressedData": {
-                "path": "battle_name/fight_edit_2.png",
+                "path": "login/fight_edit_2.png",
                 "plistFile": "",
                 "resourceType": 0
               },
@@ -578,7 +578,7 @@
           "tag": 11202,
           "touchAble": false,
           "useMergedTexture": false,
-          "visible": false,
+          "visible": true,
           "width": 575,
           "x": 568,
           "y": 320,

@@ -13,7 +13,7 @@
     "UI0.plist"
   ],
   "texturesPng": [],
-  "version": "1.4.0.1",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -37,7 +37,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 640,
+          "height": 80,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -54,7 +54,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 1136,
+          "width": 80,
           "x": 139,
           "y": 215,
           "capInsetsHeight": 1,
@@ -63,13 +63,13 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "home_bg.png",
-            "plistFile": "srcImg/home.plist",
-            "resourceType": 1
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
+            "plistFile": "",
+            "resourceType": 2
           },
           "scale9Enable": false,
-          "scale9Height": 640,
-          "scale9Width": 1136
+          "scale9Height": 80,
+          "scale9Width": 80
         }
       }
     ],

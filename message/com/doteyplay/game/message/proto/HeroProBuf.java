@@ -1784,6 +1784,668 @@ public final class HeroProBuf {
     // @@protoc_insertion_point(class_scope:PCallHero)
   }
 
+  public interface PGoldQualityUpgradeOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 result = 1;
+    /**
+     * <code>required int32 result = 1;</code>
+     *
+     * <pre>
+     *是否成功结果
+     * </pre>
+     */
+    boolean hasResult();
+    /**
+     * <code>required int32 result = 1;</code>
+     *
+     * <pre>
+     *是否成功结果
+     * </pre>
+     */
+    int getResult();
+
+    // optional int32 changeFlag = 2;
+    /**
+     * <code>optional int32 changeFlag = 2;</code>
+     *
+     * <pre>
+     *变异结果标示 0升到金色品质 1获得随机技能 2随机技能升级
+     * </pre>
+     */
+    boolean hasChangeFlag();
+    /**
+     * <code>optional int32 changeFlag = 2;</code>
+     *
+     * <pre>
+     *变异结果标示 0升到金色品质 1获得随机技能 2随机技能升级
+     * </pre>
+     */
+    int getChangeFlag();
+
+    // optional int32 skillId = 3;
+    /**
+     * <code>optional int32 skillId = 3;</code>
+     *
+     * <pre>
+     *技能id参数
+     * </pre>
+     */
+    boolean hasSkillId();
+    /**
+     * <code>optional int32 skillId = 3;</code>
+     *
+     * <pre>
+     *技能id参数
+     * </pre>
+     */
+    int getSkillId();
+  }
+  /**
+   * Protobuf type {@code PGoldQualityUpgrade}
+   */
+  public static final class PGoldQualityUpgrade extends
+      com.google.protobuf.GeneratedMessage
+      implements PGoldQualityUpgradeOrBuilder {
+    // Use PGoldQualityUpgrade.newBuilder() to construct.
+    private PGoldQualityUpgrade(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PGoldQualityUpgrade(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PGoldQualityUpgrade defaultInstance;
+    public static PGoldQualityUpgrade getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PGoldQualityUpgrade getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PGoldQualityUpgrade(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              result_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              changeFlag_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              skillId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.HeroProBuf.internal_static_PGoldQualityUpgrade_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.HeroProBuf.internal_static_PGoldQualityUpgrade_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade.class, com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PGoldQualityUpgrade> PARSER =
+        new com.google.protobuf.AbstractParser<PGoldQualityUpgrade>() {
+      public PGoldQualityUpgrade parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PGoldQualityUpgrade(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PGoldQualityUpgrade> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 result = 1;
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private int result_;
+    /**
+     * <code>required int32 result = 1;</code>
+     *
+     * <pre>
+     *是否成功结果
+     * </pre>
+     */
+    public boolean hasResult() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 result = 1;</code>
+     *
+     * <pre>
+     *是否成功结果
+     * </pre>
+     */
+    public int getResult() {
+      return result_;
+    }
+
+    // optional int32 changeFlag = 2;
+    public static final int CHANGEFLAG_FIELD_NUMBER = 2;
+    private int changeFlag_;
+    /**
+     * <code>optional int32 changeFlag = 2;</code>
+     *
+     * <pre>
+     *变异结果标示 0升到金色品质 1获得随机技能 2随机技能升级
+     * </pre>
+     */
+    public boolean hasChangeFlag() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 changeFlag = 2;</code>
+     *
+     * <pre>
+     *变异结果标示 0升到金色品质 1获得随机技能 2随机技能升级
+     * </pre>
+     */
+    public int getChangeFlag() {
+      return changeFlag_;
+    }
+
+    // optional int32 skillId = 3;
+    public static final int SKILLID_FIELD_NUMBER = 3;
+    private int skillId_;
+    /**
+     * <code>optional int32 skillId = 3;</code>
+     *
+     * <pre>
+     *技能id参数
+     * </pre>
+     */
+    public boolean hasSkillId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 skillId = 3;</code>
+     *
+     * <pre>
+     *技能id参数
+     * </pre>
+     */
+    public int getSkillId() {
+      return skillId_;
+    }
+
+    private void initFields() {
+      result_ = 0;
+      changeFlag_ = 0;
+      skillId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasResult()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, result_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, changeFlag_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, skillId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, result_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, changeFlag_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, skillId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PGoldQualityUpgrade}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgradeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.HeroProBuf.internal_static_PGoldQualityUpgrade_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.HeroProBuf.internal_static_PGoldQualityUpgrade_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade.class, com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        result_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        changeFlag_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        skillId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.HeroProBuf.internal_static_PGoldQualityUpgrade_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade build() {
+        com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade buildPartial() {
+        com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade result = new com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.result_ = result_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.changeFlag_ = changeFlag_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.skillId_ = skillId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade) {
+          return mergeFrom((com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade other) {
+        if (other == com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade.getDefaultInstance()) return this;
+        if (other.hasResult()) {
+          setResult(other.getResult());
+        }
+        if (other.hasChangeFlag()) {
+          setChangeFlag(other.getChangeFlag());
+        }
+        if (other.hasSkillId()) {
+          setSkillId(other.getSkillId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasResult()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.HeroProBuf.PGoldQualityUpgrade) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 result = 1;
+      private int result_ ;
+      /**
+       * <code>required int32 result = 1;</code>
+       *
+       * <pre>
+       *是否成功结果
+       * </pre>
+       */
+      public boolean hasResult() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 result = 1;</code>
+       *
+       * <pre>
+       *是否成功结果
+       * </pre>
+       */
+      public int getResult() {
+        return result_;
+      }
+      /**
+       * <code>required int32 result = 1;</code>
+       *
+       * <pre>
+       *是否成功结果
+       * </pre>
+       */
+      public Builder setResult(int value) {
+        bitField0_ |= 0x00000001;
+        result_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 result = 1;</code>
+       *
+       * <pre>
+       *是否成功结果
+       * </pre>
+       */
+      public Builder clearResult() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        result_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 changeFlag = 2;
+      private int changeFlag_ ;
+      /**
+       * <code>optional int32 changeFlag = 2;</code>
+       *
+       * <pre>
+       *变异结果标示 0升到金色品质 1获得随机技能 2随机技能升级
+       * </pre>
+       */
+      public boolean hasChangeFlag() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 changeFlag = 2;</code>
+       *
+       * <pre>
+       *变异结果标示 0升到金色品质 1获得随机技能 2随机技能升级
+       * </pre>
+       */
+      public int getChangeFlag() {
+        return changeFlag_;
+      }
+      /**
+       * <code>optional int32 changeFlag = 2;</code>
+       *
+       * <pre>
+       *变异结果标示 0升到金色品质 1获得随机技能 2随机技能升级
+       * </pre>
+       */
+      public Builder setChangeFlag(int value) {
+        bitField0_ |= 0x00000002;
+        changeFlag_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 changeFlag = 2;</code>
+       *
+       * <pre>
+       *变异结果标示 0升到金色品质 1获得随机技能 2随机技能升级
+       * </pre>
+       */
+      public Builder clearChangeFlag() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        changeFlag_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 skillId = 3;
+      private int skillId_ ;
+      /**
+       * <code>optional int32 skillId = 3;</code>
+       *
+       * <pre>
+       *技能id参数
+       * </pre>
+       */
+      public boolean hasSkillId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 skillId = 3;</code>
+       *
+       * <pre>
+       *技能id参数
+       * </pre>
+       */
+      public int getSkillId() {
+        return skillId_;
+      }
+      /**
+       * <code>optional int32 skillId = 3;</code>
+       *
+       * <pre>
+       *技能id参数
+       * </pre>
+       */
+      public Builder setSkillId(int value) {
+        bitField0_ |= 0x00000004;
+        skillId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 skillId = 3;</code>
+       *
+       * <pre>
+       *技能id参数
+       * </pre>
+       */
+      public Builder clearSkillId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        skillId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PGoldQualityUpgrade)
+    }
+
+    static {
+      defaultInstance = new PGoldQualityUpgrade(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PGoldQualityUpgrade)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_PAscend_descriptor;
   private static
@@ -1804,6 +2466,11 @@ public final class HeroProBuf {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_PCallHero_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PGoldQualityUpgrade_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PGoldQualityUpgrade_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1816,8 +2483,10 @@ public final class HeroProBuf {
       "\n\nhero.proto\"\031\n\007PAscend\022\016\n\006heroId\030\001 \002(\003\"" +
       "\031\n\007PEvolve\022\016\n\006heroId\030\001 \002(\003\"\033\n\tPMutation\022" +
       "\016\n\006heroId\030\001 \002(\003\"\033\n\tPCallHero\022\016\n\006heroId\030\001" +
-      " \002(\005B.\n com.doteyplay.game.message.proto" +
-      "B\nHeroProBuf"
+      " \002(\005\"J\n\023PGoldQualityUpgrade\022\016\n\006result\030\001 " +
+      "\002(\005\022\022\n\nchangeFlag\030\002 \001(\005\022\017\n\007skillId\030\003 \001(\005" +
+      "B.\n com.doteyplay.game.message.protoB\nHe" +
+      "roProBuf"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1848,6 +2517,12 @@ public final class HeroProBuf {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PCallHero_descriptor,
               new java.lang.String[] { "HeroId", });
+          internal_static_PGoldQualityUpgrade_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_PGoldQualityUpgrade_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PGoldQualityUpgrade_descriptor,
+              new java.lang.String[] { "Result", "ChangeFlag", "SkillId", });
           return null;
         }
       };

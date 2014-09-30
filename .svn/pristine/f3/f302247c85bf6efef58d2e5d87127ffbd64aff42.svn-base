@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B1B76EAD-335F-463B-89C7-93D2708A360F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>fancyHeart</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>92b19e3d-607e-fa44-80d3-643f45140bef</key>
+		<string>http://ql.qin@192.168.200.15:8080/svn/project2</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>client/trunk/fancyHeart/proj.ios_mac/fancyHeart.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>92b19e3d-607e-fa44-80d3-643f45140bef</key>
+		<string>../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>92b19e3d-607e-fa44-80d3-643f45140bef</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>92b19e3d-607e-fa44-80d3-643f45140bef</string>
+			<key>IDESourceControlWCCName</key>
+			<string>fancyHeart</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>92b19e3d-607e-fa44-80d3-643f45140bef</string>
+			<key>IDESourceControlWCCName</key>
+			<string>fancyHeart</string>
+		</dict>
+	</array>
+</dict>
+</plist>

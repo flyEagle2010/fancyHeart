@@ -23,11 +23,13 @@ Skill* Skill::create(int skillID)
 
 bool Skill::init(int skillID)
 {
-//    this->attacker=attacker;
     this->skillID=skillID;
     this->isReady=false;
     //被动技能走CD
-    Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::coldDown),this,XSkill::record(Value(skillID))->getTriggerParam()/10000.0,false);
+    XSkill* xskill=XSkill::record(Value(skillID));
+    if(xskill->getType()==1){
+        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::coldDown),this,xskill->getTriggerParam()/10000.0,false);
+    }
     return true;
 }
 
@@ -45,245 +47,6 @@ bool Skill::getIsReady()
 {
     return this->isReady;
 }
-
-void Skill::start()
-{
-    this->setIsReady(false);
-    //施法时间 1舜发 2吟唱（引导） 3蓄力
-    XSkill* xSkill=XSkill::record(Value(skillID));
-    //蓄力
-//    if(xSkill->getBuildTime()>0)
-//    {
-//        //进入蓄力阶段
-//        //定时触发攻击（中间操作可能直接攻击）
-//        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::cast), this, 0,0,3, false);
-//        this->attacker->buildup();
-//        return;
-//    }
-    /*
-    //引导
-    if(xSkill->getLeadNum()>0)
-    {
-        //引导
-        //定时触发正式攻击
-        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::cast), this, xSkill->getLeadGap()/10000.0,0,0, false);
-        this->attacker->spell();
-        return;
-    }
-    //射击
-    if(xSkill->getRangeType()==4 && xSkill->getRangeParam1()>0){
-        this->attacker->attack(2);
-        this->targets=this->selectTarget();
-        this->attacker->targets=this->targets;
-        return;
-    }
-    //舜发
-    if(xSkill->getLeadNum()==0)
-    {
-        this->attacker->attack(1);
-        this->attacker->targets=this->selectTarget();
-        return;
-    }
-     */
-//    Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::cast), this, xSkill->getSpellTime()/10000.0, 0, 0, false);
-//    this->targets=this->selectTarget();
-//    //引导
-//    if(xSkill->getLeadNum()>0){
-//        this->attacker->spell();
-//    }
-//    //射击
-//    if(xSkill->getRangeType()==4 && xSkill->getRangeParam1()>0){
-//        this->attacker->attack(2);
-//    }
-//    //普通攻击
-//    if(xSkill->getLeadNum()==0){
-//        this->attacker->attack(1);
-//    }
-}
-
-void Skill::cast()
-{
-    /*
-    XSkill* xSkill=XSkill::record(Value(skillID));
-    if(this->attacker->state==fstate::spell || attacker->state==fstate::buildup || attacker->state==fstate::throwing)
-    {
-        Director::getInstance()->getScheduler()->unschedule(SEL_SCHEDULE(&Skill::cast),this);
-    }
-    
-    this->attacker->attack(1);
-    
-    this->targets=this->selectTarget();
-    
-    int rangeType=xSkill->getRangeType();
-    
-    if (rangeType == 5) //弹射
-    {
-        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::bounce), this,0.2,targets.size(), 0.2, false);
-
-    }else{
-        for(MFighter* mf : targets)
-        {
-            int arrowNum=xSkill->getRangeParam2();
-            //带弹道的
-            if(arrowNum>0)
-            {
-                this->shoot(mf);
-                continue;
-            }
-//            this->hit(mf);
-        }
-    }
-     */
-    
-    
-    /*
-     陈天华:
-     0 自身
-     1 我方 影响人数
-     2 近战 影响人数
-     3 爆发 前排/中排/后排
-     4 射击 最大距离/子弹数量
-     5 弹射 弹射次数
-     6 穿透 最大距离
-    */
-    
-    
-//    XSkill* xskill=XSkill::record(Value(skillID));
-//    this->attacker->attackOver();
-//
-//    //射击
-//    if(xskill->getRangeType()==4){
-//        this->attacker->attack(2);
-//        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::hitAll), this, 0, 0, xskill->getSpellTime()/10000.0, false);
-//        return;
-//    }
-//    //弹射
-//    if(xskill->getRangeType()==5){
-//        this->attacker->attack(2);
-//        this->attacker->shoot(nullptr,xskill->getRangeType());
-//        Director::getInstance()->getScheduler()->schedule(SEL_SCHEDULE(&Skill::bounce), this, 0.3, targets.size(), 0.3, false);
-//        return;
-//    }
-//    //穿透
-//    if(xskill->getRangeType()==6){
-//        this->attacker->attack(2);
-//        this->attacker->shoot(nullptr, xskill->getRangeType());
-//        return;
-//    }
-//    
-//    //引导完直接攻击
-//    if(xskill->getLeadNum()>0){
-//        this->hitAll();
-//    }
-    
-}
-
-void Skill::hitAll()
-{
-//    for(int pos : targets){
-//        MFighter* mf=FightMgr::getInstance()->getHero(pos);
-//        this->attacker->hit(mf);
-//    }
-}
-
-void Skill::bounce(float dt)
-{
-//    MFighter* mf=FightMgr::getInstance()->getHero(targets.at(0));
-//    targets.erase(targets.begin());
-//    if(this->targets.size()>0){
-//        FightMgr::getInstance()->bonceTo(mf);
-//    }
-}
-
-
-//重置受击对象,攻击范围－－》策略
-//std::vector<int> Skill::selectTarget()
-//{
-//    std::vector<int> arr;
-//    XSkill* xSkill=XSkill::record(Value(skillID));
-//    
-//    switch (xSkill->getRangeType()) {
-//        case 0: //自身
-//            arr.push_back(attacker->pos);
-//            break;
-//        case 1: //我方 影响人数 all
-//            arr=FightMgr::getInstance()->getFoes(attacker->pos,true);
-//            arr=this->selectStrategy(arr,xSkill->getRangeParam1());
-//            break;
-//        case 2: //近战 影响人数 all
-//            arr=FightMgr::getInstance()->getFoes(attacker->pos);
-//            arr=this->selectStrategy(arr,xSkill->getRangeParam1());
-//            this->selectStrategy(arr,xSkill->getRangeParam2());
-//            break;
-//        case 3:{ //爆发 前排/中排/后排
-//            std::vector<int> vec=FightMgr::getInstance()->getFoes(attacker->pos);
-//            int row1=0,row2=0,row3=0;
-//            
-//            for(int mPos : vec){
-//                MFighter* mf=FightMgr::getInstance()->getHero(mPos);
-//                if(attacker->getGrid() - mf->getGrid() <= 2){
-//                    if(row1 <= xSkill->getRangeParam1()){
-//                        arr.push_back(mPos);
-//                        row1++;
-//                    }
-//                }
-//                if(attacker->getGrid() - mf->getGrid() <= 2){
-//                    if(row2 <= xSkill->getRangeParam2()){
-//                        arr.push_back(mPos);
-//                        row2++;
-//                    }
-//                }
-//                if(attacker->getGrid() - mf->getGrid() <= 2){
-//                    if(row3 <= xSkill->getRangeParam3()){
-//                        arr.push_back(mPos);
-//                        row3++;
-//                    }
-//                }
-//            }
-//            break;
-//        }
-//        case 4: //最大距离/子弹数量 all
-//            arr=FightMgr::getInstance()->getFoes(attacker->pos);
-//            for(int i=0;i<arr.size();i++)
-//            {
-//                MFighter* mf=FightMgr::getInstance()->getHero(arr[i]);
-//
-//                if(abs(attacker->getGrid()-mf->getGrid()) > xSkill->getRangeParam1())
-//                {
-//                    arr.erase(arr.begin()+i);
-//                }
-//            }
-//            arr=this->selectStrategy(arr,xSkill->getRangeParam2());
-//            break;
-//        case 5: //弹射 弹射次数
-//        {
-//            std::vector<int> vec=FightMgr::getInstance()->getFoes(attacker->pos);
-//            int bondNum=xSkill->getRangeParam1();
-//            for(int i=0;i<bondNum;i++)
-//            {
-//                arr.push_back(vec.at(i%vec.size()));
-//            }
-//        }
-//            break;
-//        case 6: //穿透 最大距离
-//        {
-//            std::vector<int> vec=FightMgr::getInstance()->getFoes(attacker->pos);
-//            for(int mPos : vec)
-//            {
-//                MFighter* mf=FightMgr::getInstance()->getHero(mPos);
-//                if(attacker->getGrid()-mf->getGrid() <= xSkill->getRangeParam1()){
-//                    arr.push_back(mPos);
-//                }
-//            }
-//        }
-//            break;
-//        default:
-//            log("error range type:%d,skillID:%d",xSkill->getRangeType(),skillID);
-//            break;
-//    }
-//    return arr;
-//}
-
 
 //选择策略
 std::vector<int> Skill::selectStrategy(std::vector<int> arr,int num)
@@ -363,33 +126,31 @@ int Skill::getMp()
 
 bool Skill::sortFar(int pos1,int pos2)
 {
-    NpcMgr* f1=FightMgr::getInstance()->getHero(pos1);
-    NpcMgr* f2=FightMgr::getInstance()->getHero(pos2);
+    FighterMgr* f1=BattleMgr::getInstance()->getHero(pos1);
+    FighterMgr* f2=BattleMgr::getInstance()->getHero(pos2);
     return f1->getGrid()-f2->getGrid() > 0;
 }
 
 bool Skill::sortNear(int pos1,int pos2)
 {
-//    NpcMgr* f1=FightMgr::getInstance()->getHero(pos1);
-//    NpcMgr* f2=FightMgr::getInstance()->getHero(pos2);
-//    return f1->getGrid()-f2->getGrid() < 0;
+    FighterMgr* f1=BattleMgr::getInstance()->getHero(pos1);
+    FighterMgr* f2=BattleMgr::getInstance()->getHero(pos2);
+    return f1->getGrid()-f2->getGrid() < 0;
     return 0;
 }
 
 bool Skill::sortLessHp(int pos1,int pos2)
 {
-//    NpcMgr* f1=FightMgr::getInstance()->getHero(pos1);
-//    NpcMgr* f2=FightMgr::getInstance()->getHero(pos2);
-//    return f1->data->hp<f2->data->hp;
-    return 0;
+    FighterMgr* f1=BattleMgr::getInstance()->getHero(pos1);
+    FighterMgr* f2=BattleMgr::getInstance()->getHero(pos2);
+    return f1->mf->data->hp<f2->mf->data->hp;
 }
 
 bool Skill::sortMoreHp(int pos1,int pos2)
 {
-//    NpcMgr* f1=FightMgr::getInstance()->getHero(pos1);
-//    NpcMgr* f2=FightMgr::getInstance()->getHero(pos2);
-//    return f1->data->hp>f2->data->hp;
-    return 0;
+    FighterMgr* f1=BattleMgr::getInstance()->getHero(pos1);
+    FighterMgr* f2=BattleMgr::getInstance()->getHero(pos2);
+    return f1->mf->data->hp>f2->mf->data->hp;
 }
 
 void Skill::stop()
@@ -405,6 +166,4 @@ void Skill::resume()
 Skill::~Skill()
 {
     Director::getInstance()->getScheduler()->unschedule(SEL_SCHEDULE(&Skill::coldDown),this);
-    Director::getInstance()->getScheduler()->unschedule(SEL_SCHEDULE(&Skill::bounce),this);
-    Director::getInstance()->getScheduler()->unschedule(SEL_SCHEDULE(&Skill::cast),this);
 }

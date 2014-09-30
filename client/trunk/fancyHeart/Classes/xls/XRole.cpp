@@ -45,6 +45,9 @@ std::string XRole::getPotrait(){
 int XRole::getCommonSkill(){
 	return doc[v.asString().c_str()]["commonSkill"].GetInt();
 }
+int XRole::getSkill0(){
+	return doc[v.asString().c_str()]["skill0"].GetInt();
+}
 int XRole::getSkill1(){
 	return doc[v.asString().c_str()]["skill1"].GetInt();
 }

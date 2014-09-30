@@ -13,7 +13,7 @@
     "UI0.plist"
   ],
   "texturesPng": [],
-  "version": "1.4.0.1",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -156,7 +156,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/button.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/button.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -547,7 +547,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/button.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/button.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -637,7 +637,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/button.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/button.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -727,7 +727,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/button.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/button.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -817,7 +817,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/button.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/button.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -907,7 +907,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/button.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/button.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -932,7 +932,7 @@
       "classname": "Panel",
       "name": "chat",
       "ZOrder": 0,
-      "actiontag": 12,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

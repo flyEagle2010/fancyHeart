@@ -12,10 +12,8 @@
   "textures": [
     "UI0.plist"
   ],
-  "texturesPng": [
-    "UI0.png"
-  ],
-  "version": "1.4.0.1",
+  "texturesPng": [],
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -1362,7 +1360,7 @@
               "customProperty": "",
               "flipX": false,
               "flipY": false,
-              "height": 96,
+              "height": 63,
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
@@ -1372,14 +1370,14 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.112280704,
-              "sizePercentY": 0.166377813,
+              "sizePercentX": 0.0748538,
+              "sizePercentY": 0.109185442,
               "sizeType": 0,
               "tag": 12088,
               "touchAble": true,
               "useMergedTexture": false,
               "visible": true,
-              "width": 96,
+              "width": 64,
               "x": 354,
               "y": -213,
               "capInsetsHeight": 1,
@@ -1408,9 +1406,9 @@
                 "resourceType": 0
               },
               "scale9Enable": false,
-              "scale9Height": 96,
-              "scale9Width": 96,
-              "text": "返回",
+              "scale9Height": 63,
+              "scale9Width": 64,
+              "text": "",
               "textColorB": 255,
               "textColorG": 255,
               "textColorR": 255
@@ -6570,7 +6568,7 @@
       "classname": "Panel",
       "name": "roleInfoPanel",
       "ZOrder": 0,
-      "actiontag": 45,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

@@ -25,6 +25,7 @@ struct BData{
     int rate;
     int star;
     int pos;
+    std::vector<int> skills;
 };
 
 class FData:public Ref

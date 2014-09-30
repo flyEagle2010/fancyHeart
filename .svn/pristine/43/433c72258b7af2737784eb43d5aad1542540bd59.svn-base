@@ -1,0 +1,90 @@
+//
+//  SkillIcon.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-9-24.
+//
+//
+
+#include "SkillIcon.h"
+
+SkillIcon* SkillIcon::create(ImageView* rim,int skillID)
+{
+    SkillIcon* pRet=new SkillIcon();
+    if(pRet && pRet->init(rim,skillID)){
+        pRet->autorelease();
+        return pRet;
+    }
+    pRet->autorelease();
+    return nullptr;
+}
+
+bool SkillIcon::init(ImageView* rim,int skillID)
+{
+    this->rim=rim;
+    this->skillID=skillID;
+    
+    XSkill* xskill=XSkill::record(Value(skillID));
+
+    ImageView* img=ImageView::create("battle_000.png");
+    img->setTag(skillID);
+    Vec2 pos=rim->getPosition();
+    img->setPosition(pos);
+    this->addChild(img);
+    Size size=rim->getContentSize();
+
+    for(int j=0;j<xskill->getMp();j++){
+        ImageView* bean=ImageView::create("combat_down_point.png");
+        this->addChild(bean,1,skillID*10+j);
+        bean->setPosition(pos+Vec2(18*j-size.width/2+20,-(10+size.height/2)));
+        this->beanBgs.pushBack(bean);
+    }
+    return true;
+}
+
+void SkillIcon::setIsOK(bool isOK)
+{
+    this->isOK=isOK;
+    if(isOK){
+        this->rim->setVisible(true);
+        this->rim->runAction(RepeatForever::create(Sequence::create(FadeTo::create(0.8,60),FadeTo::create(0.8,255), NULL)));
+    }else{
+        this->rim->stopAllActions();
+        this->rim->setVisible(false);
+        this->hideBean();
+    }
+}
+
+void SkillIcon::resetBeans(int num)
+{
+    int allNum=this->beanBgs.size();
+    int hasNum=this->beans.size();
+    if(num>=allNum){
+        this->setIsOK(true);
+    }
+    for(int i=0;i<allNum;i++)
+    {
+        //消耗后减少
+        if(num<hasNum){
+            this->beans.at(i)->setVisible(false);
+            continue;
+        }
+        //增加，已经有了
+        if(this->beans.size()>i){
+            this->beans.at(i)->setVisible(true);
+            continue;
+        }else{
+            ImageView* bean=ImageView::create("combat_small.png");
+            bean->setPosition(beanBgs.at(i)->getPosition());
+            this->addChild(bean,1);
+            this->beans.pushBack(bean);
+        }
+    }
+}
+
+void SkillIcon::hideBean()
+{
+    for(int i=0;i<beans.size();i++){
+        beans.at(i)->setVisible(false);
+    }
+}

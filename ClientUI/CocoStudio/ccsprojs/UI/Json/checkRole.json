@@ -12,10 +12,8 @@
   "textures": [
     "UI0.plist"
   ],
-  "texturesPng": [
-    "UI0.png"
-  ],
-  "version": "1.4.0.1",
+  "texturesPng": [],
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -39,7 +37,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 96,
+          "height": 63,
           "ignoreSize": true,
           "layoutParameter": {
             "classname": null,
@@ -60,22 +58,22 @@
             "type": 2
           },
           "opacity": 255,
-          "positionPercentX": 0.89084506,
-          "positionPercentY": 0.1234375,
+          "positionPercentX": 0.9049296,
+          "positionPercentY": 0.149218753,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.08450704,
-          "sizePercentY": 0.15,
+          "sizePercentX": 0.0563380271,
+          "sizePercentY": 0.0984375,
           "sizeType": 0,
           "tag": 20602,
           "touchAble": true,
           "useMergedTexture": false,
           "visible": true,
-          "width": 96,
-          "x": 1012,
-          "y": 79,
+          "width": 64,
+          "x": 1028,
+          "y": 95,
           "capInsetsHeight": 1,
           "capInsetsWidth": 1,
           "capInsetsX": 0,
@@ -102,9 +100,9 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 96,
-          "scale9Width": 96,
-          "text": "返回",
+          "scale9Height": 63,
+          "scale9Width": 64,
+          "text": "",
           "textColorB": 255,
           "textColorG": 255,
           "textColorR": 255
@@ -162,7 +160,7 @@
               "scale9Enable": false,
               "texture": null,
               "textureData": {
-                "path": "summon/summon_progress_2.png",
+                "path": "hero/summon_progress_2.png",
                 "plistFile": "",
                 "resourceType": 0
               }
@@ -272,13 +270,13 @@
               "fontType": 0,
               "normal": null,
               "normalData": {
-                "path": "summon/Knob_1.png",
+                "path": "hero/Knob_1.png",
                 "plistFile": "",
                 "resourceType": 0
               },
               "pressed": null,
               "pressedData": {
-                "path": "summon/Knob_1_2.png",
+                "path": "hero/Knob_1_2.png",
                 "plistFile": "",
                 "resourceType": 0
               },
@@ -350,7 +348,7 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "summon/summon_progress_1.png",
+            "path": "hero/summon_progress_1.png",
             "plistFile": "",
             "resourceType": 0
           },
@@ -430,13 +428,13 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "summon/knapsack_button_1.png",
+            "path": "hero/knapsack_button_1.png",
             "plistFile": "",
             "resourceType": 0
           },
           "pressed": null,
           "pressedData": {
-            "path": "summon/knapsack_button_2.png",
+            "path": "hero/knapsack_button_2.png",
             "plistFile": "",
             "resourceType": 0
           },

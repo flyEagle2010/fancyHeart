@@ -209,10 +209,12 @@ void protobuf_AssignDesc_gate_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PNodeResp));
   PNpcRes_descriptor_ = file->message_type(9);
-  static const int PNpcRes_offsets_[3] = {
+  static const int PNpcRes_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PNpcRes, xid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PNpcRes, addlvl_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PNpcRes, addexp_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PNpcRes, curlvl_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PNpcRes, curexp_),
   };
   PNpcRes_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -259,9 +261,10 @@ void protobuf_AssignDesc_gate_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PResultReq));
   PResultResp_descriptor_ = file->message_type(12);
-  static const int PResultResp_offsets_[6] = {
+  static const int PResultResp_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PResultResp, star_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PResultResp, grouplvl_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PResultResp, curgrouplvl_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PResultResp, groupexp_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PResultResp, coin_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PResultResp, npcs_),
@@ -366,16 +369,17 @@ void protobuf_AddDesc_gate_2eproto() {
     "\001 \002(\005\022\037\n\tnodeItems\030\002 \003(\0132\014.PUpdateNode\"&"
     "\n\tPGateResp\022\031\n\005gates\030\001 \003(\0132\n.PGateItem\"8"
     "\n\010PNodeReq\022\016\n\006gateId\030\001 \002(\005\022\013\n\003xId\030\002 \002(\005\022"
-    "\017\n\007groupId\030\003 \002(\005\"\013\n\tPNodeResp\"6\n\007PNpcRes"
+    "\017\n\007groupId\030\003 \002(\005\"\013\n\tPNodeResp\"V\n\007PNpcRes"
     "\022\013\n\003xId\030\001 \002(\003\022\016\n\006addLvl\030\002 \002(\005\022\016\n\006addExp\030"
-    "\003 \002(\005\"+\n\010PItemRes\022\016\n\006itemId\030\001 \002(\005\022\017\n\007ite"
-    "mNum\030\002 \002(\005\"7\n\nPResultReq\022\016\n\006gateId\030\001 \002(\005"
-    "\022\013\n\003xId\030\002 \002(\005\022\014\n\004star\030\003 \002(\005\"\177\n\013PResultRe"
-    "sp\022\014\n\004star\030\001 \002(\005\022\020\n\010groupLvl\030\002 \002(\005\022\020\n\010gr"
-    "oupExp\030\003 \002(\005\022\014\n\004coin\030\004 \002(\005\022\026\n\004npcs\030\005 \003(\013"
-    "2\010.PNpcRes\022\030\n\005items\030\006 \003(\0132\t.PItemResB.\n "
-    "com.doteyplay.game.message.protoB\nGatePr"
-    "oBuf", 764);
+    "\003 \002(\005\022\016\n\006curLvl\030\004 \002(\005\022\016\n\006curExp\030\005 \002(\005\"+\n"
+    "\010PItemRes\022\016\n\006itemId\030\001 \002(\005\022\017\n\007itemNum\030\002 \002"
+    "(\005\"7\n\nPResultReq\022\016\n\006gateId\030\001 \002(\005\022\013\n\003xId\030"
+    "\002 \002(\005\022\014\n\004star\030\003 \002(\005\"\224\001\n\013PResultResp\022\014\n\004s"
+    "tar\030\001 \002(\005\022\020\n\010groupLvl\030\002 \002(\005\022\023\n\013curGroupL"
+    "vl\030\003 \002(\005\022\020\n\010groupExp\030\004 \002(\005\022\014\n\004coin\030\005 \002(\005"
+    "\022\026\n\004npcs\030\006 \003(\0132\010.PNpcRes\022\030\n\005items\030\007 \003(\0132"
+    "\t.PItemResB.\n com.doteyplay.game.message"
+    ".protoB\nGateProBuf", 818);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "gate.proto", &protobuf_RegisterTypes);
   PGateReq::default_instance_ = new PGateReq();
@@ -2521,6 +2525,8 @@ void PNodeResp::Swap(PNodeResp* other) {
 const int PNpcRes::kXIdFieldNumber;
 const int PNpcRes::kAddLvlFieldNumber;
 const int PNpcRes::kAddExpFieldNumber;
+const int PNpcRes::kCurLvlFieldNumber;
+const int PNpcRes::kCurExpFieldNumber;
 #endif  // !_MSC_VER
 
 PNpcRes::PNpcRes()
@@ -2542,6 +2548,8 @@ void PNpcRes::SharedCtor() {
   xid_ = GOOGLE_LONGLONG(0);
   addlvl_ = 0;
   addexp_ = 0;
+  curlvl_ = 0;
+  curexp_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2580,6 +2588,8 @@ void PNpcRes::Clear() {
     xid_ = GOOGLE_LONGLONG(0);
     addlvl_ = 0;
     addexp_ = 0;
+    curlvl_ = 0;
+    curexp_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -2634,6 +2644,38 @@ bool PNpcRes::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(32)) goto parse_curLvl;
+        break;
+      }
+
+      // required int32 curLvl = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_curLvl:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &curlvl_)));
+          set_has_curlvl();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(40)) goto parse_curExp;
+        break;
+      }
+
+      // required int32 curExp = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_curExp:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &curexp_)));
+          set_has_curexp();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2671,6 +2713,16 @@ void PNpcRes::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->addexp(), output);
   }
 
+  // required int32 curLvl = 4;
+  if (has_curlvl()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->curlvl(), output);
+  }
+
+  // required int32 curExp = 5;
+  if (has_curexp()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->curexp(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2692,6 +2744,16 @@ void PNpcRes::SerializeWithCachedSizes(
   // required int32 addExp = 3;
   if (has_addexp()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->addexp(), target);
+  }
+
+  // required int32 curLvl = 4;
+  if (has_curlvl()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->curlvl(), target);
+  }
+
+  // required int32 curExp = 5;
+  if (has_curexp()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->curexp(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2724,6 +2786,20 @@ int PNpcRes::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->addexp());
+    }
+
+    // required int32 curLvl = 4;
+    if (has_curlvl()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->curlvl());
+    }
+
+    // required int32 curExp = 5;
+    if (has_curexp()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->curexp());
     }
 
   }
@@ -2762,6 +2838,12 @@ void PNpcRes::MergeFrom(const PNpcRes& from) {
     if (from.has_addexp()) {
       set_addexp(from.addexp());
     }
+    if (from.has_curlvl()) {
+      set_curlvl(from.curlvl());
+    }
+    if (from.has_curexp()) {
+      set_curexp(from.curexp());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -2779,7 +2861,7 @@ void PNpcRes::CopyFrom(const PNpcRes& from) {
 }
 
 bool PNpcRes::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
 
   return true;
 }
@@ -2789,6 +2871,8 @@ void PNpcRes::Swap(PNpcRes* other) {
     std::swap(xid_, other->xid_);
     std::swap(addlvl_, other->addlvl_);
     std::swap(addexp_, other->addexp_);
+    std::swap(curlvl_, other->curlvl_);
+    std::swap(curexp_, other->curexp_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -3347,6 +3431,7 @@ void PResultReq::Swap(PResultReq* other) {
 #ifndef _MSC_VER
 const int PResultResp::kStarFieldNumber;
 const int PResultResp::kGroupLvlFieldNumber;
+const int PResultResp::kCurGroupLvlFieldNumber;
 const int PResultResp::kGroupExpFieldNumber;
 const int PResultResp::kCoinFieldNumber;
 const int PResultResp::kNpcsFieldNumber;
@@ -3371,6 +3456,7 @@ void PResultResp::SharedCtor() {
   _cached_size_ = 0;
   star_ = 0;
   grouplvl_ = 0;
+  curgrouplvl_ = 0;
   groupexp_ = 0;
   coin_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -3410,6 +3496,7 @@ void PResultResp::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     star_ = 0;
     grouplvl_ = 0;
+    curgrouplvl_ = 0;
     groupexp_ = 0;
     coin_ = 0;
   }
@@ -3452,12 +3539,28 @@ bool PResultResp::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_groupExp;
+        if (input->ExpectTag(24)) goto parse_curGroupLvl;
         break;
       }
 
-      // required int32 groupExp = 3;
+      // required int32 curGroupLvl = 3;
       case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_curGroupLvl:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &curgrouplvl_)));
+          set_has_curgrouplvl();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(32)) goto parse_groupExp;
+        break;
+      }
+
+      // required int32 groupExp = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_groupExp:
@@ -3468,12 +3571,12 @@ bool PResultResp::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_coin;
+        if (input->ExpectTag(40)) goto parse_coin;
         break;
       }
 
-      // required int32 coin = 4;
-      case 4: {
+      // required int32 coin = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_coin:
@@ -3484,12 +3587,12 @@ bool PResultResp::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(42)) goto parse_npcs;
+        if (input->ExpectTag(50)) goto parse_npcs;
         break;
       }
 
-      // repeated .PNpcRes npcs = 5;
-      case 5: {
+      // repeated .PNpcRes npcs = 6;
+      case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_npcs:
@@ -3498,13 +3601,13 @@ bool PResultResp::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(42)) goto parse_npcs;
-        if (input->ExpectTag(50)) goto parse_items;
+        if (input->ExpectTag(50)) goto parse_npcs;
+        if (input->ExpectTag(58)) goto parse_items;
         break;
       }
 
-      // repeated .PItemRes items = 6;
-      case 6: {
+      // repeated .PItemRes items = 7;
+      case 7: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_items:
@@ -3513,7 +3616,7 @@ bool PResultResp::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(50)) goto parse_items;
+        if (input->ExpectTag(58)) goto parse_items;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -3546,26 +3649,31 @@ void PResultResp::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->grouplvl(), output);
   }
 
-  // required int32 groupExp = 3;
+  // required int32 curGroupLvl = 3;
+  if (has_curgrouplvl()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->curgrouplvl(), output);
+  }
+
+  // required int32 groupExp = 4;
   if (has_groupexp()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->groupexp(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->groupexp(), output);
   }
 
-  // required int32 coin = 4;
+  // required int32 coin = 5;
   if (has_coin()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->coin(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->coin(), output);
   }
 
-  // repeated .PNpcRes npcs = 5;
+  // repeated .PNpcRes npcs = 6;
   for (int i = 0; i < this->npcs_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, this->npcs(i), output);
+      6, this->npcs(i), output);
   }
 
-  // repeated .PItemRes items = 6;
+  // repeated .PItemRes items = 7;
   for (int i = 0; i < this->items_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, this->items(i), output);
+      7, this->items(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -3586,28 +3694,33 @@ void PResultResp::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->grouplvl(), target);
   }
 
-  // required int32 groupExp = 3;
+  // required int32 curGroupLvl = 3;
+  if (has_curgrouplvl()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->curgrouplvl(), target);
+  }
+
+  // required int32 groupExp = 4;
   if (has_groupexp()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->groupexp(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->groupexp(), target);
   }
 
-  // required int32 coin = 4;
+  // required int32 coin = 5;
   if (has_coin()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->coin(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->coin(), target);
   }
 
-  // repeated .PNpcRes npcs = 5;
+  // repeated .PNpcRes npcs = 6;
   for (int i = 0; i < this->npcs_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        5, this->npcs(i), target);
+        6, this->npcs(i), target);
   }
 
-  // repeated .PItemRes items = 6;
+  // repeated .PItemRes items = 7;
   for (int i = 0; i < this->items_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        6, this->items(i), target);
+        7, this->items(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3635,14 +3748,21 @@ int PResultResp::ByteSize() const {
           this->grouplvl());
     }
 
-    // required int32 groupExp = 3;
+    // required int32 curGroupLvl = 3;
+    if (has_curgrouplvl()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->curgrouplvl());
+    }
+
+    // required int32 groupExp = 4;
     if (has_groupexp()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->groupexp());
     }
 
-    // required int32 coin = 4;
+    // required int32 coin = 5;
     if (has_coin()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -3650,7 +3770,7 @@ int PResultResp::ByteSize() const {
     }
 
   }
-  // repeated .PNpcRes npcs = 5;
+  // repeated .PNpcRes npcs = 6;
   total_size += 1 * this->npcs_size();
   for (int i = 0; i < this->npcs_size(); i++) {
     total_size +=
@@ -3658,7 +3778,7 @@ int PResultResp::ByteSize() const {
         this->npcs(i));
   }
 
-  // repeated .PItemRes items = 6;
+  // repeated .PItemRes items = 7;
   total_size += 1 * this->items_size();
   for (int i = 0; i < this->items_size(); i++) {
     total_size +=
@@ -3700,6 +3820,9 @@ void PResultResp::MergeFrom(const PResultResp& from) {
     if (from.has_grouplvl()) {
       set_grouplvl(from.grouplvl());
     }
+    if (from.has_curgrouplvl()) {
+      set_curgrouplvl(from.curgrouplvl());
+    }
     if (from.has_groupexp()) {
       set_groupexp(from.groupexp());
     }
@@ -3723,7 +3846,7 @@ void PResultResp::CopyFrom(const PResultResp& from) {
 }
 
 bool PResultResp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
 
   for (int i = 0; i < npcs_size(); i++) {
     if (!this->npcs(i).IsInitialized()) return false;
@@ -3738,6 +3861,7 @@ void PResultResp::Swap(PResultResp* other) {
   if (other != this) {
     std::swap(star_, other->star_);
     std::swap(grouplvl_, other->grouplvl_);
+    std::swap(curgrouplvl_, other->curgrouplvl_);
     std::swap(groupexp_, other->groupexp_);
     std::swap(coin_, other->coin_);
     npcs_.Swap(&other->npcs_);

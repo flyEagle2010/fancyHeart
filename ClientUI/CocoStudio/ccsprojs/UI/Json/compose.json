@@ -12,10 +12,8 @@
   "textures": [
     "UI0.plist"
   ],
-  "texturesPng": [
-    "UI0.png"
-  ],
-  "version": "1.4.0.1",
+  "texturesPng": [],
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,

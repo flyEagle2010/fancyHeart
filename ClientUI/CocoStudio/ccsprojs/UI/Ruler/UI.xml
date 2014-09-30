@@ -104,4 +104,8 @@
     <Project>homeUi</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>checkRole</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

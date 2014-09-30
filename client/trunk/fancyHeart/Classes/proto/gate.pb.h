@@ -934,6 +934,20 @@ class PNpcRes : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 addexp() const;
   inline void set_addexp(::google::protobuf::int32 value);
 
+  // required int32 curLvl = 4;
+  inline bool has_curlvl() const;
+  inline void clear_curlvl();
+  static const int kCurLvlFieldNumber = 4;
+  inline ::google::protobuf::int32 curlvl() const;
+  inline void set_curlvl(::google::protobuf::int32 value);
+
+  // required int32 curExp = 5;
+  inline bool has_curexp() const;
+  inline void clear_curexp();
+  static const int kCurExpFieldNumber = 5;
+  inline ::google::protobuf::int32 curexp() const;
+  inline void set_curexp(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:PNpcRes)
  private:
   inline void set_has_xid();
@@ -942,15 +956,21 @@ class PNpcRes : public ::google::protobuf::Message {
   inline void clear_has_addlvl();
   inline void set_has_addexp();
   inline void clear_has_addexp();
+  inline void set_has_curlvl();
+  inline void clear_has_curlvl();
+  inline void set_has_curexp();
+  inline void clear_has_curexp();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 xid_;
   ::google::protobuf::int32 addlvl_;
   ::google::protobuf::int32 addexp_;
+  ::google::protobuf::int32 curlvl_;
+  ::google::protobuf::int32 curexp_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_gate_2eproto();
   friend void protobuf_AssignDesc_gate_2eproto();
@@ -1223,24 +1243,31 @@ class PResultResp : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 grouplvl() const;
   inline void set_grouplvl(::google::protobuf::int32 value);
 
-  // required int32 groupExp = 3;
+  // required int32 curGroupLvl = 3;
+  inline bool has_curgrouplvl() const;
+  inline void clear_curgrouplvl();
+  static const int kCurGroupLvlFieldNumber = 3;
+  inline ::google::protobuf::int32 curgrouplvl() const;
+  inline void set_curgrouplvl(::google::protobuf::int32 value);
+
+  // required int32 groupExp = 4;
   inline bool has_groupexp() const;
   inline void clear_groupexp();
-  static const int kGroupExpFieldNumber = 3;
+  static const int kGroupExpFieldNumber = 4;
   inline ::google::protobuf::int32 groupexp() const;
   inline void set_groupexp(::google::protobuf::int32 value);
 
-  // required int32 coin = 4;
+  // required int32 coin = 5;
   inline bool has_coin() const;
   inline void clear_coin();
-  static const int kCoinFieldNumber = 4;
+  static const int kCoinFieldNumber = 5;
   inline ::google::protobuf::int32 coin() const;
   inline void set_coin(::google::protobuf::int32 value);
 
-  // repeated .PNpcRes npcs = 5;
+  // repeated .PNpcRes npcs = 6;
   inline int npcs_size() const;
   inline void clear_npcs();
-  static const int kNpcsFieldNumber = 5;
+  static const int kNpcsFieldNumber = 6;
   inline const ::PNpcRes& npcs(int index) const;
   inline ::PNpcRes* mutable_npcs(int index);
   inline ::PNpcRes* add_npcs();
@@ -1249,10 +1276,10 @@ class PResultResp : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::PNpcRes >*
       mutable_npcs();
 
-  // repeated .PItemRes items = 6;
+  // repeated .PItemRes items = 7;
   inline int items_size() const;
   inline void clear_items();
-  static const int kItemsFieldNumber = 6;
+  static const int kItemsFieldNumber = 7;
   inline const ::PItemRes& items(int index) const;
   inline ::PItemRes* mutable_items(int index);
   inline ::PItemRes* add_items();
@@ -1267,6 +1294,8 @@ class PResultResp : public ::google::protobuf::Message {
   inline void clear_has_star();
   inline void set_has_grouplvl();
   inline void clear_has_grouplvl();
+  inline void set_has_curgrouplvl();
+  inline void clear_has_curgrouplvl();
   inline void set_has_groupexp();
   inline void clear_has_groupexp();
   inline void set_has_coin();
@@ -1276,13 +1305,14 @@ class PResultResp : public ::google::protobuf::Message {
 
   ::google::protobuf::int32 star_;
   ::google::protobuf::int32 grouplvl_;
+  ::google::protobuf::int32 curgrouplvl_;
   ::google::protobuf::int32 groupexp_;
-  ::google::protobuf::int32 coin_;
   ::google::protobuf::RepeatedPtrField< ::PNpcRes > npcs_;
   ::google::protobuf::RepeatedPtrField< ::PItemRes > items_;
+  ::google::protobuf::int32 coin_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
 
   friend void  protobuf_AddDesc_gate_2eproto();
   friend void protobuf_AssignDesc_gate_2eproto();
@@ -1758,6 +1788,50 @@ inline void PNpcRes::set_addexp(::google::protobuf::int32 value) {
   addexp_ = value;
 }
 
+// required int32 curLvl = 4;
+inline bool PNpcRes::has_curlvl() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void PNpcRes::set_has_curlvl() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void PNpcRes::clear_has_curlvl() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void PNpcRes::clear_curlvl() {
+  curlvl_ = 0;
+  clear_has_curlvl();
+}
+inline ::google::protobuf::int32 PNpcRes::curlvl() const {
+  return curlvl_;
+}
+inline void PNpcRes::set_curlvl(::google::protobuf::int32 value) {
+  set_has_curlvl();
+  curlvl_ = value;
+}
+
+// required int32 curExp = 5;
+inline bool PNpcRes::has_curexp() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void PNpcRes::set_has_curexp() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void PNpcRes::clear_has_curexp() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void PNpcRes::clear_curexp() {
+  curexp_ = 0;
+  clear_has_curexp();
+}
+inline ::google::protobuf::int32 PNpcRes::curexp() const {
+  return curexp_;
+}
+inline void PNpcRes::set_curexp(::google::protobuf::int32 value) {
+  set_has_curexp();
+  curexp_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // PItemRes
@@ -1924,15 +1998,37 @@ inline void PResultResp::set_grouplvl(::google::protobuf::int32 value) {
   grouplvl_ = value;
 }
 
-// required int32 groupExp = 3;
-inline bool PResultResp::has_groupexp() const {
+// required int32 curGroupLvl = 3;
+inline bool PResultResp::has_curgrouplvl() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void PResultResp::set_has_groupexp() {
+inline void PResultResp::set_has_curgrouplvl() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void PResultResp::clear_has_groupexp() {
+inline void PResultResp::clear_has_curgrouplvl() {
   _has_bits_[0] &= ~0x00000004u;
+}
+inline void PResultResp::clear_curgrouplvl() {
+  curgrouplvl_ = 0;
+  clear_has_curgrouplvl();
+}
+inline ::google::protobuf::int32 PResultResp::curgrouplvl() const {
+  return curgrouplvl_;
+}
+inline void PResultResp::set_curgrouplvl(::google::protobuf::int32 value) {
+  set_has_curgrouplvl();
+  curgrouplvl_ = value;
+}
+
+// required int32 groupExp = 4;
+inline bool PResultResp::has_groupexp() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void PResultResp::set_has_groupexp() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void PResultResp::clear_has_groupexp() {
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void PResultResp::clear_groupexp() {
   groupexp_ = 0;
@@ -1946,15 +2042,15 @@ inline void PResultResp::set_groupexp(::google::protobuf::int32 value) {
   groupexp_ = value;
 }
 
-// required int32 coin = 4;
+// required int32 coin = 5;
 inline bool PResultResp::has_coin() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void PResultResp::set_has_coin() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void PResultResp::clear_has_coin() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void PResultResp::clear_coin() {
   coin_ = 0;
@@ -1968,7 +2064,7 @@ inline void PResultResp::set_coin(::google::protobuf::int32 value) {
   coin_ = value;
 }
 
-// repeated .PNpcRes npcs = 5;
+// repeated .PNpcRes npcs = 6;
 inline int PResultResp::npcs_size() const {
   return npcs_.size();
 }
@@ -1993,7 +2089,7 @@ PResultResp::mutable_npcs() {
   return &npcs_;
 }
 
-// repeated .PItemRes items = 6;
+// repeated .PItemRes items = 7;
 inline int PResultResp::items_size() const {
   return items_.size();
 }
