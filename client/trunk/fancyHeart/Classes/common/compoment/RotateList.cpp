@@ -63,9 +63,7 @@ void RotateList::setNum(int num)
 
     int childNum=this->items.size();
     if(childNum > num){
-//        for(int i=itemNum-num;i<itemNum;i++){
         for(int i=0;i<childNum-num;i++){
-//            this->removeChild(this->items.at(i));
             this->removeChild(this->items.at(childNum-i-1));
             this->items.popBack();
         }
@@ -74,10 +72,6 @@ void RotateList::setNum(int num)
     for(int i=childNum;i<num;i++){
         Widget* item=this->model->clone();
         this->addChild(item);
-//        this->tellIndexEvent(item,i);
-//        int x =(this->panelSize.width/itemNum)*i + this->panelSize.width/2;
-//        //初始设置位置
-//        this->setItemTransform(item, x);
         this->items.pushBack(item);
     }
     //设置位置
@@ -215,12 +209,10 @@ void RotateList::interceptTouchEvent(Widget::TouchEventType event, Widget *sende
         }
         case TouchEventType::ENDED: //release
         {
-//            if(touchBeganPoint.distance(convertToNodeSpace(touchPoint))<10 && this->items.getIndex(sender)==this->tagNumAtMiddle && this->eventCallback){
             if(touchBeganPoint.distance(touch->getLocationInView())<10 && this->items.getIndex(sender)==this->tagNumAtMiddle && this->eventCallback){
                 this->eventCallback(EventType::TOUCH_ITEM,sender,this->tagNumAtMiddle);
             }
             this->handleReleaseLogic(touch->getLocation());
-            
             break;
         }
     }
@@ -260,9 +252,13 @@ void RotateList::setItemTransform(cocos2d::ui::Widget* widget, float dx)
     
     //缩放：越往中心点缩放系数越大
     float dis=abs(this->radius/2-widget->getPositionX());
+    
     float scaleNum=pow(dis/this->radius,0.8);
     widget->setScale(fmax(1-scaleNum, 0.4));
+    //widget->setScale(dis<5?1:0.5);
     
+    //float color=fmax(1-scaleNum, 0.4);
+    //widget->setColor(Color3B(255*color,255*color,255*color));
     //旋转角度
     int rotation = (180/this->radius/2)*(dx - this->panelSize.width/2);
     widget->setRotation(rotation);
@@ -312,6 +308,7 @@ void RotateList::resetZOrder()
 void RotateList::setSlider(Slider* slider)
 {
     this->slider = slider;
+    
     this->slider->setPercent(0);
     this->slider->addEventListener(CC_CALLBACK_2(RotateList::sliderEvent,this));
 }

@@ -1,0 +1,519 @@
+//
+//  Formation.cpp
+//  fancyHeart
+//
+//  Created by zhai on 14-6-18.
+//
+//
+
+#include "Formation.h"
+
+Formation* Formation::create(BaseUI* delegate)
+{
+    Formation* formation=new Formation();
+    if (formation && formation->init("publish/formation/formation.ExportJson")) {
+        formation->autorelease();
+        return formation;
+    }
+    CC_SAFE_DELETE(formation);
+    return nullptr;
+}
+
+bool Formation::init(std::string fileName)
+{
+	if(!BaseUI::init(fileName))
+	{
+		return false;
+	}
+    this->resetUI();
+	return true;
+}
+
+void Formation::onEnter()
+{
+    BaseUI::onEnter();
+}
+
+void Formation::resetUI()//init map
+{
+    CardItem* cardItem=CardItem::create();
+    Widget* item=static_cast<Widget*>(cardItem->item);
+    auto widgetSize = Director::getInstance()->getWinSize();
+    this->rotateList = RotateList::create();
+    this->rotateList->setSize(Size(widgetSize.width, widgetSize.height));
+    this->rotateList->addEventListener(CC_CALLBACK_3(Formation::rotateListCallback,this));
+    for (int i=0; i<5; i++) {
+        PGroup pGroup=Manager::getInstance()->getRoleData()->groups(i);
+        std::vector<FormationData> ids;
+        for (int j=0; j<pGroup.npcid_size(); j++) {
+            if (pGroup.npcid(j)!=0) {
+                ids.push_back(FormationData{pGroup.npcid(j),1});
+            }
+        }
+        sort(ids.begin(), ids.end(), this->sortIds);
+        this->groups.push_back(ids);
+    }
+    
+    //模版
+    item->removeFromParent();
+    //item->setPosition(Vec2(0, Director::getInstance()->getWinSize().height-item->getContentSize().height));
+    this->rotateList->setItemModel(item,Director::getInstance()->getWinSize().width,Director::getInstance()->getWinSize(),Director::getInstance()->getWinSize().width/7);//传进去单个模版
+    this->addChild(this->rotateList,0);
+    this->rotateList->setPosition(Vec2(0,Director::getInstance()->getWinSize().height-item->getContentSize().height-20));
+    auto slider=static_cast<Slider*>(layout->getChildByName("slider_0"));
+    this->rotateList->setSlider(slider);
+    slider->getVirtualRenderer()->setContentSize(Size(474,slider->getVirtualRenderer()->getContentSize().height));
+    //this->rotateList->setVisible(false);
+    Button* btnReturn=static_cast<Button*>(layout->getChildByName("btn_return"));
+    btnReturn->addTouchEventListener(CC_CALLBACK_2(Formation::touchButtonEvent, this));
+    //btnReturn->setPosition(Vec2(Director::getInstance()->getWinSize().width, 0));
+    Widget* panel_btns=static_cast<Widget*>(layout->getChildByName("panel_btns"));
+    panel_btns->removeFromParent();
+    this->addChild(panel_btns,1);
+    static_cast<Button*>(panel_btns->getChildByName("btn_all"))->addTouchEventListener(CC_CALLBACK_2(Formation::touchButtonEvent, this));
+    static_cast<Button*>(panel_btns->getChildByName("btn_front"))->addTouchEventListener(CC_CALLBACK_2(Formation::touchButtonEvent, this));
+//    static_cast<Button*>(panel_btns->getChildByName("btn_middle"))->addTouchEventListener(CC_CALLBACK_2(Formation::touchButtonEvent, this));
+    static_cast<Button*>(panel_btns->getChildByName("btn_after"))->addTouchEventListener(CC_CALLBACK_2(Formation::touchButtonEvent, this));
+    log("rotateList=%d,panelbuttons=%d",this->rotateList->getLocalZOrder(),panel_btns->getLocalZOrder());
+    Widget* imgGroup=static_cast<Widget*>(layout->getChildByName("img_group"));
+    
+    Widget* paneHero=static_cast<Widget*>(imgGroup->getChildByName("panelHero"));
+    paneHero->setVisible(false);
+    
+    
+    this->pageView=NewPageView::create();
+    imgGroup->addChild(this->pageView);
+    this->pageView->setSize(paneHero->getContentSize());
+    this->pageView->setPosition(paneHero->getPosition());
+    //this->pageView=static_cast<PageView*>(imgGroup->getChildByName("pageView"));
+    this->pageView->addEventListener(CC_CALLBACK_2(Formation::pageViewEvent, this));
+    this->pageView->setLayoutType(Type::VERTICAL);
+    
+    Button* btnChange=static_cast<Button*>(imgGroup->getChildByName("btn_change"));
+    btnChange->setLocalZOrder(1);
+    btnChange->addTouchEventListener(CC_CALLBACK_2(Formation::touchButtonEvent, this));
+    
+    
+    
+    for (int i=0; i<5; i++) {
+        Layout* subPage=static_cast<Layout*>(paneHero->clone());
+        subPage->setVisible(true);
+        pageView->addPage(subPage);
+        this->initGroup(i);
+        
+    }
+    
+    //this->setListMask(0);
+    this->currentPos=-1;
+    this->initList();
+    
+    
+//    Sprite* spite=Sprite::create("cloud.png");
+//    spite->setAnchorPoint(Vec2(0, 0));
+//    this->addChild(spite, -1);
+}
+
+void Formation::initList()
+{
+    this->npcs.clear();
+    for(int i=0;i<Manager::getInstance()->getRoleData()->npclist_size();i++){
+        PNpc pNpc=Manager::getInstance()->getRoleData()->npclist(i);
+        int64 npcdId=pNpc.npcid();
+        if (this->currentPos==-1) {
+            this->npcs.push_back(FormationData{npcdId,this->isInFormation(npcdId)?1:0});
+        }else{
+            XRole* xRole=XRole::record(Value(pNpc.spriteid()));
+            if (xRole->getPos()==this->currentPos) {
+                this->npcs.push_back(FormationData{npcdId,this->isInFormation(npcdId)?1:0});
+            }
+        }
+    }
+    sort(this->npcs.begin(), this->npcs.end(), this->sortIds);
+    this->rotateList->setNum(this->npcs.size());
+    Widget* title=static_cast<Widget*>(layout->getChildByName("img_title"));
+    Text* txtForce= static_cast<Text*>(title->getChildByName("txt_forceDesc"));
+    txtForce->setString(StringUtils::format("%d", int(this->pageView->getCurPageIndex())+1));
+    txtForce->enableOutline(Color4B(37,19,0,255));
+}
+
+void Formation::setListMask(int index)
+{
+    std::vector<FormationData> ids=this->groups.at(index);
+    //先把所有遮罩隐藏
+    for(int i=0;i<this->rotateList->getItems().size();i++){
+        Widget* widget=this->rotateList->getItems().at(i);
+        //Mask* mask=static_cast<Mask*>(widget->getChildByName("mask"));
+        Widget* img_on=(Widget*)widget->getChildByName("img_on");
+        img_on->setVisible(false);
+        //mask->hide();
+    }
+    for(int i=0;i<ids.size();i++)
+    {
+        PNpc* npc=Manager::getInstance()->getNpc(ids.at(i).npcId);
+        //如果npc的id与item的tag一致就显示
+        for(int j=0;j<this->rotateList->getItems().size();j++){
+            Widget* widget=this->rotateList->getItems().at(j);
+            //Mask* mask=static_cast<Mask*>(widget->getChildByName("mask"));
+            //log(widget->getTag());
+            PNpc* pNpc=Manager::getInstance()->getNpc(this->npcs.at(widget->getTag()%10000).npcId);
+            if (pNpc->npcid()==npc->npcid()) {
+                Widget* img_on=(Widget*)widget->getChildByName("img_on");
+                img_on->setVisible(true);
+                //mask->show();
+                break;
+            }
+        }
+    }
+
+}
+
+bool Formation::isInFormation(int64 npcId)
+{
+    std::vector<FormationData> ids=this->groups.at(this->pageView->getCurPageIndex());
+    for(int i=0;i<ids.size();i++){
+        if (ids.at(i).npcId==npcId) {
+            return true;
+            break;
+        }
+    }
+    return  false;
+}
+
+void Formation::changeGroup(int64 npcId,int groupIndex,bool isFormation)
+{
+    
+    std::vector<FormationData> ids=this->groups.at(groupIndex);
+    std::vector<FormationData>::iterator it = ids.begin();
+    
+    bool isFound=false;
+    int index=0;
+    for (; it !=ids.end(); ++it)
+    {
+        index=index+1;
+        if (FormationData(*it).npcId==npcId) {
+            if (isFormation) {
+                ids.erase(it);
+            }
+            isFound=true;
+            break;
+        }
+    }
+    if (!isFormation) {
+        ids.push_back(FormationData{npcId,1});
+        
+    }
+    this->isSave=true;
+    sort(ids.begin(), ids.end(), this->sortIds);
+    this->groups.at(groupIndex)=ids;
+    this->setListMask(groupIndex);
+    this->initGroup(groupIndex,false);
+}
+
+bool Formation::sortIds(FormationData fd1,FormationData fd2)
+{
+    PNpc* pNpc1=Manager::getInstance()->getNpc(fd1.npcId);
+    PNpc* pNpc2=Manager::getInstance()->getNpc(fd2.npcId);
+    if (fd1.isFormation!=fd2.isFormation) {
+        return fd1.isFormation>fd2.isFormation;
+    }else if (pNpc1->level()!=pNpc2->level()) {
+        return pNpc1->level()>pNpc2->level();
+    }else if (pNpc1->quality()!=pNpc2->quality()){
+        return pNpc1->quality()>pNpc2->quality();
+    }else if (pNpc1->star()!=pNpc2->star()){
+        return pNpc1->star()>pNpc2->star();
+    }else{
+        return pNpc1->npcid()<pNpc2->npcid();
+    }
+    
+    return  true;
+}
+
+void Formation::initGroup(int groupIndex,bool isInit)
+{
+    std::vector<FormationData> ids=this->groups.at(groupIndex);
+    Layout* subPage=this->pageView->getPage(groupIndex);
+    for(int i=0;i<5;i++)
+    {
+        Widget* img=static_cast<Widget*>(subPage->getChildByName("img_"+Value((i+1)).asString()));
+        ImageView* icon=(ImageView*)img->getChildByName("icon");
+        Text* txt=static_cast<Text*>(icon->getChildByName("txt_lvl"));
+        icon->setVisible(i<ids.size());
+        if (i<ids.size()) {
+            PNpc* pNpc=Manager::getInstance()->getNpc(ids.at(i).npcId);
+            XRole* xRole=XRole::record(Value(pNpc->spriteid()));
+            icon->loadTexture("face_"+Value(xRole->getId()).asString()+".png");
+            txt->setString(Value(pNpc->level()).asString());
+        }
+        
+        if (isInit) {
+            img->setTouchEnabled(true);
+            img->setEnabled(true);
+            img->addTouchEventListener(CC_CALLBACK_2(Formation::touchEvent, this));
+        }
+        img->setTag((i+1)*10000+i);
+        
+        PNpc* pnpc;
+        if (i<ids.size()) {
+            pnpc=Manager::getInstance()->getNpc(ids.at(i).npcId);
+        }else{
+            pnpc=nullptr;
+        }
+        ImageView* imageView=static_cast<ImageView*>(img->getChildByName("frame"));
+        //imageView->loadTexture("frame_0.png");
+        imageView->loadTexture(pnpc?"frame_"+Value(Manager::getInstance()->Qualitys[pnpc->quality()].color).asString()+".png":"frame_0.png");
+        for(int j=1;j<7;j++){
+            ImageView* imageView=static_cast<ImageView*>(img->getChildByName("star_"+Value(j).asString()));
+            imageView->setVisible(i<ids.size());
+            imageView->setLocalZOrder(7-j);
+            if (pnpc) {
+                imageView->loadTexture(j<=pnpc->star()?"star_1.png":"star_2.png");
+            }
+        }
+    }
+}
+
+void Formation::rotateListCallback(RotateList::EventType type,Widget*item,int index)
+{
+    switch (type)
+    {
+        //移到中间处理
+        case RotateList::EventType::SCROLL_MIDDLE:
+        {
+            //item->setBrightStyle(BrightStyle::NONE);
+//            int bValue=200;
+//            Color3B color3B=item->getColor();
+//            int intR = color3B.r;
+//            int intG = color3B.g;
+//            int intB = color3B.b;
+//            intR = intR + (255 - intR) * bValue / 255;
+//            intG = intG + (255 - intG) * bValue / 255;
+//            intB = intB + (255 - intB) * bValue / 255;
+//            item->setColor(Color3B(intR,intG,intB));
+            break;
+        }
+        //点击中间list
+        case RotateList::EventType::TOUCH_ITEM:
+        {
+            PNpc* pNpc=Manager::getInstance()->getNpc(this->npcs.at(index).npcId);
+            XRole* xRole=XRole::record(Value(pNpc->spriteid()));
+            if (xRole->getIsRole()) {
+                Manager::getInstance()->showMsg("主将不能下阵");
+                return;
+            }
+            //Mask* mask=static_cast<Mask*>(item->getChildByName("mask"));
+            Widget* img_on=(Widget*)item->getChildByName("img_on");
+            //通过mask的显示不显示判断是上阵还是下阵
+            bool isDown=img_on->isVisible()?true:false;
+            Widget* subPage=this->pageView->getPage(this->pageView->getCurPageIndex());
+            Widget* img=static_cast<Widget*>(subPage->getChildByName("img_1"));
+            ImageView* icon=(ImageView*)img->getChildByName("icon");
+            icon->loadTexture("face_"+Value(xRole->getId()).asString()+".png");
+            Widget* iconClone=icon->clone();
+            this->displayAction(iconClone, isDown);
+            this->changeGroup(pNpc->npcid(), int(this->pageView->getCurPageIndex()), img_on->isVisible());
+            break;
+        }
+        //
+        case RotateList::EventType::SET_ITEM_DATA:
+        {
+//            Mask* mask=static_cast<Mask*>(item->getChildByName("mask"));
+//            if (!mask) {
+//                mask=Mask::create(item->getSize());
+//                mask->setName("mask");
+//                item->addChild(mask);
+//                mask->setTouchEnabled(true);
+//                mask->setEnabled(false);
+//            }
+            item->setTag(100000+index);
+            Widget* img_on=(Widget*)item->getChildByName("img_on");
+            img_on->setLocalZOrder(1);
+            PNpc* pNpc=Manager::getInstance()->getNpc(this->npcs.at(index).npcId);
+            item->setTag(100000+index);
+            img_on->setVisible(this->npcs.at(index).isFormation);
+//            if (this->npcs.at(index).isFormation) {
+//                mask->hide();
+//            }else{
+//                mask->hide();
+//            }
+            XRole* xRole=XRole::record(Value(pNpc->spriteid()));
+            static_cast<Text*>(item->getChildByName("txt_name"))->setString(xRole->getIsRole()?Manager::getInstance()->getRoleData()->role().rolename():xRole->getName());
+            for(int i=1;i<7;i++){
+                ImageView* imageView=static_cast<ImageView*>(item->getChildByName("star_"+Value(i).asString()));
+                imageView->loadTexture(i<=pNpc->star()?"star_1.png":"star_2.png");
+            }
+            static_cast<Text*>(item->getChildByName("txt_lvl"))->setString(Value(pNpc->level()).asString());
+            ImageView* imageView=static_cast<ImageView*>(item->getChildByName("img_frame"));
+            imageView->loadTexture("hero_cardframe_"+Value(Manager::getInstance()->Qualitys[pNpc->quality()].color).asString()+".png");
+            break;
+        }
+        default:
+            break;
+            
+    }
+}
+
+void Formation::displayAction(Widget* widget,bool isDown)
+{
+    auto widgetSize = Director::getInstance()->getWinSize();
+    widget->setVisible(true);
+    Vec2 startP=Vec2(widgetSize.width/2, widgetSize.height/2-100);
+    Vec2 endP=Vec2(widgetSize.width/2,widgetSize.height/2);
+    widget->setPosition(isDown?startP:endP);
+    this->addChild(widget);
+    widget->runAction(Sequence::create(Spawn::create(
+                                                     MoveTo::create(0.5, isDown?endP:startP),
+                                                    FadeOut::create(0.5),NULL),
+                                      CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, widget)),NULL));
+}
+
+void Formation::pageViewEvent(Ref *pSender, PageView::EventType type)
+{
+    switch (type)
+    {
+        case PageView::EventType::TURNING:
+        {
+            if (this->currentPageIndex==int(pageView->getCurPageIndex())) {
+                return;
+            }
+            this->currentPageIndex=int(pageView->getCurPageIndex());
+            this->initList();
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+void Formation::touchButtonEvent(Ref *pSender, TouchEventType type)
+{
+    auto btn=static_cast<Button*>(pSender);
+    if (!btn||type!=TouchEventType::ENDED) {
+        return;
+    }
+    //返回按钮
+    switch (btn->getTag()) {
+        case 12215:
+        {
+            if (!this->isSave) {
+                this->clear(true);
+                return;
+            }
+            PSaveGroups pgroups;
+            for (int i=0; i<groups.size(); i++) {
+                PGroup* group=new PGroup;
+                group->set_groupid(i);
+                std::vector<FormationData> ids=groups.at(i);
+                for (int j=0; j<ids.size(); j++) {
+                    group->add_npcid(ids.at(j).npcId);
+                }
+                pgroups.mutable_groups()->AddAllocated(group);
+            }
+            Manager::getInstance()->socket->send(C_SAVEFORMATION, &pgroups);
+            break;
+        }
+        case 12873:
+        {
+             this->pageView->scrollToPage(this->pageView->getCurPageIndex()>=4?0:this->pageView->getCurPageIndex()+1);
+            break;
+        }
+        case 13086://全部
+        {
+            this->currentPos=-1;
+            this->initList();
+            break;
+        }
+        case 13087://前排
+        {
+            this->currentPos=0;
+            this->initList();
+            break;
+        }
+        case 13089://中排
+        {
+            this->currentPos=1;
+            this->initList();
+            break;
+        }
+        case 13091://后排
+        {
+            this->currentPos=2;
+            this->initList();
+          break;
+        }
+        default:
+            break;
+    }
+}
+
+void Formation::updateGroups(const std::vector<std::vector<FormationData>> groups)
+{
+    for (int i=0; i<groups.size(); i++) {
+        PGroup* group=Manager::getInstance()->getRoleData()->mutable_groups(i);
+        group->set_groupid(i);
+        std::vector<FormationData> ids=groups.at(i);
+        //为了清空旧的数据
+        for (int j=0; j<5; j++) {
+            if (j<group->npcid_size()) {
+                //如果j小于旧的数组长度就用set 如果大于旧的长度就得用add
+                group->set_npcid(j, (j<ids.size()?ids.at(j).npcId:0));
+            }else{
+                group->add_npcid((j<ids.size()?ids.at(j).npcId:0));
+            }
+            
+        }
+    }
+}
+
+void Formation::touchEvent(Ref *pSender, TouchEventType type)
+{
+    if (type!=TouchEventType::ENDED) {
+        return;
+    }
+    
+
+    Widget* widget=static_cast<Widget*>(pSender);
+    int index=widget->getTag()%10000;
+    
+    std::vector<FormationData> ids=this->groups.at(this->pageView->getCurPageIndex());
+    if (index>=ids.size()) {
+        return;
+    }
+    PNpc* pNpc=Manager::getInstance()->getNpc(ids.at(index).npcId);
+    XRole* xRole=XRole::record(Value(pNpc->spriteid()));
+    if (xRole->getIsRole()) {
+        Manager::getInstance()->showMsg("主将不能下阵");
+        return;
+    }
+    Widget* icon=(Widget*)widget->getChildByName("icon");
+    this->displayAction(icon->clone(),true);
+    this->changeGroup(pNpc->npcid(), int(this->pageView->getCurPageIndex()), true);
+    
+}
+
+void Formation::initNetEvent(){
+    auto listener = EventListenerCustom::create(NET_MESSAGE, [=](EventCustom* event){
+        NetMsg* msg = static_cast<NetMsg*>(event->getUserData());
+        switch (msg->msgId)
+        {
+            case C_COMMONMSG:
+            {
+                PCommonResp pCommonResp;
+                pCommonResp.ParseFromArray(msg->bytes, msg->len);
+                if(pCommonResp.resulttype()==C_SAVEFORMATION){
+                    this->updateGroups(this->groups);
+                    this->clear(true);
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    });
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+    
+}
+
+void Formation::onExit()
+{
+    BaseUI::onExit();
+}

@@ -3,6 +3,7 @@
 #include "TestScene2.h"
 #include "Update.h"
 #include "TestShadeScene.h"
+#include "RaptorExample.h"
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
@@ -77,7 +78,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
 //    auto scene = TestScene2::createScene();
-
+//    auto scene=RaptorExample::scene();
     auto scene = LoginScene::createScene();
 //   auto scene = Update::createScene();
 

@@ -1,0 +1,36 @@
+option java_package = "com.doteyplay.game.message.proto";
+option java_outer_classname = "MailProBuf";
+
+
+message PMailItem{
+   required int64 itemId=1;//邮件id
+   required int32 type = 2;//类型  1:系统邮件，2:个人邮件
+   required string title=3;//标题
+   required string msg=4;//消息
+   repeated PReward itemList = 5;//奖励的物品
+   required int64 date = 6;//邮件发给我的日期
+}
+
+message PReward{
+   required int64 id=1;//id
+   required int32 type=2;//类型
+   required int32 number=3;//数量
+}
+
+message PReadMail{
+   required int64 itemId=1;//邮件id
+}
+
+message PMailItemList
+{
+	repeated PMailItem list=1;
+}
+
+message PMailList
+{
+
+}
+
+message PReadAllMail{
+   
+}

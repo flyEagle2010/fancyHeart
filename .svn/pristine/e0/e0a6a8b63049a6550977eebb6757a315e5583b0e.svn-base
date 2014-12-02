@@ -1,0 +1,97 @@
+//
+//  SkillIcon.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-9-24.
+//
+//
+
+#include "SkillIcon.h"
+
+SkillIcon* SkillIcon::create(ImageView* rim,int skillID,FighterMgr* hero)
+{
+    SkillIcon* pRet=new SkillIcon();
+    if(pRet && pRet->init(rim,skillID,hero)){
+        pRet->autorelease();
+        return pRet;
+    }
+    pRet->autorelease();
+    return nullptr;
+}
+
+bool SkillIcon::init(ImageView* rim,int skillID,FighterMgr* hero)
+{
+    this->skillID=skillID;
+    this->skill=Skill::create(skillID);
+    this->skill->fm=hero;
+    this->skill->retain();
+    
+    this->hero=hero;
+    this->setContentSize(rim->getContentSize());
+    
+    std::string fName="face_"+Value(hero->mf->data->bd.xid).asString()+".png";
+    this->icon=ImageView::create(fName);
+    this->icon->setPosition(rim->getPosition());
+    this->addChild(this->icon);
+    this->icon->setTouchEnabled(true);
+    
+    this->progressBar=ProgressTimer::create(Sprite::createWithSpriteFrameName("fight/combat_skill.png"));
+    this->progressBar->setPosition(rim->getPosition());
+    this->addChild(progressBar);
+    
+    this->progressBar->setPercentage(0.0);
+    
+    this->setName("icon");
+
+    return true;
+}
+
+void SkillIcon::start()
+{
+    this->skill->start();
+
+    this->progressBar->setPercentage(0.0);
+    
+    XSkill* xskill=XSkill::record(Value(skillID));
+    ProgressTo* pt=ProgressTo::create(xskill->getTriggerParam()/10000.0, 100.0);
+    this->progressBar->runAction(Sequence::create(pt,CallFunc::create(CC_CALLBACK_0(SkillIcon::skillReady, this)), NULL));
+}
+
+void SkillIcon::skillReady()
+{
+    this->skill->stop();
+//    this->skill->isReady=true;
+    this->progressBar->runAction(RepeatForever::create(Sequence::create(FadeTo::create(0.8,60),FadeTo::create(0.8,255), NULL)));
+}
+
+void SkillIcon::skillAttack()
+{
+    this->progressBar->stopAllActions();
+    this->progressBar->setPercentage(0);
+    this->hero->stopCast();;
+    log("skillID:%d",skill->skillID);
+    this->hero->view->stopActionByTag(ACTION_RUN_TAG);
+    this->hero->skill=this->skill;
+//    this->hero->attack();
+    this->hero->preHit();
+    
+    this->start();
+}
+
+void SkillIcon::heroDie()
+{
+    this->progressBar->stopAllActions();
+    this->progressBar->setPercentage(0);
+    this->skill->stop();
+//    this->skill->isReady=false;
+    
+    this->icon->setColor(Color3B(80, 80, 80));
+}
+
+void SkillIcon::onExit()
+{
+    Widget::onExit();
+    if(this->skill){
+        this->skill->release();
+    }
+}

@@ -11,9 +11,27 @@ public final class ChatProBuf {
   public interface PChatReqOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required string msg = 1;
+    // required int32 type = 1;
     /**
-     * <code>required string msg = 1;</code>
+     * <code>required int32 type = 1;</code>
+     *
+     * <pre>
+     *消息类型1功能2普通 
+     * </pre>
+     */
+    boolean hasType();
+    /**
+     * <code>required int32 type = 1;</code>
+     *
+     * <pre>
+     *消息类型1功能2普通 
+     * </pre>
+     */
+    int getType();
+
+    // required string msg = 2;
+    /**
+     * <code>required string msg = 2;</code>
      *
      * <pre>
      *消息
@@ -21,7 +39,7 @@ public final class ChatProBuf {
      */
     boolean hasMsg();
     /**
-     * <code>required string msg = 1;</code>
+     * <code>required string msg = 2;</code>
      *
      * <pre>
      *消息
@@ -29,7 +47,7 @@ public final class ChatProBuf {
      */
     java.lang.String getMsg();
     /**
-     * <code>required string msg = 1;</code>
+     * <code>required string msg = 2;</code>
      *
      * <pre>
      *消息
@@ -89,8 +107,13 @@ public final class ChatProBuf {
               }
               break;
             }
-            case 10: {
+            case 8: {
               bitField0_ |= 0x00000001;
+              type_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
               msg_ = input.readBytes();
               break;
             }
@@ -134,21 +157,45 @@ public final class ChatProBuf {
     }
 
     private int bitField0_;
-    // required string msg = 1;
-    public static final int MSG_FIELD_NUMBER = 1;
+    // required int32 type = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private int type_;
+    /**
+     * <code>required int32 type = 1;</code>
+     *
+     * <pre>
+     *消息类型1功能2普通 
+     * </pre>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 type = 1;</code>
+     *
+     * <pre>
+     *消息类型1功能2普通 
+     * </pre>
+     */
+    public int getType() {
+      return type_;
+    }
+
+    // required string msg = 2;
+    public static final int MSG_FIELD_NUMBER = 2;
     private java.lang.Object msg_;
     /**
-     * <code>required string msg = 1;</code>
+     * <code>required string msg = 2;</code>
      *
      * <pre>
      *消息
      * </pre>
      */
     public boolean hasMsg() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required string msg = 1;</code>
+     * <code>required string msg = 2;</code>
      *
      * <pre>
      *消息
@@ -169,7 +216,7 @@ public final class ChatProBuf {
       }
     }
     /**
-     * <code>required string msg = 1;</code>
+     * <code>required string msg = 2;</code>
      *
      * <pre>
      *消息
@@ -190,6 +237,7 @@ public final class ChatProBuf {
     }
 
     private void initFields() {
+      type_ = 0;
       msg_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -197,6 +245,10 @@ public final class ChatProBuf {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       if (!hasMsg()) {
         memoizedIsInitialized = 0;
         return false;
@@ -209,7 +261,10 @@ public final class ChatProBuf {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getMsgBytes());
+        output.writeInt32(1, type_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getMsgBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -222,7 +277,11 @@ public final class ChatProBuf {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getMsgBytes());
+          .computeInt32Size(1, type_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getMsgBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -340,8 +399,10 @@ public final class ChatProBuf {
 
       public Builder clear() {
         super.clear();
-        msg_ = "";
+        type_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        msg_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -373,6 +434,10 @@ public final class ChatProBuf {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
         result.msg_ = msg_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -390,8 +455,11 @@ public final class ChatProBuf {
 
       public Builder mergeFrom(com.doteyplay.game.message.proto.ChatProBuf.PChatReq other) {
         if (other == com.doteyplay.game.message.proto.ChatProBuf.PChatReq.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          setType(other.getType());
+        }
         if (other.hasMsg()) {
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
           msg_ = other.msg_;
           onChanged();
         }
@@ -400,6 +468,10 @@ public final class ChatProBuf {
       }
 
       public final boolean isInitialized() {
+        if (!hasType()) {
+          
+          return false;
+        }
         if (!hasMsg()) {
           
           return false;
@@ -426,20 +498,69 @@ public final class ChatProBuf {
       }
       private int bitField0_;
 
-      // required string msg = 1;
+      // required int32 type = 1;
+      private int type_ ;
+      /**
+       * <code>required int32 type = 1;</code>
+       *
+       * <pre>
+       *消息类型1功能2普通 
+       * </pre>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 type = 1;</code>
+       *
+       * <pre>
+       *消息类型1功能2普通 
+       * </pre>
+       */
+      public int getType() {
+        return type_;
+      }
+      /**
+       * <code>required int32 type = 1;</code>
+       *
+       * <pre>
+       *消息类型1功能2普通 
+       * </pre>
+       */
+      public Builder setType(int value) {
+        bitField0_ |= 0x00000001;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 type = 1;</code>
+       *
+       * <pre>
+       *消息类型1功能2普通 
+       * </pre>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required string msg = 2;
       private java.lang.Object msg_ = "";
       /**
-       * <code>required string msg = 1;</code>
+       * <code>required string msg = 2;</code>
        *
        * <pre>
        *消息
        * </pre>
        */
       public boolean hasMsg() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required string msg = 1;</code>
+       * <code>required string msg = 2;</code>
        *
        * <pre>
        *消息
@@ -457,7 +578,7 @@ public final class ChatProBuf {
         }
       }
       /**
-       * <code>required string msg = 1;</code>
+       * <code>required string msg = 2;</code>
        *
        * <pre>
        *消息
@@ -477,7 +598,7 @@ public final class ChatProBuf {
         }
       }
       /**
-       * <code>required string msg = 1;</code>
+       * <code>required string msg = 2;</code>
        *
        * <pre>
        *消息
@@ -488,26 +609,26 @@ public final class ChatProBuf {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000002;
         msg_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string msg = 1;</code>
+       * <code>required string msg = 2;</code>
        *
        * <pre>
        *消息
        * </pre>
        */
       public Builder clearMsg() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         msg_ = getDefaultInstance().getMsg();
         onChanged();
         return this;
       }
       /**
-       * <code>required string msg = 1;</code>
+       * <code>required string msg = 2;</code>
        *
        * <pre>
        *消息
@@ -518,7 +639,7 @@ public final class ChatProBuf {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000002;
         msg_ = value;
         onChanged();
         return this;
@@ -1054,6 +1175,1391 @@ public final class ChatProBuf {
     // @@protoc_insertion_point(class_scope:PChatResp)
   }
 
+  public interface PChatUpdateOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 msgType = 1;
+    /**
+     * <code>required int32 msgType = 1;</code>
+     *
+     * <pre>
+     *0玩家消息1系统消息2工会消息3活动消息
+     * </pre>
+     */
+    boolean hasMsgType();
+    /**
+     * <code>required int32 msgType = 1;</code>
+     *
+     * <pre>
+     *0玩家消息1系统消息2工会消息3活动消息
+     * </pre>
+     */
+    int getMsgType();
+
+    // required string msgName = 2;
+    /**
+     * <code>required string msgName = 2;</code>
+     *
+     * <pre>
+     *玩家名字
+     * </pre>
+     */
+    boolean hasMsgName();
+    /**
+     * <code>required string msgName = 2;</code>
+     *
+     * <pre>
+     *玩家名字
+     * </pre>
+     */
+    java.lang.String getMsgName();
+    /**
+     * <code>required string msgName = 2;</code>
+     *
+     * <pre>
+     *玩家名字
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getMsgNameBytes();
+
+    // required int64 roleId = 3;
+    /**
+     * <code>required int64 roleId = 3;</code>
+     */
+    boolean hasRoleId();
+    /**
+     * <code>required int64 roleId = 3;</code>
+     */
+    long getRoleId();
+
+    // required string msg = 4;
+    /**
+     * <code>required string msg = 4;</code>
+     *
+     * <pre>
+     *消息内容
+     * </pre>
+     */
+    boolean hasMsg();
+    /**
+     * <code>required string msg = 4;</code>
+     *
+     * <pre>
+     *消息内容
+     * </pre>
+     */
+    java.lang.String getMsg();
+    /**
+     * <code>required string msg = 4;</code>
+     *
+     * <pre>
+     *消息内容
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getMsgBytes();
+  }
+  /**
+   * Protobuf type {@code PChatUpdate}
+   */
+  public static final class PChatUpdate extends
+      com.google.protobuf.GeneratedMessage
+      implements PChatUpdateOrBuilder {
+    // Use PChatUpdate.newBuilder() to construct.
+    private PChatUpdate(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PChatUpdate(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PChatUpdate defaultInstance;
+    public static PChatUpdate getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PChatUpdate getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PChatUpdate(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              msgType_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              msgName_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              roleId_ = input.readInt64();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              msg_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.ChatProBuf.internal_static_PChatUpdate_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.ChatProBuf.internal_static_PChatUpdate_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate.class, com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PChatUpdate> PARSER =
+        new com.google.protobuf.AbstractParser<PChatUpdate>() {
+      public PChatUpdate parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PChatUpdate(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PChatUpdate> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 msgType = 1;
+    public static final int MSGTYPE_FIELD_NUMBER = 1;
+    private int msgType_;
+    /**
+     * <code>required int32 msgType = 1;</code>
+     *
+     * <pre>
+     *0玩家消息1系统消息2工会消息3活动消息
+     * </pre>
+     */
+    public boolean hasMsgType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 msgType = 1;</code>
+     *
+     * <pre>
+     *0玩家消息1系统消息2工会消息3活动消息
+     * </pre>
+     */
+    public int getMsgType() {
+      return msgType_;
+    }
+
+    // required string msgName = 2;
+    public static final int MSGNAME_FIELD_NUMBER = 2;
+    private java.lang.Object msgName_;
+    /**
+     * <code>required string msgName = 2;</code>
+     *
+     * <pre>
+     *玩家名字
+     * </pre>
+     */
+    public boolean hasMsgName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string msgName = 2;</code>
+     *
+     * <pre>
+     *玩家名字
+     * </pre>
+     */
+    public java.lang.String getMsgName() {
+      java.lang.Object ref = msgName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          msgName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string msgName = 2;</code>
+     *
+     * <pre>
+     *玩家名字
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getMsgNameBytes() {
+      java.lang.Object ref = msgName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // required int64 roleId = 3;
+    public static final int ROLEID_FIELD_NUMBER = 3;
+    private long roleId_;
+    /**
+     * <code>required int64 roleId = 3;</code>
+     */
+    public boolean hasRoleId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int64 roleId = 3;</code>
+     */
+    public long getRoleId() {
+      return roleId_;
+    }
+
+    // required string msg = 4;
+    public static final int MSG_FIELD_NUMBER = 4;
+    private java.lang.Object msg_;
+    /**
+     * <code>required string msg = 4;</code>
+     *
+     * <pre>
+     *消息内容
+     * </pre>
+     */
+    public boolean hasMsg() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required string msg = 4;</code>
+     *
+     * <pre>
+     *消息内容
+     * </pre>
+     */
+    public java.lang.String getMsg() {
+      java.lang.Object ref = msg_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          msg_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string msg = 4;</code>
+     *
+     * <pre>
+     *消息内容
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getMsgBytes() {
+      java.lang.Object ref = msg_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msg_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      msgType_ = 0;
+      msgName_ = "";
+      roleId_ = 0L;
+      msg_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasMsgType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasMsgName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRoleId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasMsg()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, msgType_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getMsgNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, roleId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getMsgBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, msgType_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getMsgNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, roleId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getMsgBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PChatUpdate}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.ChatProBuf.PChatUpdateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.ChatProBuf.internal_static_PChatUpdate_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.ChatProBuf.internal_static_PChatUpdate_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate.class, com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        msgType_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        msgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        roleId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        msg_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.ChatProBuf.internal_static_PChatUpdate_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate build() {
+        com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate buildPartial() {
+        com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate result = new com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.msgType_ = msgType_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.msgName_ = msgName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.roleId_ = roleId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.msg_ = msg_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate) {
+          return mergeFrom((com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate other) {
+        if (other == com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate.getDefaultInstance()) return this;
+        if (other.hasMsgType()) {
+          setMsgType(other.getMsgType());
+        }
+        if (other.hasMsgName()) {
+          bitField0_ |= 0x00000002;
+          msgName_ = other.msgName_;
+          onChanged();
+        }
+        if (other.hasRoleId()) {
+          setRoleId(other.getRoleId());
+        }
+        if (other.hasMsg()) {
+          bitField0_ |= 0x00000008;
+          msg_ = other.msg_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasMsgType()) {
+          
+          return false;
+        }
+        if (!hasMsgName()) {
+          
+          return false;
+        }
+        if (!hasRoleId()) {
+          
+          return false;
+        }
+        if (!hasMsg()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.ChatProBuf.PChatUpdate) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 msgType = 1;
+      private int msgType_ ;
+      /**
+       * <code>required int32 msgType = 1;</code>
+       *
+       * <pre>
+       *0玩家消息1系统消息2工会消息3活动消息
+       * </pre>
+       */
+      public boolean hasMsgType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 msgType = 1;</code>
+       *
+       * <pre>
+       *0玩家消息1系统消息2工会消息3活动消息
+       * </pre>
+       */
+      public int getMsgType() {
+        return msgType_;
+      }
+      /**
+       * <code>required int32 msgType = 1;</code>
+       *
+       * <pre>
+       *0玩家消息1系统消息2工会消息3活动消息
+       * </pre>
+       */
+      public Builder setMsgType(int value) {
+        bitField0_ |= 0x00000001;
+        msgType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 msgType = 1;</code>
+       *
+       * <pre>
+       *0玩家消息1系统消息2工会消息3活动消息
+       * </pre>
+       */
+      public Builder clearMsgType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        msgType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required string msgName = 2;
+      private java.lang.Object msgName_ = "";
+      /**
+       * <code>required string msgName = 2;</code>
+       *
+       * <pre>
+       *玩家名字
+       * </pre>
+       */
+      public boolean hasMsgName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string msgName = 2;</code>
+       *
+       * <pre>
+       *玩家名字
+       * </pre>
+       */
+      public java.lang.String getMsgName() {
+        java.lang.Object ref = msgName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          msgName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string msgName = 2;</code>
+       *
+       * <pre>
+       *玩家名字
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getMsgNameBytes() {
+        java.lang.Object ref = msgName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string msgName = 2;</code>
+       *
+       * <pre>
+       *玩家名字
+       * </pre>
+       */
+      public Builder setMsgName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        msgName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string msgName = 2;</code>
+       *
+       * <pre>
+       *玩家名字
+       * </pre>
+       */
+      public Builder clearMsgName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        msgName_ = getDefaultInstance().getMsgName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string msgName = 2;</code>
+       *
+       * <pre>
+       *玩家名字
+       * </pre>
+       */
+      public Builder setMsgNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        msgName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required int64 roleId = 3;
+      private long roleId_ ;
+      /**
+       * <code>required int64 roleId = 3;</code>
+       */
+      public boolean hasRoleId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int64 roleId = 3;</code>
+       */
+      public long getRoleId() {
+        return roleId_;
+      }
+      /**
+       * <code>required int64 roleId = 3;</code>
+       */
+      public Builder setRoleId(long value) {
+        bitField0_ |= 0x00000004;
+        roleId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int64 roleId = 3;</code>
+       */
+      public Builder clearRoleId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        roleId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required string msg = 4;
+      private java.lang.Object msg_ = "";
+      /**
+       * <code>required string msg = 4;</code>
+       *
+       * <pre>
+       *消息内容
+       * </pre>
+       */
+      public boolean hasMsg() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required string msg = 4;</code>
+       *
+       * <pre>
+       *消息内容
+       * </pre>
+       */
+      public java.lang.String getMsg() {
+        java.lang.Object ref = msg_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          msg_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string msg = 4;</code>
+       *
+       * <pre>
+       *消息内容
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getMsgBytes() {
+        java.lang.Object ref = msg_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msg_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string msg = 4;</code>
+       *
+       * <pre>
+       *消息内容
+       * </pre>
+       */
+      public Builder setMsg(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        msg_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string msg = 4;</code>
+       *
+       * <pre>
+       *消息内容
+       * </pre>
+       */
+      public Builder clearMsg() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        msg_ = getDefaultInstance().getMsg();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string msg = 4;</code>
+       *
+       * <pre>
+       *消息内容
+       * </pre>
+       */
+      public Builder setMsgBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        msg_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PChatUpdate)
+    }
+
+    static {
+      defaultInstance = new PChatUpdate(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PChatUpdate)
+  }
+
+  public interface PChatTagOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 type = 1;
+    /**
+     * <code>required int32 type = 1;</code>
+     *
+     * <pre>
+     *1开启2关闭
+     * </pre>
+     */
+    boolean hasType();
+    /**
+     * <code>required int32 type = 1;</code>
+     *
+     * <pre>
+     *1开启2关闭
+     * </pre>
+     */
+    int getType();
+  }
+  /**
+   * Protobuf type {@code PChatTag}
+   */
+  public static final class PChatTag extends
+      com.google.protobuf.GeneratedMessage
+      implements PChatTagOrBuilder {
+    // Use PChatTag.newBuilder() to construct.
+    private PChatTag(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PChatTag(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PChatTag defaultInstance;
+    public static PChatTag getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PChatTag getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PChatTag(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              type_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.doteyplay.game.message.proto.ChatProBuf.internal_static_PChatTag_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.doteyplay.game.message.proto.ChatProBuf.internal_static_PChatTag_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.doteyplay.game.message.proto.ChatProBuf.PChatTag.class, com.doteyplay.game.message.proto.ChatProBuf.PChatTag.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PChatTag> PARSER =
+        new com.google.protobuf.AbstractParser<PChatTag>() {
+      public PChatTag parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PChatTag(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PChatTag> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 type = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private int type_;
+    /**
+     * <code>required int32 type = 1;</code>
+     *
+     * <pre>
+     *1开启2关闭
+     * </pre>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 type = 1;</code>
+     *
+     * <pre>
+     *1开启2关闭
+     * </pre>
+     */
+    public int getType() {
+      return type_;
+    }
+
+    private void initFields() {
+      type_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, type_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, type_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatTag parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatTag parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatTag parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatTag parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatTag parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatTag parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatTag parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatTag parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatTag parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.doteyplay.game.message.proto.ChatProBuf.PChatTag parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.doteyplay.game.message.proto.ChatProBuf.PChatTag prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PChatTag}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.doteyplay.game.message.proto.ChatProBuf.PChatTagOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.doteyplay.game.message.proto.ChatProBuf.internal_static_PChatTag_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.doteyplay.game.message.proto.ChatProBuf.internal_static_PChatTag_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.doteyplay.game.message.proto.ChatProBuf.PChatTag.class, com.doteyplay.game.message.proto.ChatProBuf.PChatTag.Builder.class);
+      }
+
+      // Construct using com.doteyplay.game.message.proto.ChatProBuf.PChatTag.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        type_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.doteyplay.game.message.proto.ChatProBuf.internal_static_PChatTag_descriptor;
+      }
+
+      public com.doteyplay.game.message.proto.ChatProBuf.PChatTag getDefaultInstanceForType() {
+        return com.doteyplay.game.message.proto.ChatProBuf.PChatTag.getDefaultInstance();
+      }
+
+      public com.doteyplay.game.message.proto.ChatProBuf.PChatTag build() {
+        com.doteyplay.game.message.proto.ChatProBuf.PChatTag result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.doteyplay.game.message.proto.ChatProBuf.PChatTag buildPartial() {
+        com.doteyplay.game.message.proto.ChatProBuf.PChatTag result = new com.doteyplay.game.message.proto.ChatProBuf.PChatTag(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.type_ = type_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.doteyplay.game.message.proto.ChatProBuf.PChatTag) {
+          return mergeFrom((com.doteyplay.game.message.proto.ChatProBuf.PChatTag)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.doteyplay.game.message.proto.ChatProBuf.PChatTag other) {
+        if (other == com.doteyplay.game.message.proto.ChatProBuf.PChatTag.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasType()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.doteyplay.game.message.proto.ChatProBuf.PChatTag parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.doteyplay.game.message.proto.ChatProBuf.PChatTag) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 type = 1;
+      private int type_ ;
+      /**
+       * <code>required int32 type = 1;</code>
+       *
+       * <pre>
+       *1开启2关闭
+       * </pre>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 type = 1;</code>
+       *
+       * <pre>
+       *1开启2关闭
+       * </pre>
+       */
+      public int getType() {
+        return type_;
+      }
+      /**
+       * <code>required int32 type = 1;</code>
+       *
+       * <pre>
+       *1开启2关闭
+       * </pre>
+       */
+      public Builder setType(int value) {
+        bitField0_ |= 0x00000001;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 type = 1;</code>
+       *
+       * <pre>
+       *1开启2关闭
+       * </pre>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PChatTag)
+    }
+
+    static {
+      defaultInstance = new PChatTag(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PChatTag)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_PChatReq_descriptor;
   private static
@@ -1064,6 +2570,16 @@ public final class ChatProBuf {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_PChatResp_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PChatUpdate_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PChatUpdate_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PChatTag_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PChatTag_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1073,9 +2589,12 @@ public final class ChatProBuf {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nchat.proto\"\027\n\010PChatReq\022\013\n\003msg\030\001 \002(\t\"\030\n" +
-      "\tPChatResp\022\013\n\003msg\030\001 \001(\tB.\n com.doteyplay" +
-      ".game.message.protoB\nChatProBuf"
+      "\n\nchat.proto\"%\n\010PChatReq\022\014\n\004type\030\001 \002(\005\022\013" +
+      "\n\003msg\030\002 \002(\t\"\030\n\tPChatResp\022\013\n\003msg\030\001 \001(\t\"L\n" +
+      "\013PChatUpdate\022\017\n\007msgType\030\001 \002(\005\022\017\n\007msgName" +
+      "\030\002 \002(\t\022\016\n\006roleId\030\003 \002(\003\022\013\n\003msg\030\004 \002(\t\"\030\n\010P" +
+      "ChatTag\022\014\n\004type\030\001 \002(\005B.\n com.doteyplay.g" +
+      "ame.message.protoB\nChatProBuf"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1087,13 +2606,25 @@ public final class ChatProBuf {
           internal_static_PChatReq_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PChatReq_descriptor,
-              new java.lang.String[] { "Msg", });
+              new java.lang.String[] { "Type", "Msg", });
           internal_static_PChatResp_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_PChatResp_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PChatResp_descriptor,
               new java.lang.String[] { "Msg", });
+          internal_static_PChatUpdate_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_PChatUpdate_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PChatUpdate_descriptor,
+              new java.lang.String[] { "MsgType", "MsgName", "RoleId", "Msg", });
+          internal_static_PChatTag_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_PChatTag_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PChatTag_descriptor,
+              new java.lang.String[] { "Type", });
           return null;
         }
       };

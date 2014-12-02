@@ -1,0 +1,146 @@
+//
+//  GateMap.cpp
+//  fancyHeart
+//
+//  Created by zhai on 14-6-18.
+//
+//
+
+#include "GateMap.h"
+
+GateMap* GateMap::create(BaseUI* delegate,int  gateId)
+{
+    GateMap* gateMap=new GateMap();
+    if (gateMap && gateMap->init("publish/gateMap/gateMap.ExportJson",gateId)) {
+        gateMap->autorelease();
+        return gateMap;
+    }
+    CC_SAFE_DELETE(gateMap);
+    return nullptr;
+}
+
+bool GateMap::init(std::string fileName,int gateId)
+{
+	if(!BaseUI::init(fileName))
+	{
+		return false;
+	}
+    Manager::getInstance()->gateId=0;
+    this->resetUI(gateId);
+	return true;
+}
+
+void GateMap::onEnter()
+{
+    BaseUI::onEnter();
+}
+
+void GateMap::resetUI(int gateId)//init map
+{
+    auto size=Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
+    gateItem=Manager::getInstance()->getGateItem(gateId);
+    Widget* bgLayer=(Widget*)layout->getChildByName("bgLayer");
+    Button* button=static_cast<Button*>(bgLayer->getChildByName("btn_return"));
+    button->setLocalZOrder(2);
+    button->addTouchEventListener(CC_CALLBACK_2(GateMap::touchButtonEvent, this));
+    
+    Button* btn_send=static_cast<Button*>(bgLayer->getChildByName("btn_send"));
+    btn_send->setLocalZOrder(2);
+    btn_send->addTouchEventListener(CC_CALLBACK_2(GateMap::touchButtonEvent, this));
+    
+    
+    
+    XGate* xGate=XGate::record(Value(gateId));
+    string path="publish/map_100/map_100.ExportJson";
+    //地图
+    Layout* map=static_cast<Layout*>(cocostudio::GUIReader::getInstance()->widgetFromJsonFile(path.c_str()));
+    for (auto child:map->getChildren()) {
+        string name=child->getName();
+        if (name.find("img_")!=-1) {
+            child->setVisible(false);
+            int tag=gateId*100+child->getTag()%100;
+            child->setTag(tag);
+            static_cast<Widget*>(child)->setTouchEnabled(true);
+            static_cast<Widget*>(child)->addTouchEventListener(CC_CALLBACK_2(GateMap::touchEvent, this));
+            this->sprites.insert(child->getTag(), child);
+        }
+    }
+    bgLayer->addChild(map);
+//    //通过服务器传递的数据判断显示哪个
+    for (int i=0; i<gateItem->items_size(); i++) {
+        PNodeItem* nodeItem= gateItem->mutable_items(i);
+        Node*  sprite=this->sprites.at(nodeItem->xid());
+        if (sprite) {
+            XNode* xn=XNode::record(Value(nodeItem->xid()));
+            sprite->setVisible(xn->getDisplay()==0);
+        }
+    }
+
+    bgLayer->setTouchEnabled(true);
+    bgLayer->setEnabled(true);
+    bgLayer->addTouchEventListener(CC_CALLBACK_2(GateMap::touchEvent, this));
+}
+
+void GateMap::touchButtonEvent(Ref *pSender, TouchEventType type)
+{
+    auto btn=static_cast<Button*>(pSender);
+    if (!btn) {
+        return;
+    }
+    if (type==TouchEventType::ENDED) {
+        switch (btn->getTag()) {
+            case 10705:
+                this->clear(true);
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+//遍历所有显示对象，判断鼠标点击的位置是否在显示对象的区域内，来判断点击的哪个对象
+Node* GateMap::getTouchSprite(cocos2d::Vec2 pos)
+{
+    for(Map<int, Node*>::iterator it = this->sprites.begin(); it != this->sprites.end(); it++) {
+        auto sprite=it->second;
+        //全局坐标转换局部坐标
+        Vec2 nsp = sprite->convertToNodeSpace(pos);
+        Rect bb;
+        bb.size = sprite->getContentSize();
+        if (bb.containsPoint(nsp) && sprite->isVisible())
+        {
+            return sprite;
+        }
+    }
+    return nullptr;
+}
+
+void GateMap::touchEvent(Ref *pSender, TouchEventType type)
+{
+    Widget* widget=static_cast<Widget*>(pSender);
+    if(type==TouchEventType::BEGAN)
+    {
+        widget->stopAllActions();
+        widget->runAction(Sequence::create(ScaleTo::create(0.15,1.1),ScaleTo::create(0.15, 1),NULL) );
+    }
+    if(type==TouchEventType::ENDED)
+    {
+        if (widget) {
+            XNode* xn=XNode::record(Value(widget->getTag()));
+            if (xn->getType()==1) {//进战役
+                GateSelect* gateSelect=GateSelect::create(this, gateItem->gateid(),widget->getTag());
+                gateSelect->show(this);
+            }else if(xn->getType()==0){//进关卡
+                this->resetUI(xn->getGateID());
+            }
+        }
+        
+    }
+}
+
+void GateMap::onExit()
+{
+    this->sprites.clear();
+    BaseUI::onExit();
+}

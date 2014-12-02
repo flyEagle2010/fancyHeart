@@ -37,7 +37,6 @@ public:
     virtual bool init() override;
     //设置样式:此函数的参数分别是模版，正弦弧度的一个弧度的直线长度，弹窗大小，模版直接间距
     void setItemModel(Widget* model,float radius=0,Size panelSize = Size(0,0),float itemDistance=0);
-//    void setRoll(int index);//设置滚动到第几个在中间位置，从0起始
     
     Vector<Widget*>& getItems();//得到items
     void setNum(int num);
@@ -48,7 +47,6 @@ private:
     float goDistance;//触摸移动的横向位移
     int itemNum;//需要制作多少模版
 
-//    bool isBack;//是否回弹（当到最左边和最右边不能走到时候不能回弹）
     int tagNumAtMiddle;//在中间的模版的tag值,移动过程中此值为－1
 
     void startBounce();
@@ -77,11 +75,9 @@ protected:
     bool bePressed;
     float slidTime;
     Vec2 touchBeganPoint;
-//    Vec2 touchMovedPoint;
     Vec2 touchEndedPoint;
     Vec2 touchMovingPoint;
 
-    //virtual void checkChildInfo(int handleState,Widget* sender,const Vec2 &touchPoint);
     void interceptTouchEvent(Widget::TouchEventType event, Widget *sender, Touch *touch);
 
     float childFocusCancelOffset;
@@ -97,7 +93,6 @@ protected:
     float autoScrollAcceleration;//加速度
     bool autoScroll;
     float autoScrollAddUpTime;
-//    bool isBackScoll;
     int backStep;//自动走得步长
     float backDis;//卡牌需要走x坐标长度
     float endOffsetX;//最后停止前走得x坐标长度

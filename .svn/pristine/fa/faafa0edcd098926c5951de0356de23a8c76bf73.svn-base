@@ -1,0 +1,234 @@
+
+huLi.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 156, 73
+  size: 152, 181
+  orig: 152, 181
+  offset: 0, 0
+  index: -1
+10
+  rotate: true
+  xy: 640, 219
+  size: 35, 137
+  orig: 35, 137
+  offset: 0, 0
+  index: -1
+11
+  rotate: true
+  xy: 2, 20
+  size: 48, 140
+  orig: 48, 140
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 2, 70
+  size: 152, 184
+  orig: 152, 184
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 310, 75
+  size: 151, 179
+  orig: 151, 179
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 463, 105
+  size: 90, 149
+  orig: 90, 149
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 555, 158
+  size: 83, 96
+  orig: 83, 96
+  offset: 0, 0
+  index: -1
+6
+  rotate: false
+  xy: 237, 2
+  size: 74, 69
+  orig: 74, 69
+  offset: 0, 0
+  index: -1
+7
+  rotate: true
+  xy: 156, 2
+  size: 69, 79
+  orig: 69, 79
+  offset: 0, 0
+  index: -1
+8
+  rotate: false
+  xy: 313, 14
+  size: 73, 59
+  orig: 73, 59
+  offset: 0, 0
+  index: -1
+9
+  rotate: true
+  xy: 555, 110
+  size: 46, 66
+  orig: 46, 66
+  offset: 0, 0
+  index: -1
+yinying
+  rotate: false
+  xy: 640, 190
+  size: 119, 27
+  orig: 119, 27
+  offset: 0, 0
+  index: -1
+
+huLi2.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1/001
+  rotate: false
+  xy: 2, 2
+  size: 316, 208
+  orig: 316, 208
+  offset: 0, 0
+  index: -1
+1/002
+  rotate: false
+  xy: 320, 5
+  size: 316, 205
+  orig: 316, 205
+  offset: 0, 0
+  index: -1
+1/003
+  rotate: false
+  xy: 638, 5
+  size: 308, 205
+  orig: 308, 205
+  offset: 0, 0
+  index: -1
+
+huLi3.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+2/0
+  rotate: true
+  xy: 811, 5
+  size: 116, 83
+  orig: 116, 83
+  offset: 0, 0
+  index: -1
+2/1
+  rotate: true
+  xy: 719, 2
+  size: 119, 90
+  orig: 119, 90
+  offset: 0, 0
+  index: -1
+2/2
+  rotate: false
+  xy: 573, 29
+  size: 144, 92
+  orig: 144, 92
+  offset: 0, 0
+  index: -1
+2/3
+  rotate: false
+  xy: 2, 10
+  size: 144, 111
+  orig: 144, 111
+  offset: 0, 0
+  index: -1
+2/4
+  rotate: false
+  xy: 148, 10
+  size: 144, 111
+  orig: 144, 111
+  offset: 0, 0
+  index: -1
+2/5
+  rotate: false
+  xy: 294, 10
+  size: 144, 111
+  orig: 144, 111
+  offset: 0, 0
+  index: -1
+2/6
+  rotate: false
+  xy: 440, 14
+  size: 131, 107
+  orig: 131, 107
+  offset: 0, 0
+  index: -1
+2/7
+  rotate: false
+  xy: 896, 14
+  size: 84, 107
+  orig: 84, 107
+  offset: 0, 0
+  index: -1
+2/8
+  rotate: false
+  xy: 982, 52
+  size: 39, 69
+  orig: 39, 69
+  offset: 0, 0
+  index: -1
+
+huLi4.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+3/0
+  rotate: false
+  xy: 2, 2
+  size: 106, 124
+  orig: 106, 124
+  offset: 0, 0
+  index: -1
+3/1
+  rotate: false
+  xy: 326, 2
+  size: 105, 124
+  orig: 105, 124
+  offset: 0, 0
+  index: -1
+3/2
+  rotate: false
+  xy: 110, 2
+  size: 106, 124
+  orig: 106, 124
+  offset: 0, 0
+  index: -1
+3/3
+  rotate: false
+  xy: 433, 2
+  size: 105, 124
+  orig: 105, 124
+  offset: 0, 0
+  index: -1
+3/4
+  rotate: false
+  xy: 218, 2
+  size: 106, 124
+  orig: 106, 124
+  offset: 0, 0
+  index: -1
+3/5
+  rotate: false
+  xy: 540, 2
+  size: 101, 124
+  orig: 101, 124
+  offset: 0, 0
+  index: -1

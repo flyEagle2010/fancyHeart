@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <root name="服务器参数配置">
 	<service_id description="服id">11</service_id>
-	<server_area_id description="区id">1</server_area_id>
+	<server_area_id description="区id">2</server_area_id>
 	<server_area_name description="区name">主服务</server_area_name>
 	<server_port description="gameserver端口">2888</server_port>
 	<gm_server_port description="GM端口">5556</gm_server_port>

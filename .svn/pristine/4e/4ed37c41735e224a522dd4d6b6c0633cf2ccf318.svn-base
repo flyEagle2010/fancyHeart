@@ -1,0 +1,290 @@
+
+neZha.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+png/1
+  rotate: false
+  xy: 904, 866
+  size: 86, 70
+  orig: 86, 70
+  offset: 0, 0
+  index: -1
+png/10
+  rotate: false
+  xy: 904, 744
+  size: 26, 13
+  orig: 26, 13
+  offset: 0, 0
+  index: -1
+png/11
+  rotate: false
+  xy: 165, 214
+  size: 22, 20
+  orig: 22, 20
+  offset: 0, 0
+  index: -1
+png/12
+  rotate: false
+  xy: 904, 759
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+png/13
+  rotate: false
+  xy: 32, 56
+  size: 31, 31
+  orig: 31, 31
+  offset: 0, 0
+  index: -1
+png/14
+  rotate: false
+  xy: 32, 89
+  size: 63, 76
+  orig: 63, 76
+  offset: 0, 0
+  index: -1
+png/15
+  rotate: false
+  xy: 2, 41
+  size: 28, 193
+  orig: 28, 193
+  offset: 0, 0
+  index: -1
+png/16
+  rotate: false
+  xy: 120, 179
+  size: 43, 55
+  orig: 43, 55
+  offset: 0, 0
+  index: -1
+png/2
+  rotate: false
+  xy: 32, 167
+  size: 86, 67
+  orig: 86, 67
+  offset: 0, 0
+  index: -1
+png/3
+  rotate: false
+  xy: 904, 797
+  size: 86, 67
+  orig: 86, 67
+  offset: 0, 0
+  index: -1
+png/4
+  rotate: false
+  xy: 65, 67
+  size: 15, 20
+  orig: 15, 20
+  offset: 0, 0
+  index: -1
+png/5
+  rotate: false
+  xy: 2, 2
+  size: 20, 37
+  orig: 20, 37
+  offset: 0, 0
+  index: -1
+png/6
+  rotate: true
+  xy: 97, 139
+  size: 26, 21
+  orig: 26, 21
+  offset: 0, 0
+  index: -1
+png/7
+  rotate: false
+  xy: 942, 769
+  size: 12, 26
+  orig: 12, 26
+  offset: 0, 0
+  index: -1
+png/8
+  rotate: false
+  xy: 120, 150
+  size: 16, 27
+  orig: 16, 27
+  offset: 0, 0
+  index: -1
+png/9
+  rotate: false
+  xy: 992, 916
+  size: 29, 20
+  orig: 29, 20
+  offset: 0, 0
+  index: -1
+png/哪吒拆分 勾黑
+  rotate: false
+  xy: 2, 236
+  size: 900, 700
+  orig: 900, 700
+  offset: 0, 0
+  index: -1
+
+neZha2.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+png/1/0
+  rotate: false
+  xy: 2, 6
+  size: 205, 86
+  orig: 205, 86
+  offset: 0, 0
+  index: -1
+png/1/1
+  rotate: false
+  xy: 209, 2
+  size: 194, 90
+  orig: 194, 90
+  offset: 0, 0
+  index: -1
+png/1/2
+  rotate: false
+  xy: 405, 2
+  size: 165, 90
+  orig: 165, 90
+  offset: 0, 0
+  index: -1
+png/1/3
+  rotate: false
+  xy: 572, 2
+  size: 135, 90
+  orig: 135, 90
+  offset: 0, 0
+  index: -1
+png/1/4
+  rotate: false
+  xy: 709, 2
+  size: 130, 90
+  orig: 130, 90
+  offset: 0, 0
+  index: -1
+png/1/5
+  rotate: false
+  xy: 841, 25
+  size: 113, 67
+  orig: 113, 67
+  offset: 0, 0
+  index: -1
+
+neZha3.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+png/2/0
+  rotate: false
+  xy: 2, 2
+  size: 96, 103
+  orig: 96, 103
+  offset: 0, 0
+  index: -1
+png/2/1
+  rotate: false
+  xy: 100, 2
+  size: 96, 103
+  orig: 96, 103
+  offset: 0, 0
+  index: -1
+png/2/2
+  rotate: false
+  xy: 198, 2
+  size: 96, 103
+  orig: 96, 103
+  offset: 0, 0
+  index: -1
+png/2/3
+  rotate: false
+  xy: 296, 2
+  size: 96, 103
+  orig: 96, 103
+  offset: 0, 0
+  index: -1
+png/2/4
+  rotate: false
+  xy: 394, 2
+  size: 96, 103
+  orig: 96, 103
+  offset: 0, 0
+  index: -1
+png/2/5
+  rotate: false
+  xy: 492, 2
+  size: 96, 103
+  orig: 96, 103
+  offset: 0, 0
+  index: -1
+png/2/6
+  rotate: false
+  xy: 590, 2
+  size: 96, 103
+  orig: 96, 103
+  offset: 0, 0
+  index: -1
+png/2/7
+  rotate: false
+  xy: 688, 2
+  size: 96, 103
+  orig: 96, 103
+  offset: 0, 0
+  index: -1
+png/2/8
+  rotate: false
+  xy: 786, 2
+  size: 96, 103
+  orig: 96, 103
+  offset: 0, 0
+  index: -1
+png/2/9
+  rotate: false
+  xy: 884, 2
+  size: 96, 103
+  orig: 96, 103
+  offset: 0, 0
+  index: -1
+
+neZha4.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+png/3/10
+  rotate: false
+  xy: 2, 2
+  size: 130, 99
+  orig: 130, 99
+  offset: 0, 0
+  index: -1
+png/3/11
+  rotate: false
+  xy: 134, 2
+  size: 130, 99
+  orig: 130, 99
+  offset: 0, 0
+  index: -1
+png/3/12
+  rotate: false
+  xy: 266, 2
+  size: 130, 99
+  orig: 130, 99
+  offset: 0, 0
+  index: -1
+png/3/13
+  rotate: false
+  xy: 398, 2
+  size: 130, 99
+  orig: 130, 99
+  offset: 0, 0
+  index: -1
+png/3/14
+  rotate: false
+  xy: 530, 2
+  size: 130, 99
+  orig: 130, 99
+  offset: 0, 0
+  index: -1

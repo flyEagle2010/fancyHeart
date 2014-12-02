@@ -1,0 +1,25 @@
+package com.doteyplay.game.constants.account;
+
+import com.doteyplay.game.constants.IResponseTextId;
+
+public enum LoginResult implements IResponseTextId
+{
+	//成功
+	SUCCESS(0),
+	//身份认证失败
+	AUTH_FAIL(10001),;
+
+	private int textId;
+	
+	LoginResult(int textId)
+	{
+		this.textId = textId;
+	}
+	
+	@Override
+	public int getTextId()
+	{
+		return textId;
+	}
+	
+}

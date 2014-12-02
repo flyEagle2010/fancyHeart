@@ -20,8 +20,6 @@
 		<key>92b19e3d-607e-fa44-80d3-643f45140bef</key>
 		<string>../../../../../..</string>
 	</dict>
-	<key>IDESourceControlProjectURL</key>
-	<string>http://ql.qin@192.168.200.15:8080/svn/project2</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -30,7 +28,7 @@
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
+			<string>public.vcs.subversion</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>92b19e3d-607e-fa44-80d3-643f45140bef</string>
 			<key>IDESourceControlWCCName</key>
@@ -38,7 +36,7 @@
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.subversion</string>
+			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>92b19e3d-607e-fa44-80d3-643f45140bef</string>
 			<key>IDESourceControlWCCName</key>

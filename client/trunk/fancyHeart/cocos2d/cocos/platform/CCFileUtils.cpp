@@ -566,8 +566,11 @@ static Data getData(const std::string& filename, bool forString)
 std::string FileUtils::getStringFromFile(const std::string& filename)
 {
     Data data = getData(filename, true);
-    if (data.isNull())
+    
+    if (data.isNull()){
+        log("file %s, not find....................",filename.c_str());
     	return "";
+    }
     
     std::string ret((const char*)data.getBytes());
     return ret;

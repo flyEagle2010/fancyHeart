@@ -15,17 +15,28 @@
 #include "ui/CocosGUI.h"
 #include "cocostudio/CocoStudio.h"
 #include "RotateList.h"
+#include <spine/spine-cocos2dx.h>
 USING_NS_CC;
+using namespace spine;
+
 class TestScene2:public BaseUI{
 public:
 	static Scene* createScene();
 	virtual bool init();
 	CREATE_FUNC(TestScene2);
-//    virtual void onEnter();
     
     void listEvent(Ref* pSender, ScrollView::EventType type);
     void selectedItemEvent(Ref *pSender, ListView::EventType type);
+    void onTouch(Ref*,Widget::TouchEventType);
 private:
     RotateList* rotateList;
+    void spineTest();
+    
+    SkeletonAnimation* skeletonNode ;//= SkeletonAnimation::createWithFile("longNv.json","longNv.atlas");
+    void onAnimationEnd(int trackIndex);
+    
+
+
+    spTrackEntry* et;
 };
 #endif /* defined(__fancyHeart__TestScene2__) */

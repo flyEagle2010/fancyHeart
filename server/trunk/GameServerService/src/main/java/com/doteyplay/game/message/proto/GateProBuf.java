@@ -5716,6 +5716,42 @@ public final class GateProBuf {
 
   public interface PNodeRespOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 state = 1;
+    /**
+     * <code>required int32 state = 1;</code>
+     *
+     * <pre>
+     *成功否失败.
+     * </pre>
+     */
+    boolean hasState();
+    /**
+     * <code>required int32 state = 1;</code>
+     *
+     * <pre>
+     *成功否失败.
+     * </pre>
+     */
+    int getState();
+
+    // required int32 itemCount = 2;
+    /**
+     * <code>required int32 itemCount = 2;</code>
+     *
+     * <pre>
+     *掉落物品数量
+     * </pre>
+     */
+    boolean hasItemCount();
+    /**
+     * <code>required int32 itemCount = 2;</code>
+     *
+     * <pre>
+     *掉落物品数量
+     * </pre>
+     */
+    int getItemCount();
   }
   /**
    * Protobuf type {@code PNodeResp}
@@ -5750,6 +5786,7 @@ public final class GateProBuf {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -5765,6 +5802,16 @@ public final class GateProBuf {
                                      extensionRegistry, tag)) {
                 done = true;
               }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              state_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              itemCount_ = input.readInt32();
               break;
             }
           }
@@ -5806,13 +5853,72 @@ public final class GateProBuf {
       return PARSER;
     }
 
+    private int bitField0_;
+    // required int32 state = 1;
+    public static final int STATE_FIELD_NUMBER = 1;
+    private int state_;
+    /**
+     * <code>required int32 state = 1;</code>
+     *
+     * <pre>
+     *成功否失败.
+     * </pre>
+     */
+    public boolean hasState() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 state = 1;</code>
+     *
+     * <pre>
+     *成功否失败.
+     * </pre>
+     */
+    public int getState() {
+      return state_;
+    }
+
+    // required int32 itemCount = 2;
+    public static final int ITEMCOUNT_FIELD_NUMBER = 2;
+    private int itemCount_;
+    /**
+     * <code>required int32 itemCount = 2;</code>
+     *
+     * <pre>
+     *掉落物品数量
+     * </pre>
+     */
+    public boolean hasItemCount() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 itemCount = 2;</code>
+     *
+     * <pre>
+     *掉落物品数量
+     * </pre>
+     */
+    public int getItemCount() {
+      return itemCount_;
+    }
+
     private void initFields() {
+      state_ = 0;
+      itemCount_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasState()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasItemCount()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -5820,6 +5926,12 @@ public final class GateProBuf {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, state_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, itemCount_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -5829,6 +5941,14 @@ public final class GateProBuf {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, state_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, itemCount_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -5945,6 +6065,10 @@ public final class GateProBuf {
 
       public Builder clear() {
         super.clear();
+        state_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        itemCount_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -5971,6 +6095,17 @@ public final class GateProBuf {
 
       public com.doteyplay.game.message.proto.GateProBuf.PNodeResp buildPartial() {
         com.doteyplay.game.message.proto.GateProBuf.PNodeResp result = new com.doteyplay.game.message.proto.GateProBuf.PNodeResp(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.state_ = state_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.itemCount_ = itemCount_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -5986,11 +6121,25 @@ public final class GateProBuf {
 
       public Builder mergeFrom(com.doteyplay.game.message.proto.GateProBuf.PNodeResp other) {
         if (other == com.doteyplay.game.message.proto.GateProBuf.PNodeResp.getDefaultInstance()) return this;
+        if (other.hasState()) {
+          setState(other.getState());
+        }
+        if (other.hasItemCount()) {
+          setItemCount(other.getItemCount());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (!hasState()) {
+          
+          return false;
+        }
+        if (!hasItemCount()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -6009,6 +6158,105 @@ public final class GateProBuf {
             mergeFrom(parsedMessage);
           }
         }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 state = 1;
+      private int state_ ;
+      /**
+       * <code>required int32 state = 1;</code>
+       *
+       * <pre>
+       *成功否失败.
+       * </pre>
+       */
+      public boolean hasState() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 state = 1;</code>
+       *
+       * <pre>
+       *成功否失败.
+       * </pre>
+       */
+      public int getState() {
+        return state_;
+      }
+      /**
+       * <code>required int32 state = 1;</code>
+       *
+       * <pre>
+       *成功否失败.
+       * </pre>
+       */
+      public Builder setState(int value) {
+        bitField0_ |= 0x00000001;
+        state_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 state = 1;</code>
+       *
+       * <pre>
+       *成功否失败.
+       * </pre>
+       */
+      public Builder clearState() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        state_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 itemCount = 2;
+      private int itemCount_ ;
+      /**
+       * <code>required int32 itemCount = 2;</code>
+       *
+       * <pre>
+       *掉落物品数量
+       * </pre>
+       */
+      public boolean hasItemCount() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 itemCount = 2;</code>
+       *
+       * <pre>
+       *掉落物品数量
+       * </pre>
+       */
+      public int getItemCount() {
+        return itemCount_;
+      }
+      /**
+       * <code>required int32 itemCount = 2;</code>
+       *
+       * <pre>
+       *掉落物品数量
+       * </pre>
+       */
+      public Builder setItemCount(int value) {
+        bitField0_ |= 0x00000002;
+        itemCount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 itemCount = 2;</code>
+       *
+       * <pre>
+       *掉落物品数量
+       * </pre>
+       */
+      public Builder clearItemCount() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        itemCount_ = 0;
+        onChanged();
         return this;
       }
 
@@ -6047,6 +6295,7 @@ public final class GateProBuf {
      * <code>required int32 addLvl = 2;</code>
      *
      * <pre>
+     *增加的等级
      * </pre>
      */
     boolean hasAddLvl();
@@ -6054,6 +6303,7 @@ public final class GateProBuf {
      * <code>required int32 addLvl = 2;</code>
      *
      * <pre>
+     *增加的等级
      * </pre>
      */
     int getAddLvl();
@@ -6063,6 +6313,7 @@ public final class GateProBuf {
      * <code>required int32 addExp = 3;</code>
      *
      * <pre>
+     *增加的经验
      * </pre>
      */
     boolean hasAddExp();
@@ -6070,9 +6321,46 @@ public final class GateProBuf {
      * <code>required int32 addExp = 3;</code>
      *
      * <pre>
+     *增加的经验
      * </pre>
      */
     int getAddExp();
+
+    // required int32 curLvl = 4;
+    /**
+     * <code>required int32 curLvl = 4;</code>
+     *
+     * <pre>
+     *当前等级
+     * </pre>
+     */
+    boolean hasCurLvl();
+    /**
+     * <code>required int32 curLvl = 4;</code>
+     *
+     * <pre>
+     *当前等级
+     * </pre>
+     */
+    int getCurLvl();
+
+    // required int32 curExp = 5;
+    /**
+     * <code>required int32 curExp = 5;</code>
+     *
+     * <pre>
+     *当前经验
+     * </pre>
+     */
+    boolean hasCurExp();
+    /**
+     * <code>required int32 curExp = 5;</code>
+     *
+     * <pre>
+     *当前经验
+     * </pre>
+     */
+    int getCurExp();
   }
   /**
    * Protobuf type {@code PNpcRes}
@@ -6144,6 +6432,16 @@ public final class GateProBuf {
               addExp_ = input.readInt32();
               break;
             }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              curLvl_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              curExp_ = input.readInt32();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -6213,6 +6511,7 @@ public final class GateProBuf {
      * <code>required int32 addLvl = 2;</code>
      *
      * <pre>
+     *增加的等级
      * </pre>
      */
     public boolean hasAddLvl() {
@@ -6222,6 +6521,7 @@ public final class GateProBuf {
      * <code>required int32 addLvl = 2;</code>
      *
      * <pre>
+     *增加的等级
      * </pre>
      */
     public int getAddLvl() {
@@ -6235,6 +6535,7 @@ public final class GateProBuf {
      * <code>required int32 addExp = 3;</code>
      *
      * <pre>
+     *增加的经验
      * </pre>
      */
     public boolean hasAddExp() {
@@ -6244,16 +6545,67 @@ public final class GateProBuf {
      * <code>required int32 addExp = 3;</code>
      *
      * <pre>
+     *增加的经验
      * </pre>
      */
     public int getAddExp() {
       return addExp_;
     }
 
+    // required int32 curLvl = 4;
+    public static final int CURLVL_FIELD_NUMBER = 4;
+    private int curLvl_;
+    /**
+     * <code>required int32 curLvl = 4;</code>
+     *
+     * <pre>
+     *当前等级
+     * </pre>
+     */
+    public boolean hasCurLvl() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 curLvl = 4;</code>
+     *
+     * <pre>
+     *当前等级
+     * </pre>
+     */
+    public int getCurLvl() {
+      return curLvl_;
+    }
+
+    // required int32 curExp = 5;
+    public static final int CUREXP_FIELD_NUMBER = 5;
+    private int curExp_;
+    /**
+     * <code>required int32 curExp = 5;</code>
+     *
+     * <pre>
+     *当前经验
+     * </pre>
+     */
+    public boolean hasCurExp() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 curExp = 5;</code>
+     *
+     * <pre>
+     *当前经验
+     * </pre>
+     */
+    public int getCurExp() {
+      return curExp_;
+    }
+
     private void initFields() {
       xId_ = 0L;
       addLvl_ = 0;
       addExp_ = 0;
+      curLvl_ = 0;
+      curExp_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6272,6 +6624,14 @@ public final class GateProBuf {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasCurLvl()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCurExp()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -6287,6 +6647,12 @@ public final class GateProBuf {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, addExp_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, curLvl_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, curExp_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6308,6 +6674,14 @@ public final class GateProBuf {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, addExp_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, curLvl_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, curExp_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6435,6 +6809,10 @@ public final class GateProBuf {
         bitField0_ = (bitField0_ & ~0x00000002);
         addExp_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        curLvl_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        curExp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -6475,6 +6853,14 @@ public final class GateProBuf {
           to_bitField0_ |= 0x00000004;
         }
         result.addExp_ = addExp_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.curLvl_ = curLvl_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.curExp_ = curExp_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6500,6 +6886,12 @@ public final class GateProBuf {
         if (other.hasAddExp()) {
           setAddExp(other.getAddExp());
         }
+        if (other.hasCurLvl()) {
+          setCurLvl(other.getCurLvl());
+        }
+        if (other.hasCurExp()) {
+          setCurExp(other.getCurExp());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -6514,6 +6906,14 @@ public final class GateProBuf {
           return false;
         }
         if (!hasAddExp()) {
+          
+          return false;
+        }
+        if (!hasCurLvl()) {
+          
+          return false;
+        }
+        if (!hasCurExp()) {
           
           return false;
         }
@@ -6590,6 +6990,7 @@ public final class GateProBuf {
        * <code>required int32 addLvl = 2;</code>
        *
        * <pre>
+       *增加的等级
        * </pre>
        */
       public boolean hasAddLvl() {
@@ -6599,6 +7000,7 @@ public final class GateProBuf {
        * <code>required int32 addLvl = 2;</code>
        *
        * <pre>
+       *增加的等级
        * </pre>
        */
       public int getAddLvl() {
@@ -6608,6 +7010,7 @@ public final class GateProBuf {
        * <code>required int32 addLvl = 2;</code>
        *
        * <pre>
+       *增加的等级
        * </pre>
        */
       public Builder setAddLvl(int value) {
@@ -6620,6 +7023,7 @@ public final class GateProBuf {
        * <code>required int32 addLvl = 2;</code>
        *
        * <pre>
+       *增加的等级
        * </pre>
        */
       public Builder clearAddLvl() {
@@ -6635,6 +7039,7 @@ public final class GateProBuf {
        * <code>required int32 addExp = 3;</code>
        *
        * <pre>
+       *增加的经验
        * </pre>
        */
       public boolean hasAddExp() {
@@ -6644,6 +7049,7 @@ public final class GateProBuf {
        * <code>required int32 addExp = 3;</code>
        *
        * <pre>
+       *增加的经验
        * </pre>
        */
       public int getAddExp() {
@@ -6653,6 +7059,7 @@ public final class GateProBuf {
        * <code>required int32 addExp = 3;</code>
        *
        * <pre>
+       *增加的经验
        * </pre>
        */
       public Builder setAddExp(int value) {
@@ -6665,11 +7072,110 @@ public final class GateProBuf {
        * <code>required int32 addExp = 3;</code>
        *
        * <pre>
+       *增加的经验
        * </pre>
        */
       public Builder clearAddExp() {
         bitField0_ = (bitField0_ & ~0x00000004);
         addExp_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 curLvl = 4;
+      private int curLvl_ ;
+      /**
+       * <code>required int32 curLvl = 4;</code>
+       *
+       * <pre>
+       *当前等级
+       * </pre>
+       */
+      public boolean hasCurLvl() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 curLvl = 4;</code>
+       *
+       * <pre>
+       *当前等级
+       * </pre>
+       */
+      public int getCurLvl() {
+        return curLvl_;
+      }
+      /**
+       * <code>required int32 curLvl = 4;</code>
+       *
+       * <pre>
+       *当前等级
+       * </pre>
+       */
+      public Builder setCurLvl(int value) {
+        bitField0_ |= 0x00000008;
+        curLvl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 curLvl = 4;</code>
+       *
+       * <pre>
+       *当前等级
+       * </pre>
+       */
+      public Builder clearCurLvl() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        curLvl_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 curExp = 5;
+      private int curExp_ ;
+      /**
+       * <code>required int32 curExp = 5;</code>
+       *
+       * <pre>
+       *当前经验
+       * </pre>
+       */
+      public boolean hasCurExp() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required int32 curExp = 5;</code>
+       *
+       * <pre>
+       *当前经验
+       * </pre>
+       */
+      public int getCurExp() {
+        return curExp_;
+      }
+      /**
+       * <code>required int32 curExp = 5;</code>
+       *
+       * <pre>
+       *当前经验
+       * </pre>
+       */
+      public Builder setCurExp(int value) {
+        bitField0_ |= 0x00000010;
+        curExp_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 curExp = 5;</code>
+       *
+       * <pre>
+       *当前经验
+       * </pre>
+       */
+      public Builder clearCurExp() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        curExp_ = 0;
         onChanged();
         return this;
       }
@@ -7962,6 +8468,7 @@ public final class GateProBuf {
      * <code>required int32 groupLvl = 2;</code>
      *
      * <pre>
+     *增加的等级
      * </pre>
      */
     boolean hasGroupLvl();
@@ -7969,45 +8476,64 @@ public final class GateProBuf {
      * <code>required int32 groupLvl = 2;</code>
      *
      * <pre>
+     *增加的等级
      * </pre>
      */
     int getGroupLvl();
 
-    // required int32 groupExp = 3;
+    // required int32 curGroupLvl = 3;
     /**
-     * <code>required int32 groupExp = 3;</code>
+     * <code>required int32 curGroupLvl = 3;</code>
+     *
+     * <pre>
+     *最终等级
+     * </pre>
+     */
+    boolean hasCurGroupLvl();
+    /**
+     * <code>required int32 curGroupLvl = 3;</code>
+     *
+     * <pre>
+     *最终等级
+     * </pre>
+     */
+    int getCurGroupLvl();
+
+    // required int32 groupExp = 4;
+    /**
+     * <code>required int32 groupExp = 4;</code>
      *
      * <pre>
      * </pre>
      */
     boolean hasGroupExp();
     /**
-     * <code>required int32 groupExp = 3;</code>
+     * <code>required int32 groupExp = 4;</code>
      *
      * <pre>
      * </pre>
      */
     int getGroupExp();
 
-    // required int32 coin = 4;
+    // required int32 coin = 5;
     /**
-     * <code>required int32 coin = 4;</code>
+     * <code>required int32 coin = 5;</code>
      *
      * <pre>
      * </pre>
      */
     boolean hasCoin();
     /**
-     * <code>required int32 coin = 4;</code>
+     * <code>required int32 coin = 5;</code>
      *
      * <pre>
      * </pre>
      */
     int getCoin();
 
-    // repeated .PNpcRes npcs = 5;
+    // repeated .PNpcRes npcs = 6;
     /**
-     * <code>repeated .PNpcRes npcs = 5;</code>
+     * <code>repeated .PNpcRes npcs = 6;</code>
      *
      * <pre>
      * </pre>
@@ -8015,21 +8541,21 @@ public final class GateProBuf {
     java.util.List<com.doteyplay.game.message.proto.GateProBuf.PNpcRes> 
         getNpcsList();
     /**
-     * <code>repeated .PNpcRes npcs = 5;</code>
+     * <code>repeated .PNpcRes npcs = 6;</code>
      *
      * <pre>
      * </pre>
      */
     com.doteyplay.game.message.proto.GateProBuf.PNpcRes getNpcs(int index);
     /**
-     * <code>repeated .PNpcRes npcs = 5;</code>
+     * <code>repeated .PNpcRes npcs = 6;</code>
      *
      * <pre>
      * </pre>
      */
     int getNpcsCount();
     /**
-     * <code>repeated .PNpcRes npcs = 5;</code>
+     * <code>repeated .PNpcRes npcs = 6;</code>
      *
      * <pre>
      * </pre>
@@ -8037,7 +8563,7 @@ public final class GateProBuf {
     java.util.List<? extends com.doteyplay.game.message.proto.GateProBuf.PNpcResOrBuilder> 
         getNpcsOrBuilderList();
     /**
-     * <code>repeated .PNpcRes npcs = 5;</code>
+     * <code>repeated .PNpcRes npcs = 6;</code>
      *
      * <pre>
      * </pre>
@@ -8045,41 +8571,46 @@ public final class GateProBuf {
     com.doteyplay.game.message.proto.GateProBuf.PNpcResOrBuilder getNpcsOrBuilder(
         int index);
 
-    // repeated .PItemRes items = 6;
+    // repeated .PItemRes items = 7;
     /**
-     * <code>repeated .PItemRes items = 6;</code>
+     * <code>repeated .PItemRes items = 7;</code>
      *
      * <pre>
+     *返回物品的集合.
      * </pre>
      */
     java.util.List<com.doteyplay.game.message.proto.GateProBuf.PItemRes> 
         getItemsList();
     /**
-     * <code>repeated .PItemRes items = 6;</code>
+     * <code>repeated .PItemRes items = 7;</code>
      *
      * <pre>
+     *返回物品的集合.
      * </pre>
      */
     com.doteyplay.game.message.proto.GateProBuf.PItemRes getItems(int index);
     /**
-     * <code>repeated .PItemRes items = 6;</code>
+     * <code>repeated .PItemRes items = 7;</code>
      *
      * <pre>
+     *返回物品的集合.
      * </pre>
      */
     int getItemsCount();
     /**
-     * <code>repeated .PItemRes items = 6;</code>
+     * <code>repeated .PItemRes items = 7;</code>
      *
      * <pre>
+     *返回物品的集合.
      * </pre>
      */
     java.util.List<? extends com.doteyplay.game.message.proto.GateProBuf.PItemResOrBuilder> 
         getItemsOrBuilderList();
     /**
-     * <code>repeated .PItemRes items = 6;</code>
+     * <code>repeated .PItemRes items = 7;</code>
      *
      * <pre>
+     *返回物品的集合.
      * </pre>
      */
     com.doteyplay.game.message.proto.GateProBuf.PItemResOrBuilder getItemsOrBuilder(
@@ -8152,26 +8683,31 @@ public final class GateProBuf {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              groupExp_ = input.readInt32();
+              curGroupLvl_ = input.readInt32();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              coin_ = input.readInt32();
+              groupExp_ = input.readInt32();
               break;
             }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                npcs_ = new java.util.ArrayList<com.doteyplay.game.message.proto.GateProBuf.PNpcRes>();
-                mutable_bitField0_ |= 0x00000010;
-              }
-              npcs_.add(input.readMessage(com.doteyplay.game.message.proto.GateProBuf.PNpcRes.PARSER, extensionRegistry));
+            case 40: {
+              bitField0_ |= 0x00000010;
+              coin_ = input.readInt32();
               break;
             }
             case 50: {
               if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                items_ = new java.util.ArrayList<com.doteyplay.game.message.proto.GateProBuf.PItemRes>();
+                npcs_ = new java.util.ArrayList<com.doteyplay.game.message.proto.GateProBuf.PNpcRes>();
                 mutable_bitField0_ |= 0x00000020;
+              }
+              npcs_.add(input.readMessage(com.doteyplay.game.message.proto.GateProBuf.PNpcRes.PARSER, extensionRegistry));
+              break;
+            }
+            case 58: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                items_ = new java.util.ArrayList<com.doteyplay.game.message.proto.GateProBuf.PItemRes>();
+                mutable_bitField0_ |= 0x00000040;
               }
               items_.add(input.readMessage(com.doteyplay.game.message.proto.GateProBuf.PItemRes.PARSER, extensionRegistry));
               break;
@@ -8184,10 +8720,10 @@ public final class GateProBuf {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           npcs_ = java.util.Collections.unmodifiableList(npcs_);
         }
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           items_ = java.util.Collections.unmodifiableList(items_);
         }
         this.unknownFields = unknownFields.build();
@@ -8253,6 +8789,7 @@ public final class GateProBuf {
      * <code>required int32 groupLvl = 2;</code>
      *
      * <pre>
+     *增加的等级
      * </pre>
      */
     public boolean hasGroupLvl() {
@@ -8262,26 +8799,51 @@ public final class GateProBuf {
      * <code>required int32 groupLvl = 2;</code>
      *
      * <pre>
+     *增加的等级
      * </pre>
      */
     public int getGroupLvl() {
       return groupLvl_;
     }
 
-    // required int32 groupExp = 3;
-    public static final int GROUPEXP_FIELD_NUMBER = 3;
+    // required int32 curGroupLvl = 3;
+    public static final int CURGROUPLVL_FIELD_NUMBER = 3;
+    private int curGroupLvl_;
+    /**
+     * <code>required int32 curGroupLvl = 3;</code>
+     *
+     * <pre>
+     *最终等级
+     * </pre>
+     */
+    public boolean hasCurGroupLvl() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 curGroupLvl = 3;</code>
+     *
+     * <pre>
+     *最终等级
+     * </pre>
+     */
+    public int getCurGroupLvl() {
+      return curGroupLvl_;
+    }
+
+    // required int32 groupExp = 4;
+    public static final int GROUPEXP_FIELD_NUMBER = 4;
     private int groupExp_;
     /**
-     * <code>required int32 groupExp = 3;</code>
+     * <code>required int32 groupExp = 4;</code>
      *
      * <pre>
      * </pre>
      */
     public boolean hasGroupExp() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required int32 groupExp = 3;</code>
+     * <code>required int32 groupExp = 4;</code>
      *
      * <pre>
      * </pre>
@@ -8290,20 +8852,20 @@ public final class GateProBuf {
       return groupExp_;
     }
 
-    // required int32 coin = 4;
-    public static final int COIN_FIELD_NUMBER = 4;
+    // required int32 coin = 5;
+    public static final int COIN_FIELD_NUMBER = 5;
     private int coin_;
     /**
-     * <code>required int32 coin = 4;</code>
+     * <code>required int32 coin = 5;</code>
      *
      * <pre>
      * </pre>
      */
     public boolean hasCoin() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required int32 coin = 4;</code>
+     * <code>required int32 coin = 5;</code>
      *
      * <pre>
      * </pre>
@@ -8312,11 +8874,11 @@ public final class GateProBuf {
       return coin_;
     }
 
-    // repeated .PNpcRes npcs = 5;
-    public static final int NPCS_FIELD_NUMBER = 5;
+    // repeated .PNpcRes npcs = 6;
+    public static final int NPCS_FIELD_NUMBER = 6;
     private java.util.List<com.doteyplay.game.message.proto.GateProBuf.PNpcRes> npcs_;
     /**
-     * <code>repeated .PNpcRes npcs = 5;</code>
+     * <code>repeated .PNpcRes npcs = 6;</code>
      *
      * <pre>
      * </pre>
@@ -8325,7 +8887,7 @@ public final class GateProBuf {
       return npcs_;
     }
     /**
-     * <code>repeated .PNpcRes npcs = 5;</code>
+     * <code>repeated .PNpcRes npcs = 6;</code>
      *
      * <pre>
      * </pre>
@@ -8335,7 +8897,7 @@ public final class GateProBuf {
       return npcs_;
     }
     /**
-     * <code>repeated .PNpcRes npcs = 5;</code>
+     * <code>repeated .PNpcRes npcs = 6;</code>
      *
      * <pre>
      * </pre>
@@ -8344,7 +8906,7 @@ public final class GateProBuf {
       return npcs_.size();
     }
     /**
-     * <code>repeated .PNpcRes npcs = 5;</code>
+     * <code>repeated .PNpcRes npcs = 6;</code>
      *
      * <pre>
      * </pre>
@@ -8353,7 +8915,7 @@ public final class GateProBuf {
       return npcs_.get(index);
     }
     /**
-     * <code>repeated .PNpcRes npcs = 5;</code>
+     * <code>repeated .PNpcRes npcs = 6;</code>
      *
      * <pre>
      * </pre>
@@ -8363,22 +8925,24 @@ public final class GateProBuf {
       return npcs_.get(index);
     }
 
-    // repeated .PItemRes items = 6;
-    public static final int ITEMS_FIELD_NUMBER = 6;
+    // repeated .PItemRes items = 7;
+    public static final int ITEMS_FIELD_NUMBER = 7;
     private java.util.List<com.doteyplay.game.message.proto.GateProBuf.PItemRes> items_;
     /**
-     * <code>repeated .PItemRes items = 6;</code>
+     * <code>repeated .PItemRes items = 7;</code>
      *
      * <pre>
+     *返回物品的集合.
      * </pre>
      */
     public java.util.List<com.doteyplay.game.message.proto.GateProBuf.PItemRes> getItemsList() {
       return items_;
     }
     /**
-     * <code>repeated .PItemRes items = 6;</code>
+     * <code>repeated .PItemRes items = 7;</code>
      *
      * <pre>
+     *返回物品的集合.
      * </pre>
      */
     public java.util.List<? extends com.doteyplay.game.message.proto.GateProBuf.PItemResOrBuilder> 
@@ -8386,27 +8950,30 @@ public final class GateProBuf {
       return items_;
     }
     /**
-     * <code>repeated .PItemRes items = 6;</code>
+     * <code>repeated .PItemRes items = 7;</code>
      *
      * <pre>
+     *返回物品的集合.
      * </pre>
      */
     public int getItemsCount() {
       return items_.size();
     }
     /**
-     * <code>repeated .PItemRes items = 6;</code>
+     * <code>repeated .PItemRes items = 7;</code>
      *
      * <pre>
+     *返回物品的集合.
      * </pre>
      */
     public com.doteyplay.game.message.proto.GateProBuf.PItemRes getItems(int index) {
       return items_.get(index);
     }
     /**
-     * <code>repeated .PItemRes items = 6;</code>
+     * <code>repeated .PItemRes items = 7;</code>
      *
      * <pre>
+     *返回物品的集合.
      * </pre>
      */
     public com.doteyplay.game.message.proto.GateProBuf.PItemResOrBuilder getItemsOrBuilder(
@@ -8417,6 +8984,7 @@ public final class GateProBuf {
     private void initFields() {
       star_ = 0;
       groupLvl_ = 0;
+      curGroupLvl_ = 0;
       groupExp_ = 0;
       coin_ = 0;
       npcs_ = java.util.Collections.emptyList();
@@ -8432,6 +9000,10 @@ public final class GateProBuf {
         return false;
       }
       if (!hasGroupLvl()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCurGroupLvl()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -8469,16 +9041,19 @@ public final class GateProBuf {
         output.writeInt32(2, groupLvl_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, groupExp_);
+        output.writeInt32(3, curGroupLvl_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, coin_);
+        output.writeInt32(4, groupExp_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, coin_);
       }
       for (int i = 0; i < npcs_.size(); i++) {
-        output.writeMessage(5, npcs_.get(i));
+        output.writeMessage(6, npcs_.get(i));
       }
       for (int i = 0; i < items_.size(); i++) {
-        output.writeMessage(6, items_.get(i));
+        output.writeMessage(7, items_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -8499,19 +9074,23 @@ public final class GateProBuf {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, groupExp_);
+          .computeInt32Size(3, curGroupLvl_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, coin_);
+          .computeInt32Size(4, groupExp_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, coin_);
       }
       for (int i = 0; i < npcs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, npcs_.get(i));
+          .computeMessageSize(6, npcs_.get(i));
       }
       for (int i = 0; i < items_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, items_.get(i));
+          .computeMessageSize(7, items_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8639,19 +9218,21 @@ public final class GateProBuf {
         bitField0_ = (bitField0_ & ~0x00000001);
         groupLvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        groupExp_ = 0;
+        curGroupLvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        coin_ = 0;
+        groupExp_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        coin_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         if (npcsBuilder_ == null) {
           npcs_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000020);
         } else {
           npcsBuilder_.clear();
         }
         if (itemsBuilder_ == null) {
           items_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           itemsBuilder_.clear();
         }
@@ -8694,24 +9275,28 @@ public final class GateProBuf {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.groupExp_ = groupExp_;
+        result.curGroupLvl_ = curGroupLvl_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
+        result.groupExp_ = groupExp_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
         result.coin_ = coin_;
         if (npcsBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
             npcs_ = java.util.Collections.unmodifiableList(npcs_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.npcs_ = npcs_;
         } else {
           result.npcs_ = npcsBuilder_.build();
         }
         if (itemsBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
             items_ = java.util.Collections.unmodifiableList(items_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.items_ = items_;
         } else {
@@ -8739,6 +9324,9 @@ public final class GateProBuf {
         if (other.hasGroupLvl()) {
           setGroupLvl(other.getGroupLvl());
         }
+        if (other.hasCurGroupLvl()) {
+          setCurGroupLvl(other.getCurGroupLvl());
+        }
         if (other.hasGroupExp()) {
           setGroupExp(other.getGroupExp());
         }
@@ -8749,7 +9337,7 @@ public final class GateProBuf {
           if (!other.npcs_.isEmpty()) {
             if (npcs_.isEmpty()) {
               npcs_ = other.npcs_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensureNpcsIsMutable();
               npcs_.addAll(other.npcs_);
@@ -8762,7 +9350,7 @@ public final class GateProBuf {
               npcsBuilder_.dispose();
               npcsBuilder_ = null;
               npcs_ = other.npcs_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000020);
               npcsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getNpcsFieldBuilder() : null;
@@ -8775,7 +9363,7 @@ public final class GateProBuf {
           if (!other.items_.isEmpty()) {
             if (items_.isEmpty()) {
               items_ = other.items_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensureItemsIsMutable();
               items_.addAll(other.items_);
@@ -8788,7 +9376,7 @@ public final class GateProBuf {
               itemsBuilder_.dispose();
               itemsBuilder_ = null;
               items_ = other.items_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
               itemsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getItemsFieldBuilder() : null;
@@ -8807,6 +9395,10 @@ public final class GateProBuf {
           return false;
         }
         if (!hasGroupLvl()) {
+          
+          return false;
+        }
+        if (!hasCurGroupLvl()) {
           
           return false;
         }
@@ -8907,6 +9499,7 @@ public final class GateProBuf {
        * <code>required int32 groupLvl = 2;</code>
        *
        * <pre>
+       *增加的等级
        * </pre>
        */
       public boolean hasGroupLvl() {
@@ -8916,6 +9509,7 @@ public final class GateProBuf {
        * <code>required int32 groupLvl = 2;</code>
        *
        * <pre>
+       *增加的等级
        * </pre>
        */
       public int getGroupLvl() {
@@ -8925,6 +9519,7 @@ public final class GateProBuf {
        * <code>required int32 groupLvl = 2;</code>
        *
        * <pre>
+       *增加的等级
        * </pre>
        */
       public Builder setGroupLvl(int value) {
@@ -8937,6 +9532,7 @@ public final class GateProBuf {
        * <code>required int32 groupLvl = 2;</code>
        *
        * <pre>
+       *增加的等级
        * </pre>
        */
       public Builder clearGroupLvl() {
@@ -8946,19 +9542,68 @@ public final class GateProBuf {
         return this;
       }
 
-      // required int32 groupExp = 3;
+      // required int32 curGroupLvl = 3;
+      private int curGroupLvl_ ;
+      /**
+       * <code>required int32 curGroupLvl = 3;</code>
+       *
+       * <pre>
+       *最终等级
+       * </pre>
+       */
+      public boolean hasCurGroupLvl() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 curGroupLvl = 3;</code>
+       *
+       * <pre>
+       *最终等级
+       * </pre>
+       */
+      public int getCurGroupLvl() {
+        return curGroupLvl_;
+      }
+      /**
+       * <code>required int32 curGroupLvl = 3;</code>
+       *
+       * <pre>
+       *最终等级
+       * </pre>
+       */
+      public Builder setCurGroupLvl(int value) {
+        bitField0_ |= 0x00000004;
+        curGroupLvl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 curGroupLvl = 3;</code>
+       *
+       * <pre>
+       *最终等级
+       * </pre>
+       */
+      public Builder clearCurGroupLvl() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        curGroupLvl_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 groupExp = 4;
       private int groupExp_ ;
       /**
-       * <code>required int32 groupExp = 3;</code>
+       * <code>required int32 groupExp = 4;</code>
        *
        * <pre>
        * </pre>
        */
       public boolean hasGroupExp() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required int32 groupExp = 3;</code>
+       * <code>required int32 groupExp = 4;</code>
        *
        * <pre>
        * </pre>
@@ -8967,43 +9612,43 @@ public final class GateProBuf {
         return groupExp_;
       }
       /**
-       * <code>required int32 groupExp = 3;</code>
+       * <code>required int32 groupExp = 4;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder setGroupExp(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         groupExp_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 groupExp = 3;</code>
+       * <code>required int32 groupExp = 4;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder clearGroupExp() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         groupExp_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 coin = 4;
+      // required int32 coin = 5;
       private int coin_ ;
       /**
-       * <code>required int32 coin = 4;</code>
+       * <code>required int32 coin = 5;</code>
        *
        * <pre>
        * </pre>
        */
       public boolean hasCoin() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required int32 coin = 4;</code>
+       * <code>required int32 coin = 5;</code>
        *
        * <pre>
        * </pre>
@@ -9012,37 +9657,37 @@ public final class GateProBuf {
         return coin_;
       }
       /**
-       * <code>required int32 coin = 4;</code>
+       * <code>required int32 coin = 5;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder setCoin(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         coin_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 coin = 4;</code>
+       * <code>required int32 coin = 5;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder clearCoin() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         coin_ = 0;
         onChanged();
         return this;
       }
 
-      // repeated .PNpcRes npcs = 5;
+      // repeated .PNpcRes npcs = 6;
       private java.util.List<com.doteyplay.game.message.proto.GateProBuf.PNpcRes> npcs_ =
         java.util.Collections.emptyList();
       private void ensureNpcsIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
           npcs_ = new java.util.ArrayList<com.doteyplay.game.message.proto.GateProBuf.PNpcRes>(npcs_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000020;
          }
       }
 
@@ -9050,7 +9695,7 @@ public final class GateProBuf {
           com.doteyplay.game.message.proto.GateProBuf.PNpcRes, com.doteyplay.game.message.proto.GateProBuf.PNpcRes.Builder, com.doteyplay.game.message.proto.GateProBuf.PNpcResOrBuilder> npcsBuilder_;
 
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9063,7 +9708,7 @@ public final class GateProBuf {
         }
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9076,7 +9721,7 @@ public final class GateProBuf {
         }
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9089,7 +9734,7 @@ public final class GateProBuf {
         }
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9109,7 +9754,7 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9126,7 +9771,7 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9145,7 +9790,7 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9165,7 +9810,7 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9182,7 +9827,7 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9199,7 +9844,7 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9216,7 +9861,7 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9224,7 +9869,7 @@ public final class GateProBuf {
       public Builder clearNpcs() {
         if (npcsBuilder_ == null) {
           npcs_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           npcsBuilder_.clear();
@@ -9232,7 +9877,7 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9248,7 +9893,7 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9258,7 +9903,7 @@ public final class GateProBuf {
         return getNpcsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9271,7 +9916,7 @@ public final class GateProBuf {
         }
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9285,7 +9930,7 @@ public final class GateProBuf {
         }
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9295,7 +9940,7 @@ public final class GateProBuf {
             com.doteyplay.game.message.proto.GateProBuf.PNpcRes.getDefaultInstance());
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9306,7 +9951,7 @@ public final class GateProBuf {
             index, com.doteyplay.game.message.proto.GateProBuf.PNpcRes.getDefaultInstance());
       }
       /**
-       * <code>repeated .PNpcRes npcs = 5;</code>
+       * <code>repeated .PNpcRes npcs = 6;</code>
        *
        * <pre>
        * </pre>
@@ -9322,7 +9967,7 @@ public final class GateProBuf {
           npcsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.doteyplay.game.message.proto.GateProBuf.PNpcRes, com.doteyplay.game.message.proto.GateProBuf.PNpcRes.Builder, com.doteyplay.game.message.proto.GateProBuf.PNpcResOrBuilder>(
                   npcs_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
                   isClean());
           npcs_ = null;
@@ -9330,13 +9975,13 @@ public final class GateProBuf {
         return npcsBuilder_;
       }
 
-      // repeated .PItemRes items = 6;
+      // repeated .PItemRes items = 7;
       private java.util.List<com.doteyplay.game.message.proto.GateProBuf.PItemRes> items_ =
         java.util.Collections.emptyList();
       private void ensureItemsIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           items_ = new java.util.ArrayList<com.doteyplay.game.message.proto.GateProBuf.PItemRes>(items_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
          }
       }
 
@@ -9344,9 +9989,10 @@ public final class GateProBuf {
           com.doteyplay.game.message.proto.GateProBuf.PItemRes, com.doteyplay.game.message.proto.GateProBuf.PItemRes.Builder, com.doteyplay.game.message.proto.GateProBuf.PItemResOrBuilder> itemsBuilder_;
 
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public java.util.List<com.doteyplay.game.message.proto.GateProBuf.PItemRes> getItemsList() {
@@ -9357,9 +10003,10 @@ public final class GateProBuf {
         }
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public int getItemsCount() {
@@ -9370,9 +10017,10 @@ public final class GateProBuf {
         }
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public com.doteyplay.game.message.proto.GateProBuf.PItemRes getItems(int index) {
@@ -9383,9 +10031,10 @@ public final class GateProBuf {
         }
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public Builder setItems(
@@ -9403,9 +10052,10 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public Builder setItems(
@@ -9420,9 +10070,10 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public Builder addItems(com.doteyplay.game.message.proto.GateProBuf.PItemRes value) {
@@ -9439,9 +10090,10 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public Builder addItems(
@@ -9459,9 +10111,10 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public Builder addItems(
@@ -9476,9 +10129,10 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public Builder addItems(
@@ -9493,9 +10147,10 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public Builder addAllItems(
@@ -9510,15 +10165,16 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public Builder clearItems() {
         if (itemsBuilder_ == null) {
           items_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           itemsBuilder_.clear();
@@ -9526,9 +10182,10 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public Builder removeItems(int index) {
@@ -9542,9 +10199,10 @@ public final class GateProBuf {
         return this;
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public com.doteyplay.game.message.proto.GateProBuf.PItemRes.Builder getItemsBuilder(
@@ -9552,9 +10210,10 @@ public final class GateProBuf {
         return getItemsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public com.doteyplay.game.message.proto.GateProBuf.PItemResOrBuilder getItemsOrBuilder(
@@ -9565,9 +10224,10 @@ public final class GateProBuf {
         }
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public java.util.List<? extends com.doteyplay.game.message.proto.GateProBuf.PItemResOrBuilder> 
@@ -9579,9 +10239,10 @@ public final class GateProBuf {
         }
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public com.doteyplay.game.message.proto.GateProBuf.PItemRes.Builder addItemsBuilder() {
@@ -9589,9 +10250,10 @@ public final class GateProBuf {
             com.doteyplay.game.message.proto.GateProBuf.PItemRes.getDefaultInstance());
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public com.doteyplay.game.message.proto.GateProBuf.PItemRes.Builder addItemsBuilder(
@@ -9600,9 +10262,10 @@ public final class GateProBuf {
             index, com.doteyplay.game.message.proto.GateProBuf.PItemRes.getDefaultInstance());
       }
       /**
-       * <code>repeated .PItemRes items = 6;</code>
+       * <code>repeated .PItemRes items = 7;</code>
        *
        * <pre>
+       *返回物品的集合.
        * </pre>
        */
       public java.util.List<com.doteyplay.game.message.proto.GateProBuf.PItemRes.Builder> 
@@ -9616,7 +10279,7 @@ public final class GateProBuf {
           itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.doteyplay.game.message.proto.GateProBuf.PItemRes, com.doteyplay.game.message.proto.GateProBuf.PItemRes.Builder, com.doteyplay.game.message.proto.GateProBuf.PItemResOrBuilder>(
                   items_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           items_ = null;
@@ -9719,16 +10382,18 @@ public final class GateProBuf {
       "\001 \002(\005\022\037\n\tnodeItems\030\002 \003(\0132\014.PUpdateNode\"&" +
       "\n\tPGateResp\022\031\n\005gates\030\001 \003(\0132\n.PGateItem\"8" +
       "\n\010PNodeReq\022\016\n\006gateId\030\001 \002(\005\022\013\n\003xId\030\002 \002(\005\022",
-      "\017\n\007groupId\030\003 \002(\005\"\013\n\tPNodeResp\"6\n\007PNpcRes" +
-      "\022\013\n\003xId\030\001 \002(\003\022\016\n\006addLvl\030\002 \002(\005\022\016\n\006addExp\030" +
-      "\003 \002(\005\"+\n\010PItemRes\022\016\n\006itemId\030\001 \002(\005\022\017\n\007ite" +
-      "mNum\030\002 \002(\005\"7\n\nPResultReq\022\016\n\006gateId\030\001 \002(\005" +
-      "\022\013\n\003xId\030\002 \002(\005\022\014\n\004star\030\003 \002(\005\"\177\n\013PResultRe" +
-      "sp\022\014\n\004star\030\001 \002(\005\022\020\n\010groupLvl\030\002 \002(\005\022\020\n\010gr" +
-      "oupExp\030\003 \002(\005\022\014\n\004coin\030\004 \002(\005\022\026\n\004npcs\030\005 \003(\013" +
-      "2\010.PNpcRes\022\030\n\005items\030\006 \003(\0132\t.PItemResB.\n " +
-      "com.doteyplay.game.message.protoB\nGatePr" +
-      "oBuf"
+      "\017\n\007groupId\030\003 \002(\005\"-\n\tPNodeResp\022\r\n\005state\030\001" +
+      " \002(\005\022\021\n\titemCount\030\002 \002(\005\"V\n\007PNpcRes\022\013\n\003xI" +
+      "d\030\001 \002(\003\022\016\n\006addLvl\030\002 \002(\005\022\016\n\006addExp\030\003 \002(\005\022" +
+      "\016\n\006curLvl\030\004 \002(\005\022\016\n\006curExp\030\005 \002(\005\"+\n\010PItem" +
+      "Res\022\016\n\006itemId\030\001 \002(\005\022\017\n\007itemNum\030\002 \002(\005\"7\n\n" +
+      "PResultReq\022\016\n\006gateId\030\001 \002(\005\022\013\n\003xId\030\002 \002(\005\022" +
+      "\014\n\004star\030\003 \002(\005\"\224\001\n\013PResultResp\022\014\n\004star\030\001 " +
+      "\002(\005\022\020\n\010groupLvl\030\002 \002(\005\022\023\n\013curGroupLvl\030\003 \002" +
+      "(\005\022\020\n\010groupExp\030\004 \002(\005\022\014\n\004coin\030\005 \002(\005\022\026\n\004np" +
+      "cs\030\006 \003(\0132\010.PNpcRes\022\030\n\005items\030\007 \003(\0132\t.PIte",
+      "mResB.\n com.doteyplay.game.message.proto" +
+      "B\nGateProBuf"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9788,13 +10453,13 @@ public final class GateProBuf {
           internal_static_PNodeResp_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PNodeResp_descriptor,
-              new java.lang.String[] { });
+              new java.lang.String[] { "State", "ItemCount", });
           internal_static_PNpcRes_descriptor =
             getDescriptor().getMessageTypes().get(9);
           internal_static_PNpcRes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PNpcRes_descriptor,
-              new java.lang.String[] { "XId", "AddLvl", "AddExp", });
+              new java.lang.String[] { "XId", "AddLvl", "AddExp", "CurLvl", "CurExp", });
           internal_static_PItemRes_descriptor =
             getDescriptor().getMessageTypes().get(10);
           internal_static_PItemRes_fieldAccessorTable = new
@@ -9812,7 +10477,7 @@ public final class GateProBuf {
           internal_static_PResultResp_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PResultResp_descriptor,
-              new java.lang.String[] { "Star", "GroupLvl", "GroupExp", "Coin", "Npcs", "Items", });
+              new java.lang.String[] { "Star", "GroupLvl", "CurGroupLvl", "GroupExp", "Coin", "Npcs", "Items", });
           return null;
         }
       };

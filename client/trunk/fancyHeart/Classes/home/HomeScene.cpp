@@ -44,10 +44,10 @@ bool HomeScene::init(std::string fileName,bool isScence)
     for (int i=1; i<4; i++) {
         float random=1+CCRANDOM_0_1();
         Vec2 p=Vec2(size.width-100*i, size.height-80-10*i*scale);
-        this->intAnimation("effect/home_bird.plist", "home_bird", 5*random, 5*random, 0.3*random,p,Vec2(0, size.height-80*i*scale));
+        this->intAnimation("home_bird.plist", "home_bird", 5*random, 5*random, 0.3*random,p,Vec2(0, size.height-80*i*scale));
     }
     
-    this->intAnimation("effect/airship.plist", "airship", 8, 50, 1,Vec2(-100, size.height/2+100),Vec2(size.width+100, size.height/2+100));
+    this->intAnimation("airship.plist", "airship", 8, 50, 1,Vec2(-100, size.height/2+100),Vec2(size.width+100, size.height/2+100));
     
     auto widget=static_cast<Widget*>(comLayout->getChildByName("home_botom"));
     widget->setLocalZOrder(3);
@@ -83,8 +83,41 @@ bool HomeScene::init(std::string fileName,bool isScence)
     staminaIcon->addTouchEventListener(CC_CALLBACK_2(HomeScene::touchIconEvent, this));//
   
     widget=static_cast<Widget*>(comLayout->getChildByName("home_build"));
+    
+    auto heroBuild=static_cast<Widget*>(widget->getChildByName("img_hero"));
+    auto wind=static_cast<Widget*>(heroBuild->getChildByName("img_wind"));
+    
+    this->initBuildEffect("hecheng.plist", "hecheng", "img_hecheng",9);
+    this->initBuildEffect("tiaozhan.plist", "tiaozhan", "img_fuben",8);
+    
+    auto zhaohuan=static_cast<Widget*>(widget->getChildByName("img_zhaohuan"));
+    Clip* zhaohuanClip=Clip::create("zhaohuan.plist", "zhaohuan",8);
+    zhaohuan->addChild(zhaohuanClip);
+    Size buildSize=zhaohuan->getContentSize();
+    zhaohuanClip->setPosition(Vec2(buildSize.width/2, buildSize.height/2));
+    
+    Animate* animate=Animate::create(zhaohuanClip->animation);
+    Animate* animateVerse=animate->reverse();
+    zhaohuanClip->runAction(RepeatForever::create(Sequence::create(animate,animateVerse, NULL)));
+    
+    
+    Clip* clip=Clip::create("wind.plist", "wind",8);
+    clip->setPosition(heroBuild->getContentSize().width/2,heroBuild->getContentSize().height/2);
+    clip->play(true);
+    heroBuild->addChild(clip);
+    wind->removeFromParent();
     widget->setLocalZOrder(2);
     widget->setPosition(Vec2((size.width-widget->getContentSize().width)/2, (size.height-widget->getContentSize().height)/2));
+    
+    auto img_tiaozhan=static_cast<Widget*>(widget->getChildByName("img_tiaozhan"));
+    auto img_book=static_cast<Widget*>(img_tiaozhan->getChildByName("img_book"));
+    Clip* book=Clip::create("book.plist", "book",4);
+    book->setPosition(img_tiaozhan->getContentSize().width/2,img_tiaozhan->getContentSize().height/2);
+    book->playNext(1,5);
+    img_tiaozhan->addChild(book);
+    img_book->removeFromParent();
+
+    
     for (std::string name : buildNames)
     {
         ImageView* image=(ImageView*)widget->getChildByName(name);
@@ -92,7 +125,7 @@ bool HomeScene::init(std::string fileName,bool isScence)
         image->addTouchEventListener(CC_CALLBACK_2(HomeScene::touchBuildEvent, this));
     }
     widget=(Widget*)comLayout->getChildByName("btnChat");
-    widget->setPosition(Vec2(widget->getContentSize().width*scale/2, 200));
+    widget->setPosition(Vec2(widget->getContentSize().width*scale/2, size.height/2));
     widget->addTouchEventListener(CC_CALLBACK_2(HomeScene::touchButtonEvent, this));
     widget->setLocalZOrder(2);
     widget->setScale(scale);
@@ -113,6 +146,18 @@ bool HomeScene::init(std::string fileName,bool isScence)
     //bird->setContentSize(Size(40*0.3, 46*0.3));
     
 	return true;
+}
+
+void HomeScene::initBuildEffect(string plist,string effectName,string buidName,int fps)
+{
+    auto widget=static_cast<Widget*>(comLayout->getChildByName("home_build"));
+    auto build=static_cast<Widget*>(widget->getChildByName(buidName));
+    Clip* clip=Clip::create(plist, effectName,fps);
+    clip->play(true);
+    build->addChild(clip);
+    Size buildSize=build->getContentSize();
+    clip->setPosition(Vec2(buildSize.width/2, buildSize.height/2));
+
 }
 
 void HomeScene::intAnimation(string plist,string effectName,int fps,int moveSpeed,float scale,Vec2 starP,Vec2 endP)
@@ -145,11 +190,22 @@ void HomeScene::initUi()
     static_cast<Text*>(leftPg->getChildByName("txt_name"))->setString(role.rolename());
     
     static_cast<TextAtlas*>(leftPg->getChildByName("vipLevelLabel"))->setString(Value(role.viplvl()).asString());
-    static_cast<TextAtlas*>(leftPg->getChildByName("levelLabel"))->setString(Value(role.level()).asString());
     
+    ImageView* icon=static_cast<ImageView*>(leftPg->getChildByName("icon"));
+    for (int i=0;i<Manager::getInstance()->getRoleData()->npclist_size();i++)
+    {
+        PNpc* pNpc=Manager::getInstance()->getRoleData()->mutable_npclist(i);
+        XRole* xRole=XRole::record(Value(pNpc->spriteid()));
+        if (xRole->getIsRole()) {
+            icon->loadTexture("face_"+Value(xRole->getId()).asString()+".png");
+            static_cast<TextAtlas*>(leftPg->getChildByName("levelLabel"))->setString(Value(pNpc->level()).asString());
+            break;
+        }
+
+    }
     widget=static_cast<Widget*>(widget->getChildByName("centerPg"));
-    static_cast<Text*>(widget->getChildByName("txt_currency"))->setString(Value(role.rmb()).asString());
-    static_cast<Text*>(widget->getChildByName("txt_diamond"))->setString(Value(role.coin()).asString());
+    static_cast<Text*>(widget->getChildByName("txt_currency"))->setString(Value(role.coin()).asString());
+    static_cast<Text*>(widget->getChildByName("txt_diamond"))->setString(Value(role.rmb()).asString());
     static_cast<Text*>(widget->getChildByName("txt_stamina"))->setString(Value(role.stamina()).asString());
     
 }
@@ -182,20 +238,19 @@ void HomeScene::touchButtonEvent(Ref* pSender,TouchEventType type)
                 case 10037://下面最右边的按钮
                 {
                     Bag* bag = Bag::create();
-                    bag->show();
+                    bag->show(this,1);
                     break;
                 }
                 case 10034:
                 {
-                    Formation::create(this)->show();
+                    Formation::create(this)->show(this,1);
                     break;
                 }
                 case 10036:
                 {
-                    Compose::create()->show();
+                    //Compose::create()->show();
                     break;
                 }
-                    
                 default:
                     break;
             }
@@ -236,28 +291,28 @@ void HomeScene::touchBuildEvent(cocos2d::Ref *pSender, TouchEventType type)
                 }
                 case 10003: //战场pve
                 {
-                    Gate* gate = Gate::create();
-                    gate->show();
+                    
                     //this->addChild(gate);
 //                    GateMap* gateMap=GateMap::create(this, "100");
 //                    gateMap->show();
                     break;
                 }
-                case 10004: //英雄编队（卡组）
+                case 10004: //副本
                 {
-                    
+                    Gate* gate = Gate::create();
+                    gate->show(this,1);
                     break;
                 }
                 case 10005: //英雄属性
                 {
                     RoleAllList*roleAllList = RoleAllList::create();
-                    roleAllList->show();
+                    roleAllList->show(this,1);
                         break;
                 }
                 case 10006: //召唤
                 {
                     RoleList* roleList = RoleList::create();
-                    roleList->show();
+                    roleList->show(this,1);
                     break;
                 }
                 default:

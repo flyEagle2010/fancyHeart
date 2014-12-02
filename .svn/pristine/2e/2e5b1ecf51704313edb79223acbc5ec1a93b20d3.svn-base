@@ -1,0 +1,131 @@
+
+neZha.png
+size: 128,32
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+yinying
+  rotate: false
+  xy: 2, 2
+  size: 119, 27
+  orig: 119, 27
+  offset: 0, 0
+  index: -1
+
+neZha2.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+png/1
+  rotate: false
+  xy: 2, 26
+  size: 86, 70
+  orig: 86, 70
+  offset: 0, 0
+  index: -1
+png/10
+  rotate: false
+  xy: 408, 75
+  size: 26, 13
+  orig: 26, 13
+  offset: 0, 0
+  index: -1
+png/11
+  rotate: true
+  xy: 2, 2
+  size: 22, 20
+  orig: 22, 20
+  offset: 0, 0
+  index: -1
+png/12
+  rotate: false
+  xy: 408, 90
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+png/13
+  rotate: false
+  xy: 446, 95
+  size: 31, 31
+  orig: 31, 31
+  offset: 0, 0
+  index: -1
+png/14
+  rotate: true
+  xy: 285, 63
+  size: 63, 76
+  orig: 63, 76
+  offset: 0, 0
+  index: -1
+png/15
+  rotate: true
+  xy: 2, 98
+  size: 28, 193
+  orig: 28, 193
+  offset: 0, 0
+  index: -1
+png/16
+  rotate: false
+  xy: 363, 71
+  size: 43, 55
+  orig: 43, 55
+  offset: 0, 0
+  index: -1
+png/2
+  rotate: false
+  xy: 90, 29
+  size: 86, 67
+  orig: 86, 67
+  offset: 0, 0
+  index: -1
+png/3
+  rotate: false
+  xy: 197, 59
+  size: 86, 67
+  orig: 86, 67
+  offset: 0, 0
+  index: -1
+png/4
+  rotate: false
+  xy: 91, 7
+  size: 15, 20
+  orig: 15, 20
+  offset: 0, 0
+  index: -1
+png/5
+  rotate: true
+  xy: 24, 4
+  size: 20, 37
+  orig: 20, 37
+  offset: 0, 0
+  index: -1
+png/6
+  rotate: false
+  xy: 63, 3
+  size: 26, 21
+  orig: 26, 21
+  offset: 0, 0
+  index: -1
+png/7
+  rotate: false
+  xy: 178, 41
+  size: 12, 26
+  orig: 12, 26
+  offset: 0, 0
+  index: -1
+png/8
+  rotate: false
+  xy: 178, 69
+  size: 16, 27
+  orig: 16, 27
+  offset: 0, 0
+  index: -1
+png/9
+  rotate: false
+  xy: 479, 106
+  size: 29, 20
+  orig: 29, 20
+  offset: 0, 0
+  index: -1

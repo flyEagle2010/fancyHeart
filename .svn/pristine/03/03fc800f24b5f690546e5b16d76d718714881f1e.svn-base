@@ -1,0 +1,443 @@
+//
+//  Bag.cpp
+//  fancyHeart
+//
+//  Created by doteyplay on 14-8-5.
+//
+//
+
+#include "Bag.h"
+
+Bag* Bag::create()
+{
+    Bag* bag=new Bag();
+    if (bag && bag->init("publish/bag/bag.ExportJson")) {
+        bag->autorelease();
+        return bag;
+    }
+    CC_SAFE_DELETE(bag);
+    return nullptr;
+}
+
+bool Bag::init(std::string fileName)
+{
+	if(!BaseUI::init(fileName))
+    {
+        return false;
+    }
+	//如果需要对cocostudio 设计的ui进行调整
+    this->selectNumber= 1;
+    Widget*imgBg = static_cast<Widget*>(layout->getChildByName("imgBg"));
+    this->rightBg=static_cast<Widget*>(imgBg->getChildByName("rightBg"));
+    this->leftBg=static_cast<Widget*>(imgBg->getChildByName("leftBg"));
+    this->top=static_cast<Widget*>(layout->getChildByName("top"));
+    this->qualityPanel = static_cast<Widget*>(this->leftBg->getChildByName("qualityPanel"));
+    this->sellPanel = static_cast<Widget*>(this->leftBg->getChildByName("sellPanel"));
+    this->sellBtn=static_cast<Button*>(leftBg->getChildByName("sellBtn"));
+    this->lookBtn=static_cast<Button*>(leftBg->getChildByName("lookBtn"));
+    Button* btnReduce=static_cast<Button*>(sellPanel->getChildByName("btnReduce"));
+    Button* btnAdd=static_cast<Button*>(sellPanel->getChildByName("btnAdd"));
+    Button* btnAll=static_cast<Button*>(sellPanel->getChildByName("btnAll"));
+    this->isShow=false;
+    this->isNotAllSell = false;
+    
+    ScrollView*scrollView=static_cast<ui::ScrollView*>(this->rightBg->getChildByName("scrollView"));
+    this->propItem=(Widget*)scrollView->getChildByName("propItem");
+    this->propItem->retain();
+
+    this->itemInfo.Clear();
+    //道具的显示（-1表示显示全部）
+    this->currentType = -1;
+    this->getTypeInfo(this->currentType);
+    
+    sellBtn->addTouchEventListener(CC_CALLBACK_2(Bag::touchButtonEvent, this));
+    lookBtn->addTouchEventListener(CC_CALLBACK_2(Bag::touchButtonEvent, this));
+    btnReduce->addTouchEventListener(CC_CALLBACK_2(Bag::touchButtonEvent,this));
+    btnAdd->addTouchEventListener(CC_CALLBACK_2(Bag::touchButtonEvent,this));
+    btnAll->addTouchEventListener(CC_CALLBACK_2(Bag::touchButtonEvent,this));
+    
+    std::vector<Button*> buttons;
+    std::vector<std::string> btnName={"tab1","tab2","tab3","tab4","tab5","returnBtn"};
+    for (std::string name : btnName)
+    {
+        Button* btn=static_cast<Button*>(this->rightBg->getChildByName(name));
+        btn->setTouchEnabled(true);
+        btn->addTouchEventListener(CC_CALLBACK_2(Bag::touchEvent,this));
+        buttons.push_back(btn);
+    }
+    //移除舞台上的单个item
+    this->propItem->removeFromParent();
+    
+    tabBar=TabBar::create(buttons);
+    tabBar->retain();
+
+    this->bgChange(true);
+	return true;
+}
+
+void Bag::onEnter()
+{
+    BaseUI::onEnter();
+}
+
+void Bag::getTypeInfo(int type)
+{
+    this->leftBg->setVisible(this->isShow);
+    auto itemlist = Manager::getInstance()->getRoleData()->itemlist();
+    ScrollView*scrollView=static_cast<ui::ScrollView*>(this->rightBg->getChildByName("scrollView"));
+    
+    int num=itemlist.size();
+    Size size=Size(scrollView->getInnerContainerSize().width,(propItem->getContentSize().height+15)*(num/4) - 10);
+    scrollView->setInnerContainerSize(size);
+    //移除所有对象
+    scrollView->removeAllChildren();
+    //清除道具容器
+    this->propItems.clear();
+    //根据服务器给的数据添加道具列表
+    
+    for (int i = 0;i<itemlist.size();i++)
+    {
+        PItem item = Manager::getInstance()->getRoleData()->itemlist(i);
+        XItem*xItem = XItem::record(Value(item.itemid()));
+        if (type != -1) {
+            //类型一样，则显示出来此道具
+            if (xItem->getType() == type) {
+                this->setItem(item,i);
+            }
+        }else if(type == -1){
+            this->setItem(item,i);
+        }
+    }
+    if (this->isShow == false) {
+        MoveTo* move = MoveTo::create(0.2, Vec2(-(this->leftBg->getContentSize().width/2)-Director::getInstance()->getWinSize().width/2,this->leftBg->getPositionY()));
+        this->leftBg->runAction(move);
+    }
+}
+//设置单个item显示信息
+void Bag::setItem(PItem item,int index)
+{
+    //当前模版得数量
+    int len = int(this->propItems.size());
+    ScrollView*scrollView=static_cast<ui::ScrollView*>(this->rightBg->getChildByName("scrollView"));
+    
+    Widget* newItem = dynamic_cast<Widget*>(this->propItem->clone());
+    scrollView->addChild(newItem);
+    newItem->setTouchEnabled(true);
+    newItem->addTouchEventListener(CC_CALLBACK_2(Bag::itemTouchEvent,this));
+    Text* propNum = static_cast<Text*>(newItem->getChildByName("propNum"));//数量
+    
+    //将道具单项存储起来
+    this->propItems.pushBack(newItem);
+    
+    //此处设置tag，用来对应总数据里的序列数
+    newItem->setTag(index);
+    
+    Size sSize=scrollView->getInnerContainerSize();
+    Size itemSize=newItem->getContentSize();
+    
+    float x=(sSize.width/4-itemSize.width)/4.0+sSize.width/4*(len%4)+50;
+    float y=sSize.height-(itemSize.height + 15)*(len/4) - 55;
+    newItem->setPosition(Vec2(x,y));
+    
+    //数值转化为字符串
+    propNum->setString(Value(item.itemnum()).asString());
+    
+}
+//被选中的道具的具体显示信息
+void Bag::setProperty(PItem itemData,bool isHaveData)
+{
+    //当前道具得数量
+    Text* currentPropNum = static_cast<Text*>(leftBg->getChildByName("currentPropNum"));
+    //属性描述
+    Text* propertyTxt1 = static_cast<Text*>(this->qualityPanel->getChildByName("propertyTxt1"));
+    Text* propertyTxt2 = static_cast<Text*>(this->qualityPanel->getChildByName("propertyTxt2"));
+    Text* propertyTxt3 = static_cast<Text*>(this->qualityPanel->getChildByName("propertyTxt3"));
+    Text* propertyTxt4 = static_cast<Text*>(this->qualityPanel->getChildByName("propertyTxt4"));
+    Text* propertyTxt5 = static_cast<Text*>(this->qualityPanel->getChildByName("propertyTxt5"));
+    //出售单价
+    Text* itemPriceTxt = static_cast<Text*>(leftBg->getChildByName("itemPriceTxt"));
+    Text* desTxt =static_cast<Text*>(this->qualityPanel->getChildByName("desTxt"));
+    Text* nameTxt = static_cast<Text*>(leftBg->getChildByName("nameTxt"));
+    Label* nameTxt1 = static_cast<Label*>(nameTxt->getVirtualRenderer());
+    nameTxt1->enableOutline(Color4B::BLACK,1);
+    
+    currentPropNum->setString("");
+    itemPriceTxt->setString("");
+    propertyTxt1->setString("");
+    propertyTxt2->setString("");
+    propertyTxt3->setString("");
+    propertyTxt4->setString("");
+    propertyTxt5->setString("");
+    desTxt->setString("");
+    nameTxt->setString("");
+    
+    //表示当前左侧栏不显示任何道具信息
+    if (isHaveData == false) {
+        //此处应该还有道具图片以及道具品质颜色框的去掉
+        return;
+    }else{
+        this->itemInfo = itemData;
+    }
+    currentPropNum->setString(Value(itemData.itemnum()).asString());
+    Label* currentPropNum1 = static_cast<Label*>(currentPropNum->getVirtualRenderer());
+    currentPropNum1->enableOutline(Color4B::BLACK,1);
+    
+    XItem*xItem = XItem::record(Value(itemData.itemid()));
+    itemPriceTxt->setString(Value(xItem->getPrice()).asString());
+    Label* itemPriceTxt1 = static_cast<Label*>(itemPriceTxt->getVirtualRenderer());
+    itemPriceTxt1->enableOutline(Color4B::BLACK,1);
+    
+    desTxt->setString(Value(xItem->getDes()).asString());
+//    Label* desTxt1 = static_cast<Label*>(desTxt->getVirtualRenderer());
+//    desTxt1->enableOutline(Color4B::BLACK,1);
+    
+    nameTxt->setString(Value(xItem->getName()).asString());
+    //属性的显示
+    vector<string> propertyData;
+    if (xItem->getCrh()!= 0) {
+        propertyData.push_back("暴击:"+Value(xItem->getCrh()).asString());
+    }
+    if (xItem->getMiss()!= 0) {
+        propertyData.push_back("闪避:"+Value(xItem->getMiss()).asString());
+    }
+    if (xItem->getDef() != 0) {
+        propertyData.push_back("物防:"+Value(xItem->getDef()).asString());
+    }
+    if (xItem->getMDef() != 0) {
+        propertyData.push_back("法防:"+Value(xItem->getMDef()).asString());
+    }
+    if (xItem->getAtk() != 0) {
+        propertyData.push_back("攻击:"+Value(xItem->getAtk()).asString());
+    }
+    if (xItem->getHp() != 0) {
+        propertyData.push_back("生命:"+Value(xItem->getHp()).asString());
+    }
+    if (xItem->getHeal() != 0) {
+        propertyData.push_back("生命恢复速度:"+Value(xItem->getHeal()).asString());
+    }
+    //为每个属性赋值显示
+    int propertyLen = fmin(5, propertyData.size());
+    for (int i = 0; i<propertyLen; i++) {
+        Text* propertyTxt = static_cast<Text*>(this->qualityPanel->getChildByName("propertyTxt"+Value(i+1).asString()));
+        propertyTxt->setString(propertyData.at(i));
+//        Label* propertyTxt1 = static_cast<Label*>(propertyTxt->getVirtualRenderer());
+//        propertyTxt1->enableOutline(Color4B::BLACK,1);
+    }
+    //此处应该设置道具图片以及道具品质颜色框的显示
+}
+
+void Bag::setRightPosition()
+{
+    if (this->isShow) {
+        float x = this->rightBg->getPositionX()-(this->leftBg->getContentSize().width/2+ rightBg->getContentSize().width/2)+20;
+        float y =this->leftBg->getPositionY();
+        this->leftBg->runAction(MoveTo::create(0.2, Vec2(x,y)));
+    }else{
+        MoveTo* move = MoveTo::create(0.2, Vec2(-(this->leftBg->getContentSize().width/2)-Director::getInstance()->getWinSize().width/2,this->leftBg->getPositionY()));
+        this->leftBg->runAction(move);
+    }
+}
+
+void Bag::touchEvent(cocos2d::Ref *pSender, TouchEventType type)
+{
+    Button* btn=static_cast<Button*>(pSender);
+    if(type!=TouchEventType::ENDED){
+        return;
+    }
+    switch (btn->getTag()) {
+        case 11221://tab1全部
+        {
+            //设置按钮选中状态
+            tabBar->setIndex(0);
+            this->currentType=-1;
+            break;
+        }
+        case 11225://tab2装备
+        {
+            tabBar->setIndex(1);
+            this->currentType = 1;
+            break;
+        }
+        case 11224://tab3卷轴
+        {
+            tabBar->setIndex(2);
+            this->currentType = 2;
+            break;
+        }
+        case 11223://tab4召唤石
+        {
+            tabBar->setIndex(3);
+            this->currentType = 3;
+            break;
+        }
+        case 11222://tab5消耗品
+        {
+            tabBar->setIndex(4);
+            this->currentType = 0;
+            break;
+        }
+        case 11226://返回按钮
+        {
+            this->clear(true);
+            return;
+            break;
+        }
+        default:
+            break;
+    }
+    getTypeInfo(this->currentType);
+}
+
+void Bag::itemTouchEvent(Ref *pSender, TouchEventType type)
+{
+    Widget* item=static_cast<Widget*>(pSender);
+    PItem itemData = Manager::getInstance()->getRoleData()->itemlist(item->getTag());
+    
+    this->setProperty(itemData,true);
+    if (this->isShow == false) {
+        this->isShow = true;
+        this->leftBg->setVisible(this->isShow);
+        this->setRightPosition();
+    }
+}
+
+void Bag::bgChange(bool isQualityShow)
+{
+    this->isQuality = isQualityShow;
+    this->qualityPanel->setVisible(isQualityShow);
+    this->sellPanel->setVisible(!isQualityShow);
+}
+
+void Bag::touchButtonEvent(Ref *pSender, TouchEventType type)
+{
+    Button* btn=static_cast<Button*>(pSender);
+    if (!btn) {
+        return;
+    }
+    if (type==TouchEventType::ENDED) {
+        XItem*xItem = XItem::record(Value(this->itemInfo.itemid()));
+        switch (btn->getTag()) {
+            case 11214://出售按钮／确认出售
+            {
+                if (this->isQuality) {//出售按钮
+                    this->bgChange(false);
+                    this->setData(xItem);
+                    this->sellBtn->setTitleText("确认");
+                    this->lookBtn->setTitleText("返回");
+                }else{//确认出售
+                    this->sendInfo(this->selectNumber);
+                }
+            }
+                break;
+            case 11215://查看按钮／返回按钮
+                if (!this->isQuality) {//返回
+                    this->bgChange(true);
+                    this->selectNumber= 1;
+                    this->sellBtn->setTitleText("出售");
+                    this->lookBtn->setTitleText("查看");
+                }else{//查看
+                    
+                }
+                break;
+            case 25322://减少
+                if(this->selectNumber == 1){
+                    return;
+                }
+                -- this->selectNumber;
+                this->setData(xItem);
+                break;
+            case 25323://增加
+                if(this->selectNumber == this->itemInfo.itemnum()){
+                    return;
+                }
+                ++ this->selectNumber;
+                this->setData(xItem);
+                break;
+            case 25321://全部
+                 this->selectNumber = this->itemInfo.itemnum();
+                this->setData(xItem);
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+void Bag::setData(XItem*xItem)
+{
+    int gainNum = this->selectNumber * (xItem->getPrice());
+    Text*selectNum=static_cast<Text*>(this->sellPanel->getChildByName("selectNum"));
+    selectNum->setString(Value(this->selectNumber).asString() +"/"+Value(this->itemInfo.itemnum()).asString());
+    Label* selectNum1 = static_cast<Label*>(selectNum->getVirtualRenderer());
+    selectNum1->enableOutline(Color4B::BLACK,1);
+    
+    Text*gainCoinTxt=static_cast<Text*>(this->sellPanel->getChildByName("gainCoinTxt"));
+    gainCoinTxt->setString(Value(gainNum).asString());
+    Label* gainCoinTxt1 = static_cast<Label*>(gainCoinTxt->getVirtualRenderer());
+    gainCoinTxt1->enableOutline(Color4B::BLACK,1);
+}
+
+void Bag::sendInfo(int selectNumber)
+{
+    this->isNotAllSell = selectNumber == this->itemInfo.itemnum()?false:true;
+    
+    PSellGroup pSellGroup;
+    pSellGroup.add_itemid(this->itemInfo.itemid());
+    pSellGroup.add_itemsellnum(selectNumber);
+    Manager::getInstance()->socket->send(C_SELLPROP, &pSellGroup);
+}
+
+void Bag::initNetEvent(){
+    auto listener = EventListenerCustom::create(NET_MESSAGE, [=](EventCustom* event){
+        NetMsg* msg = static_cast<NetMsg*>(event->getUserData());
+        switch (msg->msgId)
+        {
+            case C_COMMONMSG://通用返回消息
+            {
+                //0：成功 1:物品不足
+                PCommonResp commonResp;
+                commonResp.ParseFromArray(msg->bytes,msg->len);
+                //卖出商品成功(如果出售的数量是总数量，那么isShow＝false)
+                if (commonResp.status() == 0) {
+                    this->sellBtn->setTitleText("出售");
+                    this->lookBtn->setTitleText("查看");
+                    this->selectNumber = 1;
+                    this->bgChange(true);
+                    if (this->isShow && this->isNotAllSell ==false) {
+                        this->isShow = this->isNotAllSell;
+                        this->setRightPosition();
+                    }
+                    for (int i = 0; i<Manager::getInstance()->getRoleData()->itemlist_size(); i++) {
+                        PItem item = Manager::getInstance()->getRoleData()->itemlist(i);
+                        if (item.itemid() == this->itemInfo.itemid()) {
+                            this->itemInfo = item;
+                            this->setProperty(this->itemInfo,true);
+                            break;
+                        }
+                    }
+                }//物品不足
+                else if(commonResp.status() == 1){
+                    
+                }
+            }
+                break;
+            case C_UPITEM://更新道具
+                this->getTypeInfo(this->currentType);
+                break;
+//            case C_UPROLE:
+//                this->setPlayerInfo();
+//                break;
+            default:
+                break;
+        }
+    });
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void Bag::onExit()
+{
+    this->propItem->release();
+    this->tabBar->release();
+    //停止执行自己定义的函数定时器
+    BaseUI::onExit();
+}

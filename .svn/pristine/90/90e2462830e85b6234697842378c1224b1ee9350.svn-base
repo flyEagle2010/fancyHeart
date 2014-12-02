@@ -1,0 +1,76 @@
+//
+//  BaseUI.cpp
+//  fancyHeart
+//
+//  Created by 秦亮亮 on 14-6-12.
+//
+//
+
+#include "BaseUI.h"
+bool BaseUI::init(std::string fileName,bool isScence)
+{
+    if (isScence) {
+      //  layout = static_cast<Layout*>(SceneReader::getInstance()->createNodeWithSceneFile(fileName));
+    }
+    else{
+        layout=static_cast<Layout*>(cocostudio::GUIReader::getInstance()->widgetFromJsonFile(fileName.c_str()));
+    }
+    this->addChild(layout,0);
+    return true;
+};
+
+void BaseUI::onDlgClose(rapidjson::Value &data)
+{
+    
+}
+
+void BaseUI::onEnter()
+{
+    Layout::onEnter();
+    this->initNetEvent();
+    
+}
+
+void BaseUI::show(BaseUI* preUI,int effectType)
+{
+    if(preUI)
+    {
+        this->preUI=preUI;
+//        cocos2d::extension::Scale9Sprite* sprite=cocos2d::extension::Scale9Sprite::create("frame_0.png",Rect(10,10,71,76));
+//        sprite->setContentSize(Director::getInstance()->getWinSize());
+        Sprite* sprite=Sprite::create("background.png");
+        sprite->setAnchorPoint(Vec2(0, 0));
+        this->addChild(sprite, -1);
+        this->preUI->addChild(this);
+        
+    }
+}
+
+void BaseUI::show(int effectType)
+{
+    Manager::getInstance()->scene->addChild(this,0);
+    Mask::getInstance()->show();
+}
+
+void BaseUI::clear(bool isDel)
+{
+    if(isDel)
+    {
+        this->removeFromParent();
+    }
+    else
+    {
+        this->setVisible(false);
+    }
+}
+
+void BaseUI::onExit()
+{
+    if(this->preUI==nullptr){
+        Mask::getInstance()->hide();
+    }else{
+        this->preUI=nullptr;
+    }
+    Layout::onExit();
+
+}

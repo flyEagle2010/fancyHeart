@@ -8,7 +8,6 @@
 
 #include "TestUi.h"
 #include "RotateList.h"
-#include "TestUii.h"
 
 Scene* TestUi::createScene()
 {
@@ -28,7 +27,7 @@ bool TestUi::init()
     scrollView->setSize(Size(widgetSize.width, widgetSize.height));
     scrollView->setPosition(Vec2(0,0));
     
-    TestUii*testUii = TestUii::create();
+    TestUi*testUii = TestUi::create();
     scrollView->setItemModel(testUii);
     this->addChild(scrollView);
 

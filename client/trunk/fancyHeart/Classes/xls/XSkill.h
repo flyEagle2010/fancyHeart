@@ -17,10 +17,10 @@ public:
 	int getName();
 	int getDesc();
 	/*陈天华:
-0主动
-1被动*/
+0主动，被动类型为1，被动参数填冷却时间
+1被动
+3普通攻击*/
 	int getType();
-	int getMp();
 	/*陈天华:
 0：不触发
 
@@ -67,7 +67,7 @@ public:
 0 自身 
 1 我方 影响人数
 2 近战 影响人数
-3 爆发 前排/中排/后排
+3 爆发 前排/后排
 4 射击 最大距离/子弹数量
 5 弹射 弹射次数
 6 穿透 最大距离*/
@@ -99,9 +99,7 @@ public:
 0 攻击 攻击加成千分比/攻击加成实数
 # 溅射攻击 溅射攻击加成千分比/溅射攻击加成实数
 # 治疗 治疗加成千分比/治疗加成实数
-# 能量恢复 恢复法力加成实数
 # 吸取生命 吸取生命千分比/吸取生命加成实数
-# 夺取能量（特例，可抢夺敌方在战斗过程中掉落但未拾取的能量豆）
 
 有#标识的表示还没做的技能效果*/
 	int getEffectType();
@@ -111,6 +109,18 @@ public:
 	int getEffectParam4();
 	int getBuffID();
 	int getBuffRate();
+	/*这里填写的是伤害的逻辑延迟时间，比如若技能有引导，那么从引导动作/特效开始播到第一次伤害生效中间需要间隔多少时间*/
 	int getSpellTime();
+	/*Administrator:
+填入技能表现配置表中的id*/
+	int getEffectID();
+	/*Administrator:
+1表示优先
+空表示不优先*/
+	bool getIsAirFirst();
+	/*Administrator:
+1为可将目标打飞
+空 为不可将目标打飞*/
+	bool getIsHitOnAir();
 };
 #endif // defined(__dx__Data__)

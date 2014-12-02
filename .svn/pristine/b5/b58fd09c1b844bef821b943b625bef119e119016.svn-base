@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root name="服务器参数配置">
+	<service_id description="服id">11</service_id>
+	<server_area_id description="区id">2</server_area_id>
+	<server_area_name description="区name">主服务</server_area_name>
+	<server_port description="gameserver端口">2888</server_port>
+	<gm_server_port description="GM端口">5556</gm_server_port>
+	<fee_server_ip description="计费服务器TCP连接的IP地址">127.0.0.1</fee_server_ip>
+	<fee_server_port description="计费服务器TCP连接的端口">7777</fee_server_port>
+	<auth_server_ip description="认证服务器TCP连接的IP地址">192.168.200.102</auth_server_ip>
+	<auth_server_port description="认证服务器TCP连接的端口">7788</auth_server_port>
+	<log_server_ip description="logserver url">172.18.1.60</log_server_ip>
+	<log_server_port description="logserver端口">7778</log_server_port>
+	<max_players description="人数上限">2100</max_players>
+	<resource_bundle_file description="ResourceBundle文件">resource</resource_bundle_file>
+	<!--<resource_bundle_language description="支持的文件名,多个用逗号区分">zh_CN</resource_bundle_language>-->
+	<resource_bundle_default description="默认语言">zh_CN</resource_bundle_default>
+	<!--消息服务需要写，非消息服务不需要写-->
+	<common_service_path description="通用服务">/common_service_total.xml</common_service_path>
+	<local_service_path description="本地服务">/local_service_total.xml</local_service_path>
+	<protobuf_path description="protobuf文件的路径">D:\myworkspace\网络协议\message.proto</protobuf_path>
+	<config_file_path description="配置文件路径">C:\Users\AllenGao\Desktop\project2\data</config_file_path>
+</root>

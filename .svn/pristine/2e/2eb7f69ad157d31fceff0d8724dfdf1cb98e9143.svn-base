@@ -1,0 +1,19 @@
+message PHit{
+   required int32 xid=1;//id
+   required bool isMiss=2; //闪避
+   required bool isCrh=3; //暴击
+   required int32 hp=4; //掉血
+   required int32 addBuff=5; //增加的buff
+   required int32 delBuff=6; //去掉的buff
+   required bool isDie=7; //是否死亡
+   required int32 skill=8; //技能id
+   required int32 axid=9; //攻击者id
+   required int32 ahp=10; //攻击者血量变化
+   required int32 pos=11; //位置
+   required int32 apos=12; //攻击者位置
+   required float perHp=13; //血量百分比
+   required bool isDefence=14; //防御
+   required bool isHitOnAir=15; //浮空
+   required bool isImmune=16; //免疫
+   required bool isIgnore=17; //忽略
+}
